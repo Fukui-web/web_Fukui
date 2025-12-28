@@ -55,9 +55,13 @@ function doPost(e) {
         };
     }
 
+    // CORSヘッダーを追加
     return ContentService
       .createTextOutput(JSON.stringify(result))
-      .setMimeType(ContentService.MimeType.JSON);
+      .setMimeType(ContentService.MimeType.JSON)
+      .setHeader('Access-Control-Allow-Origin', '*')
+      .setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+      .setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   } catch (error) {
     Logger.log('Error: ' + error.toString());
@@ -66,17 +70,36 @@ function doPost(e) {
         success: false,
         error: error.toString()
       }))
-      .setMimeType(ContentService.MimeType.JSON);
+      .setMimeType(ContentService.MimeType.JSON)
+      .setHeader('Access-Control-Allow-Origin', '*')
+      .setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+      .setHeader('Access-Control-Allow-Headers', 'Content-Type');
   }
 }
 
 /**
- * OPTIONSリクエストへの対応（CORS プリフライト）
+ * GETリクエストへの対応
  */
 function doGet(e) {
   return ContentService
     .createTextOutput(JSON.stringify({ success: true, message: 'API is running' }))
-    .setMimeType(ContentService.MimeType.JSON);
+    .setMimeType(ContentService.MimeType.JSON)
+    .setHeader('Access-Control-Allow-Origin', '*')
+    .setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+    .setHeader('Access-Control-Allow-Headers', 'Content-Type');
+}
+
+/**
+ * OPTIONSリクエスト（CORS プリフライト）の処理
+ */
+function doOptions(e) {
+  return ContentService
+    .createTextOutput('')
+    .setMimeType(ContentService.MimeType.TEXT)
+    .setHeader('Access-Control-Allow-Origin', '*')
+    .setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+    .setHeader('Access-Control-Allow-Headers', 'Content-Type')
+    .setHeader('Access-Control-Max-Age', '86400');
 }
 
 /**
