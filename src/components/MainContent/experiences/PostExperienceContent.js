@@ -28,20 +28,22 @@ const PostExperienceContent = () => {
         </p>
       </div>
 
-      {/* Googleフォーム埋め込み */}
+      {/* Googleフォームへのリンク */}
       <div className={styles.formContainer}>
-        <iframe
-          src={googleFormUrl}
-          width="100%"
-          height="1200"
-          frameBorder="0"
-          marginHeight="0"
-          marginWidth="0"
-          title="体験談投稿フォーム"
-          className={styles.googleForm}
-        >
-          読み込んでいます…
-        </iframe>
+        <div className={styles.formLinkSection}>
+          <p className={styles.formDescription}>
+            以下のボタンからGoogleフォームにアクセスして、体験談を投稿してください。<br />
+            ※Googleアカウントでのログインが必要です。
+          </p>
+          <a 
+            href={googleFormUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.formButton}
+          >
+            体験談投稿フォームを開く
+          </a>
+        </div>
       </div>
 
       <Footer />

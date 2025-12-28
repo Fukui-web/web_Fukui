@@ -35,12 +35,58 @@
   margin: 20px 0 0 0;
 }
 
-/* Googleフォーム埋め込みコンテナ */
+/* Googleフォームリンクコンテナ */
 .formContainer {
   width: 100%;
   max-width: 640px;
   margin: 0 auto;
   padding: 0 20px 40px;
+}
+
+.formLinkSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  padding: 40px;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.formDescription {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #666;
+  text-align: center;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.formButton {
+  display: inline-block;
+  padding: 16px 40px;
+  background-color: #4285f4;
+  color: #fff;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.formButton:hover {
+  background-color: #357ae8;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.formButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .googleForm {
@@ -66,5 +112,21 @@
 
   .formContainer {
     padding: 0 10px 30px;
+  }
+
+  .formLinkSection {
+    padding: 30px 20px;
+    gap: 20px;
+  }
+
+  .formDescription {
+    font-size: 14px;
+  }
+
+  .formButton {
+    font-size: 16px;
+    padding: 14px 32px;
+    width: 100%;
+    text-align: center;
   }
 }
