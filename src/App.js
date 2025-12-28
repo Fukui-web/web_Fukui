@@ -1,49 +1,36 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import { AuthProvider } from './contexts/AuthContext';
 import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage';
 import AdminPage from './pages/AdminPage/AdminPage';
 import AdminExperienceDetail from './pages/AdminPage/AdminExperienceDetail';
-import Layout from './components/Layout/Layout'; // 
-import { navigationItems } from './data/navigationItems'; // 
+import Layout from './components/Layout/Layout';
+import { navigationItems } from './data/navigationItems';
 import ScrollToTop from './components/ScrollToTop';
 import ExperiencesContent, { PostExperienceContent } from './components/MainContent/experiences';
 import ExperiencesSearchResultsContent from './components/MainContent/experiences/ExperiencesSearchResultsContent';
 import PlacesContent from './components/MainContent/places';
 import PathsContent from './components/MainContent/paths';
-import ProtectedRoute from './components/Auth/ProtectedRoute';
 import TweetDetailPage from './pages/TweetDetailPage/TweetDetailPage';
 import PlaceSearchResults from './pages/PlaceSearchResults/PlaceSearchResults';
 import PlaceDetailPage from './pages/PlaceDetailPage/PlaceDetailPage';
 import PlaceReviewPage from './pages/PlaceReviewPage/PlaceReviewPage';
 import ReviewsPage from './pages/ReviewsPage/ReviewsPage';
 import ReviewDetailPage from './pages/ReviewDetailPage/ReviewDetailPage';
-// SectionXXPage のインポートは不要になります
-
-// Google OAuth Client ID（環境変数から取得することを推奨）
-const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID || 'YOUR_GOOGLE_CLIENT_ID_HERE';
 
 function App() {
   return (
-    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-      <AuthProvider>
-        <Router basename="/web_Fukui">
-          <ScrollToTop />
-          <Routes>
-            {/* ホーム画面用のルート */}
-            <Route path="/" element={<HomePage />} />
+    <Router basename="/web_Fukui">
+      <ScrollToTop />
+      <Routes>
+        {/* ホーム画面用のルート */}
+        <Route path="/" element={<HomePage />} />
 
-            {/* ログインページ */}
-            <Route path="/login" element={<LoginPage />} />
-
-            {/* 管理者画面ページ */}
-            <Route path="/admin" element={
-              <Layout>
-                <AdminPage />
-              </Layout>
-            } />
+        {/* 管理者画面ページ */}
+        <Route path="/admin" element={
+          <Layout>
+            <AdminPage />
+          </Layout>
+        } />
 
             {/* 管理者用体験談詳細ページ */}
             <Route path="/admin/experience/:id" element={
@@ -150,8 +137,6 @@ function App() {
             })}
           </Routes>
         </Router>
-      </AuthProvider>
-    </GoogleOAuthProvider>
   );
 }
 
