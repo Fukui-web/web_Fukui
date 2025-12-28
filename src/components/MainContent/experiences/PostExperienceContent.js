@@ -12,7 +12,7 @@ const PostExperienceContent = () => {
   ];
 
   // GoogleフォームのURLを設定（実際のフォームIDに置き換える必要があります）
-  const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSczR1VXWAU5yqnQSZFAdTkF-Qla_847LrW-m7TpFxrR75H3jw/viewform?usp=header';
+  const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSf5BLWGJ9D0qhf1QymIG-sMkiaXLGQgCJTI5xn-FC1ZFL9JMQ/viewform?usp=dialog';
 
   return (
     <div className={layoutStyles.pageContainer}>
