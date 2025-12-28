@@ -33,7 +33,7 @@ jobs:
         run: npm run build
         env:
           CI: false
-          REACT_APP_GAS_API_URL: ${{ secrets.REACT_APP_GAS_API_URL }}　
+          REACT_APP_GAS_API_URL: ${{ secrets.REACT_APP_GAS_API_URL }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
