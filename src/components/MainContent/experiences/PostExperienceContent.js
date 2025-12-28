@@ -12,8 +12,8 @@ const PostExperienceContent = () => {
   ];
 
   // GoogleフォームのURLを設定（実際のフォームIDに置き換える必要があります）
-  const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSf5BLWGJ9D0qhf1QymIG-sMkiaXLGQgCJTI5xn-FC1ZFL9JMQ/viewform?usp=dialog';
-
+  const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSf5BLWGJ9D0qhf1QymIG-sMkiaXLGQgCJTI5xn-FC1ZFL9JMQ/viewform?usp=header';
+  
   return (
     <div className={layoutStyles.pageContainer}>
       <Breadcrumbs items={breadcrumbItems} />
