@@ -45,7 +45,7 @@ const Section01 = () => {
         title="みんなの体験談を見てみよう！
 みんなの学校活用術"
         tweetCardIds={[3, 4, 5]}
-        moreButtonText="体験談をさがす"
+        moreButtonText="学校活用術をもっとみる"
         customClass={styles.experience01}
         onMoreClick={() => navigate('/experiences')}
       />

@@ -58,10 +58,6 @@ const PlaceDetailPage = () => {
             <img src={newwindowIcon} alt="" className={styles.tabIcon} />
             居場所情報
           </div>
-          <Link to={`/places/${id}/reviews`} className={styles.tab}>
-            <img src={newwindowIcon} alt="" className={styles.tabIcon} />
-            口コミ
-          </Link>
         </div>
 
         {/* タイトルとタグ */}
