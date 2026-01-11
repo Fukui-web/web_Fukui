@@ -104,3 +104,8 @@
   min-height: auto !important; /* 最小高さを自動に */
   padding: 0 !important; /* 内側の余白も0に */
 }
+
+/* インラインバナー内の女の子の画像を非表示 */
+.inlineBannerWrapper > div > div:last-child {
+  display: none !important;
+}
