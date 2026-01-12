@@ -73,7 +73,7 @@
 }
 
 .tag span {
-  font-family: 'DNP ShueiGoKinStd', sans-serif;
+  font-family: var(--font-primary);
   font-style: normal;
   font-weight: 600;
   font-size: 12px;
@@ -108,7 +108,7 @@
   width: 100%;
   max-width: 100%;
   height: auto;
-  font-family: 'DNP ShueiGoKinStd', sans-serif;
+  font-family: var(--font-primary);
   font-style: normal;
   font-weight: 600;
   font-size: 14px;
@@ -129,7 +129,7 @@
   min-height: 30px;
   max-height: 40px;
   overflow: hidden;
-  font-family: 'DNP ShueiGoKinStd', sans-serif;
+  font-family: var(--font-primary);
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
