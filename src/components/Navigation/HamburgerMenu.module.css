@@ -92,7 +92,6 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 32px 23px; /* 32px 30px → 32px 23px に変更 */
-  gap: 30px; /* 20px → 30px に変更 */
   isolation: isolate;
   position: fixed;
   top: 0;
@@ -129,7 +128,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  margin-top: 54px; /* 90px → 66px Main.module 74px→50pxに合わせて24px下げる */
+  margin-top: 84px; /* 90px → 66px Main.module 74px→50pxに合わせて24px下げる */
 }
 
 /* ナビゲーション左側の黒い縦線 - 実際のDOMノードとして追加 */
