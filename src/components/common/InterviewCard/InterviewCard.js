@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './InterviewCard.module.css';
 import interviewCards from '../../../data/interviewCards';
 
@@ -7,14 +8,19 @@ import interviewCards from '../../../data/interviewCards';
  * @param {number} cardId - 表示するカードのID
  */
 const InterviewCard = ({ cardId }) => {
+  const navigate = useNavigate();
   const card = interviewCards.find(c => c.id === cardId);
 
   if (!card) {
     return null;
   }
 
+  const handleClick = () => {
+    navigate(`/interviews/${card.id}`);
+  };
+
   return (
-    <div className={styles.interviewCard}>
+    <div className={styles.interviewCard} onClick={handleClick}>
       <div className={styles.imageContainer}>
         <img src={card.image} alt={card.title} className={styles.cardImage} />
       </div>
