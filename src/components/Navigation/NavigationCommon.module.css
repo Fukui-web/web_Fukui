@@ -182,6 +182,7 @@
 
 /* ナビヘッダー */
 .navHeader {
+  display: block;
   width: 100%;
   height: 79px;
   position: relative;
