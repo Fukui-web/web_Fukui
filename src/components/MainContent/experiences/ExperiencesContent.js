@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import layoutStyles from '../commonPageLayout.module.css'; // 共通CSS（外枠）
 import styles from './ExperiencesContent.module.css';
 import Breadcrumbs from '../../common/Breadcrumbs';
@@ -9,10 +9,13 @@ import FilterModal from '../../common/FilterModal';
 import dotlineImage from '../../../assets/images/dotline.png';
 import SearchIcon from '../../../assets/icons/SearchIcon';
 import FilterIcon from '../../../assets/icons/FilterIcon';
-import { getAllExperiences } from '../../../utils/gasApi';
+import { getAllExperiences, getExperiencesByQuestion } from '../../../utils/gasApi';
 
 const ExperiencesContent = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const questionId = searchParams.get('questionId'); // URLパラメータから取得
+  
   const [searchKeyword, setSearchKeyword] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filterCount, setFilterCount] = useState(0);
@@ -20,18 +23,60 @@ const ExperiencesContent = () => {
   const [error, setError] = useState(null);
   const [pickupExperiences, setPickupExperiences] = useState([]);
   const [isLoadingPickup, setIsLoadingPickup] = useState(true);
+  const [pickupError, setPickupError] = useState(null);
+  const [noPickupData, setNoPickupData] = useState(false);
 
-  // ピックアップ体験談を取得（上から6件）
+  // 質問IDに対応するセクション名を取得
+  const getSectionName = (qId) => {
+    const sectionNames = {
+      '2-2': '不登校のきっかけ',
+      '2-11': '学校との繋がり',
+      '4-1-3': '卒業後の進路',
+      '4-2-3': '卒業後の進路',
+      '4-3-3': '卒業後の進路',
+      '6-1-5': '公的支援の利用',
+      '6-2-5': '公的支援の利用',
+      '6-3-5': '公的支援の利用'
+    };
+    return sectionNames[qId] || null;
+  };
+
+  const sectionName = getSectionName(questionId);
+
+  // ピックアップ体験談を取得
   useEffect(() => {
     const loadPickupExperiences = async () => {
       setIsLoadingPickup(true);
+      setPickupError(null);
+      setNoPickupData(false);
+      
       try {
-        const allExperiences = await getAllExperiences();
-        // 上から6件取得
-        const pickup = allExperiences.slice(0, 6);
-        setPickupExperiences(pickup);
+        if (questionId) {
+          // questionIdが指定されている場合は、対応する体験談を取得
+          const result = await getExperiencesByQuestion(questionId, 6);
+          
+          if (result.errorType) {
+            setPickupError('体験談の取得に失敗しました');
+            setPickupExperiences([]);
+          } else if (result.noData || result.data.length === 0) {
+            setNoPickupData(true);
+            setPickupExperiences([]);
+          } else {
+            setPickupExperiences(result.data);
+          }
+        } else {
+          // questionIdがない場合は、全体験談から上位6件を取得
+          const allExperiences = await getAllExperiences();
+          const pickup = allExperiences.slice(0, 6);
+          
+          if (pickup.length === 0) {
+            setNoPickupData(true);
+          }
+          setPickupExperiences(pickup);
+        }
       } catch (error) {
         console.error('ピックアップ体験談の取得エラー:', error);
+        setPickupError('体験談の取得に失敗しました');
         setPickupExperiences([]);
       } finally {
         setIsLoadingPickup(false);
@@ -39,7 +84,7 @@ const ExperiencesContent = () => {
     };
 
     loadPickupExperiences();
-  }, []);
+  }, [questionId]);
 
   const handleApplyFilters = (count, selectedFilters) => {
     setFilterCount(count);
@@ -170,10 +215,15 @@ const ExperiencesContent = () => {
 
       {/* 体験談ピックアップセクション */}
       <div className={styles.pickupSection}>
-        <h2 className={styles.pickupTitle}>体験談ピックアップ</h2>
+        <h2 className={styles.pickupTitle}>
+          {sectionName ? `${sectionName}に関する体験談` : '体験談ピックアップ'}
+        </h2>
         <div className={styles.dividerLine}></div>
         <p className={styles.pickupDescription}>
-          みんなの体験談から、似ているところや参考にしたい情報をみつけてみてください。
+          {sectionName 
+            ? `${sectionName}に関する体験談を表示しています。`
+            : 'みんなの体験談から、似ているところや参考にしたい情報をみつけてみてください。'
+          }
         </p>
         
         {/* 体験談カードグリッド */}
@@ -181,6 +231,21 @@ const ExperiencesContent = () => {
           <div className={styles.loadingContainer}>
             <div className={styles.loadingSpinner}></div>
             <p className={styles.loadingText}>体験談を読み込み中...</p>
+          </div>
+        ) : pickupError ? (
+          <div className={styles.errorContainer}>
+            <p className={styles.errorText}>⚠️ 取得エラー: {pickupError}</p>
+            <p className={styles.errorSubText}>データの取得に失敗しました。時間をおいて再度お試しください。</p>
+          </div>
+        ) : noPickupData ? (
+          <div className={styles.noDataContainer}>
+            <p className={styles.noDataText}>該当する体験談がまだありません</p>
+            <p className={styles.noDataSubText}>
+              {sectionName 
+                ? '他のカテゴリの体験談をご覧いただくか、検索機能をお試しください。'
+                : '体験談が投稿されるとここに表示されます。'
+              }
+            </p>
           </div>
         ) : pickupExperiences.length > 0 ? (
           <div className={styles.cardsGrid}>
@@ -194,7 +259,7 @@ const ExperiencesContent = () => {
           </div>
         ) : (
           <div className={styles.noDataContainer}>
-            <p className={styles.noDataText}>表示できる体験談がありません。</p>
+            <p className={styles.noDataText}>表示できる体験談がありません</p>
           </div>
         )}
       </div>

@@ -118,7 +118,7 @@ const Section01Content = () => {
         </div>
         <button 
           className={styles.moreButton2}
-          onClick={() => navigate('/experiences')}
+          onClick={() => navigate('/experiences?questionId=2-11')}
         >
           <img src={vectorRB} alt="アイコン" className={styles.playIcon} />
           <span>体験談をさがす</span>

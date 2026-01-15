@@ -121,7 +121,7 @@ const Section00Content = () => {
         {/* ボタン */}
         <button 
           className={styles.experienceButton}
-          onClick={() => navigate('/experiences')}
+          onClick={() => navigate('/experiences?questionId=2-2')}
         >
           <img src={vectorRB} alt="" className={styles.buttonIcon} />
           <span>体験談をさがす</span>

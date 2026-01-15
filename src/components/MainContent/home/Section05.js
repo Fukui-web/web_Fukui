@@ -59,7 +59,7 @@ const Section05 = () => {
                 limit={6}
                 moreButtonText="卒業後の進路の体験談を見る"
                 customClass={styles.experience05}
-                onMoreClick={() => navigate('/experiences')}
+                onMoreClick={() => navigate('/experiences?questionId=4-1-3')}
             />
         </div>
     );
