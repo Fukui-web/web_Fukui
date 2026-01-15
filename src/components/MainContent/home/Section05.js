@@ -55,7 +55,8 @@ const Section05 = () => {
             {/* 体験談セクション追加 */}
             <ExperienceSection 
                 title={"みんなの体験談を見てみよう！\n卒業後の進路をどう選んだ？"}
-                tweetCardIds={[5, 6]}
+                questionId="4-1-3"
+                limit={6}
                 moreButtonText="卒業後の進路の体験談を見る"
                 customClass={styles.experience05}
                 onMoreClick={() => navigate('/experiences')}

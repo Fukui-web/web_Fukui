@@ -109,3 +109,49 @@
   height: 20px;
   object-fit: contain;
 }
+
+/* ローディングメッセージ */
+.loadingMessage {
+  font-family: var(--font-primary);
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+  padding: 40px 20px;
+  width: 100%;
+}
+
+/* エラーメッセージ */
+.errorMessage {
+  background-color: #fff3f3;
+  border: 1px solid #ff6b6b;
+  border-radius: 8px;
+  padding: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+.errorMessage p {
+  margin: 0;
+  font-family: var(--font-primary);
+  font-size: 14px;
+  color: #d63031;
+  line-height: 1.5;
+}
+
+/* 該当なしメッセージ */
+.noDataMessage {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+.noDataMessage p {
+  margin: 0;
+  font-family: var(--font-primary);
+  font-size: 14px;
+  color: #6c757d;
+  line-height: 1.5;
+}

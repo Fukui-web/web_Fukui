@@ -260,6 +260,52 @@
   object-fit: contain;
 }
 
+/* メッセージスタイル */
+.loadingMessage {
+  font-family: var(--font-primary);
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+  padding: 40px 20px;
+  width: 100%;
+}
+
+.errorMessage {
+  background-color: #fff3f3;
+  border: 1px solid #ff6b6b;
+  border-radius: 8px;
+  padding: 20px;
+  width: 100%;
+  text-align: center;
+  margin: 10px 0;
+}
+
+.errorMessage p {
+  margin: 0;
+  font-family: var(--font-primary);
+  font-size: 14px;
+  color: #d63031;
+  line-height: 1.5;
+}
+
+.noDataMessage {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 20px;
+  width: 100%;
+  text-align: center;
+  margin: 10px 0;
+}
+
+.noDataMessage p {
+  margin: 0;
+  font-family: var(--font-primary);
+  font-size: 14px;
+  color: #6c757d;
+  line-height: 1.5;
+}
+
 /* 行政・医療機関一覧ボタン */
 .listButton {
   display: flex;

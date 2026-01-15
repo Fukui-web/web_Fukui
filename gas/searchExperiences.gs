@@ -48,6 +48,9 @@ function doPost(e) {
       case 'rejectExperience':
         result = rejectExperience(params.id, params.reason);
         break;
+      case 'getExperiencesByQuestion':
+        result = getExperiencesByQuestion(params.questionId, params.limit);
+        break;
       default:
         result = {
           success: false,
@@ -577,5 +580,144 @@ function formatDate(date) {
     return `${year}.${month}.${day}`;
   } catch (error) {
     return String(date);
+  }
+}
+
+/**
+ * 特定の質問項目から体験談を取得
+ * @param {string} questionId - 質問ID (例: '2-2', '2-11', '6-1-5', '4-1-3')
+ * @param {number} limit - 取得件数（デフォルト6件、最新から取得）
+ * @return {object} - 検索結果
+ */
+function getExperiencesByQuestion(questionId, limit = 6) {
+  try {
+    const spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    const sheet = spreadsheet.getSheetByName(SHEET_NAME);
+    
+    if (!sheet) {
+      return {
+        success: false,
+        error: 'シート「' + SHEET_NAME + '」が見つかりません',
+        errorType: 'FETCH_ERROR'
+      };
+    }
+    
+    const data = sheet.getDataRange().getValues();
+    const headers = data[0];
+    
+    // 列インデックスのマッピング
+    const columnMapping = {
+      '2-2': 5,      // F列: 詳しい状況
+      '2-11': 14,    // O列: 学校との繋がり
+      '4-1-3': 21,   // V列: 進路1の選んだ理由
+      '4-2-3': 27,   // AB列: 進路2の選んだ理由
+      '4-3-3': 33,   // AH列: 進路3の選んだ理由
+      '6-1-5': 41,   // AP列: サポート1の感想
+      '6-2-5': 47,   // AV列: サポート2の感想
+      '6-3-5': 53    // BB列: サポート3の感想
+    };
+    
+    const targetColumnIndex = columnMapping[questionId];
+    
+    if (targetColumnIndex === undefined) {
+      return {
+        success: false,
+        error: '不正な質問IDです: ' + questionId,
+        errorType: 'INVALID_QUESTION_ID'
+      };
+    }
+    
+    // 共通列インデックス
+    const timestampIndex = 0;        // A列: タイムスタンプ
+    const authorNameIndex = 1;       // B列: ペンネーム
+    const gradeIndex = 2;            // C列: 学年
+    const familyIndex = 3;           // D列: 家族構成
+    const triggerIndex = 4;          // E列: きっかけ
+    const approvalStatusIndex = 58;  // BG列: 承認ステータス
+    
+    const results = [];
+    
+    // データ行を新しい順にソート（タイムスタンプの降順）
+    const dataRows = [];
+    for (let i = 1; i < data.length; i++) {
+      const row = data[i];
+      
+      // 空行をスキップ
+      if (!row[authorNameIndex] && !row[targetColumnIndex]) continue;
+      
+      // 承認済みの体験談のみを対象
+      const status = row[approvalStatusIndex] || '';
+      if (status !== '承認済み') continue;
+      
+      // 対象列にデータがあるもののみ
+      const targetContent = String(row[targetColumnIndex] || '').trim();
+      if (!targetContent) continue;
+      
+      dataRows.push({
+        row: row,
+        timestamp: row[timestampIndex] ? new Date(row[timestampIndex]) : new Date(0),
+        rowIndex: i
+      });
+    }
+    
+    // タイムスタンプで降順ソート（最新が先頭）
+    dataRows.sort((a, b) => b.timestamp - a.timestamp);
+    
+    // limit件数まで取得
+    const limitedRows = dataRows.slice(0, limit);
+    
+    // 該当なしの場合
+    if (limitedRows.length === 0) {
+      return {
+        success: true,
+        data: [],
+        message: '該当する体験談がありません',
+        noData: true
+      };
+    }
+    
+    // データを整形
+    for (let i = 0; i < limitedRows.length; i++) {
+      const item = limitedRows[i];
+      const row = item.row;
+      const rowIndex = item.rowIndex + 1; // スプレッドシートの行番号（1始まり）
+      
+      const authorName = String(row[authorNameIndex] || '匿名');
+      const targetContent = String(row[targetColumnIndex] || '');
+      
+      // タイトルは対象列の内容の最初の50文字
+      let title = targetContent.substring(0, 50);
+      if (targetContent.length > 50) {
+        title += '...';
+      }
+      
+      results.push({
+        id: rowIndex,
+        title: title,
+        description: targetContent,
+        text: targetContent,
+        authorName: authorName,
+        authorInitial: getInitial(authorName),
+        date: formatDate(row[timestampIndex]),
+        grade: String(row[gradeIndex] || ''),
+        family: String(row[familyIndex] || ''),
+        trigger: String(row[triggerIndex] || ''),
+        questionId: questionId
+      });
+    }
+    
+    return {
+      success: true,
+      data: results,
+      count: results.length
+    };
+    
+  } catch (error) {
+    Logger.log('getExperiencesByQuestion Error: ' + error.toString());
+    return {
+      success: false,
+      error: error.toString(),
+      errorType: 'FETCH_ERROR'
+    };
   }
 }

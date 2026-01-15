@@ -38,7 +38,8 @@ const Section02 = () => {
       <ExperienceSection 
         title="みんなの体験談を見てみよう！
 公的支援を利用してどうだった？"
-        tweetCardIds={[5, 6, 1]}
+        questionId="6-1-5"
+        limit={6}
         moreButtonText="体験談をさがす"
         customClass={styles.experience02}
         onMoreClick={() => navigate('/experiences')}
