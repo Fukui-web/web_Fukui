@@ -132,7 +132,9 @@ const TweetDetailPage = () => {
     initialReflection: experienceData.initialReflection || '',
     firstMonthLife: experienceData.firstMonthLife || '',
     hardestTime: experienceData.hardestTime || '',
+    dailyLifeOverMonth: experienceData.dailyLifeOverMonth || '',
     improvementTrigger: experienceData.improvementTrigger || '',
+    schoolConnection: experienceData.schoolConnection || '',
     
     // セクション3: 子どもの成長過程
     elementarySchool: experienceData.elementarySchool || '',
@@ -180,7 +182,8 @@ const TweetDetailPage = () => {
                 {displayData.grade && <li>▼ 1. 基本情報</li>}
                 {(displayData.detail || displayData.parentInitialAction || displayData.childReaction || 
                   displayData.schoolResponse || displayData.initialReflection || displayData.firstMonthLife || 
-                  displayData.hardestTime || displayData.improvementTrigger) && 
+                  displayData.hardestTime || displayData.dailyLifeOverMonth || displayData.improvementTrigger || 
+                  displayData.schoolConnection) && 
                   <li>▼ 2. 不登校のきっかけと経過</li>}
                 {(displayData.elementarySchool || displayData.juniorHighSchool || 
                   displayData.highSchool || displayData.alternativeSchool) && 
@@ -311,11 +314,33 @@ const TweetDetailPage = () => {
                 </div>
               )}
               
+              {displayData.dailyLifeOverMonth && (
+                <div className={styles.subsection}>
+                  <h4 className={styles.subsectionTitle}>2-9. 不登校が1ヶ月以上続いた方に質問です。お子さんと保護者は、日々をどのように過ごしていましたか？</h4>
+                  <div className={styles.articleBody}>
+                    {displayData.dailyLifeOverMonth.split('\n').map((paragraph, index) => (
+                      <p key={index}>{paragraph}</p>
+                    ))}
+                  </div>
+                </div>
+              )}
+              
               {displayData.improvementTrigger && (
                 <div className={styles.subsection}>
-                  <h4 className={styles.subsectionTitle}>2-9. 改善のきっかけ</h4>
+                  <h4 className={styles.subsectionTitle}>2-10. 改善のきっかけ</h4>
                   <div className={styles.articleBody}>
                     {displayData.improvementTrigger.split('\n').map((paragraph, index) => (
+                      <p key={index}>{paragraph}</p>
+                    ))}
+                  </div>
+                </div>
+              )}
+              
+              {displayData.schoolConnection && (
+                <div className={styles.subsection}>
+                  <h4 className={styles.subsectionTitle}>2-11. お子さんや保護者の方は、学校とはどのように繋がっていましたか？</h4>
+                  <div className={styles.articleBody}>
+                    {displayData.schoolConnection.split('\n').map((paragraph, index) => (
                       <p key={index}>{paragraph}</p>
                     ))}
                   </div>
