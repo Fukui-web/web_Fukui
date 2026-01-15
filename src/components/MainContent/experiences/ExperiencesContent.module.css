@@ -214,16 +214,53 @@
 /* データなし表示 */
 .noDataContainer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 60px 20px;
   min-height: 300px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  margin: 20px 0;
 }
 
 .noDataText {
   font-size: 16px;
-  color: #999;
+  color: #6c757d;
   text-align: center;
+  margin: 0 0 10px 0;
+  font-weight: 600;
+}
+
+.noDataSubText {
+  font-size: 14px;
+  color: #adb5bd;
+  text-align: center;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* エラー表示（ピックアップ用） */
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  min-height: 300px;
+  background-color: #fff3f3;
+  border-radius: 8px;
+  border: 1px solid #ff6b6b;
+  margin: 20px 0;
+}
+
+.errorSubText {
+  font-size: 14px;
+  color: #e74c3c;
+  text-align: center;
+  margin: 5px 0 0 0;
+  line-height: 1.5;
 }
 
 /* レスポンシブ対応 */

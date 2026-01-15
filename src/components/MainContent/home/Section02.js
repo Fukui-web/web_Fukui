@@ -42,7 +42,8 @@ const Section02 = () => {
         limit={6}
         moreButtonText="体験談をさがす"
         customClass={styles.experience02}
-        onMoreClick={() => navigate('/experiences')}
+        onMoreClick={() => navigate('/experiences?questionId=6-1-5')}
+        sectionName="公的支援の利用に関する体験談"
       />
     </div>
   );

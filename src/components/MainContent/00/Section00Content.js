@@ -114,17 +114,26 @@ const Section00Content = () => {
           )}
           
           {!loading && !error && !noData && experiences.slice(0, 2).map((exp, index) => (
-            <TweetCard key={exp.id || index} data={exp} />
+            <TweetCard 
+              key={exp.id || index} 
+              data={exp}
+              relatedContext={{
+                type: 'section',
+                sectionName: '不登校のきっかけに関する体験談',
+                questionId: '2-2',
+                relatedExperiences: experiences.slice(0, 6)
+              }}
+            />
           ))}
         </div>
         
         {/* ボタン */}
         <button 
           className={styles.experienceButton}
-          onClick={() => navigate('/experiences')}
+          onClick={() => navigate('/experiences?questionId=2-2')}
         >
           <img src={vectorRB} alt="" className={styles.buttonIcon} />
-          <span>不登校になったきっかけの体験談を見る</span>
+          <span>体験談をさがす</span>
         </button>
       </div>
 

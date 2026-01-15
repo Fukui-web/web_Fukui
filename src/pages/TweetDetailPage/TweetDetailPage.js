@@ -17,9 +17,12 @@ const TweetDetailPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingRelated, setIsLoadingRelated] = useState(false);
   const [error, setError] = useState(false);
+  const [relatedError, setRelatedError] = useState(null);
+  const [noRelatedData, setNoRelatedData] = useState(false);
 
-  // locationのstateから渡されたデータを取得
+  // locationのstateから渡されたデータとコンテキストを取得
   const passedData = location.state?.experienceData;
+  const relatedContext = location.state?.relatedContext;
 
   useEffect(() => {
     const loadExperienceData = async () => {
@@ -54,8 +57,27 @@ const TweetDetailPage = () => {
   // 関連する体験談を取得
   const loadRelatedExperiences = async (currentData) => {
     setIsLoadingRelated(true);
+    setRelatedError(null);
+    setNoRelatedData(false);
+    
     try {
-      // 同じ学年またはきっかけの体験談を検索
+      // relatedContextがあればそれを使用（遷移元から渡された関連記事）
+      if (relatedContext && relatedContext.relatedExperiences) {
+        // 現在の体験談を除外して最大4件取得
+        const related = relatedContext.relatedExperiences
+          .filter(item => String(item.id) !== String(id))
+          .slice(0, 4);
+        
+        if (related.length === 0) {
+          setNoRelatedData(true);
+        } else {
+          setRelatedExperiences(related);
+        }
+        setIsLoadingRelated(false);
+        return;
+      }
+      
+      // relatedContextがない場合は従来通り学年やきっかけで検索
       const filters = {};
       if (currentData.grade) {
         filters.grade = [currentData.grade];
@@ -63,13 +85,16 @@ const TweetDetailPage = () => {
       
       const results = await searchExperiences('*', filters);
       // 現在の体験談を除外して最大4件取得
-      const related = results.filter(item => item.id !== currentData.id).slice(0, 4);
-      setRelatedExperiences(related);
+      const related = results.filter(item => String(item.id) !== String(id)).slice(0, 4);
+      
+      if (related.length === 0) {
+        setNoRelatedData(true);
+      } else {
+        setRelatedExperiences(related);
+      }
     } catch (error) {
       console.error('関連体験談の取得エラー:', error);
-      // エラー時はtweetCardsから取得
-      const fallbackRelated = tweetCards.filter(c => c.id !== parseInt(id)).slice(0, 4);
-      setRelatedExperiences(fallbackRelated);
+      setRelatedError('関連記事の取得に失敗しました');
     } finally {
       setIsLoadingRelated(false);
     }
@@ -554,12 +579,30 @@ const TweetDetailPage = () => {
           )}
 
           <section className={styles.relatedSection}>
-            <h4 className={styles.relatedTitle}>関連記事</h4>
+            <h4 className={styles.relatedTitle}>
+              {relatedContext ? (
+                relatedContext.type === 'pickup' ? '最新の体験談' :
+                relatedContext.type === 'question' ? `${relatedContext.sectionName}` :
+                relatedContext.type === 'section' ? `${relatedContext.sectionName}` :
+                relatedContext.type === 'search' ? '検索結果の体験談' :
+                '関連記事'
+              ) : '関連記事'}
+            </h4>
             <div className={styles.relatedDivider}></div>
             {isLoadingRelated ? (
               <div className={styles.loadingContainer}>
                 <div className={styles.loadingSpinner}></div>
                 <p className={styles.loadingText}>関連記事を読み込み中...</p>
+              </div>
+            ) : relatedError ? (
+              <div className={styles.errorContainer}>
+                <p className={styles.errorText}>⚠️ {relatedError}</p>
+                <p className={styles.errorSubText}>関連記事の取得中にエラーが発生しました。</p>
+              </div>
+            ) : noRelatedData ? (
+              <div className={styles.noDataContainer}>
+                <p className={styles.noDataText}>該当する関連記事がまだありません</p>
+                <p className={styles.noDataSubText}>他の体験談を探してみてください。</p>
               </div>
             ) : (
               <div className={styles.relatedGrid}>

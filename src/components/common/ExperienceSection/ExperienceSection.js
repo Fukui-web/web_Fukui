@@ -16,6 +16,7 @@ import { getExperiencesByQuestion } from '../../../utils/gasApi';
  * @param {string} moreButtonText - 「もっと見る」ボタンのテキスト
  * @param {string} customClass - カスタムCSSクラス (オプショナル)
  * @param {Function} onMoreClick - 「もっと見る」ボタンのクリックハンドラ (オプショナル)
+ * @param {string} sectionName - セクション名（関連記事表示用）例: 'ROAD00 はじめての登校しぶり・不登校'
  */
 const ExperienceSection = ({ 
   tag, 
@@ -25,7 +26,8 @@ const ExperienceSection = ({
   limit = 6,
   moreButtonText, 
   customClass, 
-  onMoreClick 
+  onMoreClick,
+  sectionName
 }) => {
   const [experiences, setExperiences] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -107,7 +109,16 @@ const ExperienceSection = ({
         )}
         
         {!loading && !error && !noData && questionId && experiences.map((exp, index) => (
-          <TweetCard key={exp.id || index} data={exp} />
+          <TweetCard 
+            key={exp.id || index} 
+            data={exp}
+            relatedContext={{
+              type: 'section',
+              sectionName: sectionName,
+              questionId: questionId,
+              relatedExperiences: experiences
+            }}
+          />
         ))}
         
         {!loading && !error && !questionId && tweetCardIds && tweetCardIds.map(id => (
