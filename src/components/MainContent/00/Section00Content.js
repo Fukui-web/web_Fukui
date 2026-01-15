@@ -124,7 +124,7 @@ const Section00Content = () => {
           onClick={() => navigate('/experiences')}
         >
           <img src={vectorRB} alt="" className={styles.buttonIcon} />
-          <span>不登校になったきっかけの体験談を見る</span>
+          <span>体験談をさがす</span>
         </button>
       </div>
 
