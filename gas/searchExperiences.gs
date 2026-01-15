@@ -106,6 +106,9 @@ function searchExperiences(keyword, filters = {}) {
     const familyIndex = 3; // D列: 1-4家族構成
     const triggerIndex = 4; // E列: 2-1不登校になったきっかけ（複数選択可）
     const detailIndex = 5; // F列: 2-2詳しい状況
+    const q2_8Index = 11;        // L列: 2-8 一番つらかった時期（混乱期）
+    const q2_9Index = 12;        // M列: 2-9 不登校1ヶ月以上の過ごし方（安定期）
+    const q2_10Index = 13;       // N列: 2-10 改善のきっかけ（回復期）
     const support1Index = 37; // AL列: 6-1-1サポートの種類
     const support2Index = 43; // AR列: 6-2-1サポートの種類
     const support3Index = 49; // AX列: 6-3-1サポートの種類
@@ -171,17 +174,64 @@ function searchExperiences(keyword, filters = {}) {
           }
         }
         
+        // 時期フィルター（各時期に記述があるかチェック）
+        if (filters.period && filters.period.length > 0) {
+          let hasPeriodContent = false;
+          
+          filters.period.forEach(periodType => {
+            let content = '';
+            
+            // 時期の種類に応じて対応する列を確認
+            if (periodType === '登校渋り期') {
+              content = String(row[detailIndex] || ''); // 2-2 詳しい状況
+            } else if (periodType === '混乱期') {
+              content = String(row[q2_8Index] || ''); // 2-8 一番つらかった時期
+            } else if (periodType === '安定期') {
+              content = String(row[q2_9Index] || ''); // 2-9 不登校1ヶ月以上の過ごし方
+            } else if (periodType === '回復期') {
+              content = String(row[q2_10Index] || ''); // 2-10 改善のきっかけ
+            }
+            
+            // その時期の内容が存在すれば、この体験談を含める
+            if (content && content.trim().length > 0) {
+              hasPeriodContent = true;
+            }
+          });
+          
+          if (!hasPeriodContent) {
+            matchFilter = false;
+          }
+        }
+        
         if (!matchFilter) continue;
       }
       
-      // タイトルを生成（詳しい状況の最初の50文字）
-      const title = String(row[detailIndex] || '').substring(0, 50) + '...';
+      // 時期フィルターが適用されている場合、該当する時期の内容をdescriptionとして使用
+      let description = String(row[detailIndex] || ''); // デフォルトは2-2 詳しい状況
+      let title = '';
+      
+      if (filters.period && filters.period.length > 0) {
+        const periodType = filters.period[0]; // 時期フィルターは1つのみ選択可能
+        
+        if (periodType === '登校渋り期') {
+          description = String(row[detailIndex] || ''); // 2-2 詳しい状況
+        } else if (periodType === '混乱期') {
+          description = String(row[q2_8Index] || ''); // 2-8 一番つらかった時期
+        } else if (periodType === '安定期') {
+          description = String(row[q2_9Index] || ''); // 2-9 不登校1ヶ月以上の過ごし方
+        } else if (periodType === '回復期') {
+          description = String(row[q2_10Index] || ''); // 2-10 改善のきっかけ
+        }
+      }
+      
+      // タイトルを生成（descriptionの最初の50文字）
+      title = description.substring(0, 50) + '...';
       
       // 結果に追加
       results.push({
         id: i,
         title: title,
-        description: String(row[detailIndex] || ''),
+        description: description,
         authorName: row[authorNameIndex] || '匿名',
         authorInitial: getInitial(row[authorNameIndex]),
         date: formatDate(row[timestampIndex]),
