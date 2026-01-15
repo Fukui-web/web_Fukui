@@ -106,10 +106,10 @@ function searchExperiences(keyword, filters = {}) {
     const familyIndex = 3; // D列: 1-4家族構成
     const triggerIndex = 4; // E列: 2-1不登校になったきっかけ（複数選択可）
     const detailIndex = 5; // F列: 2-2詳しい状況
-    const support1Index = 35; // AJ列: 6-1-1サポートの種類
-    const support2Index = 41; // AP列: 6-2-1サポートの種類
-    const support3Index = 47; // AV列: 6-3-1サポートの種類
-    const approvalStatusIndex = 56; // BE列: 承認ステータス
+    const support1Index = 37; // AL列: 6-1-1サポートの種類
+    const support2Index = 43; // AR列: 6-2-1サポートの種類
+    const support3Index = 49; // AX列: 6-3-1サポートの種類
+    const approvalStatusIndex = 58; // BG列: 承認ステータス
     
     // データ行（2行目以降）を検索
     const results = [];
@@ -228,7 +228,7 @@ function getAllExperiences(limit = null) {
     const authorNameIndex = 1; // B列: 1-2ペンネーム
     const gradeIndex = 2; // C列: 1-3初めて不登校になった学年
     const detailIndex = 5; // F列: 2-2詳しい状況
-    const approvalStatusIndex = 56; // BE列: 承認ステータス
+    const approvalStatusIndex = 58; // BG列: 承認ステータス
     
     const results = [];
     
@@ -317,62 +317,64 @@ function getExperienceById(id) {
     const q2_6Index = 9;         // J列: 2-6 初動の振り返り
     const q2_7Index = 10;        // K列: 2-7 不登校1か月の生活
     const q2_8Index = 11;        // L列: 2-8 一番つらかった時期
-    const q2_9Index = 12;        // M列: 2-9 改善のきっかけ
+    const q2_9Index = 12;        // M列: 2-9 不登校1ヶ月以上の過ごし方
+    const q2_10Index = 13;       // N列: 2-10 改善のきっかけ
+    const q2_11Index = 14;       // O列: 2-11 学校との繋がり
     
     // セクション3: 子どもの成長過程
-    const q3_1Index = 13;        // N列: 3-1 小学生のころ
-    const q3_2Index = 14;        // O列: 3-2 中学生のころ
-    const q3_3Index = 15;        // P列: 3-3 高校生のころ
-    const q3_4Index = 16;        // Q列: 3-4 中学卒業後の通信制・定時制
+    const q3_1Index = 15;        // P列: 3-1 小学生のころ
+    const q3_2Index = 16;        // Q列: 3-2 中学生のころ
+    const q3_3Index = 17;        // R列: 3-3 高校生のころ
+    const q3_4Index = 18;        // S列: 3-4 中学卒業後の通信制・定時制
     
     // セクション4: 通信制・定時制の学校情報（最大3校）
-    const school1NameIndex = 17;      // R列: 4-1-1 学校名
-    const school1PeriodIndex = 18;    // S列: 4-1-2 通学期間
-    const school1ReasonIndex = 19;    // T列: 4-1-3 選んだ理由
-    const school1ReviewIndex = 20;    // U列: 4-1-4 感想
-    const school1CostIndex = 21;      // V列: 4-1-5 費用
-    const school1MoreIndex = 22;      // W列: 4-1-6 他にもあるか
+    const school1NameIndex = 19;      // T列: 4-1-1 学校名
+    const school1PeriodIndex = 20;    // U列: 4-1-2 通学期間
+    const school1ReasonIndex = 21;    // V列: 4-1-3 選んだ理由
+    const school1ReviewIndex = 22;    // W列: 4-1-4 感想
+    const school1CostIndex = 23;      // X列: 4-1-5 費用
+    const school1MoreIndex = 24;      // Y列: 4-1-6 他にもあるか
     
-    const school2NameIndex = 23;      // X列: 4-2-1 学校名
-    const school2PeriodIndex = 24;    // Y列: 4-2-2 通学期間
-    const school2ReasonIndex = 25;    // Z列: 4-2-3 選んだ理由
-    const school2ReviewIndex = 26;    // AA列: 4-2-4 感想
-    const school2CostIndex = 27;      // AB列: 4-2-5 費用
-    const school2MoreIndex = 28;      // AC列: 4-2-6 他にもあるか
+    const school2NameIndex = 25;      // Z列: 4-2-1 学校名
+    const school2PeriodIndex = 26;    // AA列: 4-2-2 通学期間
+    const school2ReasonIndex = 27;    // AB列: 4-2-3 選んだ理由
+    const school2ReviewIndex = 28;    // AC列: 4-2-4 感想
+    const school2CostIndex = 29;      // AD列: 4-2-5 費用
+    const school2MoreIndex = 30;      // AE列: 4-2-6 他にもあるか
     
-    const school3NameIndex = 29;      // AD列: 4-3-1 学校名
-    const school3PeriodIndex = 30;    // AE列: 4-3-2 通学期間
-    const school3ReasonIndex = 31;    // AF列: 4-3-3 選んだ理由
-    const school3ReviewIndex = 32;    // AG列: 4-3-4 感想
-    const school3CostIndex = 33;      // AH列: 4-3-5 費用
+    const school3NameIndex = 31;      // AF列: 4-3-1 学校名
+    const school3PeriodIndex = 32;    // AG列: 4-3-2 通学期間
+    const school3ReasonIndex = 33;    // AH列: 4-3-3 選んだ理由
+    const school3ReviewIndex = 34;    // AI列: 4-3-4 感想
+    const school3CostIndex = 35;      // AJ列: 4-3-5 費用
     
     // セクション5: 行政・民間サポートの有無
-    const q5_1Index = 34;        // AI列: 5-1 利用した行政サポート民間サポート
+    const q5_1Index = 36;        // AK列: 5-1 利用した行政サポート民間サポート
     
     // セクション6: 利用したサポート（最大3つ）
-    const support1TypeIndex = 35;      // AJ列: 6-1-1 サポート1の種類
-    const support1DetailIndex = 36;    // AK列: 6-1-2 サポート1の名称
-    const support1FreqIndex = 37;      // AL列: 6-1-3 サポート1の利用期間・回数
-    const support1ReasonIndex = 38;    // AM列: 6-1-4 サポート1の利用きっかけ
-    const support1FeelingIndex = 39;   // AN列: 6-1-5 サポート1の感想
-    const support1MoreIndex = 40;      // AO列: 6-1-6 他にも利用したサポートがあるか
+    const support1TypeIndex = 37;      // AL列: 6-1-1 サポート1の種類
+    const support1DetailIndex = 38;    // AM列: 6-1-2 サポート1の名称
+    const support1FreqIndex = 39;      // AN列: 6-1-3 サポート1の利用期間・回数
+    const support1ReasonIndex = 40;    // AO列: 6-1-4 サポート1の利用きっかけ
+    const support1FeelingIndex = 41;   // AP列: 6-1-5 サポート1の感想
+    const support1MoreIndex = 42;      // AQ列: 6-1-6 他にも利用したサポートがあるか
     
-    const support2TypeIndex = 41;      // AP列: 6-2-1 サポート2の種類
-    const support2DetailIndex = 42;    // AQ列: 6-2-2 サポート2の名称
-    const support2FreqIndex = 43;      // AR列: 6-2-3 サポート2の利用期間・回数
-    const support2ReasonIndex = 44;    // AS列: 6-2-4 サポート2の利用きっかけ
-    const support2FeelingIndex = 45;   // AT列: 6-2-5 サポート2の感想
-    const support2MoreIndex = 46;      // AU列: 6-2-6 他にも利用したサポートがあるか
+    const support2TypeIndex = 43;      // AR列: 6-2-1 サポート2の種類
+    const support2DetailIndex = 44;    // AS列: 6-2-2 サポート2の名称
+    const support2FreqIndex = 45;      // AT列: 6-2-3 サポート2の利用期間・回数
+    const support2ReasonIndex = 46;    // AU列: 6-2-4 サポート2の利用きっかけ
+    const support2FeelingIndex = 47;   // AV列: 6-2-5 サポート2の感想
+    const support2MoreIndex = 48;      // AW列: 6-2-6 他にも利用したサポートがあるか
     
-    const support3TypeIndex = 47;      // AV列: 6-3-1 サポート3の種類
-    const support3DetailIndex = 48;    // AW列: 6-3-2 サポート3の名称
-    const support3FreqIndex = 49;      // AX列: 6-3-3 サポート3の利用期間・回数
-    const support3ReasonIndex = 50;    // AY列: 6-3-4 サポート3の利用きっかけ
-    const support3FeelingIndex = 51;   // AZ列: 6-3-5 サポート3の感想
+    const support3TypeIndex = 49;      // AX列: 6-3-1 サポート3の種類
+    const support3DetailIndex = 50;    // AY列: 6-3-2 サポート3の名称
+    const support3FreqIndex = 51;      // AZ列: 6-3-3 サポート3の利用期間・回数
+    const support3ReasonIndex = 52;    // BA列: 6-3-4 サポート3の利用きっかけ
+    const support3FeelingIndex = 53;   // BB列: 6-3-5 サポート3の感想
     
     // セクション7: その他のサポートと今の想い
-    const q7_1Index = 52;        // BA列: 7-1 その他のサポート・活動
-    const q7_2Index = 53;        // BB列: 7-2 不登校に対する考え・想い
+    const q7_1Index = 54;        // BC列: 7-1 その他のサポート・活動
+    const q7_2Index = 55;        // BD列: 7-2 不登校に対する考え・想い
     
     // タイトルを生成（2-2の詳しい状況から）
     const title = String(row[detailIndex] || '').substring(0, 50) + '...';
@@ -403,7 +405,9 @@ function getExperienceById(id) {
         initialReflection: String(row[q2_6Index] || ''),        // 2-6 初動の振り返り
         firstMonthLife: String(row[q2_7Index] || ''),           // 2-7 不登校1か月の生活
         hardestTime: String(row[q2_8Index] || ''),              // 2-8 一番つらかった時期
-        improvementTrigger: String(row[q2_9Index] || ''),       // 2-9 改善のきっかけ
+        dailyLifeOverMonth: String(row[q2_9Index] || ''),       // 2-9 不登校1ヶ月以上の過ごし方
+        improvementTrigger: String(row[q2_10Index] || ''),      // 2-10 改善のきっかけ
+        schoolConnection: String(row[q2_11Index] || ''),        // 2-11 学校との繋がり
         
         // セクション3: 子どもの成長過程
         elementarySchool: String(row[q3_1Index] || ''),         // 3-1 小学生のころ

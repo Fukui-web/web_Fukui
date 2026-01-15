@@ -5,12 +5,12 @@
  */
 
 // 承認ステータス関連の列インデックス（0始まり）
-const EMAIL_ADDRESS_INDEX = 55;   // BD列（56列目）: メールアドレス
-const APPROVAL_STATUS_INDEX = 56; // BE列（57列目）: 承認ステータス
-const APPROVAL_DATE_INDEX = 57;   // BF列（58列目）: 承認日時
-const LAST_EDIT_DATE_INDEX = 58;  // BG列（59列目）: 最終編集日時
-const APPROVAL_COUNT_INDEX = 59;  // BH列（60列目）: 承認回数
-const REJECT_REASON_INDEX = 60;   // BI列（61列目）: 却下理由
+const EMAIL_ADDRESS_INDEX = 57;   // BF列（58列目）: メールアドレス
+const APPROVAL_STATUS_INDEX = 58; // BG列（59列目）: 承認ステータス
+const APPROVAL_DATE_INDEX = 59;   // BH列（60列目）: 承認日時
+const LAST_EDIT_DATE_INDEX = 60;  // BI列（61列目）: 最終編集日時
+const APPROVAL_COUNT_INDEX = 61;  // BJ列（62列目）: 承認回数
+const REJECT_REASON_INDEX = 62;   // BK列（63列目）: 却下理由
 
 // ステータス定数
 const STATUS = {
@@ -57,9 +57,9 @@ function getPendingExperiences() {
         const title = String(row[detailIndex] || '').substring(0, 50) + '...';
         
         // サポートの種類を取得（複数のサポート列から）
-        const support1Index = 35; // AJ列
-        const support2Index = 41; // AP列
-        const support3Index = 47; // AV列
+        const support1Index = 37; // AL列
+        const support2Index = 43; // AR列
+        const support3Index = 49; // AX列
         const supportTypes = [];
         if (row[support1Index]) supportTypes.push(row[support1Index]);
         if (row[support2Index]) supportTypes.push(row[support2Index]);
@@ -128,9 +128,9 @@ function getApprovedExperiences() {
         const title = String(row[detailIndex] || '').substring(0, 50) + '...';
         
         // サポートの種類を取得
-        const support1Index = 35;
-        const support2Index = 41;
-        const support3Index = 47;
+        const support1Index = 37;
+        const support2Index = 43;
+        const support3Index = 49;
         const supportTypes = [];
         if (row[support1Index]) supportTypes.push(row[support1Index]);
         if (row[support2Index]) supportTypes.push(row[support2Index]);
