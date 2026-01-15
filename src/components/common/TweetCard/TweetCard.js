@@ -7,6 +7,7 @@ import tweetCards from '../../../data/tweetCards';
 const TweetCard = ({ 
   cardId, 
   data, // 検索結果データ
+  relatedContext, // 関連記事のコンテキスト情報
   text, 
   tags = ['#小学生', '#学校活用術', '#学校活用術'], 
   authorName = 'ひろまま', 
@@ -43,7 +44,10 @@ const TweetCard = ({
   return (
     <Link 
       to={`/experiences/${data?.id || cardId || 1}`} 
-      state={{ experienceData: data }} 
+      state={{ 
+        experienceData: data,
+        relatedContext: relatedContext
+      }} 
       className={styles.cardLink}
     >
       <div className={styles.tweetCard}>
@@ -72,6 +76,7 @@ const TweetCard = ({
 TweetCard.propTypes = {
   cardId: PropTypes.number,
   data: PropTypes.shape({
+    id: PropTypes.number,
     title: PropTypes.string,
     description: PropTypes.string,
     authorName: PropTypes.string,
@@ -81,6 +86,13 @@ TweetCard.propTypes = {
     trigger: PropTypes.string,
     situation: PropTypes.string,
     support: PropTypes.string
+  }),
+  relatedContext: PropTypes.shape({
+    type: PropTypes.string, // 'pickup', 'question', 'search', 'section'
+    questionId: PropTypes.string,
+    sectionName: PropTypes.string,
+    searchFilters: PropTypes.object,
+    relatedExperiences: PropTypes.array
   }),
   text: PropTypes.string,
   tags: PropTypes.arrayOf(PropTypes.string),

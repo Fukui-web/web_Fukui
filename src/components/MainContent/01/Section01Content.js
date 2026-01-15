@@ -113,7 +113,16 @@ const Section01Content = () => {
           )}
           
           {!earlyLoading && !earlyError && !earlyNoData && earlyExperiences.slice(0, 2).map((exp, index) => (
-            <TweetCard key={exp.id || index} data={exp} />
+            <TweetCard 
+              key={exp.id || index} 
+              data={exp}
+              relatedContext={{
+                type: 'section',
+                sectionName: '学校とのつながりに関する体験談',
+                questionId: '2-11',
+                relatedExperiences: earlyExperiences.slice(0, 6)
+              }}
+            />
           ))}
         </div>
         <button 

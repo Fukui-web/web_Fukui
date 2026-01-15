@@ -216,13 +216,13 @@ const ExperiencesContent = () => {
       {/* 体験談ピックアップセクション */}
       <div className={styles.pickupSection}>
         <h2 className={styles.pickupTitle}>
-          {sectionName ? `${sectionName}に関する体験談` : '体験談ピックアップ'}
+          {sectionName ? `${sectionName}` : '最新の体験談'}
         </h2>
         <div className={styles.dividerLine}></div>
         <p className={styles.pickupDescription}>
           {sectionName 
-            ? `${sectionName}に関する体験談を表示しています。`
-            : 'みんなの体験談から、似ているところや参考にしたい情報をみつけてみてください。'
+            ? `${sectionName}を表示しています。`
+            : '最新の体験談を表示しています。似ているところや参考にしたい情報をみつけてみてください。'
           }
         </p>
         
@@ -254,6 +254,12 @@ const ExperiencesContent = () => {
                 key={experience.id || index} 
                 cardId={experience.id}
                 data={experience}
+                relatedContext={{
+                  type: questionId ? 'question' : 'pickup',
+                  questionId: questionId,
+                  sectionName: sectionName,
+                  relatedExperiences: pickupExperiences
+                }}
               />
             ))}
           </div>

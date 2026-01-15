@@ -296,6 +296,12 @@ const ExperiencesSearchResultsContent = () => {
                   key={result.id || index} 
                   cardId={result.id || index}
                   data={result}
+                  relatedContext={{
+                    type: 'search',
+                    searchKeyword: urlKeyword,
+                    searchFilters: filters,
+                    relatedExperiences: searchResults
+                  }}
                 />
               ))}
             </div>

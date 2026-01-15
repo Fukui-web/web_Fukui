@@ -60,6 +60,7 @@ const Section05 = () => {
                 moreButtonText="卒業後の進路の体験談を見る"
                 customClass={styles.experience05}
                 onMoreClick={() => navigate('/experiences?questionId=4-1-3')}
+                sectionName="卒業後の進路に関する体験談"
             />
         </div>
     );
