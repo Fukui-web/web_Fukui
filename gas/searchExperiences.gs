@@ -51,6 +51,9 @@ function doPost(e) {
       case 'getExperiencesByQuestion':
         result = getExperiencesByQuestion(params.questionId, params.limit);
         break;
+      case 'verifyAdmin':
+        result = verifyAdmin(params.credential);
+        break;
       default:
         result = {
           success: false,

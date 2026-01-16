@@ -22,10 +22,16 @@ const LoginPage = () => {
     }
   }, [isAuthenticated, navigate, from]);
 
-  const handleLoginSuccess = (credentialResponse) => {
+  const handleLoginSuccess = async (credentialResponse) => {
     console.log('Login Success:', credentialResponse);
-    login(credentialResponse);
-    navigate(from, { replace: true });
+    
+    const result = await login(credentialResponse);
+    
+    if (result.success) {
+      navigate(from, { replace: true });
+    } else {
+      alert('ログインに失敗しました。もう一度お試しください。');
+    }
   };
 
   const handleLoginError = () => {

@@ -1,47 +1,86 @@
 import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
+import { verifyAdmin } from '../utils/gasApi';
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isVerifying, setIsVerifying] = useState(false);
 
   // ローカルストレージから認証情報を復元
   useEffect(() => {
     const storedUser = localStorage.getItem('googleUser');
+    const storedIsAdmin = localStorage.getItem('isAdmin');
+    
     if (storedUser) {
       try {
         setUser(JSON.parse(storedUser));
+        setIsAdmin(storedIsAdmin === 'true');
       } catch (error) {
         console.error('ユーザー情報の復元に失敗しました:', error);
         localStorage.removeItem('googleUser');
+        localStorage.removeItem('isAdmin');
       }
     }
     setIsLoading(false);
   }, []);
 
-  // ログイン成功時の処理
-  const login = (credentialResponse) => {
-    // JWTトークンをデコード
-    const decoded = parseJwt(credentialResponse.credential);
+  // ログイン成功時の処理（管理者検証を含む）
+  const login = async (credentialResponse) => {
+    setIsVerifying(true);
     
-    const userData = {
-      id: decoded.sub,
-      email: decoded.email,
-      name: decoded.name,
-      picture: decoded.picture,
-      credential: credentialResponse.credential
-    };
+    try {
+      // JWTトークンをデコード
+      const decoded = parseJwt(credentialResponse.credential);
+      
+      const userData = {
+        id: decoded.sub,
+        email: decoded.email,
+        name: decoded.name,
+        picture: decoded.picture,
+        credential: credentialResponse.credential
+      };
 
-    setUser(userData);
-    localStorage.setItem('googleUser', JSON.stringify(userData));
+      // GAS側で管理者かどうかを検証
+      const adminCheckResult = await verifyAdmin(credentialResponse.credential);
+      
+      setUser(userData);
+      setIsAdmin(adminCheckResult.isAdmin);
+      
+      localStorage.setItem('googleUser', JSON.stringify(userData));
+      localStorage.setItem('isAdmin', adminCheckResult.isAdmin.toString());
+      
+      console.log('Login successful:', {
+        email: userData.email,
+        isAdmin: adminCheckResult.isAdmin
+      });
+      
+      return {
+        success: true,
+        isAdmin: adminCheckResult.isAdmin
+      };
+      
+    } catch (error) {
+      console.error('ログイン処理中にエラーが発生しました:', error);
+      return {
+        success: false,
+        isAdmin: false,
+        error: error.message
+      };
+    } finally {
+      setIsVerifying(false);
+    }
   };
 
   // ログアウト処理
   const logout = () => {
     setUser(null);
+    setIsAdmin(false);
     localStorage.removeItem('googleUser');
+    localStorage.removeItem('isAdmin');
   };
 
   // JWTトークンをデコードする関数
@@ -65,10 +104,12 @@ export const AuthProvider = ({ children }) => {
   const value = useMemo(() => ({
     user,
     isLoading,
+    isAdmin,
+    isVerifying,
     login,
     logout,
     isAuthenticated: !!user
-  }), [user, isLoading]);
+  }), [user, isLoading, isAdmin, isVerifying]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
