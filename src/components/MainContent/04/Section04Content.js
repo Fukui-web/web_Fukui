@@ -1,7 +1,6 @@
 // src/components/MainContent/04/Section04Content.js
 
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import layoutStyles from '../commonPageLayout.module.css';
 import styles from './Section04Content.module.css';
 import Footer from '../../common/Footer';
@@ -12,7 +11,6 @@ import dotlineImage from '../../../assets/images/dotline.png';
 import vectorRB from '../../../assets/images/vectorRB.png';
 
 const Section04Content = () => {
-  const navigate = useNavigate();
   return (
     <div className={`${layoutStyles.pageContainer} ${styles.section04Content}`}>
 
@@ -51,15 +49,6 @@ const Section04Content = () => {
           <InterviewCard cardId={1} />
           <InterviewCard cardId={2} />
         </div>
-        <button 
-          className={styles.interviewButton}
-          onClick={() => navigate('/interviews')}
-        >
-          <div className={styles.buttonIconContainer}>
-            <div className={styles.playIcon}></div>
-          </div>
-          <span>インタビューをもっと見る</span>
-        </button>
       </div>
 
       {/* フッター */}

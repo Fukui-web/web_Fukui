@@ -139,38 +139,3 @@
   gap: 20px;
   width: 100%;
 }
-
-.interviewButton {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 12px 20px;
-  gap: 8px;
-  width: auto;
-  max-width: 360px;
-  height: auto;
-  background: var(--color-white);
-  border: 1px solid var(--color-black);
-  border-radius: 8px;
-  font-family: var(--font-primary);
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 20px;
-  color: var(--color-black);
-  cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
-  margin-bottom: 80px;
-}
-.interviewButton:hover { background-color: rgba(0, 0, 0, 0.05); }
-.interviewButton:active { transform: scale(0.98); }
-
-.playIcon {
-  width: 19.2px;
-  height: 19.2px;
-  background-image: url('../../../assets/images/vectorRB.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
