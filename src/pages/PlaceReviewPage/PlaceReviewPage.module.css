@@ -1,11 +1,15 @@
-/* PlaceReviewPage.module.css */
+/* src/pages/PlaceReviewPage/PlaceReviewPage.module.css */
+/* 統一版 */
 
 .contentArea {
-  max-width: 1200px;
+  /* 修正: 幅制限と余白統一 */
+  width: 100%;
+  max-width: 540px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 30px 30px;
   background: white;
   min-height: 100vh;
+  box-sizing: border-box;
 }
 
 /* タブナビゲーション */
@@ -32,42 +36,13 @@
   transition: all 0.2s;
   position: relative;
 }
-
-.tab:first-child {
-  border-top-left-radius: 8px;
-  border-right: none;
-}
-
-.tab:last-child {
-  border-top-right-radius: 8px;
-  border-left: none;
-}
-
-.tab:hover {
-  background: rgba(136, 211, 188, 0.05);
-}
-
-.tabActive {
-  background: #88D3BC !important;
-  color: var(--color-black) !important;
-  border: none !important;
-  border-bottom: none !important;
-}
-
-.tabActive:hover {
-  background: #88D3BC !important;
-}
-
-/* アクティブタブの隣のタブの境界線を調整 */
-.tabActive + .tab {
-  border-left: 1.5px solid var(--color-black);
-}
-
-.tabIcon {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-}
+.tab:first-child { border-top-left-radius: 8px; border-right: none; }
+.tab:last-child { border-top-right-radius: 8px; border-left: none; }
+.tab:hover { background: rgba(136, 211, 188, 0.05); }
+.tabActive { background: #88D3BC !important; color: var(--color-black) !important; border: none !important; border-bottom: none !important; }
+.tabActive:hover { background: #88D3BC !important; }
+.tabActive + .tab { border-left: 1.5px solid var(--color-black); }
+.tabIcon { width: 20px; height: 20px; object-fit: contain; }
 
 .main {
   background: white;

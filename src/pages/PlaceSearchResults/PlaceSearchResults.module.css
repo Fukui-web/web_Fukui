@@ -1,8 +1,16 @@
+/* src/pages/PlaceSearchResults/PlaceSearchResults.module.css */
+/* 統一版 */
+
 .contentArea {
-  padding: 24px 32px;
+  /* 修正: 幅と余白統一 */
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 30px 30px;
+  box-sizing: border-box;
 }
 
-/* 検索セクション - 緑色 */
+/* 検索セクション */
 .searchSection {
   background: rgba(136, 211, 188, 0.25);
   border-radius: 12px;
@@ -35,29 +43,12 @@
   justify-content: center;
   transition: opacity 0.2s;
 }
+.searchIconButton:hover { opacity: 0.7; }
 
-.searchIconButton:hover {
-  opacity: 0.7;
-}
+.searchInput { flex: 1; border: none; outline: none; font-size: 14px; color: var(--color-black); }
+.searchInput::placeholder { color: #999; }
 
-.searchInput {
-  flex: 1;
-  border: none;
-  outline: none;
-  font-size: 14px;
-  color: var(--color-black);
-}
-
-.searchInput::placeholder {
-  color: #999;
-}
-
-.filterArea {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
+.filterArea { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 
 .filterButton {
   display: flex;
@@ -73,10 +64,7 @@
   cursor: pointer;
   transition: all 0.2s;
 }
-
-.filterButton:hover {
-  background: #F0F9F6;
-}
+.filterButton:hover { background: #F0F9F6; }
 
 .filterTag {
   display: flex;
@@ -99,35 +87,13 @@
   margin-left: 4px;
   line-height: 1;
 }
-
-.tagRemove:hover {
-  color: var(--color-black);
-}
+.tagRemove:hover { color: var(--color-black); }
 
 /* 検索結果セクション */
-.resultsSection {
-  margin-top: 32px;
-}
-
-.resultsTitle {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 12px;
-  color: var(--color-black);
-}
-
-.dividerLine {
-  height: 1px;
-  background: #E0E0E0;
-  margin-bottom: 16px;
-}
-
-.resultsDescription {
-  font-size: 14px;
-  line-height: 1.6;
-  color: #666;
-  margin-bottom: 24px;
-}
+.resultsSection { margin-top: 32px; }
+.resultsTitle { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: var(--color-black); }
+.dividerLine { height: 1px; background: #E0E0E0; margin-bottom: 16px; }
+.resultsDescription { font-size: 14px; line-height: 1.6; color: #666; margin-bottom: 24px; }
 
 .cardsGrid {
   display: grid;
@@ -136,15 +102,6 @@
 }
 
 @media (max-width: 560px) {
-  .contentArea {
-    padding: 20px 16px;
-  }
-  
-  .searchSection {
-    padding: 16px;
-    margin-bottom: 24px;
-  }
-  
   .cardsGrid {
     grid-template-columns: 1fr;
   }

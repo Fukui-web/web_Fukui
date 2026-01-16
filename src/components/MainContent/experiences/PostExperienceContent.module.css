@@ -1,368 +1,181 @@
-/* src/components/MainContent/experiences/ExperiencesSearchResultsContent.module.css */
-/* 統一版 */
+/* src/components/MainContent/experiences/PostExperienceContent.module.css */
 
-/* 検索セクション */
-.searchSection {
-  background-color: #FFE6D5;
-  /* 修正: 余白30px */
-  padding: 30px 30px;
-  margin: 20px 0;
-  border-radius: 0;
-  text-align: center;
-  
+/* メインコンテンツエリア */
+.mainContentArea {
   width: 100%;
-  max-width: 540px;
+  max-width: 540px; /* 統一: 540pxに変更 */
+  margin: 0 auto;
+  padding: 30px 30px; /* 統一: 30pxに変更 */
+  box-sizing: border-box; /* 追加: レイアウト崩れ防止 */
+}
+
+/* タイトルボックス */
+.titleBox {
+  background-color: #FFE6D5;
+  border-radius: 12px;
+  padding: 40px 30px;
+  text-align: center;
+  margin-bottom: 30px;
+  width: 100%;
   box-sizing: border-box;
 }
 
-.searchTitle {
-  font-size: 28px;
-  font-weight: bold;
+.subtitle {
+  font-family: var(--font-primary);
+  font-size: 14px;
+  font-weight: 400;
   color: #333;
-  margin-bottom: 10px;
+  margin: 0 0 10px 0;
+  line-height: 1.5;
+}
+
+.mainTitle {
+  font-family: var(--font-primary);
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 15px 0;
+  line-height: 1.4;
 }
 
 .dotline {
   width: 100%;
-  max-width: 300px;
+  max-width: 480px;
   height: auto;
-  margin: 0 auto 30px;
+  margin: 0 auto;
   display: block;
 }
 
-.searchBox {
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 10px;
-  /* 修正 */
-  width: 100%;
-  max-width: 100%;
-  margin: 0 auto;
-  box-sizing: border-box;
-}
-
-.searchInputWrapper {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 20px;
-  border: 1px solid #ddd;
-  border-radius: 25px;
-  margin-bottom: 20px;
-}
-
-.searchInput {
-  flex: 1;
-  border: none;
-  outline: none;
-  font-size: 14px;
-  color: #333;
-  width: 100%;
-}
-
-.searchInput::placeholder {
-  color: #999;
-}
-
-.buttonArea {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  align-items: flex-start;
-  width: 100%;
-}
-
-.filterRow {
-  display: flex;
-  gap: 10px;
-  width: 100%;
-  justify-content: space-between;
-}
-
-.filterButton {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 8px 15px;
-  border: 1px solid #EF9F94;
-  border-radius: 20px;
-  background-color: #fff;
-  color: #EF9F94;
-  font-size: 14px;
-  cursor: pointer;
-  white-space: nowrap;
-  width: 140px;
-  max-width: 140px;
-  min-width: 140px;
-  justify-content: center;
-  align-self: flex-start;
-}
-
-.filterButton:hover {
-  background-color: #FFF5F2;
-}
-
-.clearButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 15px;
-  border: 1px solid #EF9F94;
-  border-radius: 20px;
-  background-color: #fff;
-  color: #EF9F94;
-  font-size: 14px;
-  cursor: pointer;
-  white-space: nowrap;
-  min-width: 80px;
-}
-
-.clearButton:hover {
-  background-color: #FFF5F2;
-}
-
-.searchButton {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 12px 30px;
-  background-color: #EF9F94;
-  color: #fff;
-  border: none;
-  border-radius: 25px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.searchButton:hover:not(:disabled) {
-  background-color: #E88E83;
-}
-
-.searchButton:active:not(:disabled) {
-  transform: scale(0.98);
-  background-color: #D87D72;
-}
-
-.searchButton:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-/* 検索結果セクション */
-.resultsSection {
-  /* 修正: 余白30px */
-  padding: 40px 30px;
-  
-  /* 修正: 幅制限 */
-  width: 100%;
-  max-width: 540px;
-  margin: 0 auto;
-  box-sizing: border-box;
-}
-
-.resultsHeader {
+/* セクション */
+.section {
   margin-bottom: 30px;
+  width: 100%;
 }
 
-.resultsTitle {
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 15px;
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.resultCount {
+.sectionTitle {
+  font-family: var(--font-primary);
   font-size: 18px;
-  color: #666;
-  font-weight: normal;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 10px 0;
+  line-height: 1.5;
 }
 
-.dividerLine {
+.sectionNumber {
+  margin-right: 5px;
+}
+
+.sectionDivider {
   width: 100%;
   height: 1px;
-  background-color: #ddd;
+  background-color: #CCCCCC;
   margin-bottom: 20px;
 }
 
-.activeFilters {
-  display: flex;
-  align-items: flex-start;
-  gap: 15px;
-  margin-bottom: 25px;
-  padding: 15px 20px;
-  background-color: #FFF5F2;
-  border-radius: 8px;
-  border-left: 4px solid #EF9F94;
+.sectionContent {
+  font-family: var(--font-primary);
+  font-size: 15px;
+  font-weight: 400;
+  color: #333;
+  line-height: 1.8;
 }
 
-.filterLabel {
-  font-size: 14px;
+.sectionContent p {
+  margin: 0 0 15px 0;
+}
+
+.sectionContent p:last-child {
+  margin-bottom: 0;
+}
+
+.bulletList {
+  list-style: none;
+  padding-left: 0;
+  margin: 15px 0 0 0;
+}
+
+.bulletList li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 12px;
+  line-height: 1.8;
+}
+
+.bulletList li:last-child {
+  margin-bottom: 0;
+}
+
+.bulletList li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
   font-weight: bold;
-  color: #EF9F94;
-  white-space: nowrap;
-  padding-top: 5px;
 }
 
-.filterTags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.filterTag {
-  display: inline-block;
-  padding: 6px 15px;
-  background-color: #EF9F94;
-  color: #fff;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-.loadingContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 20px;
-  gap: 20px;
-}
-
-.loadingSpinner {
-  width: 50px;
-  height: 50px;
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #EF9F94;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.loadingText {
-  font-size: 16px;
-  color: #666;
-}
-
-.errorContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 20px;
-  gap: 25px;
-}
-
-.errorText {
-  font-size: 16px;
-  color: #d32f2f;
-  text-align: center;
-  line-height: 1.6;
-}
-
-.backButton {
-  padding: 12px 30px;
-  background-color: #EF9F94;
-  color: #fff;
-  border: none;
-  border-radius: 25px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.backButton:hover {
-  background-color: #E88E83;
-}
-
-.backToTopContainer {
-  display: flex;
-  justify-content: center;
-  margin-top: 40px;
-  padding: 32px 0;
-}
-
-.backToTopButton {
-  background-color: #EF9F94;
-  color: #fff;
-  border: none;
-  border-radius: 25px;
-  padding: 12px 48px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.backToTopButton:hover {
-  background-color: #E88E83;
-}
-
-.backToTopButton:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.noResultsContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 20px;
-  gap: 15px;
-}
-
-.noResultsText {
-  font-size: 18px;
-  color: #666;
-  font-weight: bold;
-  text-align: center;
-}
-
-.noResultsSubText {
-  font-size: 14px;
-  color: #999;
-  text-align: center;
-  line-height: 1.6;
-}
-
-.cardsGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  /* 修正 */
+/* Googleフォームリンクコンテナ */
+.formContainer {
   width: 100%;
-  max-width: 100%;
-  margin: 0 auto;
+  max-width: 540px; /* 統一: 540pxに変更 */
+  
+  /* 修正: 上マージンを0にして間隔を詰める */
+  margin: 0 auto 0; 
+  
+  /* 修正: 下パディング40pxでフッターとの間隔を確保 */
+  padding: 0 0 40px; 
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
 }
 
-@media (max-width: 768px) {
-  .cardsGrid {
-    display: flex;
-    overflow-x: auto;
-    gap: 15px;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 10px;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+.formButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 20px;
+  gap: 8px;
+  width: auto;
+  max-width: 360px;
+  height: auto;
+  background: rgba(136, 211, 188, 0.15); /* 元の色を維持 */
+  border: 1px solid var(--color-black);
+  border-radius: 8px;
+  font-family: var(--font-primary);
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-black);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.formButton:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.formButton:active {
+  transform: scale(0.98);
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 560px) {
+  .titleBox {
+    padding: 30px 20px;
   }
-  .cardsGrid::-webkit-scrollbar { display: none; }
-  .cardsGrid > * { flex: 0 0 auto; scroll-snap-align: start; }
-  
-  .activeFilters { flex-direction: column; gap: 10px; padding: 12px 15px; }
+
+  .mainTitle {
+    font-size: 24px;
+  }
+
+  .sectionTitle {
+    font-size: 16px;
+  }
+
+  .sectionContent {
+    font-size: 14px;
+  }
 }

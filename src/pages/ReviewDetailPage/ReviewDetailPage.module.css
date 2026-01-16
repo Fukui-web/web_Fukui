@@ -1,7 +1,13 @@
+/* src/pages/ReviewDetailPage/ReviewDetailPage.module.css */
+/* 統一版 */
+
 .contentArea {
-  max-width: 1200px;
+  /* 修正: 幅と余白統一 */
+  width: 100%;
+  max-width: 540px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 30px 30px;
+  box-sizing: border-box;
 }
 
 .backButton {
@@ -14,11 +20,7 @@
   font-family: var(--font-primary);
   font-weight: 600;
 }
-
-.backButton:hover {
-  background: var(--color-black);
-  color: var(--color-white);
-}
+.backButton:hover { background: var(--color-black); color: var(--color-white); }
 
 .main {
   background: var(--color-white);
@@ -42,55 +44,17 @@
   margin: 0 0 20px 0;
 }
 
-.metaInfo {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.authorInfo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
+.metaInfo { display: flex; align-items: center; gap: 20px; }
+.authorInfo { display: flex; align-items: center; gap: 10px; }
 .authorAvatar {
-  width: 40px;
-  height: 40px;
-  background: #F4BED3;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 40px; height: 40px; background: #F4BED3; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
 }
+.authorAvatar span { font-family: var(--font-primary); font-weight: 600; font-size: 18px; color: var(--color-black); }
+.authorName { font-family: var(--font-primary); font-weight: 600; font-size: 16px; color: var(--color-black); }
+.date { font-family: var(--font-primary); font-size: 14px; color: #666; }
 
-.authorAvatar span {
-  font-family: var(--font-primary);
-  font-weight: 600;
-  font-size: 18px;
-  color: var(--color-black);
-}
-
-.authorName {
-  font-family: var(--font-primary);
-  font-weight: 600;
-  font-size: 16px;
-  color: var(--color-black);
-}
-
-.date {
-  font-family: var(--font-primary);
-  font-size: 14px;
-  color: #666;
-}
-
-.tagSection {
-  margin-bottom: 30px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
+.tagSection { margin-bottom: 30px; display: flex; flex-wrap: wrap; gap: 10px; }
 .tag {
   padding: 6px 12px;
   background: #f0f0f0;
@@ -101,10 +65,7 @@
   color: var(--color-black);
 }
 
-.bodySection {
-  margin-bottom: 30px;
-}
-
+.bodySection { margin-bottom: 30px; }
 .bodyText {
   font-family: var(--font-primary);
   font-size: 16px;
@@ -122,25 +83,14 @@
   align-items: center;
   gap: 10px;
 }
-
-.ratingLabel {
-  font-family: var(--font-primary);
-  font-weight: 600;
-  font-size: 16px;
-  color: var(--color-black);
-}
-
-.ratingValue {
-  font-size: 20px;
-  color: #FFD700;
-}
+.ratingLabel { font-family: var(--font-primary); font-weight: 600; font-size: 16px; color: var(--color-black); }
+.ratingValue { font-size: 20px; color: #FFD700; }
 
 .relatedSection {
   margin-top: 50px;
   padding-top: 30px;
   border-top: 2px solid #f0f0f0;
 }
-
 .relatedTitle {
   font-family: var(--font-primary);
   font-weight: 700;
@@ -155,20 +105,12 @@
   overflow-x: auto;
   overflow-y: hidden;
   padding-bottom: 10px;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
-
-.relatedCards::-webkit-scrollbar {
-  display: none;  /* Chrome, Safari, Opera */
-}
+.relatedCards::-webkit-scrollbar { display: none; }
 
 @media (max-width: 768px) {
-  .main {
-    padding: 20px;
-  }
-
-  .pageTitle {
-    font-size: 22px;
-  }
+  .main { padding: 20px; }
+  .pageTitle { font-size: 22px; }
 }
