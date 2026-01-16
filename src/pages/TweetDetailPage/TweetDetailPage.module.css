@@ -156,6 +156,62 @@
   color: #666;
 }
 
+/* エラー表示 */
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  min-height: 300px;
+  background-color: #fff5f5;
+  border: 1px solid #ffcccc;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.errorText {
+  font-size: 16px;
+  color: #d32f2f;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.errorSubText {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+  text-align: center;
+}
+
+/* 該当なし表示 */
+.noDataContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  min-height: 300px;
+  background-color: #f9f9f9;
+  border: 1px dashed #ddd;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.noDataText {
+  font-size: 16px;
+  color: #555;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.noDataSubText {
+  font-size: 14px;
+  color: #888;
+  margin: 0;
+  text-align: center;
+}
+
 /* TOPへ戻るボタン */
 .backToTopContainer {
   display: flex;

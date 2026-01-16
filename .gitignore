@@ -22,3 +22,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# GAS test files
+gas/test*.gs
+gas/TEST_*.md
+gas/debugDoPost.gs

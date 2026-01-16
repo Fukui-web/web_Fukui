@@ -19,6 +19,10 @@ const ExperiencesSearchResultsContent = () => {
   const [filterCount, setFilterCount] = useState(0);
   const [filters, setFilters] = useState({});
   
+  // モーダルで選択中の一時的なフィルター（検索実行まで表示に反映させない）
+  const [tempFilterCount, setTempFilterCount] = useState(0);
+  const [tempFilters, setTempFilters] = useState({});
+  
   // 検索結果の状態管理
   const [searchResults, setSearchResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -44,11 +48,11 @@ const ExperiencesSearchResultsContent = () => {
       },
       {
         title: '不登校になったきっかけ',
-        options: ['いじめ／友人関係', '勉強のつまずき', '発達特性・体調要因', '教師や学校との関係', 'はっきりとした原因が無い']
+        options: ['いじめ／友人関係', '勉強のつまずき', '発達特性・体調要因', '教師や学校との関係', 'はっきりとした原因が無い', 'その他']
       },
       {
         title: '利用したサポートの種類',
-        options: ['フリースクール', 'スクールカウンセラー', '校内サポートルーム', 'スクールソーシャルワーカー', '当事者の親の会', 'イベントの参加', 'ライフパートナー', '行政運営のフリースクール']
+        options: ['公的なフリースクール', 'スクールカウンセラー', '学校内の支援教室（校内サポートルーム等）', 'スクールソーシャルワーカー', '心のパートナー', '行政の相談窓口', '行政主催のお話会やイベント', '民間のフリースクール', '民間の学習支援', '民間主催のお話会やイベント', '民間の相談窓口', 'その他']
       }
     ]
   };
@@ -114,28 +118,33 @@ const ExperiencesSearchResultsContent = () => {
     console.log('=== handleSearchClick called ===');
     console.log('searchKeyword:', searchKeyword);
     console.log('searchKeyword.trim():', searchKeyword.trim());
-    console.log('filterCount:', filterCount);
-    console.log('filters:', filters);
+    console.log('tempFilterCount:', tempFilterCount);
+    console.log('tempFilters:', tempFilters);
     
     // バリデーション: キーワードもフィルターも指定されていない場合
-    if (!searchKeyword.trim() && filterCount === 0) {
+    if (!searchKeyword.trim() && tempFilterCount === 0) {
       console.log('バリデーションエラー: キーワードとフィルターが両方未指定');
       setError('検索キーワードまたは絞り込み条件を指定してください。');
       return;
     }
 
     console.log('バリデーション通過、検索を実行');
+    
+    // 検索実行時に一時的なフィルターを正式なフィルターに反映
+    setFilterCount(tempFilterCount);
+    setFilters(tempFilters);
+    
     const keyword = searchKeyword.trim() || '*';
     const queryParams = new URLSearchParams();
     queryParams.set('keyword', keyword);
     
-    if (filterCount > 0) {
-      queryParams.set('filters', JSON.stringify(filters));
+    if (tempFilterCount > 0) {
+      queryParams.set('filters', JSON.stringify(tempFilters));
     }
     
     console.log('navigate to:', `/experiences/search?${queryParams.toString()}`);
     navigate(`/experiences/search?${queryParams.toString()}`);
-    handleSearch(keyword, filters);
+    handleSearch(keyword, tempFilters);
   };
 
   // Enterキーでの検索
@@ -148,9 +157,9 @@ const ExperiencesSearchResultsContent = () => {
   // フィルター適用
   const handleApplyFilters = (count, selectedFilters) => {
     console.log('フィルター適用:', { count, selectedFilters }); // デバッグログ
-    setFilterCount(count);
-    setFilters(selectedFilters);
-    // 決定ボタンを押しただけでは検索を実行しない（検索ボタンを押した時のみ検索）
+    // 一時的なstateに保存（検索実行まで表示に反映させない）
+    setTempFilterCount(count);
+    setTempFilters(selectedFilters);
   };
 
   // クリアボタン
@@ -158,6 +167,8 @@ const ExperiencesSearchResultsContent = () => {
     console.log('=== handleClearFilters called ===');
     setFilterCount(0);
     setFilters({});
+    setTempFilterCount(0);
+    setTempFilters({});
     setSearchKeyword('');
   };
 
@@ -192,7 +203,7 @@ const ExperiencesSearchResultsContent = () => {
                 onClick={() => setIsModalOpen(true)}
               >
                 <FilterIcon size={16} color="#EF9F94" />
-                <span>絞り込み{filterCount > 0 && `(${filterCount})`}</span>
+                <span>絞り込み{tempFilterCount > 0 && `(${tempFilterCount})`}</span>
               </button>
               <button 
                 className={styles.clearButton}
@@ -246,6 +257,11 @@ const ExperiencesSearchResultsContent = () => {
                   {item}
                 </span>
               ))}
+              {filters.period && filters.period.map((item, index) => (
+                <span key={`period-${index}`} className={styles.filterTag}>
+                  {item}
+                </span>
+              ))}
             </div>
           </div>
         )}
@@ -280,6 +296,12 @@ const ExperiencesSearchResultsContent = () => {
                   key={result.id || index} 
                   cardId={result.id || index}
                   data={result}
+                  relatedContext={{
+                    type: 'search',
+                    searchKeyword: urlKeyword,
+                    searchFilters: filters,
+                    relatedExperiences: searchResults
+                  }}
                 />
               ))}
             </div>

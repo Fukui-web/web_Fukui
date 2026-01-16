@@ -10,6 +10,7 @@ const GAS_CONFIG = {
     SEARCH_EXPERIENCES: 'searchExperiences',
     GET_ALL_EXPERIENCES: 'getAllExperiences',
     GET_EXPERIENCE_BY_ID: 'getExperienceById',
+    GET_EXPERIENCES_BY_QUESTION: 'getExperiencesByQuestion',
     POST_EXPERIENCE: 'postExperience',
     GET_PENDING_EXPERIENCES: 'getPendingExperiences',
     GET_APPROVED_EXPERIENCES: 'getApprovedExperiences',

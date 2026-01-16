@@ -247,3 +247,43 @@ export const testGasConnection = async () => {
     return false;
   }
 };
+
+/**
+ * 特定の質問項目から体験談を取得
+ * @param {string} questionId - 質問ID ('2-2', '2-11', '6-1-5'など)
+ * @param {number} limit - 取得件数（デフォルト6件）
+ * @returns {Promise<Array>} - 体験談の配列
+ */
+export const getExperiencesByQuestion = async (questionId, limit = 6) => {
+  try {
+    const params = {
+      questionId: questionId,
+      limit: limit
+    };
+
+    const response = await fetchGasApi(GAS_CONFIG.ENDPOINTS.GET_EXPERIENCES_BY_QUESTION, params);
+    
+    if (response.success) {
+      return {
+        data: response.data || [],
+        noData: response.noData || false,
+        errorType: null
+      };
+    } else {
+      return {
+        data: [],
+        noData: false,
+        errorType: response.errorType || 'FETCH_ERROR',
+        error: response.error
+      };
+    }
+  } catch (error) {
+    console.error('Get experiences by question error:', error);
+    return {
+      data: [],
+      noData: false,
+      errorType: 'FETCH_ERROR',
+      error: error.message
+    };
+  }
+};

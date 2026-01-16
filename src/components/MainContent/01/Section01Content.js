@@ -1,6 +1,6 @@
 // src/components/MainContent/01/Section01Content.js
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import layoutStyles from '../commonPageLayout.module.css'; // 共通CSS（外枠）
 import styles from './Section01Content.module.css'; // 01ページ固有CSS
@@ -12,9 +12,42 @@ import FlexiCard from '../../common/FlexiCard/FlexiCard';
 import road01Image from '../../../assets/icons/ROAD01.png';
 import dotlineImage from '../../../assets/images/dotline.png';
 import vectorRB from '../../../assets/images/vectorRB.png';
+import { getExperiencesByQuestion } from '../../../utils/gasApi';
 
 const Section01Content = () => {
   const navigate = useNavigate();
+  
+  // 不登校初期の体験談
+  const [earlyExperiences, setEarlyExperiences] = useState([]);
+  const [earlyLoading, setEarlyLoading] = useState(true);
+  const [earlyError, setEarlyError] = useState(null);
+  const [earlyNoData, setEarlyNoData] = useState(false);
+
+  useEffect(() => {
+    const fetchEarlyExperiences = async () => {
+      try {
+        const result = await getExperiencesByQuestion('2-11', 6);
+        
+        if (result.errorType) {
+          setEarlyError(result.error || '取得エラーが発生しました');
+          setEarlyExperiences([]);
+        } else if (result.noData || result.data.length === 0) {
+          setEarlyNoData(true);
+          setEarlyExperiences([]);
+        } else {
+          setEarlyExperiences(result.data);
+        }
+      } catch (err) {
+        setEarlyError('データの取得に失敗しました');
+        console.error('Experience fetch error:', err);
+      } finally {
+        setEarlyLoading(false);
+      }
+    };
+
+    fetchEarlyExperiences();
+  }, []);
+
   return (
     <div className={`${layoutStyles.pageContainer} ${styles.section01Content}`}>
 
@@ -65,12 +98,36 @@ const Section01Content = () => {
           </h3>
         </div>
         <div className={styles.tweetCardArea}>
-          <TweetCard cardId={1} />
-          <TweetCard cardId={2} />
+          {earlyLoading && <div className={styles.loadingMessage}>読み込み中...</div>}
+          
+          {earlyError && (
+            <div className={styles.errorMessage}>
+              <p>⚠️ 取得エラー: {earlyError}</p>
+            </div>
+          )}
+          
+          {earlyNoData && !earlyError && (
+            <div className={styles.noDataMessage}>
+              <p>該当する体験談がまだありません</p>
+            </div>
+          )}
+          
+          {!earlyLoading && !earlyError && !earlyNoData && earlyExperiences.slice(0, 2).map((exp, index) => (
+            <TweetCard 
+              key={exp.id || index} 
+              data={exp}
+              relatedContext={{
+                type: 'section',
+                sectionName: '学校とのつながりに関する体験談',
+                questionId: '2-11',
+                relatedExperiences: earlyExperiences.slice(0, 6)
+              }}
+            />
+          ))}
         </div>
         <button 
           className={styles.moreButton2}
-          onClick={() => navigate('/experiences')}
+          onClick={() => navigate('/experiences?questionId=2-11')}
         >
           <img src={vectorRB} alt="アイコン" className={styles.playIcon} />
           <span>体験談をさがす</span>

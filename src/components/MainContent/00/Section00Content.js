@@ -1,6 +1,6 @@
 // src/components/MainContent/00/Section00Content.js
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import layoutStyles from '../commonPageLayout.module.css'; // 共通CSS（外枠）
 import styles from './Section00Content.module.css'; // 00ページ固有CSS
@@ -11,9 +11,40 @@ import TweetCard from '../../common/TweetCard/TweetCard';
 import road00Image from '../../../assets/icons/ROAD00.png';
 import dotlineImage from '../../../assets/images/dotline.png';
 import vectorRB from '../../../assets/images/vectorRB.png';
+import { getExperiencesByQuestion } from '../../../utils/gasApi';
 
 const Section00Content = () => {
   const navigate = useNavigate();
+  const [experiences, setExperiences] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [noData, setNoData] = useState(false);
+
+  useEffect(() => {
+    const fetchExperiences = async () => {
+      try {
+        const result = await getExperiencesByQuestion('2-2', 6);
+        
+        if (result.errorType) {
+          setError(result.error || '取得エラーが発生しました');
+          setExperiences([]);
+        } else if (result.noData || result.data.length === 0) {
+          setNoData(true);
+          setExperiences([]);
+        } else {
+          setExperiences(result.data);
+        }
+      } catch (err) {
+        setError('データの取得に失敗しました');
+        console.error('Experience fetch error:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchExperiences();
+  }, []);
+
   return (
     // ページレイアウト (styles)
     <div className={`${layoutStyles.pageContainer} ${styles.section00Content}`}>
@@ -66,19 +97,43 @@ const Section00Content = () => {
           不登校になったきっかけは？
         </h3>
         
-        {/* TweetCardを2つ横並びで表示 */}
+        {/* TweetCardを表示 */}
         <div className={styles.tweetCardsContainer}>
-          <TweetCard cardId={1} />
-          <TweetCard cardId={2} />
+          {loading && <div className={styles.loadingMessage}>読み込み中...</div>}
+          
+          {error && (
+            <div className={styles.errorMessage}>
+              <p>⚠️ 取得エラー: {error}</p>
+            </div>
+          )}
+          
+          {noData && !error && (
+            <div className={styles.noDataMessage}>
+              <p>該当する体験談がまだありません</p>
+            </div>
+          )}
+          
+          {!loading && !error && !noData && experiences.slice(0, 2).map((exp, index) => (
+            <TweetCard 
+              key={exp.id || index} 
+              data={exp}
+              relatedContext={{
+                type: 'section',
+                sectionName: '不登校のきっかけに関する体験談',
+                questionId: '2-2',
+                relatedExperiences: experiences.slice(0, 6)
+              }}
+            />
+          ))}
         </div>
         
         {/* ボタン */}
         <button 
           className={styles.experienceButton}
-          onClick={() => navigate('/experiences')}
+          onClick={() => navigate('/experiences?questionId=2-2')}
         >
           <img src={vectorRB} alt="" className={styles.buttonIcon} />
-          <span>不登校になったきっかけの体験談を見る</span>
+          <span>体験談をさがす</span>
         </button>
       </div>
 
