@@ -232,7 +232,7 @@ function searchExperiences(keyword, filters = {}) {
       
       // 結果に追加
       results.push({
-        id: i,
+        id: i,  // 配列インデックス（data[1]から開始なのでid=1）
         title: title,
         description: description,
         authorName: row[authorNameIndex] || '匿名',
@@ -298,7 +298,7 @@ function getAllExperiences(limit = null) {
       const title = String(row[detailIndex] || '').substring(0, 50) + '...';
       
       results.push({
-        id: i,
+        id: i,  // 配列インデックス（data[1]から開始なのでid=1）
         title: title,
         description: String(row[detailIndex] || ''),
         authorName: row[authorNameIndex] || '匿名',
@@ -343,17 +343,17 @@ function getExperienceById(id) {
     const data = sheet.getDataRange().getValues();
     const headers = data[0];
     
-    // IDは行番号に対応（1-indexed）
-    const rowIndex = parseInt(id);
+    // IDは配列インデックスに対応（data[1]がid=1）
+    const dataIndex = parseInt(id);
     
-    if (rowIndex < 1 || rowIndex >= data.length) {
+    if (dataIndex < 1 || dataIndex >= data.length) {
       return {
         success: false,
         error: '指定されたIDの体験談が見つかりません'
       };
     }
     
-    const row = data[rowIndex];
+    const row = data[dataIndex];
     
     // 列インデックスの定義
     const timestampIndex = 0;    // A列: タイムスタンプ
@@ -435,7 +435,7 @@ function getExperienceById(id) {
     return {
       success: true,
       data: {
-        id: rowIndex,
+        id: dataIndex,
         title: title,
         
         // 基本情報（セクション1）
@@ -656,7 +656,7 @@ function getExperiencesByQuestion(questionId, limit = 6) {
       dataRows.push({
         row: row,
         timestamp: row[timestampIndex] ? new Date(row[timestampIndex]) : new Date(0),
-        rowIndex: i
+        dataIndex: i  // data配列のインデックス（data[1]から開始なのでid=1）
       });
     }
     
@@ -680,7 +680,7 @@ function getExperiencesByQuestion(questionId, limit = 6) {
     for (let i = 0; i < limitedRows.length; i++) {
       const item = limitedRows[i];
       const row = item.row;
-      const rowIndex = item.rowIndex + 1; // スプレッドシートの行番号（1始まり）
+      const dataIndex = item.dataIndex; // data配列のインデックス（id=dataIndex）
       
       const authorName = String(row[authorNameIndex] || '匿名');
       const targetContent = String(row[targetColumnIndex] || '');
@@ -692,7 +692,7 @@ function getExperiencesByQuestion(questionId, limit = 6) {
       }
       
       results.push({
-        id: rowIndex,
+        id: dataIndex,  // 配列インデックス（data[1]から開始なのでid=1）
         title: title,
         description: targetContent,
         text: targetContent,

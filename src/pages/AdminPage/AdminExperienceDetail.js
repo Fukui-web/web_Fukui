@@ -436,7 +436,7 @@ const AdminExperienceDetail = () => {
                   
                   {school.period && (
                     <div style={{ marginBottom: '20px' }}>
-                      <h5 className={styles.subsectionTitle} style={{ fontSize: '14px', marginBottom: '8px' }}>通学期間</h5>
+                      <h5 className={styles.subsectionTitle} style={{ fontSize: '14px', marginBottom: '8px' }}>4-{index + 1}-1. 通学期間</h5>
                       <div className={styles.articleBody}>
                         {school.period.split('\n').map((paragraph, pIndex) => (
                           <p key={pIndex}>{paragraph}</p>
@@ -447,7 +447,7 @@ const AdminExperienceDetail = () => {
                   
                   {school.reason && (
                     <div style={{ marginBottom: '20px' }}>
-                      <h5 className={styles.subsectionTitle} style={{ fontSize: '14px', marginBottom: '8px' }}>選んだ理由</h5>
+                      <h5 className={styles.subsectionTitle} style={{ fontSize: '14px', marginBottom: '8px' }}>4-{index + 1}-2. 選んだ理由</h5>
                       <div className={styles.articleBody}>
                         {school.reason.split('\n').map((paragraph, pIndex) => (
                           <p key={pIndex}>{paragraph}</p>
@@ -458,7 +458,7 @@ const AdminExperienceDetail = () => {
                   
                   {school.review && (
                     <div style={{ marginBottom: '20px' }}>
-                      <h5 className={styles.subsectionTitle} style={{ fontSize: '14px', marginBottom: '8px' }}>感想（良かった点・もう少しこうだったら良かった点）</h5>
+                      <h5 className={styles.subsectionTitle} style={{ fontSize: '14px', marginBottom: '8px' }}>4-{index + 1}-3. 感想（良かった点・もう少しこうだったら良かった点）</h5>
                       <div className={styles.articleBody}>
                         {school.review.split('\n').map((paragraph, pIndex) => (
                           <p key={pIndex}>{paragraph}</p>
@@ -469,7 +469,7 @@ const AdminExperienceDetail = () => {
                   
                   {school.cost && (
                     <div style={{ marginBottom: '20px' }}>
-                      <h5 className={styles.subsectionTitle} style={{ fontSize: '14px', marginBottom: '8px' }}>費用</h5>
+                      <h5 className={styles.subsectionTitle} style={{ fontSize: '14px', marginBottom: '8px' }}>4-{index + 1}-4. 費用</h5>
                       <div className={styles.articleBody}>
                         {school.cost.split('\n').map((paragraph, pIndex) => (
                           <p key={pIndex}>{paragraph}</p>
@@ -511,13 +511,13 @@ const AdminExperienceDetail = () => {
                   
                   {support.name && (
                     <div className={styles.articleBody}>
-                      <p><strong>具体的な名称:</strong> {support.name}</p>
+                      <p><strong>6-{idx + 1}-1. 具体的な名称:</strong> {support.name}</p>
                     </div>
                   )}
                   
                   {support.frequency && (
                     <div className={styles.articleBody}>
-                      <p><strong>利用期間・回数:</strong></p>
+                      <p><strong>6-{idx + 1}-2. 利用期間・回数:</strong></p>
                       {support.frequency.split('\n').map((paragraph, index) => (
                         <p key={index}>{paragraph}</p>
                       ))}
@@ -526,7 +526,7 @@ const AdminExperienceDetail = () => {
                   
                   {support.reason && (
                     <div className={styles.articleBody}>
-                      <p><strong>利用したきっかけ:</strong></p>
+                      <p><strong>6-{idx + 1}-3. 利用したきっかけ:</strong></p>
                       {support.reason.split('\n').map((paragraph, index) => (
                         <p key={index}>{paragraph}</p>
                       ))}
@@ -535,7 +535,7 @@ const AdminExperienceDetail = () => {
                   
                   {support.feeling && (
                     <div className={styles.articleBody}>
-                      <p><strong>利用した感想:</strong></p>
+                      <p><strong>6-{idx + 1}-4. 利用した感想:</strong></p>
                       {support.feeling.split('\n').map((paragraph, index) => (
                         <p key={index}>{paragraph}</p>
                       ))}
