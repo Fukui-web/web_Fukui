@@ -16,6 +16,7 @@ import PlaceDetailPage from './pages/PlaceDetailPage/PlaceDetailPage';
 import PlaceReviewPage from './pages/PlaceReviewPage/PlaceReviewPage';
 import ReviewsPage from './pages/ReviewsPage/ReviewsPage';
 import ReviewDetailPage from './pages/ReviewDetailPage/ReviewDetailPage';
+import InterviewDetailPage from './pages/InterviewDetailPage/InterviewDetailPage';
 
 function App() {
   return (
@@ -103,6 +104,13 @@ function App() {
             <Route path="/reviews/:id" element={
               <Layout>
                 <ReviewDetailPage />
+              </Layout>
+            } />
+
+            {/* インタビュー詳細ページ */}
+            <Route path="/interviews/:id" element={
+              <Layout>
+                <InterviewDetailPage />
               </Layout>
             } />
 

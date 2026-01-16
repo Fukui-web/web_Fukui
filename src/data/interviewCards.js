@@ -7,7 +7,35 @@ const interviewCards = [
     authorName: "まりぽり",
     authorInitial: "R",
     date: "2025.00.00",
-    image: require('../assets/images/AdobeStock_cat.png')
+    image: require('../assets/images/AdobeStock_cat.png'),
+    // 詳細ページ用のデータ
+    fullName: "中谷悠人",
+    profile: "福井県在住、通信制高校3年生",
+    interviewDate: "2025年7月",
+    introduction: [
+      "今回は、現在通信制高校3年生の中谷悠人さんにインタビューしました。悠人さんは、中学1年生から不登校を経験し、一度全日制高校に進学するも、再度不登校を経験。そこから学生生活の送り方や居場所のあり方を家族で見つめ直し、通信制高校への転校を決意しました。",
+      "現在は通信制高校の授業と両立しながら、学校の垣根を越えた学生団体や演劇、音楽活動などに打ち込む悠人さん。アクティブに活躍している彼ですが、現在に至るまでの葛藤や選択、家族や先生・友人との関わりについてお話をお聞きしました。"
+    ],
+    tableOfContents: [
+      "不登校のきっかけ",
+      "不登校のきっかけ",
+      "同じ状況の方へのアドバイス"
+    ],
+    sections: [
+      {
+        heading: "学校行事でのいじめがきっかけで不登校に。葛藤しつつも、第3の居場所と趣味が心の支えに",
+        qaList: [
+          {
+            question: "一悠人さんが最初に学校に行きづらくなったのは中学生の時とお聞きしました。何がきっかけはありましたか？",
+            answer: "悠人さん：中学1年生の秋に、軽いいじめに遭ったことです。体育祭のダンスに真面目に取り組まないクラスメイトからいじられて、気持ちがすごく落ち込んで…そこから学校に行けなくなりました。全日制の高校に進学してからは、しばらく頑張っていたのですが、頑張りすぎてしまって、不登校になりました。"
+          }
+        ]
+      }
+    ],
+    writer: {
+      name: "えみか",
+      description: "ここに経歴入れますか？"
+    }
   },
   {
     id: 2,
@@ -16,7 +44,35 @@ const interviewCards = [
     authorName: "まりぽり",
     authorInitial: "R",
     date: "2025.00.00",
-    image: require('../assets/images/AdobeStock_school.png')
+    image: require('../assets/images/AdobeStock_school.png'),
+    // 詳細ページ用のデータ
+    fullName: "サンプル太郎",
+    profile: "福井県在住、高校2年生",
+    interviewDate: "2025年6月",
+    introduction: [
+      "サンプルのインタビュー内容です。ここにインタビューの導入文が入ります。",
+      "詳細な内容は後ほど追加予定です。"
+    ],
+    tableOfContents: [
+      "サンプル項目1",
+      "サンプル項目2",
+      "サンプル項目3"
+    ],
+    sections: [
+      {
+        heading: "サンプル見出し",
+        qaList: [
+          {
+            question: "サンプル質問",
+            answer: "サンプル回答"
+          }
+        ]
+      }
+    ],
+    writer: {
+      name: "サンプルライター",
+      description: "経歴サンプル"
+    }
   }
 ];
 

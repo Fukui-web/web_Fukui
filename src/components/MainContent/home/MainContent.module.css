@@ -82,3 +82,30 @@
     width: 100%;
   }
 }
+
+/* インラインバナー用ラッパー */
+.inlineBannerWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 10px 0;
+  margin: 0 auto;
+}
+
+.inlineBannerWrapper > div {
+  position: static !important;
+  right: auto !important;
+  top: auto !important;
+  flex-direction: row !important;
+  width: auto !important;
+  gap: 20px !important;
+  display: flex !important; /* メディアクエリでの display: none を上書き */
+  min-height: auto !important; /* 最小高さを自動に */
+  padding: 0 !important; /* 内側の余白も0に */
+}
+
+/* インラインバナー内の女の子の画像を非表示 */
+.inlineBannerWrapper > div > div:last-child {
+  display: none !important;
+}
