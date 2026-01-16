@@ -1,10 +1,18 @@
-/* 検索セクション */
+/* src/components/MainContent/places/PlacesContent.module.css */
+/* 統一版 */
+
 .searchSection {
   background-color: rgba(136, 211, 188, 0.25);
-  padding: 40px 20px;
+  /* 修正: 余白30px */
+  padding: 30px 30px;
   margin: 20px 0;
   border-radius: 0;
   text-align: center;
+  
+  /* 修正: 幅制限 */
+  width: 100%;
+  max-width: 540px;
+  box-sizing: border-box;
 }
 
 .searchTitle {
@@ -15,7 +23,8 @@
 }
 
 .dotline {
-  width: 300px;
+  width: 100%;
+  max-width: 300px;
   height: auto;
   margin: 0 auto 30px;
   display: block;
@@ -25,8 +34,10 @@
   background-color: #fff;
   padding: 30px;
   border-radius: 10px;
-  max-width: 800px;
+  width: 100%; /* 修正 */
+  max-width: 100%; /* 修正 */
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .searchInputWrapper {
@@ -45,6 +56,7 @@
   outline: none;
   font-size: 14px;
   color: #333;
+  width: 100%;
 }
 
 .searchInput::placeholder {
@@ -56,6 +68,7 @@
   flex-direction: column;
   gap: 15px;
   align-items: flex-start;
+  width: 100%;
 }
 
 .filterButton {
@@ -129,9 +142,13 @@
 
 /* 居場所ピックアップセクション */
 .pickupSection {
-  padding: 40px 20px;
-  max-width: 1200px;
+  /* 修正: 余白30px */
+  padding: 30px 30px;
+  /* 修正: 幅制限 */
+  width: 100%;
+  max-width: 540px;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .pickupTitle {
@@ -159,37 +176,12 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
-  max-width: 1000px;
+  width: 100%;
+  max-width: 100%;
   margin: 0 auto;
 }
 
-/* レスポンシブ対応 */
 @media (max-width: 768px) {
-  .searchSection {
-    padding: 30px 15px;
-  }
-
-  .searchTitle {
-    font-size: 24px;
-  }
-
-  .dotline {
-    width: 200px;
-  }
-
-  .searchBox {
-    padding: 20px;
-  }
-
-  .buttonArea {
-    flex-direction: column;
-  }
-
-  .filterButton,
-  .searchButton {
-    width: 100%;
-  }
-
   .cardsGrid {
     display: flex;
     overflow-x: auto;
@@ -200,17 +192,6 @@
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
-
-  .cardsGrid::-webkit-scrollbar {
-    display: none;
-  }
-
-  .cardsGrid > * {
-    flex: 0 0 auto;
-    scroll-snap-align: start;
-  }
-
-  .pickupSection {
-    padding: 30px 15px;
-  }
+  .cardsGrid::-webkit-scrollbar { display: none; }
+  .cardsGrid > * { flex: 0 0 auto; scroll-snap-align: start; }
 }

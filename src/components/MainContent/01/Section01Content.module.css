@@ -1,14 +1,13 @@
 /* src/components/MainContent/01/Section01Content.module.css */
-/* 01ページ 固有のスタイル */
+/* 統一版: 01ページ */
 
-/* ページ基本レイアウト */
 .section01Content {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* タイトルセクション（00ページと同様） */
+/* タイトルセクション */
 .titleSection {
   display: flex;
   flex-direction: column;
@@ -20,6 +19,7 @@
   position: relative;
   isolation: isolate;
   min-height: 150px;
+  box-sizing: border-box; /* 追加 */
 }
 
 .roadImage {
@@ -51,9 +51,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 30px 30px;
+  
+  /* 修正: 余白統一 (30px) */
+  padding: 30px 30px; 
+  
   gap: 15px;
   width: 100%;
+  max-width: 540px;
+  box-sizing: border-box; /* 追加 */
 }
 
 .descriptionTitle {
@@ -94,7 +99,12 @@
   align-items: center;
   gap: 20px;
   width: 100%;
-  padding: 30px 0 30px 10px;
+  
+  /* 修正: 余白統一 (30px) */
+  padding: 30px 30px;
+  
+  max-width: 540px;
+  box-sizing: border-box; /* 追加 */
 }
 
 .dottedBorder {
@@ -130,7 +140,8 @@
   font-size: 12px;
   line-height: 1.5;
   color: var(--color-black);
-  padding-left: 10px;
+  /* 親でpaddingがあるので追加インデント不要 */
+  padding-left: 0; 
 }
 
 .titleLine2 {
@@ -140,7 +151,7 @@
   font-size: 18px;
   line-height: 1.4;
   color: var(--color-black);
-  padding-left: 10px;
+  padding-left: 0;
 }
 
 /* 学校の支援セクション */
@@ -150,9 +161,14 @@
   align-items: center;
   gap: 20px;
   width: 100%;
-  padding: 20px 0;
+  
+  /* 修正: 余白統一 */
+  padding: 30px 30px;
+  
   background: rgba(136, 211, 188, 0.15);
   border-radius: 0;
+  max-width: 540px;
+  box-sizing: border-box; /* 追加 */
 }
 
 .titleLine2Support {
@@ -162,7 +178,7 @@
   font-size: 12px;
   line-height: 1.5;
   color: var(--color-black);
-  padding-left: 10px;
+  padding-left: 0;
 }
 
 .titleLine1Support {
@@ -171,7 +187,7 @@
   font-weight: 600;
   font-size: 18px;
   line-height: 1.4;
-  padding-left: 10px;
+  padding-left: 0;
   color: var(--color-black);
 }
 
@@ -179,7 +195,7 @@
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  padding: 10px 0 10px 10px;
+  padding: 10px 0;
   gap: 15px;
   width: 100%;
   overflow-x: auto;
@@ -187,12 +203,9 @@
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
+.tweetCardArea::-webkit-scrollbar { display: none; }
 
-.tweetCardArea::-webkit-scrollbar {
-  display: none;
-}
-
-.moreButton {
+.moreButton, .moreButton2 {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -202,8 +215,6 @@
   width: auto;
   max-width: 360px;
   height: auto;
-  background: var(--color-white);
-  border: 1px solid var(--color-black);
   border-radius: 8px;
   font-family: var(--font-primary);
   font-style: normal;
@@ -213,100 +224,28 @@
   color: var(--color-black);
   cursor: pointer;
   transition: background-color 0.2s, transform 0.1s;
-}
-
-.moreButton:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-.moreButton:active {
-  transform: scale(0.98);
-}
-
-.moreButton2 {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 12px 20px;
-  gap: 8px;
-  width: auto;
-  max-width: 360px;
-  height: auto;
-  background: #FFE6D5;
   border: 1px solid var(--color-black);
-  border-radius: 8px;
-  font-family: var(--font-primary);
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 20px;
-  color: var(--color-black);
-  cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
 }
 
-.moreButton2:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-}
+.moreButton { background: var(--color-white); }
+.moreButton2 { background: #FFE6D5; }
+.moreButton:hover, .moreButton2:hover { background-color: rgba(0, 0, 0, 0.05); }
+.moreButton:active, .moreButton2:active { transform: scale(0.98); }
 
-.moreButton2:active {
-  transform: scale(0.98);
-}
+.playIcon { width: 19.2px; height: 19.2px; object-fit: contain; }
 
-.playIcon {
-  width: 19.2px;
-  height: 19.2px;
-  object-fit: contain;
-}
-
-/* メッセージスタイル */
-.loadingMessage {
+.loadingMessage, .errorMessage, .noDataMessage {
   font-family: var(--font-primary);
   font-size: 14px;
-  color: #666;
   text-align: center;
-  padding: 40px 20px;
   width: 100%;
 }
+.loadingMessage { color: #666; padding: 40px 20px; }
+.errorMessage { background-color: #fff3f3; border: 1px solid #ff6b6b; border-radius: 8px; padding: 20px; margin: 10px 0; }
+.errorMessage p { margin: 0; color: #d63031; line-height: 1.5; }
+.noDataMessage { background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 20px; margin: 10px 0; }
+.noDataMessage p { margin: 0; color: #6c757d; line-height: 1.5; }
 
-.errorMessage {
-  background-color: #fff3f3;
-  border: 1px solid #ff6b6b;
-  border-radius: 8px;
-  padding: 20px;
-  width: 100%;
-  text-align: center;
-  margin: 10px 0;
-}
-
-.errorMessage p {
-  margin: 0;
-  font-family: var(--font-primary);
-  font-size: 14px;
-  color: #d63031;
-  line-height: 1.5;
-}
-
-.noDataMessage {
-  background-color: #f8f9fa;
-  border: 1px solid #dee2e6;
-  border-radius: 8px;
-  padding: 20px;
-  width: 100%;
-  text-align: center;
-  margin: 10px 0;
-}
-
-.noDataMessage p {
-  margin: 0;
-  font-family: var(--font-primary);
-  font-size: 14px;
-  color: #6c757d;
-  line-height: 1.5;
-}
-
-/* 行政・医療機関一覧ボタン */
 .listButton {
   display: flex;
   flex-direction: row;
@@ -330,14 +269,8 @@
   transition: background-color 0.2s, transform 0.1s;
   margin: 20px 0;
 }
-
-.listButton:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-.listButton:active {
-  transform: scale(0.98);
-}
+.listButton:hover { background-color: rgba(0, 0, 0, 0.05); }
+.listButton:active { transform: scale(0.98); }
 
 /* 支援の種類セクション */
 .supportTypeSection {
@@ -346,7 +279,12 @@
   align-items: center;
   gap: 20px;
   width: 100%;
-  padding: 30px 0;
+  
+  /* 修正: 余白統一 */
+  padding: 30px 30px;
+  
+  max-width: 540px;
+  box-sizing: border-box; /* 追加 */
 }
 
 .supportTypeTitle {
@@ -359,7 +297,7 @@
   color: var(--color-black);
   margin: 0;
   width: 100%;
-  padding-left: 10px;
+  padding-left: 0;
 }
 
 .supportTypeDescription {
@@ -374,7 +312,6 @@
   width: 100%;
 }
 
-/* FlexiCardエリア */
 .flexiCardArea {
   display: flex;
   flex-direction: row;
@@ -382,14 +319,11 @@
   width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
-  padding: 10px 0 10px 10px;
+  padding: 10px 0;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
-
-.flexiCardArea::-webkit-scrollbar {
-  display: none;
-}
+.flexiCardArea::-webkit-scrollbar { display: none; }
 
 /* 体験談セクション2 */
 .supportSection2 {
@@ -398,11 +332,17 @@
   align-items: center;
   gap: 20px;
   width: 100%;
-  padding: 30px 0;
+  
+  /* 修正: 余白統一 */
+  padding: 30px 30px;
+  
   background: rgba(136, 211, 188, 0.15);
   border-radius: 0;
+  max-width: 540px;
+  box-sizing: border-box; /* 追加 */
 }
 
+/* 玉のずれ（変更なし） */
 .colorBar {
   position: absolute;
   width: 55.96%;
@@ -410,58 +350,13 @@
   border-radius: 50%;
   box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
 }
+.colorBar:nth-child(1) { left: 0%; right: 44.08%; top: 2.17%; bottom: 84.04%; }
+.colorBar:nth-child(2) { left: 44.03%; right: 0.04%; top: 18.46%; bottom: 67.76%; }
+.colorBar:nth-child(3) { left: 0%; right: 44.08%; top: 34.74%; bottom: 51.47%; }
+.colorBar:nth-child(4) { left: 0%; right: 44.08%; top: 51.03%; bottom: 35.19%; }
+.colorBar:nth-child(5) { left: 0%; right: 44.08%; top: 67.31%; bottom: 18.9%; }
+.colorBar:nth-child(6) { left: 0%; right: 44.08%; top: 83.6%; bottom: 2.62%; }
 
-.colorBar:nth-child(1) {
-  /* 1番目を左に寄せる */
-  left: 0%;
-  right: 44.08%;
-  top: 2.17%;
-  bottom: 84.04%;
-}
-
-.colorBar:nth-child(2) {
-  /* 2番目を右にずらす */
-  left: 44.03%;
-  right: 0.04%;
-  top: 18.46%;
-  bottom: 67.76%;
-}
-
-.colorBar:nth-child(3) {
-  left: 0%;
-  right: 44.08%;
-  top: 34.74%;
-  bottom: 51.47%;
-}
-
-.colorBar:nth-child(4) {
-  left: 0%;
-  right: 44.08%;
-  top: 51.03%;
-  bottom: 35.19%;
-}
-
-.colorBar:nth-child(5) {
-  left: 0%;
-  right: 44.08%;
-  top: 67.31%;
-  bottom: 18.9%;
-}
-
-.colorBar:nth-child(6) {
-  left: 0%;
-  right: 44.08%;
-  top: 83.6%;
-  bottom: 2.62%;
-}
-/* ▲ 01ページ固有の「玉のずれ」 ▲ */
-
-
-/* レスポンシブ対応 */
 @media (max-width: 768px) {
-  .section01Top,
-  .section01Middle {
-    width: 100%;
-    padding: 40px 20px 0px;
-  }
+  .section01Top, .section01Middle { width: 100%; }
 }

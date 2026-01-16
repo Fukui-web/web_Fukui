@@ -1,17 +1,20 @@
 /* src/components/MainContent/commonPageLayout.module.css */
-/* これは全ページ共通の「外枠」のスタイルです。
-  マージン、幅、背景色（白い枠）、レスポンシブ動作を
-  このファイルで一元管理します。
-*/
+/* 統一版: 全ページ共通の「外枠」スタイル */
 
 .pageContainer {
   /* 1. 外枠の基本スタイル */
-  width: 540px;
+  /* 修正: 固定幅540pxをやめ、100%かつ最大幅540pxにする */
+  width: 100%;
+  max-width: 540px;
+  
   min-height: 100vh;
   background: var(--color-white);
   border-radius: var(--radius-m);
   position: relative;
   padding-bottom: 0;
+  
+  /* 追加: パディングを含めて幅を計算する */
+  box-sizing: border-box;
 
   /* 2. Layout.js の flexコンテナ内での振る舞い */
   flex: none;
@@ -27,7 +30,7 @@
 /* 4. タブレット時のマージン (982px以下) */
 @media (max-width: 982px) {
   .pageContainer {
-    width: 540px;
+    /* 修正: 固定幅指定を削除（継承させる） */
     margin: 0 auto; /* 中央寄せ */
   }
 }
@@ -35,9 +38,9 @@
 /* 5. モバイル時のマージンと幅 (560px以下) */
 @media (max-width: 560px) {
   .pageContainer {
-    width: 96.43%; /* 540/560 */
+    width: 96.43%;
     max-width: 540px;
-    margin: 0 1.79%; /* 左右1.79% */
+    margin: 0 1.79%;
     border-radius: 0;
     min-height: 100vh;
   }

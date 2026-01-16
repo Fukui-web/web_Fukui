@@ -1,4 +1,5 @@
 /* src/components/MainContent/02/Section02Content.module.css */
+/* 統一版: 02ページ */
 
 .section02Content {
   display: flex;
@@ -6,15 +7,16 @@
   align-items: center;
 }
 
-/* タイトルセクション */
 .titleSection {
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* 修正: 余白統一 */
   padding: 0 30px 20px;
   gap: 5px;
   width: 100%;
   max-width: 540px;
+  box-sizing: border-box; /* 追加 */
 }
 
 .roadImage {
@@ -40,15 +42,16 @@
   margin: 5px 0;
 }
 
-/* 説明セクション */
 .descriptionSection {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 20px 30px;
+  /* 修正: 20px -> 30px に統一 */
+  padding: 30px 30px; 
   gap: 15px;
   width: 100%;
   max-width: 540px;
+  box-sizing: border-box; /* 追加 */
 }
 
 .descriptionTitle {
@@ -76,26 +79,28 @@
   margin: 0;
 }
 
-/* 相談窓口セクション */
 .consultationSection {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 30px;
+  /* 修正: 20px -> 30px に統一 */
+  padding: 30px 30px; 
   gap: 20px;
   width: 100%;
   max-width: 540px;
+  box-sizing: border-box; /* 追加 */
 }
 
-/* 各市町の情報セクション */
 .municipalSection {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 20px 30px;
+  /* 修正: 20px -> 30px に統一 */
+  padding: 30px 30px; 
   gap: 15px;
   width: 100%;
   max-width: 540px;
+  box-sizing: border-box; /* 追加 */
 }
 
 .municipalIntro {
@@ -118,7 +123,6 @@
   margin: 0;
 }
 
-/* FlexiCardエリア */
 .flexiCardArea {
   display: flex;
   flex-direction: row;
@@ -130,12 +134,8 @@
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
+.flexiCardArea::-webkit-scrollbar { display: none; }
 
-.flexiCardArea::-webkit-scrollbar {
-  display: none;
-}
-
-/* 行政・医療機関一覧ボタン */
 .listButton {
   display: flex;
   flex-direction: row;
@@ -159,16 +159,7 @@
   transition: background-color 0.2s, transform 0.1s;
   margin: 20px 0;
 }
+.listButton:hover { background-color: rgba(0, 0, 0, 0.05); }
+.listButton:active { transform: scale(0.98); }
 
-.listButton:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-.listButton:active {
-  transform: scale(0.98);
-}
-
-.playIcon {
-  width: 20px;
-  height: 20px;
-}
+.playIcon { width: 20px; height: 20px; }

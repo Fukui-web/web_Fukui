@@ -1,24 +1,26 @@
 /* src/components/MainContent/00/Section00Content.module.css */
-/* 00ページ 固有のスタイル */
+/* 統一版: 00ページ */
 
-/* ページ基本レイアウト */
 .section00Content {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+/* 上部セクション */
 .section00Top {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 30px 20px;
+  /* 修正: 余白統一 (左右30px) */
+  padding: 30px 30px 20px;
   gap: 5px;
   width: 100%;
   max-width: 540px;
   position: relative;
   isolation: isolate;
   min-height: 150px;
+  box-sizing: border-box;
 }
 
 /* ROAD 00 画像 */
@@ -34,7 +36,6 @@
   max-width: 200px;
 }
 
-/* サブタイトル */
 .topSubtitle {
   font-family: 'Zen Kaku Gothic New', sans-serif;
   font-size: 16px;
@@ -44,7 +45,6 @@
   margin: 0;
 }
 
-/* メインタイトル */
 .topMainTitle {
   font-family: 'Zen Kaku Gothic New', sans-serif;
   font-size: 32px;
@@ -55,7 +55,6 @@
   line-height: 1.3;
 }
 
-/* ドットライン装飾 */
 .dotlineContainer {
   display: flex;
   justify-content: center;
@@ -70,7 +69,6 @@
   height: auto;
 }
 
-/* 説明テキスト */
 .topDescription {
   font-family: 'Zen Kaku Gothic New', sans-serif;
   font-size: 18px;
@@ -81,20 +79,27 @@
   line-height: 1.6;
 }
 
+/* 中部セクション */
 .section00Middle {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 60px 30px 15px;
+  
+  /* 修正: 余白を他ページと統一 (30px) */
+  padding: 30px 30px; 
+  
   gap: 30px;
   position: relative;
-  width: 540px;
+  
+  /* 修正: 固定幅をやめて最大幅にする */
+  width: 100%;
+  max-width: 540px;
+  box-sizing: border-box;
+  
   min-height: 400px;
-  /* 背景色を88D3BCの15%に設定 */
   background: rgba(136, 211, 188, 0.15);
 }
 
-/* 体験談セクションタイトル */
 .experienceTitle {
   font-family: 'Zen Kaku Gothic New', sans-serif;
   font-size: 20px;
@@ -106,7 +111,6 @@
   width: 100%;
 }
 
-/* TweetCardコンテナ */
 .tweetCardsContainer {
   display: flex;
   gap: 20px;
@@ -116,17 +120,11 @@
   justify-content: flex-start;
   align-items: flex-start;
   padding: 10px 0;
-  /* スクロールバーを非表示 */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
+.tweetCardsContainer::-webkit-scrollbar { display: none; }
 
-/* Chrome, Safari, Opera用のスクロールバー非表示 */
-.tweetCardsContainer::-webkit-scrollbar {
-  display: none;
-}
-
-/* 体験談ボタン */
 .experienceButton {
   display: flex;
   flex-direction: row;
@@ -149,14 +147,8 @@
   cursor: pointer;
   transition: background-color 0.2s, transform 0.1s;
 }
-
-.experienceButton:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-.experienceButton:active {
-  transform: scale(0.98);
-}
+.experienceButton:hover { background-color: rgba(0, 0, 0, 0.05); }
+.experienceButton:active { transform: scale(0.98); }
 
 .buttonIcon {
   width: 20px;
@@ -164,52 +156,20 @@
   object-fit: contain;
 }
 
-/* メッセージスタイル */
-.loadingMessage {
+/* メッセージ類 */
+.loadingMessage, .errorMessage, .noDataMessage {
   font-family: var(--font-primary);
   font-size: 14px;
-  color: #666;
   text-align: center;
-  padding: 40px 20px;
   width: 100%;
 }
+.loadingMessage { color: #666; padding: 40px 20px; }
+.errorMessage { background-color: #fff3f3; border: 1px solid #ff6b6b; border-radius: 8px; padding: 20px; }
+.errorMessage p { margin: 0; color: #d63031; line-height: 1.5; }
+.noDataMessage { background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 20px; }
+.noDataMessage p { margin: 0; color: #6c757d; line-height: 1.5; }
 
-.errorMessage {
-  background-color: #fff3f3;
-  border: 1px solid #ff6b6b;
-  border-radius: 8px;
-  padding: 20px;
-  width: 100%;
-  text-align: center;
-}
-
-.errorMessage p {
-  margin: 0;
-  font-family: var(--font-primary);
-  font-size: 14px;
-  color: #d63031;
-  line-height: 1.5;
-}
-
-.noDataMessage {
-  background-color: #f8f9fa;
-  border: 1px solid #dee2e6;
-  border-radius: 8px;
-  padding: 20px;
-  width: 100%;
-  text-align: center;
-}
-
-.noDataMessage p {
-  margin: 0;
-  font-family: var(--font-primary);
-  font-size: 14px;
-  color: #6c757d;
-  line-height: 1.5;
-}
-
-
-/* ▼ 00ページ固有の「玉のずれ」 ▼ */
+/* 玉のずれ（変更なし） */
 .colorNavi {
   position: absolute;
   width: 22.71px;
@@ -223,7 +183,6 @@
   display: flex;
   flex-direction: column;
 }
-
 .colorBar {
   position: absolute;
   width: 55.96%;
@@ -231,82 +190,19 @@
   border-radius: 50%;
   box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
 }
+.colorBar:nth-child(1) { left: 44.03%; right: 0.04%; top: 2.17%; bottom: 84.04%; }
+.colorBar:nth-child(2) { left: 0%; right: 44.08%; top: 18.46%; bottom: 67.76%; }
+.colorBar:nth-child(3) { left: 0%; right: 44.08%; top: 34.74%; bottom: 51.47%; }
+.colorBar:nth-child(4) { left: 0%; right: 44.08%; top: 51.03%; bottom: 35.19%; }
+.colorBar:nth-child(5) { left: 0%; right: 44.08%; top: 67.31%; bottom: 18.9%; }
+.colorBar:nth-child(6) { left: 0%; right: 44.08%; top: 83.6%; bottom: 2.62%; }
 
-.colorBar:nth-child(1) {
-  /* 1番目が右にずれる */
-  left: 44.03%;
-  right: 0.04%;
-  top: 2.17%;
-  bottom: 84.04%;
-}
-
-.colorBar:nth-child(2) {
-  left: 0%;
-  right: 44.08%;
-  top: 18.46%;
-  bottom: 67.76%;
-}
-
-.colorBar:nth-child(3) {
-  left: 0%;
-  right: 44.08%;
-  top: 34.74%;
-  bottom: 51.47%;
-}
-
-.colorBar:nth-child(4) {
-  left: 0%;
-  right: 44.08%;
-  top: 51.03%;
-  bottom: 35.19%;
-}
-
-.colorBar:nth-child(5) {
-  left: 0%;
-  right: 44.08%;
-  top: 67.31%;
-  bottom: 18.9%;
-}
-
-.colorBar:nth-child(6) {
-  left: 0%;
-  right: 44.08%;
-  top: 83.6%;
-  bottom: 2.62%;
-}
-/* ▲ 00ページ固有の「玉のずれ」 ▲ */
-
-
-/* レスポンシブ対応 */
 @media (max-width: 768px) {
-  .section00Top,
-  .section00Middle {
-    width: 100%;
-    padding: 40px 20px 0px;
-  }
-  
-  .roadImage {
-    max-width: 150px;
-  }
-  
-  .topMainTitle {
-    font-size: 26px;
-  }
-  
-  .topSubtitle {
-    font-size: 14px;
-  }
-  
-  .topDescription {
-    font-size: 16px;
-  }
-  
-  .experienceTitle {
-    font-size: 18px;
-  }
-  
-  .experienceButton {
-    font-size: 14px;
-    padding: 14px 20px;
-  }
+  .section00Top, .section00Middle { width: 100%; }
+  .roadImage { max-width: 150px; }
+  .topMainTitle { font-size: 26px; }
+  .topSubtitle { font-size: 14px; }
+  .topDescription { font-size: 16px; }
+  .experienceTitle { font-size: 18px; }
+  .experienceButton { font-size: 14px; padding: 14px 20px; }
 }
