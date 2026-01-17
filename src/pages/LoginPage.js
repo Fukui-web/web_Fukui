@@ -39,17 +39,31 @@ const LoginPage = () => {
     alert('ログインに失敗しました。もう一度お試しください。');
   };
 
+  // 管理者ページへのログインかどうかを判定
+  const isAdminLogin = from.includes('/admin');
+
   return (
     <Layout>
       <div className={layoutStyles.pageContainer}>
         <div className={styles.loginContainer}>
           {/* タイトルセクション */}
           <div className={styles.titleSection}>
-            <h1 className={styles.mainTitle}>ログイン</h1>
+            <h1 className={styles.mainTitle}>
+              {isAdminLogin ? '管理者ログイン' : 'ログイン'}
+            </h1>
             <img src={dotlineImage} alt="" className={styles.dotline} />
             <p className={styles.description}>
-              体験談を投稿するには、<br />
-              Googleアカウントでのログインが必要です。
+              {isAdminLogin ? (
+                <>
+                  管理者画面にアクセスするには、<br />
+                  登録されたGoogleアカウントでのログインが必要です。
+                </>
+              ) : (
+                <>
+                  体験談を投稿するには、<br />
+                  Googleアカウントでのログインが必要です。
+                </>
+              )}
             </p>
           </div>
 
@@ -58,7 +72,7 @@ const LoginPage = () => {
             <GoogleLogin
               onSuccess={handleLoginSuccess}
               onError={handleLoginError}
-              useOneTap
+              useOneTap={!isAdminLogin}
               theme="filled_blue"
               size="large"
               text="continue_with"
@@ -69,11 +83,23 @@ const LoginPage = () => {
 
           {/* 注意事項 */}
           <div className={styles.noticeSection}>
-            <h3 className={styles.noticeTitle}>ログインについて</h3>
+            <h3 className={styles.noticeTitle}>
+              {isAdminLogin ? '管理者ログインについて' : 'ログインについて'}
+            </h3>
             <ul className={styles.noticeList}>
-              <li>ログインにはGoogleアカウントが必要です。</li>
-              <li>ログイン情報は安全に管理されます。</li>
-              <li>投稿時以外の目的で使用されることはありません。</li>
+              {isAdminLogin ? (
+                <>
+                  <li>管理者として登録されたGoogleアカウントが必要です。</li>
+                  <li>未登録のアカウントではログインできません。</li>
+                  <li>ログイン情報は安全に管理されます。</li>
+                </>
+              ) : (
+                <>
+                  <li>ログインにはGoogleアカウントが必要です。</li>
+                  <li>ログイン情報は安全に管理されます。</li>
+                  <li>投稿時以外の目的で使用されることはありません。</li>
+                </>
+              )}
             </ul>
           </div>
         </div>
