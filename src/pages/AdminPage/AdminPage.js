@@ -6,14 +6,24 @@ import Breadcrumbs from '../../components/common/Breadcrumbs';
 import Footer from '../../components/common/Footer';
 import TweetCard from '../../components/common/TweetCard/TweetCard';
 import { getPendingExperiences, getApprovedExperiences } from '../../utils/gasApi';
+import { useAuth } from '../../contexts/AuthContext';
 
 const AdminPage = () => {
   const navigate = useNavigate();
+  const { logout, user } = useAuth();
   const [activeTab, setActiveTab] = useState('pending'); // 'pending' or 'approved'
   const [pendingExperiences, setPendingExperiences] = useState([]);
   const [approvedExperiences, setApprovedExperiences] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // ログアウト処理
+  const handleLogout = () => {
+    if (window.confirm('ログアウトしますか？')) {
+      logout();
+      navigate('/');
+    }
+  };
 
   const breadcrumbItems = [
     { label: 'TOP', path: '/' },
@@ -58,8 +68,18 @@ const AdminPage = () => {
       
       <div className={layoutStyles.mainContent}>
         <div className={styles.adminHeader}>
-          <h1 className={styles.title}>管理者画面</h1>
-          <p className={styles.subtitle}>体験談の承認・管理</p>
+          <div className={styles.headerLeft}>
+            <h1 className={styles.title}>管理者画面</h1>
+            <p className={styles.subtitle}>体験談の承認・管理</p>
+          </div>
+          <div className={styles.headerRight}>
+            <div className={styles.userInfo}>
+              <span className={styles.userName}>{user?.name || user?.email}</span>
+            </div>
+            <button className={styles.logoutButton} onClick={handleLogout}>
+              ログアウト
+            </button>
+          </div>
         </div>
 
         {/* タブ切り替え */}

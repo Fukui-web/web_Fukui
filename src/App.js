@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import AdminPage from './pages/AdminPage/AdminPage';
 import AdminExperienceDetail from './pages/AdminPage/AdminExperienceDetail';
+import LoginPage from './pages/LoginPage';
+import AdminProtectedRoute from './components/Auth/AdminProtectedRoute';
 import Layout from './components/Layout/Layout';
 import { navigationItems } from './data/navigationItems';
 import ScrollToTop from './components/ScrollToTop';
@@ -26,18 +28,25 @@ function App() {
         {/* ホーム画面用のルート */}
         <Route path="/" element={<HomePage />} />
 
-        {/* 管理者画面ページ */}
+        {/* ログインページ */}
+        <Route path="/login" element={<LoginPage />} />
+
+        {/* 管理者画面ページ（認証保護） */}
         <Route path="/admin" element={
-          <Layout>
-            <AdminPage />
-          </Layout>
+          <AdminProtectedRoute>
+            <Layout>
+              <AdminPage />
+            </Layout>
+          </AdminProtectedRoute>
         } />
 
-            {/* 管理者用体験談詳細ページ */}
+            {/* 管理者用体験談詳細ページ（認証保護） */}
             <Route path="/admin/experience/:id" element={
-              <Layout>
-                <AdminExperienceDetail />
-              </Layout>
+              <AdminProtectedRoute>
+                <Layout>
+                  <AdminExperienceDetail />
+                </Layout>
+              </AdminProtectedRoute>
             } />
 
             {/* 体験談を探すページ */}

@@ -1,11 +1,23 @@
 /* 管理者画面ページ */
 
 .adminHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 30px 20px;
-  text-align: center;
   background: linear-gradient(135deg, #EF9F94 0%, #f5b5ac 100%);
   border-radius: 12px;
   margin-bottom: 30px;
+}
+
+.headerLeft {
+  flex: 1;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .title {
@@ -14,6 +26,7 @@
   font-weight: 700;
   color: #ffffff;
   margin: 0 0 8px 0;
+  text-align: left;
 }
 
 .subtitle {
@@ -23,6 +36,47 @@
   color: #ffffff;
   margin: 0;
   opacity: 0.95;
+  text-align: left;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+}
+
+.userName {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.logoutButton {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 20px;
+  background: #ffffff;
+  color: #EF9F94;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logoutButton:hover {
+  background: #f5f5f5;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.logoutButton:active {
+  transform: translateY(0);
 }
 
 /* タブ */
@@ -167,8 +221,26 @@
 /* レスポンシブ対応 */
 @media (max-width: 768px) {
   .adminHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
     padding: 24px 16px;
     margin-bottom: 24px;
+  }
+
+  .headerRight {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .userInfo {
+    justify-content: center;
+  }
+
+  .logoutButton {
+    width: 100%;
   }
 
   .title {
