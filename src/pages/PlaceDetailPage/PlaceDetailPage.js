@@ -121,11 +121,14 @@ const PlaceDetailPage = () => {
               <span className={styles.detailValue}>{card.detailInfo.target}</span>
             </div>
             <div className={styles.detailRow}>
-              <span className={styles.detailLabel}>こんな方に</span>
+              <div className={styles.detailLabel} style={{ display: 'flex', flexDirection: 'column' }}>
+                <span>こんな方に</span>
+                <span>おすすめ</span>
+              </div>
               <span className={styles.detailValue}>{card.detailInfo.recommended}</span>
             </div>
             <div className={styles.detailRow}>
-              <span className={styles.detailLabel}>おすすめ</span>
+              <span className={styles.detailLabel}>一般的に？</span>
               <span className={styles.detailValue}>{card.detailInfo.suggestion}</span>
             </div>
             <div className={styles.detailRow}>
@@ -156,7 +159,7 @@ const PlaceDetailPage = () => {
           </div>
           <button className={styles.moreButton} onClick={() => navigate('/reviews')}>
             <img src={vectorRB} alt="" className={styles.buttonIcon} />
-            <span>口コミをもっと見る</span>
+            <span>みんなの居場所の検索ページ</span>
           </button>
         </section>
       </div>
