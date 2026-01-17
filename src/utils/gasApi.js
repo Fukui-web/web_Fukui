@@ -287,3 +287,33 @@ export const getExperiencesByQuestion = async (questionId, limit = 6) => {
     };
   }
 };
+
+/**
+ * 管理者権限を検証する
+ * @param {string} credential - Google OAuthのJWTトークン
+ * @returns {Promise<object>} - 検証結果 { isAdmin: boolean, email: string }
+ */
+export const verifyAdmin = async (credential) => {
+  try {
+    const params = {
+      credential: credential
+    };
+
+    const response = await fetchGasApi('verifyAdmin', params);
+    
+    if (response.success) {
+      return {
+        isAdmin: response.isAdmin || false,
+        email: response.email || ''
+      };
+    } else {
+      throw new Error(response.error || '管理者検証に失敗しました');
+    }
+  } catch (error) {
+    console.error('Verify admin error:', error);
+    return {
+      isAdmin: false,
+      email: ''
+    };
+  }
+};

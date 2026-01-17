@@ -22,6 +22,78 @@ const STATUS = {
 // メール送信設定
 const FORM_URL = 'https://docs.google.com/forms/d/YOUR_FORM_ID/edit'; // フォームの編集URLに置き換えてください
 
+// 管理者メールアドレスのリスト（実際のメールアドレスに変更してください）
+const ADMIN_EMAILS = [
+  'admin@example.com',
+  'manager@example.com'
+  // 必要に応じて追加
+];
+
+/**
+ * 管理者権限を検証する
+ * @param {string} credential - Google OAuthのJWTトークン
+ * @return {object} - 検証結果
+ */
+function verifyAdmin(credential) {
+  try {
+    // JWTトークンをデコード
+    const decoded = decodeJwt(credential);
+    
+    if (!decoded || !decoded.email) {
+      return {
+        success: false,
+        isAdmin: false,
+        error: 'トークンのデコードに失敗しました'
+      };
+    }
+    
+    // メールアドレスが管理者リストに含まれているか確認
+    const isAdmin = ADMIN_EMAILS.includes(decoded.email);
+    
+    Logger.log('Admin verification: ' + decoded.email + ' -> ' + isAdmin);
+    
+    return {
+      success: true,
+      isAdmin: isAdmin,
+      email: decoded.email
+    };
+    
+  } catch (error) {
+    Logger.log('verifyAdmin Error: ' + error.toString());
+    return {
+      success: false,
+      isAdmin: false,
+      error: error.toString()
+    };
+  }
+}
+
+/**
+ * JWTトークンをデコードする
+ * @param {string} token - JWTトークン
+ * @return {object} - デコードされたペイロード
+ */
+function decodeJwt(token) {
+  try {
+    const parts = token.split('.');
+    if (parts.length !== 3) {
+      throw new Error('無効なJWTトークンです');
+    }
+    
+    // Base64URLデコード
+    const payload = parts[1];
+    const base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
+    const decoded = Utilities.base64Decode(base64);
+    const text = Utilities.newBlob(decoded).getDataAsString();
+    
+    return JSON.parse(text);
+    
+  } catch (error) {
+    Logger.log('decodeJwt Error: ' + error.toString());
+    return null;
+  }
+}
+
 /**
  * 未承認の体験談を取得
  * @return {object} - 未承認体験談の配列
