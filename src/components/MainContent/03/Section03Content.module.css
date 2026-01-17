@@ -1,4 +1,5 @@
 /* src/components/MainContent/03/Section03Content.module.css */
+/* 統一版: 03ページ */
 
 .section03Content {
   display: flex;
@@ -6,15 +7,16 @@
   align-items: center;
 }
 
-/* タイトルセクション */
 .titleSection {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 30px 20px;
+  /* 修正: 余白統一 */
+  padding: 0 30px 20px; 
   gap: 5px;
   width: 100%;
   max-width: 540px;
+  box-sizing: border-box; /* 追加 */
 }
 
 .roadImage {
@@ -40,15 +42,16 @@
   margin: 5px 0;
 }
 
-/* 説明セクション */
 .descriptionSection {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 20px 30px;
+  /* 修正: 20px -> 30px に統一 */
+  padding: 30px 30px; 
   gap: 15px;
   width: 100%;
   max-width: 540px;
+  box-sizing: border-box; /* 追加 */
 }
 
 .descriptionTitle {
@@ -76,15 +79,16 @@
   margin: 0;
 }
 
-/* みんなの居場所一覧セクション */
 .placeListSection {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 20px 30px;
+  /* 修正: 20px -> 30px に統一 */
+  padding: 30px 30px; 
   gap: 15px;
   width: 100%;
   max-width: 540px;
+  box-sizing: border-box; /* 追加 */
 }
 
 .placeListTitle {
@@ -97,7 +101,6 @@
   margin: 0;
 }
 
-/* PlaceCardエリア */
 .placeCardArea {
   display: flex;
   flex-direction: row;
@@ -109,12 +112,8 @@
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
+.placeCardArea::-webkit-scrollbar { display: none; }
 
-.placeCardArea::-webkit-scrollbar {
-  display: none;
-}
-
-/* みんなの居場所検索ページボタン */
 .searchButton {
   display: flex;
   flex-direction: row;
@@ -138,16 +137,7 @@
   transition: background-color 0.2s, transform 0.1s;
   margin: 20px 0;
 }
+.searchButton:hover { background-color: #7bc4ad; }
+.searchButton:active { transform: scale(0.98); }
 
-.searchButton:hover {
-  background-color: #7bc4ad;
-}
-
-.searchButton:active {
-  transform: scale(0.98);
-}
-
-.playIcon {
-  width: 20px;
-  height: 20px;
-}
+.playIcon { width: 20px; height: 20px; }

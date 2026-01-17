@@ -1,10 +1,19 @@
+/* src/components/MainContent/experiences/ExperiencesContent.module.css */
+/* 統一版 */
+
 /* 検索セクション */
 .searchSection {
   background-color: #FFE6D5;
-  padding: 40px 20px;
+  /* 修正: 余白を30pxに統一 */
+  padding: 30px 30px;
   margin: 20px 0 0 0;
   border-radius: 0;
   text-align: center;
+  
+  /* 追加: コンテンツ幅制限 */
+  width: 100%;
+  max-width: 540px;
+  box-sizing: border-box;
 }
 
 .searchTitle {
@@ -15,7 +24,8 @@
 }
 
 .dotline {
-  width: 300px;
+  width: 100%;
+  max-width: 300px;
   height: auto;
   margin: 0 auto 30px;
   display: block;
@@ -25,8 +35,11 @@
   background-color: #fff;
   padding: 30px;
   border-radius: 10px;
-  max-width: 800px;
+  /* 修正: 親要素に合わせる */
+  width: 100%;
+  max-width: 100%; 
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .searchInputWrapper {
@@ -45,6 +58,7 @@
   outline: none;
   font-size: 14px;
   color: #333;
+  width: 100%; /* 追加 */
 }
 
 .searchInput::placeholder {
@@ -56,6 +70,7 @@
   flex-direction: column;
   gap: 15px;
   align-items: flex-start;
+  width: 100%; /* 追加 */
 }
 
 .filterRow {
@@ -128,8 +143,13 @@
 
 /* 体験談ピックアップセクション */
 .pickupSection {
-  padding: 40px 20px 80px 20px;
-  max-width: 1200px;
+  /* 修正: 余白統一 */
+  padding: 30px 30px 80px 30px;
+  
+  /* 修正: 幅制限 */
+  width: 100%;
+  max-width: 540px;
+  box-sizing: border-box;
   margin: 0 auto;
 }
 
@@ -155,14 +175,16 @@
   margin-bottom: 30px;
 }
 
-/* エラー表示 */
+/* エラー・ローディング・カード共通 */
 .errorContainer {
   background-color: #ffebee;
   border: 1px solid #ef5350;
   border-radius: 8px;
   padding: 20px;
-  margin: 55px auto 0 auto;
-  max-width: 800px;
+  margin: 20px auto;
+  width: 100%; /* 修正 */
+  max-width: 100%; /* 修正 */
+  box-sizing: border-box;
   text-align: center;
 }
 
@@ -177,7 +199,8 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
-  max-width: 1000px;
+  width: 100%;
+  max-width: 100%; /* 修正 */
   margin: 0 auto;
 }
 
@@ -211,7 +234,6 @@
   color: #666;
 }
 
-/* データなし表示 */
 .noDataContainer {
   display: flex;
   flex-direction: column;
@@ -241,20 +263,6 @@
   line-height: 1.5;
 }
 
-/* エラー表示（ピックアップ用） */
-.errorContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 60px 20px;
-  min-height: 300px;
-  background-color: #fff3f3;
-  border-radius: 8px;
-  border: 1px solid #ff6b6b;
-  margin: 20px 0;
-}
-
 .errorSubText {
   font-size: 14px;
   color: #e74c3c;
@@ -265,31 +273,7 @@
 
 /* レスポンシブ対応 */
 @media (max-width: 768px) {
-  .searchSection {
-    padding: 30px 15px;
-  }
-
-  .searchTitle {
-    font-size: 24px;
-  }
-
-  .dotline {
-    width: 200px;
-  }
-
-  .searchBox {
-    padding: 20px;
-  }
-
-  .buttonArea {
-    flex-direction: column;
-  }
-
-  .filterButton,
-  .searchButton {
-    width: 100%;
-  }
-
+  /* スマホ時は2列グリッドを横スクロールにする既存スタイルを維持 */
   .cardsGrid {
     display: flex;
     overflow-x: auto;
@@ -297,20 +281,16 @@
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     padding-bottom: 10px;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 
   .cardsGrid::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
+    display: none;
   }
 
   .cardsGrid > * {
     flex: 0 0 auto;
     scroll-snap-align: start;
-  }
-
-  .pickupSection {
-    padding: 30px 15px;
   }
 }

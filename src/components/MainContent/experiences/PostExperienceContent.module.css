@@ -1,11 +1,12 @@
-/* 体験談投稿ページのスタイル */
+/* src/components/MainContent/experiences/PostExperienceContent.module.css */
 
 /* メインコンテンツエリア */
 .mainContentArea {
   width: 100%;
-  max-width: 640px;
+  max-width: 540px; /* 統一: 540pxに変更 */
   margin: 0 auto;
-  padding: 20px;
+  padding: 30px 30px; /* 統一: 30pxに変更 */
+  box-sizing: border-box; /* 追加: レイアウト崩れ防止 */
 }
 
 /* タイトルボックス */
@@ -15,6 +16,8 @@
   padding: 40px 30px;
   text-align: center;
   margin-bottom: 30px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .subtitle {
@@ -46,6 +49,7 @@
 /* セクション */
 .section {
   margin-bottom: 30px;
+  width: 100%;
 }
 
 .sectionTitle {
@@ -111,12 +115,18 @@
 /* Googleフォームリンクコンテナ */
 .formContainer {
   width: 100%;
-  max-width: 640px;
-  margin: 40px auto 0;
-  padding: 0 20px 40px;
+  max-width: 540px; /* 統一: 540pxに変更 */
+  
+  /* 修正: 上マージンを0にして間隔を詰める */
+  margin: 0 auto 0; 
+  
+  /* 修正: 下パディング40pxでフッターとの間隔を確保 */
+  padding: 0 0 40px; 
+  
   display: flex;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .formButton {
@@ -129,7 +139,7 @@
   width: auto;
   max-width: 360px;
   height: auto;
-  background: rgba(136, 211, 188, 0.15);
+  background: rgba(136, 211, 188, 0.15); /* 元の色を維持 */
   border: 1px solid var(--color-black);
   border-radius: 8px;
   font-family: var(--font-primary);
@@ -167,40 +177,5 @@
 
   .sectionContent {
     font-size: 14px;
-  }
-}
-
-/* レスポンシブ対応 */
-@media (max-width: 560px) {
-  .titleSection {
-    padding: 40px 20px 30px;
-  }
-
-  .mainTitle {
-    font-size: 28px;
-  }
-
-  .description {
-    font-size: 14px;
-  }
-
-  .formContainer {
-    padding: 0 10px 30px;
-  }
-
-  .formLinkSection {
-    padding: 30px 20px;
-    gap: 20px;
-  }
-
-  .formDescription {
-    font-size: 14px;
-  }
-
-  .formButton {
-    font-size: 16px;
-    padding: 14px 32px;
-    width: 100%;
-    text-align: center;
   }
 }

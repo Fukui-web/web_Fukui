@@ -1,4 +1,5 @@
 /* src/components/MainContent/05/Section05Content.module.css */
+/* 統一版: 05ページ */
 
 .section05Content {
   display: flex;
@@ -6,15 +7,16 @@
   align-items: center;
 }
 
-/* タイトルセクション */
 .titleSection {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 30px 20px;
+  /* 修正: 余白統一 */
+  padding: 0 30px 20px; 
   gap: 5px;
   width: 100%;
   max-width: 540px;
+  box-sizing: border-box; /* 追加 */
 }
 
 .roadImage {
@@ -40,15 +42,16 @@
   margin: 5px 0;
 }
 
-/* 説明セクション */
 .descriptionSection {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 20px 30px;
+  /* 修正: 20px -> 30px に統一 */
+  padding: 30px 30px; 
   gap: 15px;
   width: 100%;
   max-width: 540px;
+  box-sizing: border-box; /* 追加 */
 }
 
 .descriptionTitle {
@@ -76,15 +79,16 @@
   margin: 0;
 }
 
-/* 検索機能セクション */
 .searchSection {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 20px 30px;
+  /* 修正: 20px -> 30px に統一 */
+  padding: 30px 30px; 
   gap: 15px;
   width: 100%;
   max-width: 540px;
+  box-sizing: border-box; /* 追加 */
 }
 
 .searchTitle {
@@ -97,7 +101,6 @@
   margin: 0;
 }
 
-/* PlaceCardエリア - 横スクロール */
 .placeCardArea {
   display: flex;
   flex-direction: row;
@@ -109,12 +112,8 @@
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
+.placeCardArea::-webkit-scrollbar { display: none; }
 
-.placeCardArea::-webkit-scrollbar {
-  display: none;
-}
-
-/* 中学卒業後の進路ボタン */
 .pathButton {
   display: flex;
   flex-direction: row;
@@ -138,20 +137,12 @@
   transition: background-color 0.2s, transform 0.1s;
   margin: 20px 0;
 }
+.pathButton:hover { background-color: #97b8db; }
+.pathButton:active { transform: scale(0.98); }
 
-.pathButton:hover {
-  background-color: #97b8db;
-}
+.playIcon { width: 20px; height: 20px; }
 
-.pathButton:active {
-  transform: scale(0.98);
-}
-
-.playIcon {
-  width: 20px;
-  height: 20px;
-}
-
+/* 玉のずれ（変更なし） */
 .colorBar {
   position: absolute;
   width: 55.96%;
@@ -159,56 +150,13 @@
   border-radius: 50%;
   box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
 }
+.colorBar:nth-child(1) { left: 0%; right: 44.08%; top: 2.17%; bottom: 84.04%; }
+.colorBar:nth-child(2) { left: 44.03%; right: 0.04%; top: 18.46%; bottom: 67.76%; }
+.colorBar:nth-child(3) { left: 0%; right: 44.08%; top: 34.74%; bottom: 51.47%; }
+.colorBar:nth-child(4) { left: 0%; right: 44.08%; top: 51.03%; bottom: 35.19%; }
+.colorBar:nth-child(5) { left: 0%; right: 44.08%; top: 67.31%; bottom: 18.9%; }
+.colorBar:nth-child(6) { left: 0%; right: 44.08%; top: 83.6%; bottom: 2.62%; }
 
-.colorBar:nth-child(1) {
-  left: 0%;
-  right: 44.08%;
-  top: 2.17%;
-  bottom: 84.04%;
-}
-
-.colorBar:nth-child(2) {
-  left: 44.03%;
-  right: 0.04%;
-  top: 18.46%;
-  bottom: 67.76%;
-}
-
-.colorBar:nth-child(3) {
-  left: 0%;
-  right: 44.08%;
-  top: 34.74%;
-  bottom: 51.47%;
-}
-
-.colorBar:nth-child(4) {
-  left: 0%;
-  right: 44.08%;
-  top: 51.03%;
-  bottom: 35.19%;
-}
-
-.colorBar:nth-child(5) {
-  left: 0%;
-  right: 44.08%;
-  top: 67.31%;
-  bottom: 18.9%;
-}
-
-.colorBar:nth-child(6) {
-  left: 0%;
-  right: 44.08%;
-  top: 83.6%;
-  bottom: 2.62%;
-}
-/* ▲ 05ページ固有の「玉のずれ」 ▲ */
-
-
-/* レスポンシブ対応 */
 @media (max-width: 768px) {
-  .section05Top,
-  .section05Middle {
-    width: 100%;
-    padding: 40px 20px 0px;
-  }
+  .section05Top, .section05Middle { width: 100%; }
 }

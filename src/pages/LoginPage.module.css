@@ -1,13 +1,15 @@
-/* ログインページのスタイル */
+/* src/pages/LoginPage.module.css */
+/* 統一版 */
 
 .loginContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  max-width: 540px;
+  max-width: 540px; /* 統一 */
   margin: 0 auto;
-  padding: 0 30px;
+  padding: 30px 30px; /* 修正: 余白統一 */
+  box-sizing: border-box; /* 追加 */
 }
 
 /* タイトルセクション */
@@ -90,36 +92,10 @@
 
 /* レスポンシブ対応 */
 @media (max-width: 560px) {
-  .loginContainer {
-    padding: 0 20px;
-  }
-
+  /* スマホ時も基本設定でカバーできるため大幅な変更は不要ですが、微調整用に残します */
   .titleSection {
     padding: 40px 0 30px;
   }
-
-  .mainTitle {
-    font-size: 28px;
-  }
-
-  .description {
-    font-size: 14px;
-  }
-
-  .loginButtonSection {
-    padding: 30px 0;
-  }
-
-  .noticeSection {
-    padding: 20px;
-    margin: 20px 0 40px 0;
-  }
-
-  .noticeTitle {
-    font-size: 16px;
-  }
-
-  .noticeList {
-    font-size: 13px;
-  }
+  .mainTitle { font-size: 28px; }
+  .description { font-size: 14px; }
 }
