@@ -121,7 +121,7 @@
 /* Q&Aブロック */
 .qaBlock { margin-bottom: 30px; }
 .question { font-size: 15px; font-weight: 400; color: #4CAF50; margin: 0 0 15px 0; line-height: 1.8; }
-.answer { font-size: 15px; font-weight: 400; color: #333; margin: 0; line-height: 1.8; text-align: justify; }
+.answer { font-size: 15px; font-weight: 400; color: #333; margin: 0; line-height: 1.8; text-align: justify; white-space: pre-wrap;}
 
 /* ライター紹介 */
 .writerSection {
