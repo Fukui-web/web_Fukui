@@ -3,7 +3,7 @@ import layoutStyles from '../commonPageLayout.module.css';
 import styles from './PathsContent.module.css';
 import Breadcrumbs from '../../common/Breadcrumbs';
 import Footer from '../../common/Footer';
-import PlaceCard from '../../common/PlaceCard/PlaceCard';
+import SchoolCard from '../../common/SchoolCard/SchoolCard';
 import FilterModal from '../../common/FilterModal';
 import dotlineImage from '../../../assets/images/dotline.png';
 import SearchIcon from '../../../assets/icons/SearchIcon';
@@ -15,7 +15,7 @@ const PathsContent = () => {
 
   const breadcrumbItems = [
     { label: 'TOP', path: '/' },
-    { label: '卒業後の進路をさがす', path: '/paths' }
+    { label: '卒業後の進路をさがす', path: '/schools' }
   ];
 
   const filterConfig = {
@@ -90,12 +90,10 @@ const PathsContent = () => {
         
         {/* 進路カードグリッド */}
         <div className={styles.cardsGrid}>
-          <PlaceCard cardId={1} />
-          <PlaceCard cardId={2} />
-          <PlaceCard cardId={3} />
-          <PlaceCard cardId={1} />
-          <PlaceCard cardId={2} />
-          <PlaceCard cardId={3} />
+          <SchoolCard cardId={9} />
+          <SchoolCard cardId={10} />
+          <SchoolCard cardId={8} />
+          <SchoolCard cardId={5} />
         </div>
       </div>
 

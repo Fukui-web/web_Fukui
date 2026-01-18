@@ -12,6 +12,7 @@ import ExperiencesContent, { PostExperienceContent } from './components/MainCont
 import ExperiencesSearchResultsContent from './components/MainContent/experiences/ExperiencesSearchResultsContent';
 import PlacesContent from './components/MainContent/places';
 import PathsContent from './components/MainContent/paths';
+import SchoolDetailPage from './pages/SchoolDetailPage/SchoolDetailPage';
 import TweetDetailPage from './pages/TweetDetailPage/TweetDetailPage';
 import PlaceSearchResults from './pages/PlaceSearchResults/PlaceSearchResults';
 import PlaceDetailPage from './pages/PlaceDetailPage/PlaceDetailPage';
@@ -124,9 +125,16 @@ function App() {
             } />
 
             {/* 卒業後の進路を探すページ */}
-            <Route path="/paths" element={
+            <Route path="/schools" element={
               <Layout>
                 <PathsContent />
+              </Layout>
+            } />
+
+            {/* 学校詳細ページ　*/}
+            <Route path="/schools/:id" element={
+              <Layout>
+                <SchoolDetailPage />
               </Layout>
             } />
 

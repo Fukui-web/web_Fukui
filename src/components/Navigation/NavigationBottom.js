@@ -19,7 +19,7 @@ const NavigationBottom = ({ onActionCompleted }) => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     if (item === '◯卒業後の進路をさがす') {
-      navigate('/paths');
+      navigate('/schools');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 

@@ -1,0 +1,285 @@
+/* src/pages/SchoolDetailPage/SchoolDetailPage.module.css */
+/* 青色テーマ（卒業後の進路用） */
+
+.contentArea {
+  background: white;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* タブナビゲーション */
+.tabNav {
+  display: flex;
+  gap: 0;
+  margin-bottom: 0;
+  width: fit-content;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 30px;
+  background: white;
+  border: 1.5px solid var(--color-black);
+  border-bottom: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--color-black);
+  transition: all 0.2s;
+  position: relative;
+}
+.tab:first-child { border-top-left-radius: 8px; border-right: none; }
+.tab:last-child { border-top-right-radius: 8px; border-left: none; }
+
+/* ▼▼▼ 修正: ホバー時の薄い青色 ▼▼▼ */
+.tab:hover { background: rgba(121, 181, 238, 0.05); }
+
+/* ▼▼▼ 修正: アクティブ時の青色 (#79B5EE) ▼▼▼ */
+.tabActive { background: #79B5EE !important; color: white !important; border: none !important; border-bottom: none !important; }
+.tabActive:hover { background: #79B5EE !important; }
+.tabActive + .tab { border-left: 1.5px solid var(--color-black); }
+.tabIcon { width: 20px; height: 20px; object-fit: contain; }
+
+/* タイトルセクション */
+.titleSection {
+  /* ▼▼▼ 修正: 薄い青色の背景 ▼▼▼ */
+  background: rgba(121, 181, 238, 0.25);
+  padding: 30px 30px;
+}
+
+.pageTitle {
+  font-size: 32px;
+  font-weight: bold;
+  line-height: 1.4;
+  margin: 0 0 15px 0;
+  color: var(--color-black);
+}
+
+.tagArea { display: flex; flex-wrap: wrap; gap: 10px; }
+.tag {
+  padding: 6px 16px;
+  background: white;
+  /* ▼▼▼ 修正: 青色の枠線 ▼▼▼ */
+  border: 1px solid #79B5EE;
+  border-radius: 20px;
+  font-size: 14px;
+  color: var(--color-black);
+}
+
+/* 画像スライダー */
+.imageSlider {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0 30px;
+  /* ▼▼▼ 修正: 薄い青色の背景 ▼▼▼ */
+  background: rgba(121, 181, 238, 0.25);
+}
+
+.imageContainer {
+  width: 100%;
+  height: 424px;
+  border: 1.5px solid var(--color-black);
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+.image { width: 100%; height: 100%; object-fit: cover; }
+
+.pagination { display: flex; align-items: center; justify-content: flex-end; gap: 15px; }
+.paginationBtn { background: none; border: none; font-size: 20px; cursor: pointer; padding: 5px 10px; color: var(--color-black); transition: color 0.2s; }
+/* ▼▼▼ 修正: ホバー時の文字色 ▼▼▼ */
+.paginationBtn:hover { color: #79B5EE; }
+.paginationText { font-size: 16px; color: var(--color-black); }
+
+.backButton {
+  padding: 10px 20px;
+  /* ▼▼▼ 修正: ボタン背景色 ▼▼▼ */
+  background: #79B5EE;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+.backButton:hover { background: #5fa0dd; }
+
+/* こんなところです */
+.aboutSection {
+  /* ▼▼▼ 修正: 薄い青色の背景 ▼▼▼ */
+  background: rgba(121, 181, 238, 0.25);
+  padding: 30px 30px;
+  margin-bottom: 0;
+}
+
+.aboutTitle {
+  /* ▼▼▼ 修正: 見出しの背景色 ▼▼▼ */
+  background: #79B5EE;
+  color: white; /* 文字色を白にして見やすく */
+  padding: 4px 22px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 7px;
+  border-radius: 4px;
+  width: fit-content;
+  position: relative;
+}
+.aboutTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  /* ▼▼▼ 修正: 三角部分の色 ▼▼▼ */
+  border-top: 10px solid #79B5EE;
+}
+.aboutText { font-size: 15px; line-height: 1.8; color: var(--color-black); margin: 0; }
+
+/* 詳細情報エリア全体 */
+.detailInfo {
+  background: white;
+  padding: 30px; /* 余白を調整 */
+  margin-bottom: -30px;
+}
+
+/* 各項目のブロック */
+.detailRow {
+  display: flex;
+  flex-direction: column; /* 縦並びにする */
+  padding: 0;
+  border-bottom: none; /* 以前の区切り線を消す */
+  margin-bottom: 25px; /* 次の項目との間隔 */
+}
+
+/* 小タイトル (公式サイトと同じ雰囲気で) */
+.detailLabel {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--color-black);
+  width: 100%;
+  
+  /* ▼ 黒い点線 ▼ */
+  border-bottom: 2px dotted var(--color-black);
+  
+  padding-bottom: 5px;
+  margin-bottom: 10px; /* 内容との間隔 */
+}
+
+/* 内容 */
+.detailValue {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-black);
+  padding-left: 0;
+}
+
+/* 利用者の口コミ */
+.reviewSection {
+  background: white;
+  padding: 40px 30px;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.reviewTitle {
+  text-align: left;
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.titleLine1 { font-size: 12px; font-weight: normal; line-height: 1.5; color: var(--color-black); }
+.titleLine2 { font-size: 20px; font-weight: 600; line-height: 1.4; color: var(--color-black); }
+
+.tweetArea {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 10px 0;
+  gap: 15px;
+  width: 100%;
+  max-width: 480px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.tweetArea::-webkit-scrollbar { display: none; }
+
+.moreButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 20px;
+  gap: 8px;
+  width: auto;
+  max-width: 360px;
+  height: auto;
+  /* ▼▼▼ 修正: ボタン背景も薄い青色に統一 ▼▼▼ */
+  background: rgba(121, 181, 238, 0.25);
+  border: 1px solid var(--color-black);
+  border-radius: 8px;
+  font-family: var(--font-primary);
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-black);
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+.moreButton:hover { background-color: rgba(121, 181, 238, 0.4); }
+.moreButton:active { transform: scale(0.98); }
+.buttonIcon { width: 20px; height: 20px; object-fit: contain; }
+
+/* ...既存のスタイル... */
+
+/* ▼▼▼ 新しく追加するスタイル ▼▼▼ */
+.urlContainer {
+  margin-top: 30px; /* 上の文章との余白 */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.urlLabel {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--color-black); /* 黒文字 */
+  /* ここで「区切り線」を引いています */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2); 
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+}
+
+.urlLink {
+  font-size: 14px;
+  color: #0066cc; /* リンクらしい青色 */
+  text-decoration: underline;
+  word-break: break-all; /* URLが長い場合に折り返す */
+  line-height: 1.5;
+}
+
+.urlLink:hover {
+  text-decoration: none;
+  opacity: 0.8;
+}

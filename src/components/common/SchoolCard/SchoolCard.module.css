@@ -1,0 +1,147 @@
+/* Link wrapper */
+.cardLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cardLink:hover .schoolCard {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.schoolCard {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  width: 240px;
+  max-width: 240px;
+  height: 265px; /* タグ領域(35px)を除いて狭めた */
+  min-height: 265px;
+  max-height: 265px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  border: 1.5px solid var(--color-black);
+  overflow: hidden;
+  background: #FFFFFF;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1); /* 影を追加 */
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 中央揃え */
+  padding: 5px 10px;
+  gap: 0px; /* ギャップを削除 */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.imageContainer {
+  width: 240px;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.tagArea {
+  display: none; /* 一時的に非表示にする（元のプロパティは履歴に残っています） */
+}
+
+.tag {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 3px 6px;
+  gap: 10px;
+  height: 15px;
+  background: #FDF9D5;
+  flex: none;
+  flex-grow: 0;
+}
+
+.tag span {
+  font-family: var(--font-primary);
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+  color: #000000;
+}
+
+.divider {
+  width: 100%;
+  height: 0;
+  border: 0;
+  border-bottom: 1px dotted #000000;
+  flex: none;
+  order: 2;
+  align-self: stretch;
+  flex-grow: 0;
+  margin: 4px 0;
+  display: none; /* 使用していないdividerを非表示に */
+}
+
+.dotline {
+  width: 100%;
+  height: 10px;
+  background-size: contain;
+  background-repeat: repeat-x;
+  margin: 2px 0;
+  flex: none;
+  align-self: stretch;
+}
+
+.schoolTitle {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  font-family: var(--font-primary);
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center; /* 中央揃え */
+  letter-spacing: 0.05em;
+  color: #000000;
+  flex: none;
+  padding: 2px 0;
+  flex-grow: 0;
+  margin: 0;
+}
+
+.schoolDescription {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  min-height: 30px;
+  max-height: 40px;
+  overflow: hidden;
+  font-family: var(--font-primary);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: 0.05em;
+  color: #333333;
+  flex: none;
+  order: 5;
+  flex-grow: 0;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
