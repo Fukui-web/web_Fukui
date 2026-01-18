@@ -216,12 +216,12 @@ const ExperiencesContent = () => {
       {/* 体験談ピックアップセクション */}
       <div className={styles.pickupSection}>
         <h2 className={styles.pickupTitle}>
-          {sectionName ? `${sectionName}` : '最新の体験談'}
+          {sectionName ? `${sectionName}に関連する体験談` : '最新の体験談'}
         </h2>
         <div className={styles.dividerLine}></div>
         <p className={styles.pickupDescription}>
           {sectionName 
-            ? `${sectionName}を表示しています。`
+            ? `${sectionName}に関連する体験談を表示しています。`
             : '最新の体験談を表示しています。似ているところや参考にしたい情報をみつけてみてください。'
           }
         </p>
