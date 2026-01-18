@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Section05.module.css';
 import roadNumberImage from '../../../assets/icons/05_0.png';
-import PlaceCard from '../../common/PlaceCard/PlaceCard';
+import SchoolCard from '../../common/SchoolCard/SchoolCard';
 import SectionTitle from '../../common/SectionTitle';
 import ExperienceSection from '../../common/ExperienceSection/ExperienceSection';
 
@@ -33,14 +33,14 @@ const Section05 = () => {
                     <h3 className={styles.placeTitle}>学校・フリースクールの紹介</h3>
                 </div>
                 <div className={styles.placeCardArea}>
-                    <PlaceCard cardId={7} />
-                    <PlaceCard cardId={8} />
-                    <PlaceCard cardId={3} />
+                    <SchoolCard cardId={7} />
+                    <SchoolCard cardId={8} />
+                    <SchoolCard cardId={3} />
                 </div>
 
                 <button 
                     className={styles.moreButton}
-                    onClick={() => navigate('/paths')}
+                    onClick={() => navigate('/schools')}
                 >
                     <div className={styles.buttonIconContainer}>
                         <div className={styles.playIcon}></div>
