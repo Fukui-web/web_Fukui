@@ -32,27 +32,18 @@ const FilterModal = ({ isOpen, onClose, filterConfig, onApply }) => {
   const toggleTag = (tag, categoryIndex) => {
     const uniqueTag = `${categoryIndex}_${tag}`;
     
-    // 時期フィルター（index >= 100）の場合は、1つのみ選択可能
-    if (categoryIndex >= 100) {
-      setSelectedTags(prev => {
-        // すでに選択されている場合は解除
-        if (prev.includes(uniqueTag)) {
-          return prev.filter(t => t !== uniqueTag);
-        }
-        // 他の時期フィルターをクリアして新しいものを選択
-        return [...prev.filter(t => {
-          const index = parseInt(t.split('_')[0]);
-          return index < 100; // 条件フィルターは残す
-        }), uniqueTag];
-      });
-    } else {
-      // 条件フィルターは複数選択可能（既存の動作）
-      setSelectedTags(prev => 
-        prev.includes(uniqueTag) 
-          ? prev.filter(t => t !== uniqueTag)
-          : [...prev, uniqueTag]
-      );
-    }
+    setSelectedTags(prev => {
+      // すでに選択されている場合は解除
+      if (prev.includes(uniqueTag)) {
+        return prev.filter(t => t !== uniqueTag);
+      }
+      
+      // 同じカテゴリの他の選択を解除して、新しいものを選択（1つのみ選択可能）
+      return [...prev.filter(t => {
+        const index = parseInt(t.split('_')[0]);
+        return index !== categoryIndex; // 同じカテゴリのものは削除
+      }), uniqueTag];
+    });
   };
 
   const getDisplayTag = (uniqueTag) => {

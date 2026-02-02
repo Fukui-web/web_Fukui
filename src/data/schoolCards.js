@@ -35,7 +35,7 @@ const schoolCards = [
     searchTags: {
       type: ["フリースクール"],
       style: ["対面"],
-      frequency: ["週1~5選択制登校", "選択制登校"],
+      frequency: ["週1~5選択制登校"],
       exam: ["試験なし"],
       location: ["福井県内"]
     },
@@ -79,11 +79,11 @@ const schoolCards = [
     },
     // 検索用タグ（フィルタリング用）
     searchTags: {
-      type: ["通信制高校", "サポート校"],
+      type: ["通信制高校"],
       style: ["対面", "オンライン", "選択可能"],
       frequency: ["年数回のスクーリング(宿泊あり)"],
       exam: ["その他"],
-      location: ["福井にキャンパスがある"]
+      location: ["福井県内","福井にキャンパスがある"]
     },
     images: [
       require('../assets/images/AdobeStock_Preview.png'),
@@ -125,11 +125,11 @@ const schoolCards = [
     },
     // 検索用タグ（フィルタリング用）
     searchTags: {
-      type: ["通信制高校", "サポート校"],
+      type: ["通信制高校"],
       style: ["対面"],
-      frequency: ["週1~5選択制登校", "選択制登校"],
+      frequency: ["週1~5選択制登校"],
       exam: ["試験なし(面接のみ)"],
-      location: ["福井県内"]
+      location: ["福井県内","福井にキャンパスがある"]
     },
     images: [
       require('../assets/images/AdobeStock_Preview.png'),
@@ -175,7 +175,7 @@ const schoolCards = [
       style: ["対面"],
       frequency: ["年数回のスクーリング(宿泊なし)"],
       exam: ["試験なし(面接のみ)"],
-      location: ["福井県内"]
+      location: ["福井県内","福井にキャンパスがある"]
     },
     images: [
       require('../assets/images/AdobeStock_Preview.png'),
@@ -217,11 +217,11 @@ const schoolCards = [
     },
     // 検索用タグ（フィルタリング用）
     searchTags: {
-      type: ["サポート校"],
+      type: ["通信制高校"],
       style: ["選択可能"],
       frequency: ["年数回のスクーリング(宿泊なし)"],
       exam: ["試験なし(面接のみ)"],
-      location: ["福井県内"]
+      location: ["福井県内","福井にキャンパスがある"]
     },
     images: [
       require('../assets/images/AdobeStock_Preview.png'),
@@ -263,11 +263,11 @@ const schoolCards = [
     },
     // 検索用タグ（フィルタリング用）
     searchTags: {
-      type: ["フリースクール"],
+      type: ["通信制高校"],
       style: ["選択可能"],
       frequency: ["その他"],
       exam: ["試験なし"],
-      location: ["福井県内"]
+      location: ["福井県内","福井にキャンパスがある"]
     },
     images: [
       require('../assets/images/AdobeStock_Preview.png'),
