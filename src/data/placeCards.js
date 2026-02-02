@@ -22,6 +22,12 @@ const placeCards = [
       fee: "月2回6,380円（税込）〜",
       other: "我が家にも不登校気味の子がいます。お子様が好きなことで集中する時間がお母さんの救いになることもあるかと思い応募させていただきました。"
     },
+    // 検索用タグ（フィルタリング用）
+    searchTags: {
+      grade: ["小学生から", "中学生から", "高校生から"],
+      situation: ["専門的なことを学びたい", "家以外の場所での居場所を見つけたい", "友達をさがしたい"],
+      facility: ["習い事"]
+    },
     images: [
       require('../assets/images/AdobeStock_Preview.png'),
     ],
@@ -47,6 +53,12 @@ const placeCards = [
       schedule: "主に第三か第四日曜日 場所はインスタグラムにて",
       fee: "無料",
       other: "最初の方のメールアドレスというところは非公開ですか？（できれば個人のメールなので非公開でお願いしたいです）"
+    },
+    // 検索用タグ（フィルタリング用）
+    searchTags: {
+      grade: ["卒業している場合"],
+      situation: ["不登校や子育てについて相談したい", "不登校や子育ての未来について見失わない"],
+      facility: ["サークル"]
     },
     images: [
       require('../assets/images/AdobeStock_Preview.png'),
@@ -74,6 +86,12 @@ const placeCards = [
       fee: "3000円〜",
       other: "オルタナティブスクールちいさな学校ヒトツナガリでは新入スクール生を随時募集しています◎\n\nヒトツナガリには小学校に行ったことがなく、スクールが私の学校だ！と思って通っている子、\n小学校に週1.2回通いながら、ヒトツナガリに通っている子、\n不登校になって家で過ごしていたけれど、\nヒトツナガリに来るようになった子など\n色んな子がいますよ◎\n\n入学を検討されている方の体験入学も随時受付中！"
     },
+    // 検索用タグ（フィルタリング用）
+    searchTags: {
+      grade: ["小学生から"],
+      situation: ["専門的なことを学びたい", "家以外の場所での居場所を見つけたい", "外部とコミュニケーションを取れる場所に行きたい", "不登校や子育てについて相談したい", "不登校や子育てのイベントに参加したい", "友達をさがしたい"],
+      facility: ["オルタナティブスクール"]
+    },
     images: [
       require('../assets/images/AdobeStock_Preview.png'),
     ],
@@ -99,6 +117,12 @@ const placeCards = [
       schedule: "毎月第一土曜日",
       fee: "無料",
       other: ""
+    },
+    // 検索用タグ（フィルタリング用）
+    searchTags: {
+      grade: ["卒業している場合"],
+      situation: ["不登校や子育てについて相談したい", "不登校や子育ての未来について見失わない"],
+      facility: ["サークル"]
     },
     images: [
       require('../assets/images/AdobeStock_Preview.png'),
@@ -126,6 +150,12 @@ const placeCards = [
       fee: "学習スペースは半日1000円、1日1800円です。通塾は別途ご相談ください。",
       other: "こんにちは。Instagramで拝見し、ご連絡させていただきました。学習塾としての事業がメインですが、空き時間を、さまざまなニーズをお持ちの方にご利用いただきたいと思っております。\n\nよろしくお願いいたします。"
     },
+    // 検索用タグ（フィルタリング用）
+    searchTags: {
+      grade: ["小学生から"],
+      situation: ["専門的なことを学びたい", "一人で学習したい", "家以外の場所での居場所を見つけたい", "外部とコミュニケーションを取れる場所に行きたい"],
+      facility: ["塾"]
+    },
     images: [
       require('../assets/images/AdobeStock_Preview.png'),
     ],
@@ -151,6 +181,12 @@ const placeCards = [
       schedule: "不定期",
       fee: "なし",
       other: ""
+    },
+    // 検索用タグ（フィルタリング用）
+    searchTags: {
+      grade: ["小学生から", "中学生から", "高校生から"],
+      situation: ["家以外の場所での居場所を見つけたい", "不登校や子育てについて相談したい", "不登校や子育ての未来について見失わない", "友達をさがしたい"],
+      facility: ["サークル"]
     },
     images: [
       require('../assets/images/AdobeStock_Preview.png'),
@@ -178,6 +214,12 @@ const placeCards = [
       fee: "月額39,800円（税別)／1回利用5000円（税別)",
       other: ""
     },
+    // 検索用タグ（フィルタリング用）
+    searchTags: {
+      grade: ["小学生から", "中学生から"],
+      situation: ["進学したい", "専門的なことを学びたい", "一人で学習したい", "家以外の場所での居場所を見つけたい", "学校行事に参加したい", "外部とコミュニケーションを取れる場所に行きたい", "不登校や子育ての未来について見失わない", "友達をさがしたい"],
+      facility: ["フリースクール"]
+    },
     images: [
       require('../assets/images/AdobeStock_Preview.png'),
     ],
@@ -203,6 +245,12 @@ const placeCards = [
       schedule: "",
       fee: "https://share.google/NJrBZIuQHb4kKDyVQ  留学料金別途お問い合わせ下さい",
       other: ""
+    },
+    // 検索用タグ（フィルタリング用）
+    searchTags: {
+      grade: ["小学生から", "中学生から", "高校生から"],
+      situation: ["進学したい", "専門的なことを学びたい", "一人で学習したい", "オンラインで授業を受けたい", "家以外の場所での居場所を見つけたい", "外部とコミュニケーションを取れる場所に行きたい"],
+      facility: ["塾", "オンラインサポート", "習い事", "イベント"]
     },
     images: [
       require('../assets/images/AdobeStock_Preview.png'),
@@ -230,6 +278,12 @@ const placeCards = [
       fee: "約2万6000円から",
       other: ""
     },
+    // 検索用タグ（フィルタリング用）
+    searchTags: {
+      grade: ["高校生から"],
+      situation: ["進学したい", "専門的なことを学びたい", "一人で学習したい", "家以外の場所での居場所を見つけたい", "学校行事に参加したい", "外部とコミュニケーションを取れる場所に行きたい", "友達をさがしたい"],
+      facility: ["フリースクール"]
+    },
     images: [
       require('../assets/images/AdobeStock_Preview.png'),
     ],
@@ -256,11 +310,49 @@ const placeCards = [
       fee: "15,400円～",
       other: ""
     },
+    // 検索用タグ（フィルタリング用）
+    searchTags: {
+      grade: ["中学生から"],
+      situation: ["進学したい", "家以外の場所での居場所を見つけたい", "学校行事に参加したい", "外部とコミュニケーションを取れる場所に行きたい", "友達をさがしたい"],
+      facility: ["フリースクール"]
+    },
     images: [
       require('../assets/images/AdobeStock_Preview.png'),
     ],
     image: require('../assets/images/AdobeStock_Preview.png'),
     tags: ["中学生", "フリースクール"]
+  },
+  {
+    id: 11,
+    title: "トーキョーコーヒー福井市",
+    description: "",
+    body: "私自身、娘が小学生の時に不登校で辛い時期もありました。でも、その中での気づきがとても大きく、今では娘が自分の気持ちを大切にしてくれたこと（不登校）に、感謝するほどです。トーキョーコーヒーは、まずは大人がたのしむことを大切にしています。子どもの側にいる大人がまず自分の在りたい姿で生きていること。そのことが子どもたちにとっても、良き育ちに繋がっていくと信じています。気軽に遊びに来てくださいね。",
+    address: "福井市自宅",
+    hours: "月2、3回",
+    contact: "080-6948-7080",
+    detailInfo: {
+      location: "福井市自宅",
+      phone: "080-6948-7080",
+      email: "tokiutukusii55@icloud.com",
+      website: "https://www.instagram.com/tkcf_fukui_363?igsh=MWxxNmFwZnBrNmE3bQ%3D%3D&utm_source=qr",
+      target: "不登校生の保護者, 大人も子どももだれでもどうぞ",
+      recommended: "外部とコミュニケーションを取れる場所に行きたい, 不登校や子育てについて相談したい, 不登校や子育てについて共有したい, 不登校や子育てのイベントに参加したい, お友達を見つけたい, 同じ悩みを持つ人と話したい",
+      suggestion: "大人も子どもも自分らしく在れる場所",
+      schedule: "月2、3回",
+      fee: "600円＋イベントによって",
+      other: ""
+    },
+    // 検索用タグ（フィルタリング用）
+    searchTags: {
+      grade: [],
+      situation: [], 
+      facility: []
+    },
+    images: [
+      require('../assets/images/AdobeStock_Preview.png'),
+    ],
+    image: require('../assets/images/AdobeStock_Preview.png'),
+    tags: ["タグ1", "タグ2"] // 検索用の簡易タグ
   }
 ];
 
