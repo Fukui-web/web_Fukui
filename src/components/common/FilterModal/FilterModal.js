@@ -68,10 +68,12 @@ const FilterModal = ({ isOpen, onClose, filterConfig, onApply }) => {
     if (onApply) {
       // カテゴリごとにフィルターを整理
       const filters = {
-        grade: [],
-        trigger: [],
-        support: [],
-        period: []
+        grade: [],      // index 0: 形態からさがす
+        trigger: [],    // index 1: 授業スタイルからさがす
+        support: [],    // index 2: 登校頻度からさがす
+        exam: [],       // index 3: 入試の有無からさがす
+        location: [],   // index 4: 本校所在地からさがす
+        period: []      // index 100+: 時期で絞り込む
       };
 
       selectedTags.forEach(uniqueTag => {
@@ -83,6 +85,8 @@ const FilterModal = ({ isOpen, onClose, filterConfig, onApply }) => {
         if (index === 0) filters.grade.push(tag);
         else if (index === 1) filters.trigger.push(tag);
         else if (index === 2) filters.support.push(tag);
+        else if (index === 3) filters.exam.push(tag);
+        else if (index === 4) filters.location.push(tag);
         else if (index >= 100) filters.period.push(tag); // 時期フィルターは100番台
       });
 
