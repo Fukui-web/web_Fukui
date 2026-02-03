@@ -27,8 +27,8 @@ yarn-error.log*
 gas/test*.gs
 gas/TEST_*.md
 gas/debugDoPost.gs
+quickTest.gs
 
 # unnecessary md files
 GAS_SETUP.md
 SEARCH_FEATURE.md
-quickTest.gs
