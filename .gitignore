@@ -31,3 +31,4 @@ gas/debugDoPost.gs
 # unnecessary md files
 GAS_SETUP.md
 SEARCH_FEATURE.md
+quickTest.gs
