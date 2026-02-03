@@ -14,7 +14,6 @@ import PlacesContent from './components/MainContent/places';
 import PathsContent from './components/MainContent/paths';
 import SchoolDetailPage from './pages/SchoolDetailPage/SchoolDetailPage';
 import TweetDetailPage from './pages/TweetDetailPage/TweetDetailPage';
-import PlaceSearchResults from './pages/PlaceSearchResults/PlaceSearchResults';
 import PlaceDetailPage from './pages/PlaceDetailPage/PlaceDetailPage';
 import PlaceReviewPage from './pages/PlaceReviewPage/PlaceReviewPage';
 import ReviewsPage from './pages/ReviewsPage/ReviewsPage';
@@ -82,13 +81,6 @@ function App() {
             <Route path="/places" element={
               <Layout>
                 <PlacesContent />
-              </Layout>
-            } />
-
-            {/* 居場所の検索結果と詳細ページ */}
-            <Route path="/places/search" element={
-              <Layout>
-                <PlaceSearchResults />
               </Layout>
             } />
             

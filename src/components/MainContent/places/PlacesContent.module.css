@@ -181,6 +181,24 @@
   margin: 0 auto;
 }
 
+.noResults {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+  width: 100%;
+}
+
+.noResults p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.noResults p:first-child {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
 @media (max-width: 768px) {
   .cardsGrid {
     display: flex;

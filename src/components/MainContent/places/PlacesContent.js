@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import layoutStyles from '../commonPageLayout.module.css';
 import styles from './PlacesContent.module.css';
 import Breadcrumbs from '../../common/Breadcrumbs';
@@ -9,31 +8,99 @@ import FilterModal from '../../common/FilterModal';
 import dotlineImage from '../../../assets/images/dotline.png';
 import SearchIcon from '../../../assets/icons/SearchIcon';
 import FilterIcon from '../../../assets/icons/FilterIcon';
+import placeCards from '../../../data/placeCards';
 
 const PlacesContent = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filterCount, setFilterCount] = useState(0);
-  const [selectedFilters, setSelectedFilters] = useState([]);
+  const [activeFilters, setActiveFilters] = useState({});
   const [searchKeyword, setSearchKeyword] = useState('');
-  const navigate = useNavigate();
+  const [filteredCards, setFilteredCards] = useState(placeCards);
+
+  /**
+   * 文字列正規化
+   */
+  const normalizeText = (str) => {
+    if (str === null || str === undefined) return '';
+    return String(str).replace(/[ 　\t\n]+/g, '').toLowerCase();
+  };
+
+  // フィルタリングロジック
+  useEffect(() => {
+    console.log("居場所フィルタリング開始:", { searchKeyword, activeFilters });
+    let results = placeCards;
+
+    // 1. キーワード検索
+    if (searchKeyword) {
+      const term = normalizeText(searchKeyword);
+      results = results.filter(card => {
+        const title = normalizeText(card.title);
+        const body = normalizeText(card.body);
+        const tags = card.tags ? normalizeText(card.tags.join('')) : '';
+        const details = card.detailInfo ? normalizeText(Object.values(card.detailInfo).join('')) : '';
+        
+        const searchTagsText = card.searchTags 
+          ? normalizeText(Object.values(card.searchTags).flat().join(''))
+          : '';
+        
+        const allText = title + body + tags + details + searchTagsText;
+        return allText.includes(term);
+      });
+    }
+
+    // 2. カテゴリフィルタ
+    Object.keys(activeFilters).forEach(category => {
+      const options = activeFilters[category];
+      if (options && options.length > 0) {
+        
+        console.log(`カテゴリ[${category}] で絞り込み中:`, options);
+
+        results = results.filter(card => {
+          if (card.searchTags) {
+            return options.some(opt => {
+              const optNorm = normalizeText(opt);
+              
+              // FilterModalが使用する固定キー
+              // grade: お子さんの学年 (index 0)
+              // situation: 状況 (index 1) 
+              // facility: 施設の区分 (index 2)
+              
+              if (category === 'grade') {
+                const gradeTags = card.searchTags.grade || [];
+                return gradeTags.some(tag => normalizeText(tag).includes(optNorm) || optNorm.includes(normalizeText(tag)));
+              }
+              
+              if (category === 'situation') {
+                const situationTags = card.searchTags.situation || [];
+                return situationTags.some(tag => normalizeText(tag).includes(optNorm) || optNorm.includes(normalizeText(tag)));
+              }
+              
+              if (category === 'facility') {
+                const facilityTags = card.searchTags.facility || [];
+                return facilityTags.some(tag => normalizeText(tag).includes(optNorm) || optNorm.includes(normalizeText(tag)));
+              }
+              
+              return false;
+            });
+          }
+          return false;
+        });
+      }
+    });
+
+    console.log("居場所フィルタリング結果:", results.length, "件");
+    setFilteredCards(results);
+  }, [searchKeyword, activeFilters]);
 
   const handleApplyFilters = (count, filters) => {
     setFilterCount(count);
-    setSelectedFilters(filters);
+    setActiveFilters(filters);
   };
 
-  const handleSearch = () => {
-    navigate('/places/search', { 
-      state: { 
-        filters: selectedFilters,
-        keyword: searchKeyword 
-      } 
-    });
-  };
-
-  const handleClearFilters = () => {
+  const handleClearAll = () => {
+    setSearchKeyword('');
+    setActiveFilters({});
     setFilterCount(0);
-    setSelectedFilters([]);
   };
 
   const breadcrumbItems = [
@@ -94,13 +161,13 @@ const PlacesContent = () => {
               </button>
               <button 
                 className={styles.clearButton}
-                onClick={handleClearFilters}
+                onClick={handleClearAll}
               >
                 クリア
               </button>
             </div>
             
-            <button className={styles.searchButton} onClick={handleSearch}>
+            <button className={styles.searchButton} onClick={() => setSearchKeyword(searchKeyword)}>
               <SearchIcon size={18} color="#fff" />
               <span>検索する</span>
             </button>
@@ -118,12 +185,16 @@ const PlacesContent = () => {
         
         {/* 居場所カードグリッド */}
         <div className={styles.cardsGrid}>
-          <PlaceCard cardId={1} />
-          <PlaceCard cardId={2} />
-          <PlaceCard cardId={3} />
-          <PlaceCard cardId={1} />
-          <PlaceCard cardId={2} />
-          <PlaceCard cardId={3} />
+          {filteredCards.length > 0 ? (
+            filteredCards.map(card => (
+              <PlaceCard key={card.id} cardId={card.id} />
+            ))
+          ) : (
+            <div className={styles.noResults}>
+              <p>検索条件に一致する居場所が見つかりませんでした。</p>
+              <p>キーワードやフィルタ条件を変更して再度検索してください。</p>
+            </div>
+          )}
         </div>
       </div>
 
