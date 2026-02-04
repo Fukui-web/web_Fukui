@@ -156,6 +156,130 @@
   color: #ffffff;
 }
 
+/* 管理情報セクション */
+.adminInfoSection {
+  margin: 32px 0;
+  padding: 24px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 2px solid #e0e0e0;
+}
+
+.adminInfoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.adminInfoItem {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.adminInfoLabel {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #666666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.adminInfoValue {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333333;
+  padding: 8px 12px;
+  background: #ffffff;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+}
+
+/* ステータスバッジ */
+.statusBadge {
+  font-weight: 700;
+  text-align: center;
+}
+
+.statusApproved {
+  background: #e8f5e9;
+  color: #2e7d32;
+  border-color: #4caf50;
+}
+
+.statusRejected {
+  background: #ffebee;
+  color: #c62828;
+  border-color: #f44336;
+}
+
+.statusPending {
+  background: #fff3e0;
+  color: #e65100;
+  border-color: #ff9800;
+}
+
+.badgeNew {
+  background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
+  color: #ffffff;
+  border: none;
+}
+
+.badgeResubmit {
+  background: linear-gradient(135deg, #ff9800 0%, #ffa726 100%);
+  color: #ffffff;
+  border: none;
+}
+
+/* 却下理由履歴 */
+.rejectHistorySection {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 2px dashed #e0e0e0;
+}
+
+.rejectHistoryTitle {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #333333;
+  margin: 0 0 16px 0;
+}
+
+.rejectHistoryList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rejectHistoryItem {
+  padding: 16px;
+  background: #ffffff;
+  border-left: 4px solid #ff9800;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.rejectHistoryDate {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: #666666;
+  margin-bottom: 8px;
+  letter-spacing: 0.3px;
+}
+
+.rejectHistoryReason {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333333;
+  white-space: pre-wrap;
+}
+
 /* 管理者用アクションボタン */
 .adminActions {
   display: flex;

@@ -2,6 +2,8 @@
  * Google Apps Script (GAS) - 管理者機能
  * 
  * 体験談の承認・却下機能を提供します
+ * 
+ * 注意: SHEET_NAME定数はsearchExperiences.gsで定義されています
  */
 
 // 承認ステータス関連の列インデックス（0始まり）
@@ -10,7 +12,11 @@ const APPROVAL_STATUS_INDEX = 58; // BG列（59列目）: 承認ステータス
 const APPROVAL_DATE_INDEX = 59;   // BH列（60列目）: 承認日時
 const LAST_EDIT_DATE_INDEX = 60;  // BI列（61列目）: 最終編集日時
 const APPROVAL_COUNT_INDEX = 61;  // BJ列（62列目）: 承認回数
-const REJECT_REASON_INDEX = 62;   // BK列（63列目）: 却下理由
+const REJECT_REASON_INDEX = 62;   // BK列（63列目）: 却下理由（最新）
+const FIRST_SUBMIT_DATE_INDEX = 63; // BL列（64列目）: 初回投稿日時
+const EDIT_COUNT_INDEX = 64;      // BM列（65列目）: 編集回数
+const SUBMISSION_STATE_INDEX = 65; // BN列（66列目）: 投稿状態
+const REJECT_REASON_HISTORY_INDEX = 66; // BO列（67列目）: 却下理由履歴
 
 // ステータス定数
 const STATUS = {
@@ -148,7 +154,12 @@ function getPendingExperiences() {
           trigger: row[triggerIndex] || '',
           supportTypes: supportTypes.join(', '),
           status: status,
-          lastEditDate: row[LAST_EDIT_DATE_INDEX] || ''
+          lastEditDate: row[LAST_EDIT_DATE_INDEX] || '',
+          firstSubmitDate: row[FIRST_SUBMIT_DATE_INDEX] || '',
+          editCount: row[EDIT_COUNT_INDEX] || 0,
+          submissionState: row[SUBMISSION_STATE_INDEX] || '新規投稿',
+          rejectReason: row[REJECT_REASON_INDEX] || '',
+          rejectReasonHistory: row[REJECT_REASON_HISTORY_INDEX] || ''
         });
       }
     }
@@ -220,7 +231,11 @@ function getApprovedExperiences() {
           supportTypes: supportTypes.join(', '),
           status: STATUS.APPROVED,
           approvalDate: row[APPROVAL_DATE_INDEX] || '',
-          approvalCount: row[APPROVAL_COUNT_INDEX] || 0
+          approvalCount: row[APPROVAL_COUNT_INDEX] || 0,
+          lastEditDate: row[LAST_EDIT_DATE_INDEX] || '',
+          firstSubmitDate: row[FIRST_SUBMIT_DATE_INDEX] || '',
+          editCount: row[EDIT_COUNT_INDEX] || 0,
+          submissionState: row[SUBMISSION_STATE_INDEX] || '新規投稿'
         });
       }
     }
@@ -275,6 +290,14 @@ function approveExperience(id) {
     
     // 承認回数をインクリメント
     sheet.getRange(sheetRow, APPROVAL_COUNT_INDEX + 1).setValue(parseInt(currentCount) + 1);
+    
+    // 投稿状態を更新
+    const editCount = sheet.getRange(sheetRow, EDIT_COUNT_INDEX + 1).getValue() || 0;
+    if (editCount > 0) {
+      sheet.getRange(sheetRow, SUBMISSION_STATE_INDEX + 1).setValue('再編集');
+    } else {
+      sheet.getRange(sheetRow, SUBMISSION_STATE_INDEX + 1).setValue('新規投稿');
+    }
     
     // 承認メールを送信
     try {
@@ -333,13 +356,22 @@ function rejectExperience(id, reason) {
     // 承認ステータスを「却下」に更新
     sheet.getRange(sheetRow, APPROVAL_STATUS_INDEX + 1).setValue(STATUS.REJECTED);
     
-    // 却下理由を保存
+    // 却下理由を履歴に追加
     if (reason) {
+      // 最新の却下理由を保存
       sheet.getRange(sheetRow, REJECT_REASON_INDEX + 1).setValue(reason);
+      
+      // 却下理由履歴に追加
+      const existingHistory = sheet.getRange(sheetRow, REJECT_REASON_HISTORY_INDEX + 1).getValue();
+      const updatedHistory = addRejectReasonToHistory(existingHistory, reason);
+      sheet.getRange(sheetRow, REJECT_REASON_HISTORY_INDEX + 1).setValue(updatedHistory);
     }
     
-    // 却下日時を保存（承認日時の列を使用）
-    sheet.getRange(sheetRow, APPROVAL_DATE_INDEX + 1).setValue(new Date());
+    // 却下時は承認日時をクリア（承認済みではないため）
+    sheet.getRange(sheetRow, APPROVAL_DATE_INDEX + 1).setValue('');
+    
+    // 最終編集日時をクリア（再編集を促すため）
+    sheet.getRange(sheetRow, LAST_EDIT_DATE_INDEX + 1).setValue('');
     
     // 却下メールを送信
     try {
@@ -384,6 +416,25 @@ function formatDate(timestamp) {
   } catch (error) {
     return '';
   }
+}
+
+/**
+ * 却下理由履歴に新しい理由を追加
+ * @param {string} existingHistory - 既存の却下理由履歴
+ * @param {string} newReason - 新しい却下理由
+ * @return {string} - 更新された却下理由履歴
+ */
+function addRejectReasonToHistory(existingHistory, newReason) {
+  const now = new Date();
+  const timestamp = Utilities.formatDate(now, 'Asia/Tokyo', 'yyyy/MM/dd HH:mm');
+  const newEntry = '[' + timestamp + '] ' + newReason;
+  
+  if (!existingHistory || existingHistory.trim() === '') {
+    return newEntry;
+  }
+  
+  // 既存の履歴に追記（改行で区切る）
+  return existingHistory + '\n' + newEntry;
 }
 
 /**
@@ -506,8 +557,8 @@ function onEditTrigger(e) {
       // 現在のステータスを確認
       const currentStatus = sheet.getRange(row, APPROVAL_STATUS_INDEX + 1).getValue();
       
-      // 承認済みの場合のみ、未承認に戻す
-      if (currentStatus === STATUS.APPROVED) {
+      // 承認済みまたは却下済みの場合、未承認に戻す
+      if (currentStatus === STATUS.APPROVED || currentStatus === STATUS.REJECTED) {
         sheet.getRange(row, APPROVAL_STATUS_INDEX + 1).setValue(STATUS.PENDING);
         
         // 最終編集日時を記録
@@ -516,7 +567,14 @@ function onEditTrigger(e) {
           Utilities.formatDate(now, 'Asia/Tokyo', 'yyyy/MM/dd HH:mm:ss')
         );
         
-        Logger.log('体験談（行' + row + '）が編集されたため、承認ステータスを未承認に変更しました。');
+        // 編集回数をインクリメント
+        const currentEditCount = sheet.getRange(row, EDIT_COUNT_INDEX + 1).getValue() || 0;
+        sheet.getRange(row, EDIT_COUNT_INDEX + 1).setValue(parseInt(currentEditCount) + 1);
+        
+        // 投稿状態を「再編集」に更新
+        sheet.getRange(row, SUBMISSION_STATE_INDEX + 1).setValue('再編集');
+        
+        Logger.log('体験談（行' + row + '）が編集されたため、承認ステータスを未承認に変更しました。編集回数: ' + (parseInt(currentEditCount) + 1));
       }
     }
     
@@ -539,11 +597,48 @@ function onFormSubmit(e) {
     }
     
     const row = e.range.getRow();
+    const now = new Date();
+    const formattedNow = Utilities.formatDate(now, 'Asia/Tokyo', 'yyyy/MM/dd HH:mm:ss');
     
-    // BE列（57列目）に「未承認」を設定
+    // 初回投稿日時を確認
+    const firstSubmitDate = sheet.getRange(row, FIRST_SUBMIT_DATE_INDEX + 1).getValue();
+    
+    // 承認ステータスを「未承認」に設定
     sheet.getRange(row, APPROVAL_STATUS_INDEX + 1).setValue(STATUS.PENDING);
     
-    Logger.log('新しい投稿（行' + row + '）を未承認に設定しました。');
+    if (!firstSubmitDate || firstSubmitDate === '') {
+      // 初回投稿の場合
+      Logger.log('初回投稿を検出（行' + row + '）');
+      
+      // 初回投稿日時を設定
+      sheet.getRange(row, FIRST_SUBMIT_DATE_INDEX + 1).setValue(formattedNow);
+      
+      // 最終編集日時を設定
+      sheet.getRange(row, LAST_EDIT_DATE_INDEX + 1).setValue(formattedNow);
+      
+      // 編集回数を0に初期化
+      sheet.getRange(row, EDIT_COUNT_INDEX + 1).setValue(0);
+      
+      // 投稿状態を「新規投稿」に設定
+      sheet.getRange(row, SUBMISSION_STATE_INDEX + 1).setValue('新規投稿');
+      
+      Logger.log('新規投稿として設定しました。初回投稿日時: ' + formattedNow);
+    } else {
+      // 再編集の場合（初回投稿日が既に存在）
+      Logger.log('再編集を検出（行' + row + '）。初回投稿日時: ' + firstSubmitDate);
+      
+      // 最終編集日時を更新
+      sheet.getRange(row, LAST_EDIT_DATE_INDEX + 1).setValue(formattedNow);
+      
+      // 編集回数をインクリメント
+      const currentEditCount = sheet.getRange(row, EDIT_COUNT_INDEX + 1).getValue() || 0;
+      sheet.getRange(row, EDIT_COUNT_INDEX + 1).setValue(parseInt(currentEditCount) + 1);
+      
+      // 投稿状態を「再編集」に設定
+      sheet.getRange(row, SUBMISSION_STATE_INDEX + 1).setValue('再編集');
+      
+      Logger.log('再編集として更新しました。編集回数: ' + (parseInt(currentEditCount) + 1));
+    }
     
   } catch (error) {
     Logger.log('onFormSubmit Error: ' + error.toString());
