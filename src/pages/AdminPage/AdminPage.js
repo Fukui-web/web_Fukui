@@ -125,10 +125,26 @@ const AdminPage = () => {
                       }
                     }}
                   >
-                    <TweetCard
-                      cardId={experience.id}
-                      data={experience}
-                    />
+                    <div className={styles.cardWrapper}>
+                      {/* バッジ表示 */}
+                      <div className={styles.badgeContainer}>
+                        {experience.submissionState === '新規投稿' && (
+                          <span className={`${styles.badge} ${styles.badgeNew}`}>NEW</span>
+                        )}
+                        {experience.submissionState === '再編集' && (
+                          <span className={`${styles.badge} ${styles.badgeResubmit}`}>再編集</span>
+                        )}
+                        {experience.editCount > 0 && (
+                          <span className={`${styles.badge} ${styles.badgeEditCount}`}>
+                            編集{experience.editCount}回
+                          </span>
+                        )}
+                      </div>
+                      <TweetCard
+                        cardId={experience.id}
+                        data={experience}
+                      />
+                    </div>
                   </button>
                 </div>
               ))}

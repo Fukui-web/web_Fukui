@@ -135,20 +135,39 @@ const AdminExperienceDetail = () => {
     }
   };
 
-  // 却下処理
+  // 保留（却下）処理
   const handleReject = async () => {
+    if (!rejectReason.trim()) {
+      alert('保留理由を入力してください');
+      return;
+    }
+    
     // eslint-disable-next-line no-restricted-globals
-    if (!confirm('この体験談を却下しますか？')) return;
+    if (!confirm('この体験談を保留にしますか？')) return;
     
     try {
-      await rejectExperience(experienceData.id);
-      alert('却下しました');
+      await rejectExperience(experienceData.id, rejectReason);
+      alert('保留にしました');
       navigate('/admin'); // 管理者画面に戻る
     } catch (error) {
-      console.error('却下エラー:', error);
-      alert('却下に失敗しました');
+      console.error('保留処理エラー:', error);
+      alert('保留処理に失敗しました');
     }
   };
+
+  // 却下理由履歴をパース
+  const parseRejectHistory = (history) => {
+    if (!history) return [];
+    return history.split('\n').map(line => {
+      const match = line.match(/^\[(.+?)\]\s*(.+)$/);
+      if (match) {
+        return { date: match[1], reason: match[2] };
+      }
+      return { date: '', reason: line };
+    }).filter(item => item.reason);
+  };
+
+  const rejectHistory = parseRejectHistory(experienceData?.rejectReasonHistory || '');
 
   // 却下フォームを表示
   const handleShowRejectForm = () => {
@@ -245,6 +264,81 @@ const AdminExperienceDetail = () => {
                 </div>
               )}
             </div>
+          </section>
+
+          {/* 管理情報セクション */}
+          <section className={styles.adminInfoSection}>
+            <h3 className={styles.sectionHeading}>📊 管理情報</h3>
+            <div className={styles.sectionDivider}></div>
+            
+            <div className={styles.adminInfoGrid}>
+              <div className={styles.adminInfoItem}>
+                <span className={styles.adminInfoLabel}>承認ステータス</span>
+                <span className={`${styles.adminInfoValue} ${styles.statusBadge} ${
+                  experienceData.approvalStatus === '承認済み' ? styles.statusApproved :
+                  experienceData.approvalStatus === '却下' ? styles.statusRejected :
+                  styles.statusPending
+                }`}>
+                  {experienceData.approvalStatus || '未承認'}
+                </span>
+              </div>
+              
+              <div className={styles.adminInfoItem}>
+                <span className={styles.adminInfoLabel}>投稿状態</span>
+                <span className={`${styles.adminInfoValue} ${
+                  experienceData.submissionState === '新規投稿' ? styles.badgeNew :
+                  experienceData.submissionState === '再編集' ? styles.badgeResubmit :
+                  ''
+                }`}>
+                  {experienceData.submissionState || '新規投稿'}
+                </span>
+              </div>
+              
+              {experienceData.editCount !== undefined && experienceData.editCount > 0 && (
+                <div className={styles.adminInfoItem}>
+                  <span className={styles.adminInfoLabel}>編集回数</span>
+                  <span className={styles.adminInfoValue}>{experienceData.editCount}回</span>
+                </div>
+              )}
+              
+              {experienceData.firstSubmitDate && (
+                <div className={styles.adminInfoItem}>
+                  <span className={styles.adminInfoLabel}>初回投稿日時</span>
+                  <span className={styles.adminInfoValue}>{experienceData.firstSubmitDate}</span>
+                </div>
+              )}
+              
+              {experienceData.lastEditDate && (
+                <div className={styles.adminInfoItem}>
+                  <span className={styles.adminInfoLabel}>最終編集日時</span>
+                  <span className={styles.adminInfoValue}>{experienceData.lastEditDate}</span>
+                </div>
+              )}
+              
+              {experienceData.approvalDate && (
+                <div className={styles.adminInfoItem}>
+                  <span className={styles.adminInfoLabel}>承認日時</span>
+                  <span className={styles.adminInfoValue}>{experienceData.approvalDate}</span>
+                </div>
+              )}
+            </div>
+            
+            {/* 却下理由履歴 */}
+            {rejectHistory.length > 0 && (
+              <div className={styles.rejectHistorySection}>
+                <h4 className={styles.rejectHistoryTitle}>🔄 保留理由履歴</h4>
+                <div className={styles.rejectHistoryList}>
+                  {rejectHistory.map((item, index) => (
+                    <div key={index} className={styles.rejectHistoryItem}>
+                      {item.date && (
+                        <div className={styles.rejectHistoryDate}>{item.date}</div>
+                      )}
+                      <div className={styles.rejectHistoryReason}>{item.reason}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </section>
 
           {/* セクション2: 不登校のきっかけと経過 */}
@@ -592,17 +686,17 @@ const AdminExperienceDetail = () => {
                       className={styles.rejectButton}
                       onClick={handleShowRejectForm}
                     >
-                      却下する
+                      保留にする
                     </button>
                   </>
                 ) : (
                   <div className={styles.rejectFormContainer}>
-                    <h4 className={styles.rejectFormTitle}>却下理由を入力してください</h4>
+                    <h4 className={styles.rejectFormTitle}>保留理由を入力してください</h4>
                     <textarea
                       className={styles.rejectReasonTextarea}
                       value={rejectReason}
                       onChange={(e) => setRejectReason(e.target.value)}
-                      placeholder="却下理由を詳しく記入してください..."
+                      placeholder="保留理由を詳しく記入してください...&#10;&#10;例：&#10;・〇〇の部分についてもう少し詳しく教えてください&#10;・△△の記載が不明瞭なため、具体的な説明をお願いします"
                       rows="6"
                     />
                     <div className={styles.rejectFormButtons}>
@@ -610,7 +704,7 @@ const AdminExperienceDetail = () => {
                         className={styles.confirmRejectButton}
                         onClick={handleConfirmReject}
                       >
-                        却下を確定する
+                        保留を確定する
                       </button>
                       <button
                         className={styles.cancelRejectButton}
