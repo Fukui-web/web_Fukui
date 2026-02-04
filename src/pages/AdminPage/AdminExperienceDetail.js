@@ -155,6 +155,39 @@ const AdminExperienceDetail = () => {
     }
   };
 
+  // 日時フォーマット関数
+  const formatDateTime = (dateTimeString) => {
+    if (!dateTimeString) return '';
+    
+    try {
+      // 既に整形済みの日時（yyyy/MM/dd HH:mm:ss）の場合はそのまま返す
+      if (typeof dateTimeString === 'string' && /^\d{4}\/\d{2}\/\d{2}/.test(dateTimeString)) {
+        return dateTimeString;
+      }
+      
+      // ISO形式やその他の形式をパース
+      const date = new Date(dateTimeString);
+      
+      // 無効な日付の場合
+      if (isNaN(date.getTime())) {
+        return dateTimeString;
+      }
+      
+      // 日本時間で整形
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      const hours = String(date.getHours()).padStart(2, '0');
+      const minutes = String(date.getMinutes()).padStart(2, '0');
+      const seconds = String(date.getSeconds()).padStart(2, '0');
+      
+      return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
+    } catch (error) {
+      console.error('日時フォーマットエラー:', error);
+      return dateTimeString;
+    }
+  };
+
   // 却下理由履歴をパース
   const parseRejectHistory = (history) => {
     if (!history) return [];
@@ -304,21 +337,21 @@ const AdminExperienceDetail = () => {
               {experienceData.firstSubmitDate && (
                 <div className={styles.adminInfoItem}>
                   <span className={styles.adminInfoLabel}>初回投稿日時</span>
-                  <span className={styles.adminInfoValue}>{experienceData.firstSubmitDate}</span>
+                  <span className={styles.adminInfoValue}>{formatDateTime(experienceData.firstSubmitDate)}</span>
                 </div>
               )}
               
               {experienceData.lastEditDate && (
                 <div className={styles.adminInfoItem}>
                   <span className={styles.adminInfoLabel}>最終編集日時</span>
-                  <span className={styles.adminInfoValue}>{experienceData.lastEditDate}</span>
+                  <span className={styles.adminInfoValue}>{formatDateTime(experienceData.lastEditDate)}</span>
                 </div>
               )}
               
               {experienceData.approvalDate && (
                 <div className={styles.adminInfoItem}>
                   <span className={styles.adminInfoLabel}>承認日時</span>
-                  <span className={styles.adminInfoValue}>{experienceData.approvalDate}</span>
+                  <span className={styles.adminInfoValue}>{formatDateTime(experienceData.approvalDate)}</span>
                 </div>
               )}
             </div>
