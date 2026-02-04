@@ -42,11 +42,17 @@ function doPost(e) {
       case 'getApprovedExperiences':
         result = getApprovedExperiences();
         break;
+      case 'getOnHoldExperiences':
+        result = getOnHoldExperiences();
+        break;
       case 'approveExperience':
         result = approveExperience(params.id);
         break;
       case 'rejectExperience':
         result = rejectExperience(params.id, params.reason);
+        break;
+      case 'returnToPending':
+        result = returnToPending(params.id);
         break;
       case 'getExperiencesByQuestion':
         result = getExperiencesByQuestion(params.questionId, params.limit);

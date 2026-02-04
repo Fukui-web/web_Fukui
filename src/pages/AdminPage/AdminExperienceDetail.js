@@ -4,7 +4,7 @@ import layoutStyles from '../../components/MainContent/commonPageLayout.module.c
 import styles from './AdminExperienceDetail.module.css';
 import Breadcrumbs from '../../components/common/Breadcrumbs';
 import Footer from '../../components/common/Footer';
-import { getExperienceById, approveExperience, rejectExperience } from '../../utils/gasApi';
+import { getExperienceById, approveExperience, rejectExperience, returnToPending } from '../../utils/gasApi';
 
 const AdminExperienceDetail = () => {
   const { id } = useParams();
@@ -16,8 +16,9 @@ const AdminExperienceDetail = () => {
   const [showRejectForm, setShowRejectForm] = useState(false);
   const [rejectReason, setRejectReason] = useState('');
 
-  // locationのstateからisPendingを取得
+  // locationのstateからisPending, isOnHoldを取得
   const isPending = location.state?.isPending || false;
+  const isOnHold = location.state?.isOnHold || false;
 
   const breadcrumbItems = [
     { label: 'TOP', path: '/' },
@@ -155,6 +156,21 @@ const AdminExperienceDetail = () => {
     }
   };
 
+  // 未承認に戻す処理
+  const handleReturnToPending = async () => {
+    // eslint-disable-next-line no-restricted-globals
+    if (!confirm('この体験談を未承認に戻しますか？\n（管理者が誤って保留にした場合に使用します）')) return;
+    
+    try {
+      await returnToPending(experienceData.id);
+      alert('未承認に戻しました');
+      navigate('/admin'); // 管理者画面に戻る
+    } catch (error) {
+      console.error('未承認への変更エラー:', error);
+      alert('未承認への変更に失敗しました');
+    }
+  };
+
   // 日時フォーマット関数
   const formatDateTime = (dateTimeString) => {
     if (!dateTimeString) return '';
@@ -169,7 +185,7 @@ const AdminExperienceDetail = () => {
       const date = new Date(dateTimeString);
       
       // 無効な日付の場合
-      if (isNaN(date.getTime())) {
+      if (Number.isNaN(date.getTime())) {
         return dateTimeString;
       }
       
@@ -308,20 +324,27 @@ const AdminExperienceDetail = () => {
               <div className={styles.adminInfoItem}>
                 <span className={styles.adminInfoLabel}>承認ステータス</span>
                 <span className={`${styles.adminInfoValue} ${styles.statusBadge} ${
-                  experienceData.approvalStatus === '承認済み' ? styles.statusApproved :
-                  experienceData.approvalStatus === '却下' ? styles.statusRejected :
-                  styles.statusPending
+                  (() => {
+                    if (experienceData.approvalStatus === '承認済み') return styles.statusApproved;
+                    if (experienceData.approvalStatus === '却下') return styles.statusRejected;
+                    return styles.statusPending;
+                  })()
                 }`}>
-                  {experienceData.approvalStatus || '未承認'}
+                  {(() => {
+                    if (experienceData.approvalStatus === '却下') return '保留';
+                    return experienceData.approvalStatus || '未承認';
+                  })()}
                 </span>
               </div>
               
               <div className={styles.adminInfoItem}>
                 <span className={styles.adminInfoLabel}>投稿状態</span>
                 <span className={`${styles.adminInfoValue} ${
-                  experienceData.submissionState === '新規投稿' ? styles.badgeNew :
-                  experienceData.submissionState === '再編集' ? styles.badgeResubmit :
-                  ''
+                  (() => {
+                    if (experienceData.submissionState === '新規投稿') return styles.badgeNew;
+                    if (experienceData.submissionState === '再編集') return styles.badgeResubmit;
+                    return '';
+                  })()
                 }`}>
                   {experienceData.submissionState || '新規投稿'}
                 </span>
@@ -355,6 +378,16 @@ const AdminExperienceDetail = () => {
                 </div>
               )}
             </div>
+            
+            {/* 最新の保留理由 */}
+            {experienceData.rejectReason && experienceData.approvalStatus === '却下' && (
+              <div className={styles.currentRejectReasonSection}>
+                <h4 className={styles.currentRejectReasonTitle}>📝 最新の保留理由</h4>
+                <div className={styles.currentRejectReasonBox}>
+                  {experienceData.rejectReason}
+                </div>
+              </div>
+            )}
             
             {/* 却下理由履歴 */}
             {rejectHistory.length > 0 && (
@@ -749,6 +782,14 @@ const AdminExperienceDetail = () => {
                   </div>
                 )}
               </>
+            )}
+            {isOnHold && (
+              <button
+                className={styles.returnToPendingButton}
+                onClick={handleReturnToPending}
+              >
+                未承認に戻す
+              </button>
             )}
             <button
               className={styles.backButton}

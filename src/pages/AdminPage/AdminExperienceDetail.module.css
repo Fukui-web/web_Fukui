@@ -234,6 +234,35 @@
   border: none;
 }
 
+/* 最新の保留理由 */
+.currentRejectReasonSection {
+  margin-top: 24px;
+  padding: 20px;
+  background: #fff8e1;
+  border-radius: 8px;
+  border: 2px solid #ff9800;
+}
+
+.currentRejectReasonTitle {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #f57c00;
+  margin: 0 0 12px 0;
+}
+
+.currentRejectReasonBox {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #333333;
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 6px;
+  white-space: pre-wrap;
+  border-left: 4px solid #ff9800;
+}
+
 /* 却下理由履歴 */
 .rejectHistorySection {
   margin-top: 24px;
@@ -324,6 +353,25 @@
   background: #da190b;
   transform: translateY(-1px);
   box-shadow: 0 4px 8px rgba(244, 67, 54, 0.3);
+}
+
+.returnToPendingButton {
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px 32px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: #FF9800;
+  color: #ffffff;
+}
+
+.returnToPendingButton:hover {
+  background: #F57C00;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(255, 152, 0, 0.3);
 }
 
 .adminActions .backButton {
