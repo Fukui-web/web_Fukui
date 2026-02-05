@@ -5,14 +5,15 @@ import styles from './AdminPage.module.css';
 import Breadcrumbs from '../../components/common/Breadcrumbs';
 import Footer from '../../components/common/Footer';
 import TweetCard from '../../components/common/TweetCard/TweetCard';
-import { getPendingExperiences, getApprovedExperiences } from '../../utils/gasApi';
+import { getPendingExperiences, getApprovedExperiences, getOnHoldExperiences } from '../../utils/gasApi';
 import { useAuth } from '../../contexts/AuthContext';
 
 const AdminPage = () => {
   const navigate = useNavigate();
   const { logout, user } = useAuth();
-  const [activeTab, setActiveTab] = useState('pending'); // 'pending' or 'approved'
+  const [activeTab, setActiveTab] = useState('pending'); // 'pending', 'onHold', or 'approved'
   const [pendingExperiences, setPendingExperiences] = useState([]);
+  const [onHoldExperiences, setOnHoldExperiences] = useState([]);
   const [approvedExperiences, setApprovedExperiences] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -39,11 +40,13 @@ const AdminPage = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const [pending, approved] = await Promise.all([
+      const [pending, onHold, approved] = await Promise.all([
         getPendingExperiences(),
+        getOnHoldExperiences(),
         getApprovedExperiences()
       ]);
       setPendingExperiences(pending);
+      setOnHoldExperiences(onHold);
       setApprovedExperiences(approved);
     } catch (error) {
       console.error('データ取得エラー:', error);
@@ -56,11 +59,22 @@ const AdminPage = () => {
   // 体験談詳細ページへ遷移
   const handleOpenDetail = (experienceId) => {
     navigate(`/admin/experience/${experienceId}`, {
-      state: { isPending: activeTab === 'pending' }
+      state: { 
+        isPending: activeTab === 'pending',
+        isOnHold: activeTab === 'onHold',
+        isApproved: activeTab === 'approved'
+      }
     });
   };
 
-  const currentExperiences = activeTab === 'pending' ? pendingExperiences : approvedExperiences;
+  let currentExperiences;
+  if (activeTab === 'pending') {
+    currentExperiences = pendingExperiences;
+  } else if (activeTab === 'onHold') {
+    currentExperiences = onHoldExperiences;
+  } else {
+    currentExperiences = approvedExperiences;
+  }
 
   return (
     <div className={layoutStyles.pageContainer}>
@@ -91,6 +105,12 @@ const AdminPage = () => {
             未承認体験談 ({pendingExperiences.length})
           </button>
           <button
+            className={`${styles.tab} ${activeTab === 'onHold' ? styles.activeTab : ''}`}
+            onClick={() => setActiveTab('onHold')}
+          >
+            保留中体験談 ({onHoldExperiences.length})
+          </button>
+          <button
             className={`${styles.tab} ${activeTab === 'approved' ? styles.activeTab : ''}`}
             onClick={() => setActiveTab('approved')}
           >
@@ -108,7 +128,9 @@ const AdminPage = () => {
           )}
           {!isLoading && !error && currentExperiences.length === 0 && (
             <div className={styles.emptyMessage}>
-              {activeTab === 'pending' ? '未承認の体験談はありません' : '承認済みの体験談はありません'}
+              {activeTab === 'pending' && '未承認の体験談はありません'}
+              {activeTab === 'onHold' && '保留中の体験談はありません'}
+              {activeTab === 'approved' && '承認済みの体験談はありません'}
             </div>
           )}
           {!isLoading && !error && currentExperiences.length > 0 && (
@@ -125,10 +147,26 @@ const AdminPage = () => {
                       }
                     }}
                   >
-                    <TweetCard
-                      cardId={experience.id}
-                      data={experience}
-                    />
+                    <div className={styles.cardWrapper}>
+                      {/* バッジ表示 */}
+                      <div className={styles.badgeContainer}>
+                        {experience.submissionState === '新規投稿' && (
+                          <span className={`${styles.badge} ${styles.badgeNew}`}>NEW</span>
+                        )}
+                        {experience.submissionState === '再編集' && (
+                          <span className={`${styles.badge} ${styles.badgeResubmit}`}>再編集</span>
+                        )}
+                        {experience.editCount > 0 && (
+                          <span className={`${styles.badge} ${styles.badgeEditCount}`}>
+                            編集{experience.editCount}回
+                          </span>
+                        )}
+                      </div>
+                      <TweetCard
+                        cardId={experience.id}
+                        data={experience}
+                      />
+                    </div>
                   </button>
                 </div>
               ))}

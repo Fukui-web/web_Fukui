@@ -42,11 +42,17 @@ function doPost(e) {
       case 'getApprovedExperiences':
         result = getApprovedExperiences();
         break;
+      case 'getOnHoldExperiences':
+        result = getOnHoldExperiences();
+        break;
       case 'approveExperience':
         result = approveExperience(params.id);
         break;
       case 'rejectExperience':
         result = rejectExperience(params.id, params.reason);
+        break;
+      case 'returnToPending':
+        result = returnToPending(params.id);
         break;
       case 'getExperiencesByQuestion':
         result = getExperiencesByQuestion(params.questionId, params.limit);
@@ -432,6 +438,18 @@ function getExperienceById(id) {
     const q7_1Index = 54;        // BC列: 7-1 その他のサポート・活動
     const q7_2Index = 55;        // BD列: 7-2 不登校に対する考え・想い
     
+    // メールアドレスと承認ステータス
+    const emailIndex = 57;       // BF列: メールアドレス
+    const approvalStatusIndex = 58;  // BG列: 承認ステータス
+    const approvalDateIndex = 59;    // BH列: 承認日時
+    const lastEditDateIndex = 60;    // BI列: 最終編集日時
+    const approvalCountIndex = 61;   // BJ列: 承認回数
+    const rejectReasonIndex = 62;    // BK列: 却下理由（最新）
+    const firstSubmitDateIndex = 63; // BL列: 初回投稿日時
+    const editCountIndex = 64;       // BM列: 編集回数
+    const submissionStateIndex = 65; // BN列: 投稿状態
+    const rejectReasonHistoryIndex = 66; // BO列: 却下理由履歴
+    
     // タイトルを生成（2-2の詳しい状況から）
     const title = String(row[detailIndex] || '').substring(0, 50) + '...';
     
@@ -531,7 +549,18 @@ function getExperienceById(id) {
         // セクション7: その他のサポートと今の想い
         otherSupport: String(row[q7_1Index] || ''),             // 7-1 その他のサポート・活動
         currentThoughts: String(row[q7_2Index] || ''),          // 7-2 不登校に対する考え・想い
-        message: String(row[q7_2Index] || '')                   // 互換性のため（7-2と同じ）
+        message: String(row[q7_2Index] || ''),                  // 互換性のため（7-2と同じ）
+        
+        // 管理者用情報
+        approvalStatus: row[approvalStatusIndex] || '',
+        approvalDate: row[approvalDateIndex] || '',
+        lastEditDate: row[lastEditDateIndex] || '',
+        approvalCount: row[approvalCountIndex] || 0,
+        rejectReason: row[rejectReasonIndex] || '',
+        firstSubmitDate: row[firstSubmitDateIndex] || '',
+        editCount: row[editCountIndex] || 0,
+        submissionState: row[submissionStateIndex] || '',
+        rejectReasonHistory: row[rejectReasonHistoryIndex] || ''
       }
     };
     

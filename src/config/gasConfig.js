@@ -14,8 +14,10 @@ const GAS_CONFIG = {
     POST_EXPERIENCE: 'postExperience',
     GET_PENDING_EXPERIENCES: 'getPendingExperiences',
     GET_APPROVED_EXPERIENCES: 'getApprovedExperiences',
+    GET_ON_HOLD_EXPERIENCES: 'getOnHoldExperiences',
     APPROVE_EXPERIENCE: 'approveExperience',
-    REJECT_EXPERIENCE: 'rejectExperience'
+    REJECT_EXPERIENCE: 'rejectExperience',
+    RETURN_TO_PENDING: 'returnToPending'
   },
   
   // タイムアウト設定（ミリ秒）
