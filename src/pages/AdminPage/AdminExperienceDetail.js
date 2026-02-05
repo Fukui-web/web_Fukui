@@ -232,20 +232,20 @@ const AdminExperienceDetail = () => {
   // 却下確定処理
   const handleConfirmReject = async () => {
     if (!rejectReason.trim()) {
-      alert('却下理由を入力してください');
+      alert('保留理由を入力してください');
       return;
     }
 
     // eslint-disable-next-line no-restricted-globals
-    if (!confirm('この内容で却下しますか？')) return;
+    if (!confirm('この内容で保留にしますか？')) return;
     
     try {
       await rejectExperience(experienceData.id, rejectReason);
-      alert('却下しました');
+      alert('保留にしました');
       navigate('/admin'); // 管理者画面に戻る
     } catch (error) {
-      console.error('却下エラー:', error);
-      alert('却下に失敗しました');
+      console.error('保留エラー:', error);
+      alert('保留に失敗しました');
     }
   };
 

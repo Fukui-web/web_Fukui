@@ -498,8 +498,8 @@ function rejectExperience(id, reason) {
     // 却下時は承認日時をクリア（承認済みではないため）
     sheet.getRange(sheetRow, APPROVAL_DATE_INDEX + 1).setValue('');
     
-    // 最終編集日時をクリア（再編集を促すため）
-    sheet.getRange(sheetRow, LAST_EDIT_DATE_INDEX + 1).setValue('');
+    // 最終編集日時は保持（管理者が誤って保留にした場合に未承認に戻せるように）
+    // sheet.getRange(sheetRow, LAST_EDIT_DATE_INDEX + 1).setValue(''); // 削除
     
     // 却下メールを送信
     try {
