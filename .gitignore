@@ -23,12 +23,16 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# GAS test files
+# GAS test files and documentation
 gas/test*.gs
+gas/*Test*.gs
+gas/debug*.gs
+gas/quick*.gs
 gas/TEST_*.md
-gas/debugDoPost.gs
-quickTest.gs
+gas/ADMIN_*.md
 
-# unnecessary md files
+# Unnecessary documentation files
 GAS_SETUP.md
 SEARCH_FEATURE.md
+OAUTH_SETUP.md
+ADMIN_AUTH_SETUP.md
