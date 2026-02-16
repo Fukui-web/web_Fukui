@@ -294,6 +294,25 @@ function getAllExperiences(limit = null) {
     const detailIndex = 5; // F列: 2-2詳しい状況
     const approvalStatusIndex = 58; // BG列: 承認ステータス
     
+    // 学校情報の列インデックス
+    const school1NameIndex = 19;      // T列: 4-1-1 学校名
+    const school1PeriodIndex = 20;    // U列: 4-1-2 通学期間
+    const school1ReasonIndex = 21;    // V列: 4-1-3 選んだ理由
+    const school1ReviewIndex = 22;    // W列: 4-1-4 感想
+    const school1CostIndex = 23;      // X列: 4-1-5 費用
+    
+    const school2NameIndex = 25;      // Z列: 4-2-1 学校名
+    const school2PeriodIndex = 26;    // AA列: 4-2-2 通学期間
+    const school2ReasonIndex = 27;    // AB列: 4-2-3 選んだ理由
+    const school2ReviewIndex = 28;    // AC列: 4-2-4 感想
+    const school2CostIndex = 29;      // AD列: 4-2-5 費用
+    
+    const school3NameIndex = 31;      // AF列: 4-3-1 学校名
+    const school3PeriodIndex = 32;    // AG列: 4-3-2 通学期間
+    const school3ReasonIndex = 33;    // AH列: 4-3-3 選んだ理由
+    const school3ReviewIndex = 34;    // AI列: 4-3-4 感想
+    const school3CostIndex = 35;      // AJ列: 4-3-5 費用
+    
     // サポート情報の列インデックス
     const support1TypeIndex = 37;      // AL列: 6-1-1 サポート1の種類
     const support1DetailIndex = 38;    // AM列: 6-1-2 サポート1の名称
@@ -326,6 +345,31 @@ function getAllExperiences(limit = null) {
       
       // タイトルを生成（詳しい状況の最初の50文字）
       const title = String(row[detailIndex] || '').substring(0, 50) + '...';
+      
+      // 学校情報を配列化
+      const schools = [
+        {
+          name: row[school1NameIndex] || '',
+          period: String(row[school1PeriodIndex] || ''),
+          reason: String(row[school1ReasonIndex] || ''),
+          review: String(row[school1ReviewIndex] || ''),
+          cost: String(row[school1CostIndex] || '')
+        },
+        {
+          name: row[school2NameIndex] || '',
+          period: String(row[school2PeriodIndex] || ''),
+          reason: String(row[school2ReasonIndex] || ''),
+          review: String(row[school2ReviewIndex] || ''),
+          cost: String(row[school2CostIndex] || '')
+        },
+        {
+          name: row[school3NameIndex] || '',
+          period: String(row[school3PeriodIndex] || ''),
+          reason: String(row[school3ReasonIndex] || ''),
+          review: String(row[school3ReviewIndex] || ''),
+          cost: String(row[school3CostIndex] || '')
+        }
+      ].filter(s => s.name); // 学校名が入力されているもののみ
       
       // サポート情報を配列化
       const supports = [
@@ -362,6 +406,7 @@ function getAllExperiences(limit = null) {
         grade: row[gradeIndex],
         family: row[familyIndex],
         trigger: row[triggerIndex],
+        schools: schools,  // 学校情報を追加
         supports: supports  // サポート情報を追加
       });
       

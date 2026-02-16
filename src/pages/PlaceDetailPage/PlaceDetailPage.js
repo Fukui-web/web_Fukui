@@ -290,6 +290,14 @@ const PlaceDetailPage = () => {
             </>
           )}
         </section>
+
+        {/* Topページに戻るボタン */}
+        <section className={styles.backToTopSection}>
+          <button className={styles.backToTopButton} onClick={() => navigate('/places')}>
+            <img src={vectorRB} alt="" className={styles.buttonIcon} />
+            <span>居場所をさがすページに戻る</span>
+          </button>
+        </section>
       </div>
 
       <Footer />
