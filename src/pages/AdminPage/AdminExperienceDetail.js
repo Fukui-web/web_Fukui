@@ -4,7 +4,7 @@ import layoutStyles from '../../components/MainContent/commonPageLayout.module.c
 import styles from './AdminExperienceDetail.module.css';
 import Breadcrumbs from '../../components/common/Breadcrumbs';
 import Footer from '../../components/common/Footer';
-import { getExperienceById, approveExperience, rejectExperience } from '../../utils/gasApi';
+import { getExperienceById, approveExperience, rejectExperience, returnToPending } from '../../utils/gasApi';
 
 const AdminExperienceDetail = () => {
   const { id } = useParams();
@@ -16,8 +16,9 @@ const AdminExperienceDetail = () => {
   const [showRejectForm, setShowRejectForm] = useState(false);
   const [rejectReason, setRejectReason] = useState('');
 
-  // locationのstateからisPendingを取得
+  // locationのstateからisPending, isOnHoldを取得
   const isPending = location.state?.isPending || false;
+  const isOnHold = location.state?.isOnHold || false;
 
   const breadcrumbItems = [
     { label: 'TOP', path: '/' },
@@ -135,20 +136,87 @@ const AdminExperienceDetail = () => {
     }
   };
 
-  // 却下処理
+  // 保留（却下）処理
   const handleReject = async () => {
+    if (!rejectReason.trim()) {
+      alert('保留理由を入力してください');
+      return;
+    }
+    
     // eslint-disable-next-line no-restricted-globals
-    if (!confirm('この体験談を却下しますか？')) return;
+    if (!confirm('この体験談を保留にしますか？')) return;
     
     try {
-      await rejectExperience(experienceData.id);
-      alert('却下しました');
+      await rejectExperience(experienceData.id, rejectReason);
+      alert('保留にしました');
       navigate('/admin'); // 管理者画面に戻る
     } catch (error) {
-      console.error('却下エラー:', error);
-      alert('却下に失敗しました');
+      console.error('保留処理エラー:', error);
+      alert('保留処理に失敗しました');
     }
   };
+
+  // 未承認に戻す処理
+  const handleReturnToPending = async () => {
+    // eslint-disable-next-line no-restricted-globals
+    if (!confirm('この体験談を未承認に戻しますか？\n（管理者が誤って保留にした場合に使用します）')) return;
+    
+    try {
+      await returnToPending(experienceData.id);
+      alert('未承認に戻しました');
+      navigate('/admin'); // 管理者画面に戻る
+    } catch (error) {
+      console.error('未承認への変更エラー:', error);
+      alert('未承認への変更に失敗しました');
+    }
+  };
+
+  // 日時フォーマット関数
+  const formatDateTime = (dateTimeString) => {
+    if (!dateTimeString) return '';
+    
+    try {
+      // 既に整形済みの日時（yyyy/MM/dd HH:mm:ss）の場合はそのまま返す
+      if (typeof dateTimeString === 'string' && /^\d{4}\/\d{2}\/\d{2}/.test(dateTimeString)) {
+        return dateTimeString;
+      }
+      
+      // ISO形式やその他の形式をパース
+      const date = new Date(dateTimeString);
+      
+      // 無効な日付の場合
+      if (Number.isNaN(date.getTime())) {
+        return dateTimeString;
+      }
+      
+      // 日本時間で整形
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      const hours = String(date.getHours()).padStart(2, '0');
+      const minutes = String(date.getMinutes()).padStart(2, '0');
+      const seconds = String(date.getSeconds()).padStart(2, '0');
+      
+      return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
+    } catch (error) {
+      console.error('日時フォーマットエラー:', error);
+      return dateTimeString;
+    }
+  };
+
+  // 却下理由履歴をパース
+  const parseRejectHistory = (history) => {
+    if (!history) return [];
+    return history.split('\n').map(line => {
+      const match = line.match(/^\[(.+?)\]\s*(.+)$/);
+      if (match) {
+        return { date: match[1], reason: match[2] };
+      }
+      return { date: '', reason: line };
+    }).filter(item => item.reason);
+  };
+
+  const rejectHistory = parseRejectHistory(experienceData?.rejectReasonHistory || '');
 
   // 却下フォームを表示
   const handleShowRejectForm = () => {
@@ -164,20 +232,20 @@ const AdminExperienceDetail = () => {
   // 却下確定処理
   const handleConfirmReject = async () => {
     if (!rejectReason.trim()) {
-      alert('却下理由を入力してください');
+      alert('保留理由を入力してください');
       return;
     }
 
     // eslint-disable-next-line no-restricted-globals
-    if (!confirm('この内容で却下しますか？')) return;
+    if (!confirm('この内容で保留にしますか？')) return;
     
     try {
       await rejectExperience(experienceData.id, rejectReason);
-      alert('却下しました');
+      alert('保留にしました');
       navigate('/admin'); // 管理者画面に戻る
     } catch (error) {
-      console.error('却下エラー:', error);
-      alert('却下に失敗しました');
+      console.error('保留エラー:', error);
+      alert('保留に失敗しました');
     }
   };
 
@@ -245,6 +313,98 @@ const AdminExperienceDetail = () => {
                 </div>
               )}
             </div>
+          </section>
+
+          {/* 管理情報セクション */}
+          <section className={styles.adminInfoSection}>
+            <h3 className={styles.sectionHeading}>📊 管理情報</h3>
+            <div className={styles.sectionDivider}></div>
+            
+            <div className={styles.adminInfoGrid}>
+              <div className={styles.adminInfoItem}>
+                <span className={styles.adminInfoLabel}>承認ステータス</span>
+                <span className={`${styles.adminInfoValue} ${styles.statusBadge} ${
+                  (() => {
+                    if (experienceData.approvalStatus === '承認済み') return styles.statusApproved;
+                    if (experienceData.approvalStatus === '却下') return styles.statusRejected;
+                    return styles.statusPending;
+                  })()
+                }`}>
+                  {(() => {
+                    if (experienceData.approvalStatus === '却下') return '保留';
+                    return experienceData.approvalStatus || '未承認';
+                  })()}
+                </span>
+              </div>
+              
+              <div className={styles.adminInfoItem}>
+                <span className={styles.adminInfoLabel}>投稿状態</span>
+                <span className={`${styles.adminInfoValue} ${
+                  (() => {
+                    if (experienceData.submissionState === '新規投稿') return styles.badgeNew;
+                    if (experienceData.submissionState === '再編集') return styles.badgeResubmit;
+                    return '';
+                  })()
+                }`}>
+                  {experienceData.submissionState || '新規投稿'}
+                </span>
+              </div>
+              
+              {experienceData.editCount !== undefined && experienceData.editCount > 0 && (
+                <div className={styles.adminInfoItem}>
+                  <span className={styles.adminInfoLabel}>編集回数</span>
+                  <span className={styles.adminInfoValue}>{experienceData.editCount}回</span>
+                </div>
+              )}
+              
+              {experienceData.firstSubmitDate && (
+                <div className={styles.adminInfoItem}>
+                  <span className={styles.adminInfoLabel}>初回投稿日時</span>
+                  <span className={styles.adminInfoValue}>{formatDateTime(experienceData.firstSubmitDate)}</span>
+                </div>
+              )}
+              
+              {experienceData.lastEditDate && (
+                <div className={styles.adminInfoItem}>
+                  <span className={styles.adminInfoLabel}>最終編集日時</span>
+                  <span className={styles.adminInfoValue}>{formatDateTime(experienceData.lastEditDate)}</span>
+                </div>
+              )}
+              
+              {experienceData.approvalDate && (
+                <div className={styles.adminInfoItem}>
+                  <span className={styles.adminInfoLabel}>承認日時</span>
+                  <span className={styles.adminInfoValue}>{formatDateTime(experienceData.approvalDate)}</span>
+                </div>
+              )}
+            </div>
+            
+            {/* 最新の保留理由 */}
+            {experienceData.rejectReason && experienceData.approvalStatus === '却下' && (
+              <div className={styles.currentRejectReasonSection}>
+                <h4 className={styles.currentRejectReasonTitle}>📝 最新の保留理由</h4>
+                <div className={styles.currentRejectReasonBox}>
+                  {experienceData.rejectReason}
+                </div>
+              </div>
+            )}
+            
+            {/* 却下理由履歴 */}
+            {rejectHistory.length > 0 && (
+              <div className={styles.rejectHistorySection}>
+                <h4 className={styles.rejectHistoryTitle}>🔄 保留理由履歴</h4>
+                <div className={styles.rejectHistoryList}>
+                  {rejectHistory.map((item, index) => (
+                    <div key={index} className={styles.rejectHistoryItem}>
+                      {item.date && (
+                        <div className={styles.rejectHistoryDate}>{item.date}</div>
+                      )}
+                      <div className={styles.rejectHistoryReason}>{item.reason}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </section>
 
           {/* セクション2: 不登校のきっかけと経過 */}
@@ -592,17 +752,17 @@ const AdminExperienceDetail = () => {
                       className={styles.rejectButton}
                       onClick={handleShowRejectForm}
                     >
-                      却下する
+                      保留にする
                     </button>
                   </>
                 ) : (
                   <div className={styles.rejectFormContainer}>
-                    <h4 className={styles.rejectFormTitle}>却下理由を入力してください</h4>
+                    <h4 className={styles.rejectFormTitle}>保留理由を入力してください</h4>
                     <textarea
                       className={styles.rejectReasonTextarea}
                       value={rejectReason}
                       onChange={(e) => setRejectReason(e.target.value)}
-                      placeholder="却下理由を詳しく記入してください..."
+                      placeholder="保留理由を詳しく記入してください...&#10;&#10;例：&#10;・〇〇の部分についてもう少し詳しく教えてください&#10;・△△の記載が不明瞭なため、具体的な説明をお願いします"
                       rows="6"
                     />
                     <div className={styles.rejectFormButtons}>
@@ -610,7 +770,7 @@ const AdminExperienceDetail = () => {
                         className={styles.confirmRejectButton}
                         onClick={handleConfirmReject}
                       >
-                        却下を確定する
+                        保留を確定する
                       </button>
                       <button
                         className={styles.cancelRejectButton}
@@ -622,6 +782,14 @@ const AdminExperienceDetail = () => {
                   </div>
                 )}
               </>
+            )}
+            {isOnHold && (
+              <button
+                className={styles.returnToPendingButton}
+                onClick={handleReturnToPending}
+              >
+                未承認に戻す
+              </button>
             )}
             <button
               className={styles.backButton}

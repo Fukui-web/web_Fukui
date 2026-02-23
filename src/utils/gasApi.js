@@ -188,6 +188,25 @@ export const getApprovedExperiences = async () => {
 };
 
 /**
+ * 保留中（却下）の体験談を取得
+ * @returns {Promise<Array>} - 保留中体験談の配列
+ */
+export const getOnHoldExperiences = async () => {
+  try {
+    const response = await fetchGasApi(GAS_CONFIG.ENDPOINTS.GET_ON_HOLD_EXPERIENCES);
+    
+    if (response.success) {
+      return response.data || [];
+    } else {
+      throw new Error(response.error || '保留中体験談の取得に失敗しました');
+    }
+  } catch (error) {
+    console.error('Get on hold experiences error:', error);
+    throw error;
+  }
+};
+
+/**
  * 体験談を承認
  * @param {number|string} id - 体験談のID
  * @returns {Promise<object>} - 承認結果
@@ -229,6 +248,27 @@ export const rejectExperience = async (id, reason = '') => {
     }
   } catch (error) {
     console.error('Reject experience error:', error);
+    throw error;
+  }
+};
+
+/**
+ * 体験談を保留中から未承認に戻す
+ * @param {number|string} id - 体験談のID
+ * @returns {Promise<object>} - 処理結果
+ */
+export const returnToPending = async (id) => {
+  try {
+    const params = { id: Number.parseInt(id, 10) };
+    const response = await fetchGasApi(GAS_CONFIG.ENDPOINTS.RETURN_TO_PENDING, params);
+    
+    if (response.success) {
+      return response;
+    } else {
+      throw new Error(response.error || '未承認への変更に失敗しました');
+    }
+  } catch (error) {
+    console.error('Return to pending error:', error);
     throw error;
   }
 };
