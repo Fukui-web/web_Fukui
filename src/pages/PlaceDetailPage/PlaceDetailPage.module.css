@@ -41,7 +41,7 @@
 .tabActive { background: #88D3BC !important; color: var(--color-black) !important; border: none !important; border-bottom: none !important; }
 .tabActive:hover { background: #88D3BC !important; }
 .tabActive + .tab { border-left: 1.5px solid var(--color-black); }
-.tabIcon { width: 20px; height: 20px; object-fit: contain; }
+.tabIcon { width: 14px; height: 14px; object-fit: contain; }
 
 /* タイトルセクション */
 .titleSection {
@@ -233,4 +233,4 @@
 }
 .moreButton:hover { background-color: rgba(0, 0, 0, 0.05); }
 .moreButton:active { transform: scale(0.98); }
-.buttonIcon { width: 20px; height: 20px; object-fit: contain; }
+.buttonIcon { width: 14px; height: 14px; object-fit: contain; }

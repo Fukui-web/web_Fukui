@@ -85,7 +85,7 @@ const InterviewDetailPage = () => {
         {/* 目次セクション */}
         {card.tableOfContents && (
           <div className={styles.tocSection}>
-            <h3 className={styles.tocTitle}>目次　いるかな？</h3>
+            <h3 className={styles.tocTitle}>目次</h3>
             <ul className={styles.tocList}>
               {card.tableOfContents.map((item, index) => (
                 <li 
@@ -124,7 +124,7 @@ const InterviewDetailPage = () => {
             </div>
             <div className={styles.writerInfo}>
               <p className={styles.writerText}>
-                ライター：{card.writer.name}さんの紹介<br />
+                ライター：{card.writer.name}<br />
                 {card.writer.description}
               </p>
             </div>

@@ -30,7 +30,8 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 98px;
+  width: 100%;
+  max-width: 120px;
   height: 30px;
   margin-bottom: 0px; /* マイナスマージンを削除 */
 }
@@ -125,8 +126,8 @@
 }
 
 .playIcon {
-  width: 19.2px;
-  height: 19.2px;
+  width: 14px;
+  height: 14px;
   object-fit: contain;
 }
 

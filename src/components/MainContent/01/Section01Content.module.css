@@ -232,7 +232,7 @@
 .moreButton:hover, .moreButton2:hover { background-color: rgba(0, 0, 0, 0.05); }
 .moreButton:active, .moreButton2:active { transform: scale(0.98); }
 
-.playIcon { width: 19.2px; height: 19.2px; object-fit: contain; }
+.playIcon { width: 14px; height: 14px; object-fit: contain; }
 
 .loadingMessage, .errorMessage, .noDataMessage {
   font-family: var(--font-primary);

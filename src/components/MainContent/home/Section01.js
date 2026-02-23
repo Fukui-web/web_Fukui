@@ -46,7 +46,7 @@ const Section01 = () => {
 みんなの学校活用術"
         questionId="2-11"
         limit={6}
-        moreButtonText="体験談をさがす"
+        moreButtonText="体験談をもっとみる"
         customClass={styles.experience01}
         onMoreClick={() => navigate('/experiences?questionId=2-11')}
         sectionName="学校とのつながりに関する体験談"
