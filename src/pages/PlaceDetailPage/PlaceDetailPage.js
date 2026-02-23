@@ -112,10 +112,22 @@ const PlaceDetailPage = () => {
               <span className={styles.detailLabel}>メール</span>
               <span className={styles.detailValue}>{card.detailInfo.email}</span>
             </div>
-            <div className={styles.detailRow}>
-              <span className={styles.detailLabel}>公式サイト</span>
-              <span className={styles.detailValue}>{card.detailInfo.website}</span>
-            </div>
+            {card.detailInfo.website && (
+              <div className={styles.detailRow}>
+                <span className={styles.detailLabel}>公式サイト</span>
+                <span className={styles.detailValue}>
+                  <a 
+                    href={card.detailInfo.website.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={styles.websiteLink}
+                  >
+                    {card.detailInfo.website.name}
+                    <img src={newwindowIcon} alt="新しいウィンドウで開く" className={styles.linkIcon} />
+                  </a>
+                </span>
+              </div>
+            )}
             <div className={styles.detailRow}>
               <span className={styles.detailLabel}>対象</span>
               <span className={styles.detailValue}>{card.detailInfo.target}</span>

@@ -19,9 +19,9 @@
   padding: 0;
   width: 240px;
   max-width: 240px;
-  height: 265px; /* タグ領域(35px)を除いて狭めた */
-  min-height: 265px;
-  max-height: 265px;
+  height: 280px; /* 固定高さに変更 */
+  min-height: 280px;
+  max-height: 280px;
   flex-shrink: 0;
   border-radius: 10px;
   border: 1.5px solid var(--color-black);
@@ -35,10 +35,12 @@
 .contentContainer {
   display: flex;
   flex-direction: column;
-  align-items: center; /* 中央揃え */
-  padding: 5px 10px;
+  align-items: center; /* 横方向の中央揃え */
+  justify-content: center; /* 縦方向の中央揃え */
+  padding: 4px 10px 8px 10px; /* 上下の余白を狭める */
   gap: 0px; /* ギャップを削除 */
   width: 100%;
+  height: 80px; /* 明示的に高さを指定（カード280px - 画像200px = 80px） */
   box-sizing: border-box;
 }
 
@@ -97,10 +99,13 @@
 .dotline {
   width: 100%;
   height: 10px;
+  min-height: 10px; /* 最小高さを確保 */
   background-size: contain;
   background-repeat: repeat-x;
-  margin: 2px 0;
+  background-position: center;
+  margin: 0; /* marginを0にして間隔を詰める */
   flex: none;
+  flex-shrink: 0; /* 縮小しないように */
   align-self: stretch;
 }
 
@@ -112,14 +117,37 @@
   font-style: normal;
   font-weight: 600;
   font-size: 14px;
-  line-height: 18px;
+  line-height: 1.4; /* 行間を調整 */
   text-align: center; /* 中央揃え */
+  letter-spacing: 0.05em;
+  color: #000000;
+  flex: none;
+  padding: 2px 0; /* 上下の余白を狭める */
+  flex-grow: 0;
+  margin: 0;
+  white-space: pre-line; /* 改行を認識 */
+  word-break: keep-all; /* 単語の途中で改行しない */
+}
+
+/* SchoolCard.jsではplaceTitleクラスを使用しているので、同じスタイルを適用 */
+.placeTitle {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  font-family: var(--font-primary);
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: center;
   letter-spacing: 0.05em;
   color: #000000;
   flex: none;
   padding: 2px 0;
   flex-grow: 0;
   margin: 0;
+  white-space: pre-line;
+  word-break: keep-all;
 }
 
 .schoolDescription {
