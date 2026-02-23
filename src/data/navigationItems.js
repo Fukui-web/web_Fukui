@@ -25,8 +25,8 @@ export const navigationItems = [
     component: Section01Content 
   },
   {
-    title: '行政が行う公的支援',
-    subItems: ['公的機関の支援の種類'],
+    title: '公的支援や医療機関',
+    subItems: ['公的機関の支援の種類や', '医療機関を紹介'],
     path: '/section02', 
     component: Section02Content 
   },

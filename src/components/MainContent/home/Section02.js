@@ -13,7 +13,7 @@ const Section02 = () => {
     <div className={styles.section02}>
       <SectionTitle 
         roadNumber="02" 
-        title="行政が行う公的支援" 
+        title="公的支援や医療機関" 
         roadNumberImage={roadNumberImage} 
       />
 

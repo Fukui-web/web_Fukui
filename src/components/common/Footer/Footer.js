@@ -57,6 +57,11 @@ const Footer = () => {
           <img src={footerLogo} alt="ぼくらのみち 福井県版" className={styles.logoImage} />
         </button>
         
+        {/* 採択プランテキスト */}
+        <p className={styles.adoptionText}>
+          【福井県ワクワクチャレンジプランコンテスト2025採択プラン】
+        </p>
+        
         {/* 4. 既存の .footerMenu を削除し、新しい .footerList に変更 */}
         <ul className={styles.footerList}>
           <li onClick={() => handleListClick('体験談をさがす')}>体験談をさがす</li>
