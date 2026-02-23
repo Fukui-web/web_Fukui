@@ -38,7 +38,18 @@
 .tocBox { background: #F5F5F5; padding: 16px; border-radius: 8px; width: 100%; }
 .tocBox strong { font-size: 14px; font-weight: 700; }
 .tocBox ul { margin: 12px 0 0 0; padding-left: 0; list-style: none; }
-.tocBox li { font-size: 13px; line-height: 1.8; color: #333; }
+.tocBox li { 
+  font-size: 13px; 
+  line-height: 1.8; 
+  color: #333; 
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.tocBox li:hover {
+  background-color: #E0E0E0;
+  color: #000;
+}
 .metaArea { width: 100%; }
 .metaRow { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dotted #CCC; font-size: 13px; }
 

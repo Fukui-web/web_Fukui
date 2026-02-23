@@ -100,6 +100,16 @@ const TweetDetailPage = () => {
     }
   };
 
+  // 目次のスクロール処理
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const yOffset = -80; // ヘッダーの高さ分オフセット
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
+
   const breadcrumbItems = [
     { label: 'TOP', path: '/' },
     { label: '体験談をさがす', path: '/experiences' },
@@ -204,24 +214,42 @@ const TweetDetailPage = () => {
             <aside className={styles.tocBox}>
               <strong>体験談の目次</strong>
               <ul>
-                {displayData.grade && <li>▼ 1. 基本情報</li>}
+                {displayData.grade && 
+                  <li onClick={() => scrollToSection('section-1')} style={{ cursor: 'pointer' }}>
+                    ▼ 1. 基本情報
+                  </li>}
                 {(displayData.detail || displayData.parentInitialAction || displayData.childReaction || 
                   displayData.schoolResponse || displayData.initialReflection || displayData.firstMonthLife || 
                   displayData.hardestTime || displayData.dailyLifeOverMonth || displayData.improvementTrigger || 
                   displayData.schoolConnection) && 
-                  <li>▼ 2. 不登校のきっかけと経過</li>}
+                  <li onClick={() => scrollToSection('section-2')} style={{ cursor: 'pointer' }}>
+                    ▼ 2. 不登校のきっかけと経過
+                  </li>}
                 {(displayData.elementarySchool || displayData.juniorHighSchool || 
                   displayData.highSchool || displayData.alternativeSchool) && 
-                  <li>▼ 3. 子どもの成長過程</li>}
-                {displayData.schools.length > 0 && <li>▼ 4. 通信制・定時制の学校情報</li>}
-                {displayData.supportUsed && <li>▼ 5. 行政・民間サポート</li>}
-                {displayData.supports.length > 0 && <li>▼ 6. 利用したサポート</li>}
+                  <li onClick={() => scrollToSection('section-3')} style={{ cursor: 'pointer' }}>
+                    ▼ 3. 子どもの成長過程
+                  </li>}
+                {displayData.schools.length > 0 && 
+                  <li onClick={() => scrollToSection('section-4')} style={{ cursor: 'pointer' }}>
+                    ▼ 4. 通信制・定時制の学校情報
+                  </li>}
+                {displayData.supportUsed && 
+                  <li onClick={() => scrollToSection('section-5')} style={{ cursor: 'pointer' }}>
+                    ▼ 5. 行政・民間サポート
+                  </li>}
+                {displayData.supports.length > 0 && 
+                  <li onClick={() => scrollToSection('section-6')} style={{ cursor: 'pointer' }}>
+                    ▼ 6. 利用したサポート
+                  </li>}
                 {(displayData.otherSupport || displayData.currentThoughts) && 
-                  <li>▼ 7. その他のサポートと今の想い</li>}
+                  <li onClick={() => scrollToSection('section-7')} style={{ cursor: 'pointer' }}>
+                    ▼ 7. その他のサポートと今の想い
+                  </li>}
               </ul>
             </aside>
 
-            <div className={styles.metaArea}>
+            <div className={styles.metaArea} id="section-1">
               <div className={styles.metaRow}>
                 <span>記載日</span>
                 <span>{displayData.date}</span>
@@ -251,7 +279,7 @@ const TweetDetailPage = () => {
 
           {/* セクション2: 不登校のきっかけと経過 */}
           {displayData.detail && (
-            <section className={styles.bodySection}>
+            <section className={styles.bodySection} id="section-2">
               <h3 className={styles.sectionHeading}>2. 不登校のきっかけと経過</h3>
               <div className={styles.sectionDivider}></div>
               
@@ -376,7 +404,7 @@ const TweetDetailPage = () => {
 
           {/* セクション3: 子どもの成長過程 */}
           {(displayData.elementarySchool || displayData.juniorHighSchool || displayData.highSchool || displayData.alternativeSchool) && (
-            <section className={styles.bodySection}>
+            <section className={styles.bodySection} id="section-3">
               <h3 className={styles.sectionHeading}>3. 子どもの成長過程</h3>
               <div className={styles.sectionDivider}></div>
               
@@ -428,7 +456,7 @@ const TweetDetailPage = () => {
 
           {/* セクション4: 通信制・定時制の学校情報 */}
           {displayData.schools.length > 0 && (
-            <section className={styles.bodySection}>
+            <section className={styles.bodySection} id="section-4">
               <h3 className={styles.sectionHeading}>4. 通信制・定時制の学校情報</h3>
               <div className={styles.sectionDivider}></div>
               
@@ -486,7 +514,7 @@ const TweetDetailPage = () => {
 
           {/* セクション5: 行政・民間サポートの有無 */}
           {displayData.supportUsed && (
-            <section className={styles.bodySection}>
+            <section className={styles.bodySection} id="section-5">
               <h3 className={styles.sectionHeading}>5. 行政・民間サポート</h3>
               <div className={styles.sectionDivider}></div>
               
@@ -503,7 +531,7 @@ const TweetDetailPage = () => {
 
           {/* セクション6: 利用したサポート */}
           {displayData.supports.length > 0 && (
-            <section className={styles.bodySection}>
+            <section className={styles.bodySection} id="section-6">
               <h3 className={styles.sectionHeading}>6. 利用したサポート</h3>
               <div className={styles.sectionDivider}></div>
               
@@ -550,7 +578,7 @@ const TweetDetailPage = () => {
 
           {/* セクション7: その他のサポートと今の想い */}
           {(displayData.otherSupport || displayData.currentThoughts) && (
-            <section className={styles.bodySection}>
+            <section className={styles.bodySection} id="section-7">
               <h3 className={styles.sectionHeading}>7. その他のサポートと今の想い</h3>
               <div className={styles.sectionDivider}></div>
               

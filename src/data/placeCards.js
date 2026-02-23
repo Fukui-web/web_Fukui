@@ -45,14 +45,14 @@ const placeCards = [
     detailInfo: {
       location: "福井市",
       phone: "09097685530",
-      email: "ringopandaisuki123@gmail.com",
+      email: "",
       website: "tomarigi_fukui",
       target: "不登校生の保護者",
       recommended: "不登校や子育てについて相談したい, 不登校や子育てについて共有したい, 同じ悩みを持つ人と話したい",
       suggestion: "不登校児の親のおしゃべり会",
       schedule: "主に第三か第四日曜日 場所はインスタグラムにて",
       fee: "無料",
-      other: "最初の方のメールアドレスというところは非公開ですか？（できれば個人のメールなので非公開でお願いしたいです）"
+      other: ""
     },
     // 検索用タグ（フィルタリング用）
     searchTags: {

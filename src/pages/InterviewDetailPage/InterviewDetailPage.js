@@ -14,6 +14,16 @@ const InterviewDetailPage = () => {
   const navigate = useNavigate();
   const card = interviewCards.find(c => String(c.id) === String(id));
 
+  // 目次のスクロール処理
+  const scrollToSection = (sectionIndex) => {
+    const element = document.getElementById(`section-${sectionIndex}`);
+    if (element) {
+      const yOffset = -80; // ヘッダーの高さ分オフセット
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
+
   const breadcrumbItems = [
     { label: 'TOP', path: '/' },
     { label: '不登校とぼくら', path: '/04' },
@@ -78,7 +88,14 @@ const InterviewDetailPage = () => {
             <h3 className={styles.tocTitle}>目次　いるかな？</h3>
             <ul className={styles.tocList}>
               {card.tableOfContents.map((item, index) => (
-                <li key={index} className={styles.tocItem}>{item}</li>
+                <li 
+                  key={index} 
+                  className={styles.tocItem}
+                  onClick={() => scrollToSection(index)}
+                  style={{ cursor: 'pointer' }}
+                >
+                  {item}
+                </li>
               ))}
             </ul>
           </div>
@@ -86,7 +103,7 @@ const InterviewDetailPage = () => {
 
         {/* セクション */}
         {card.sections && card.sections.map((section, sectionIndex) => (
-          <div key={sectionIndex} className={styles.section}>
+          <div key={sectionIndex} className={styles.section} id={`section-${sectionIndex}`}>
             <h2 className={styles.sectionHeading}>{section.heading}</h2>
             <div className={styles.sectionDivider}></div>
             

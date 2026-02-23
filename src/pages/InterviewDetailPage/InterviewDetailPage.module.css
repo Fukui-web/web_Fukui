@@ -101,11 +101,18 @@
   font-weight: 400;
   color: #333;
   margin-bottom: 8px;
+  padding: 4px 8px;
   padding-left: 20px;
   position: relative;
+  border-radius: 4px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.tocItem:hover {
+  background-color: #E0E0E0;
+  color: #000;
 }
 .tocItem:last-child { margin-bottom: 0; }
-.tocItem::before { content: '▼'; position: absolute; left: 0; font-size: 12px; }
+.tocItem::before { content: '▼'; position: absolute; left: 8px; font-size: 12px; }
 
 /* セクション */
 .section { margin-top: 40px; }
