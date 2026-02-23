@@ -3,9 +3,9 @@
 
 .searchSection {
   background-color: rgba(136, 211, 188, 0.25);
-  /* 修正: 余白30px */
-  padding: 30px 30px;
-  margin: 20px 0;
+  /* 修正: 上下の余白を調整 */
+  padding: 30px 30px 20px 30px; /* 下のpaddingを減らす */
+  margin: 20px 0 5px 0; /* 下の余白を狭める */
   border-radius: 0;
   text-align: center;
   
@@ -26,7 +26,7 @@
   width: 100%;
   max-width: 300px;
   height: auto;
-  margin: 0 auto 30px;
+  margin: 0 auto 10px; /* 下の余白を狭める */
   display: block;
 }
 
@@ -142,8 +142,8 @@
 
 /* 居場所ピックアップセクション */
 .pickupSection {
-  /* 修正: 余白30px */
-  padding: 30px 30px;
+  /* 修正: 上の余白を狭める */
+  padding: 15px 30px 30px 30px;
   /* 修正: 幅制限 */
   width: 100%;
   max-width: 540px;
@@ -160,9 +160,78 @@
 
 .dividerLine {
   width: 100%;
-  height: 1px;
-  background-color: #ddd;
-  margin-bottom: 20px;
+  height: 2px;
+  background-color: #000;
+  margin-bottom: 10px;
+}
+
+.tocSection {
+  margin: 15px 0;
+  background-color: #E8E8E8;
+  border-radius: 12px;
+  padding: 20px 30px;
+}
+
+.tocTitle {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.tocList {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.tocItem {
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  padding: 5px 0;
+  padding-left: 20px;
+  position: relative;
+  transition: background-color 0.2s;
+}
+
+.tocItem::before {
+  content: '▼';
+  position: absolute;
+  left: 0;
+  color: #666;
+  font-size: 12px;
+}
+
+.tocItem:hover {
+  background-color: #D0D0D0;
+}
+
+.citiesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.citySection {
+  border-bottom: 1px solid #ddd;
+  padding: 8px 0;
+}
+
+.cityName {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.cityCardsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  width: 100%;
+  max-width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .pickupDescription {

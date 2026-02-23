@@ -1,209 +1,104 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import layoutStyles from '../commonPageLayout.module.css';
 import styles from './PlacesContent.module.css';
 import Breadcrumbs from '../../common/Breadcrumbs';
 import Footer from '../../common/Footer';
 import PlaceCard from '../../common/PlaceCard/PlaceCard';
-import FilterModal from '../../common/FilterModal';
 import dotlineImage from '../../../assets/images/dotline.png';
-import SearchIcon from '../../../assets/icons/SearchIcon';
-import FilterIcon from '../../../assets/icons/FilterIcon';
 import placeCards from '../../../data/placeCards';
 
 const PlacesContent = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [filterCount, setFilterCount] = useState(0);
-  const [activeFilters, setActiveFilters] = useState({});
-  const [searchKeyword, setSearchKeyword] = useState('');
-  const [filteredCards, setFilteredCards] = useState(placeCards);
-
-  /**
-   * 文字列正規化
-   */
-  const normalizeText = (str) => {
-    if (str === null || str === undefined) return '';
-    return String(str).replace(/[ 　\t\n]+/g, '').toLowerCase();
-  };
-
-  // フィルタリングロジック
-  useEffect(() => {
-    console.log("居場所フィルタリング開始:", { searchKeyword, activeFilters });
-    let results = placeCards;
-
-    // 1. キーワード検索
-    if (searchKeyword) {
-      const term = normalizeText(searchKeyword);
-      results = results.filter(card => {
-        const title = normalizeText(card.title);
-        const body = normalizeText(card.body);
-        const tags = card.tags ? normalizeText(card.tags.join('')) : '';
-        const details = card.detailInfo ? normalizeText(Object.values(card.detailInfo).join('')) : '';
-        
-        const searchTagsText = card.searchTags 
-          ? normalizeText(Object.values(card.searchTags).flat().join(''))
-          : '';
-        
-        const allText = title + body + tags + details + searchTagsText;
-        return allText.includes(term);
-      });
-    }
-
-    // 2. カテゴリフィルタ
-    Object.keys(activeFilters).forEach(category => {
-      const options = activeFilters[category];
-      if (options && options.length > 0) {
-        
-        console.log(`カテゴリ[${category}] で絞り込み中:`, options);
-
-        results = results.filter(card => {
-          if (card.searchTags) {
-            return options.some(opt => {
-              const optNorm = normalizeText(opt);
-              
-              // FilterModalが使用する固定キー
-              // grade: お子さんの学年 (index 0)
-              // situation: 状況 (index 1) 
-              // facility: 施設の区分 (index 2)
-              
-              if (category === 'grade') {
-                const gradeTags = card.searchTags.grade || [];
-                return gradeTags.some(tag => normalizeText(tag).includes(optNorm) || optNorm.includes(normalizeText(tag)));
-              }
-              
-              if (category === 'situation') {
-                const situationTags = card.searchTags.situation || [];
-                return situationTags.some(tag => normalizeText(tag).includes(optNorm) || optNorm.includes(normalizeText(tag)));
-              }
-              
-              if (category === 'facility') {
-                const facilityTags = card.searchTags.facility || [];
-                return facilityTags.some(tag => normalizeText(tag).includes(optNorm) || optNorm.includes(normalizeText(tag)));
-              }
-              
-              return false;
-            });
-          }
-          return false;
-        });
-      }
-    });
-
-    console.log("居場所フィルタリング結果:", results.length, "件");
-    setFilteredCards(results);
-  }, [searchKeyword, activeFilters]);
-
-  const handleApplyFilters = (count, filters) => {
-    setFilterCount(count);
-    setActiveFilters(filters);
-  };
-
-  const handleClearAll = () => {
-    setSearchKeyword('');
-    setActiveFilters({});
-    setFilterCount(0);
-  };
 
   const breadcrumbItems = [
     { label: 'TOP', path: '/' },
     { label: '居場所をさがす', path: '/places' }
   ];
 
-  const filterConfig = {
-    selectedColor: '#88D3BC',
-    buttonColor: '#88D3BC',
-    categories: [
-      {
-        title: 'お子さんの学年からさがす',
-        options: ['小学生から', '中学生から', '高校生から', '卒業している場合']
-      },
-      {
-        title: '状況からさがす',
-        options: ['進学したい', '専門的なことを学びたい', '一人で学習したい', 'オンラインで授業を受けたい', '学校行事に参加したい', '家以外の場所での居場所を見つけたい', '外部とコミュニケーションを取れる場所に行きたい', '不登校や子育てについて相談したい', '不登校や子育ての未来について見失わない', '不登校や子育てのイベントに参加したい', '友達をさがしたい']
-      },
-      {
-        title: '施設の区分からさがす',
-        options: ['フリースクール', '塾', 'オンラインサポート', 'サークル', 'オルタナティブスクール', '習い事', 'イベント']
-      }
-    ]
+  // 市町村ごとにカードを分配
+  const cityCards = {
+    'あわら市': [],
+    '池田町': [],
+    '永平寺町': [],
+    '越前市': [],
+    '越前町': [],
+    'おおい町': [],
+    '大野市': [4],
+    '小浜市': [],
+    '勝山市': [1],
+    '坂井市': [6],
+    '鯖江市': [],
+    '高浜町': [],
+    '敦賀市': [],
+    '福井市': [2, 3, 5, 7, 8, 9, 10, 11],
+    '南越前町': [],
+    '美浜町': [],
+    '若狭町': []
+  };
+
+  // カードがある市町村のみを抽出
+  const citiesWithCards = Object.entries(cityCards)
+    .filter(([_, cardIds]) => cardIds.length > 0)
+    .map(([cityName, cardIds]) => ({ cityName, count: cardIds.length }));
+
+  // スクロール機能
+  const scrollToSection = (cityName) => {
+    const element = document.getElementById(`city-${cityName}`);
+    if (element) {
+      const yOffset = -80;
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
   };
 
   return (
     <div className={layoutStyles.pageContainer}>
       <Breadcrumbs items={breadcrumbItems} />
       
-      {/* 検索セクション */}
+      {/* タイトルセクション */}
       <div className={styles.searchSection}>
         <h1 className={styles.searchTitle}>居場所をさがす</h1>
         <img src={dotlineImage} alt="" className={styles.dotline} />
-        
-        <div className={styles.searchBox}>
-          {/* 検索入力フィールド */}
-          <div className={styles.searchInputWrapper}>
-            <SearchIcon size={20} color="#999" />
-            <input 
-              type="text" 
-              placeholder="調べたい内容を、キーワードで記入してください。"
-              className={styles.searchInput}
-              value={searchKeyword}
-              onChange={(e) => setSearchKeyword(e.target.value)}
-            />
-          </div>
-          
-          {/* ボタンエリア */}
-          <div className={styles.buttonArea}>
-            <div className={styles.filterRow}>
-              <button 
-                className={styles.filterButton}
-                onClick={() => setIsModalOpen(true)}
-              >
-                <FilterIcon size={16} color="#88D3BC" />
-                <span>絞り込み{filterCount > 0 && `(${filterCount})`}</span>
-              </button>
-              <button 
-                className={styles.clearButton}
-                onClick={handleClearAll}
-              >
-                クリア
-              </button>
-            </div>
-            
-            <button className={styles.searchButton} onClick={() => setSearchKeyword(searchKeyword)}>
-              <SearchIcon size={18} color="#fff" />
-              <span>検索する</span>
-            </button>
-          </div>
-        </div>
       </div>
 
       {/* 居場所ピックアップセクション */}
       <div className={styles.pickupSection}>
-        <h2 className={styles.pickupTitle}>居場所ピックアップ</h2>
+        <h2 className={styles.pickupTitle}>福井県(17市町)</h2>
         <div className={styles.dividerLine}></div>
-        <p className={styles.pickupDescription}>
-          みんなの居場所から、お子さんや保護者の方に合う場所をみつけてみてください。
-        </p>
         
-        {/* 居場所カードグリッド */}
-        <div className={styles.cardsGrid}>
-          {filteredCards.length > 0 ? (
-            filteredCards.map(card => (
-              <PlaceCard key={card.id} cardId={card.id} />
-            ))
-          ) : (
-            <div className={styles.noResults}>
-              <p>検索条件に一致する居場所が見つかりませんでした。</p>
-              <p>キーワードやフィルタ条件を変更して再度検索してください。</p>
+        {/* 目次セクション */}
+        <div className={styles.tocSection}>
+          <h3 className={styles.tocTitle}>目次</h3>
+          <div className={styles.tocList}>
+            {citiesWithCards.map(({ cityName, count }) => (
+              <div
+                key={cityName}
+                className={styles.tocItem}
+                onClick={() => scrollToSection(cityName)}
+              >
+                {cityName}({count})
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        <div className={styles.dividerLine}></div>
+        
+        {/* 市町名リストとカード */}
+        <div className={styles.citiesContainer}>
+          {Object.entries(cityCards).map(([cityName, cardIds]) => (
+            <div key={cityName} id={`city-${cityName}`} className={styles.citySection}>
+              <div className={styles.cityName}>{cityName}</div>
+              {cardIds.length > 0 && (
+                <div className={styles.cityCardsGrid}>
+                  {cardIds.map(cardId => (
+                    <PlaceCard key={cardId} cardId={cardId} />
+                  ))}
+                </div>
+              )}
             </div>
-          )}
+          ))}
         </div>
       </div>
-
-      <FilterModal 
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        filterConfig={filterConfig}
-        onApply={handleApplyFilters}
-      />
 
       <Footer />
     </div>
