@@ -127,7 +127,7 @@ const interviewCards = [
 
     writer: {
       name: "えみか",
-      description: "ライター / インタビュアー"
+      description: "30代、2児の母。高校生の時に不登校経験あり。教員免許所持。現在は育児をしながらライター活動を行う。"
     }
   }
 ];

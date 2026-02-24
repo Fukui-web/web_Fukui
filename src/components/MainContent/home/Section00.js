@@ -42,12 +42,22 @@ const Section00 = () => {
         </p>
       </ContentFrame>
 
+      {/* 相談センター情報 */}
+      <div className={styles.consultationInfo}>
+        <p className={styles.consultationText}>
+          今すぐどこかに相談したい方は<br />
+          福井県教育総合研究所教育相談センター<br />
+          <a href="tel:0120968104" className={styles.phoneLink}>0120-96-8104</a><br />
+          <span className={styles.consultationNote}>(フリーダイヤル)24時間対応</span>
+        </p>
+      </div>
+
       <ExperienceSection 
         title="みんなの体験談を見てみよう！
 不登校になったきっかけは？"
         questionId="2-2"
         limit={6}
-        moreButtonText="体験談をさがす"
+        moreButtonText="体験談をもっとみる"
         customClass={styles.experience00}
         onMoreClick={() => navigate('/experiences?questionId=2-2')}
         sectionName="不登校のきっかけに関する体験談"

@@ -136,9 +136,9 @@
 }
 
 .searchItem {
-  font-family: var(--font-secondary);
+  font-family: var(--font-primary);
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 16px;
   line-height: 23px;
   color: var(--color-black);
@@ -162,9 +162,9 @@
   width: fit-content; /* 100% → fit-content テキスト幅に合わせる */
   min-width: 100%; /* 最小幅は親の100%を確保 */
   padding: 5px 8px;
-  font-family: var(--font-secondary);
+  font-family: var(--font-primary);
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 16px;
   line-height: 23px;
   color: var(--color-black);

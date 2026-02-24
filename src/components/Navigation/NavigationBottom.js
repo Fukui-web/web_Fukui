@@ -32,7 +32,7 @@ const NavigationBottom = ({ onActionCompleted }) => {
   // フッタークリックハンドラ
   const handleFooterClick = () => {
     console.log("「プロジェクトと私たちについて」がクリックされました");
-    // navigate('/about'); 
+    window.open('https://tayouna-ikikata.studio.site/', '_blank');
 
     if (onActionCompleted) {
       onActionCompleted();

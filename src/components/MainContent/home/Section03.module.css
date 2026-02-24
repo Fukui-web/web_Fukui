@@ -31,7 +31,8 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 98px;
+  width: 100%;
+  max-width: 120px;
   height: 30px;
   margin-bottom: 0px;
 }
@@ -234,8 +235,8 @@
 }
 
 .playIcon {
-  width: 19.2px;
-  height: 19.2px;
+  width: 14px;
+  height: 14px;
   background-image: url('../../../assets/images/vectorRB.png');
   background-size: contain;
   background-repeat: no-repeat;

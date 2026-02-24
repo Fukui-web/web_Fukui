@@ -15,12 +15,12 @@ const Section02Content = () => {
     <div className={`${layoutStyles.pageContainer} ${styles.section02Content}`}>
 
       {/* パンくずリスト */}
-      <Breadcrumbs sectionNumber="02" sectionTitle="行政が行う公的支援" />
+      <Breadcrumbs sectionNumber="02" sectionTitle="公的支援や医療機関" />
 
       {/* タイトル部分 */}
       <div className={styles.titleSection}>
         <img src={road02Image} alt="ROAD 02" className={styles.roadImage} />
-        <h1 className={styles.mainTitle}>行政が行う公的支援</h1>
+        <h1 className={styles.mainTitle}>公的支援や医療機関</h1>
         <img src={dotlineImage} alt="点線" className={styles.dotline} />
       </div>
 
