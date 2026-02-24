@@ -13,36 +13,68 @@ import NavIcon from '../../assets/icons/NavIcon';
  */
 const NavigationItem = ({ title, subItems = [], index, isHamburger = false, path }) => {
   const navigate = useNavigate();
-  
+
+  // subItemsがオブジェクト形式（パス付き）かどうかで挙動を分岐
+  const hasSubPaths = subItems.length > 0 && typeof subItems[0] === 'object';
+
   // タイトルの処理（ハンバーガーメニューでは改行なし、通常ナビでは改行あり）
   const formattedTitle = isHamburger
-    ? title.replace(/\\n/g, ' ').replace(/\n/g, ' ') // ハンバーガーメニューでは改行文字をスペースに置換
+    ? title.replace(/\\n/g, ' ').replace(/\n/g, ' ')
     : title
-        .replace(/\\n/g, '\n') // 文字列"\n"を実際の改行文字に変換
-        .split('\n')           // 改行文字で分割
+        .replace(/\\n/g, '\n')
+        .split('\n')
         .map((line, i, arr) => (
           <React.Fragment key={i}>
             {line}
             {i < arr.length - 1 && <br />}
           </React.Fragment>
         ));
-  
-  // クリックハンドラ (
+
+  // 全体クリック（文字列subItems / 03以外）
   const handleItemClick = () => {
-    // path が props として渡されていれば、そのパスに遷移する
-    if (path) {
-      console.log(`ナビゲーション項目 "${title.replace(/\\n|\n/g, ' ')}" がクリックされました -> ${path} へ遷移`);
+    if (!hasSubPaths && path) {
       navigate(path);
-    } else {
-      console.log(`ナビゲーション項目 "${title.replace(/\\n|\n/g, ' ')}" がクリックされました (遷移パスなし)`);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    
-    // 以前の if...else if ブロックはすべて不要になります
+  };
+
+  // タイトルクリック（オブジェクトsubItems / 03）
+  const handleTitleClick = (e) => {
+    e.stopPropagation();
+    if (path) {
+      navigate(path);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  // サブアイテムクリック（オブジェクトsubItems / 03）
+  const handleSubItemClick = (e, subItem) => {
+    e.stopPropagation();
+    const subPath = typeof subItem === 'object' ? subItem.path : null;
+    const targetPath = subPath || path;
+    if (targetPath) {
+      const [pagePath, hash] = targetPath.split('#');
+      navigate(targetPath);
+      if (hash) {
+        setTimeout(() => {
+          const el = document.getElementById(hash);
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
   };
 
   return (
-    <div className={commonStyles.navItem} onClick={handleItemClick}>
-      <div className={commonStyles.navItemHeader}>
+    <div
+      className={`${commonStyles.navItem} ${!hasSubPaths ? commonStyles.navItemClickable : ''}`}
+      onClick={handleItemClick}
+    >
+      <div
+        className={`${commonStyles.navItemHeader} ${hasSubPaths ? commonStyles.navItemHeaderClickable : ''}`}
+        onClick={hasSubPaths ? handleTitleClick : undefined}
+      >
         <div className={commonStyles.navIcon}>
           <NavIcon index={index} />
         </div>
@@ -51,11 +83,12 @@ const NavigationItem = ({ title, subItems = [], index, isHamburger = false, path
       {subItems.length > 0 && (
         <div className={commonStyles.navSubItems}>
           {subItems.map((item, idx) => (
-            <div 
-              key={idx} 
-              className={commonStyles.navSubItem}
+            <div
+              key={idx}
+              className={`${commonStyles.navSubItem} ${hasSubPaths ? commonStyles.navSubItemClickable : ''}`}
+              onClick={hasSubPaths ? (e) => handleSubItemClick(e, item) : undefined}
             >
-              {item}
+              {typeof item === 'object' ? item.label : item}
             </div>
           ))}
         </div>

@@ -32,7 +32,10 @@ export const navigationItems = [
   },
   {
     title: 'まだまだある！\nみんなの居場所',
-    subItems: ['こどもの居場所', '保護者の居場所'],
+    subItems: [
+      { label: 'こどもの居場所', path: '/section03#kids-place' },
+      { label: '保護者の居場所', path: '/section03#parents-place' },
+    ],
     path: '/section03', 
     component: Section03Content 
   },

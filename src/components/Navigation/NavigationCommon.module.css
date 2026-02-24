@@ -10,26 +10,54 @@
   align-items: flex-start;
   padding: 0px 0px 0px 30px;
   gap: 5px; /* 10px → 5px に変更 タイトルとサブメニューの間隔を狭める */
-  transition: background-color 0.2s;
   border-radius: 5px;
-  cursor: pointer; /* 全体をクリック可能に */
   overflow: visible;
 }
 
-.navItem:hover {
+/* ナビアイテム - 全体クリック型（03以外） */
+.navItemClickable {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.navItemClickable:hover {
   background-color: rgba(0, 0, 0, 0.05);
+}
+
+.navItemClickable:hover .navTitle {
+  color: #555;
+}
+
+.navItemClickable:hover .navSubItem {
+  color: #555;
 }
 
 /* ナビアイテムヘッダー */
 .navItemHeader {
   display: flex;
   align-items: center;
-  gap: 8px; /* 12px → 8px に変更 */
+  gap: 8px;
   margin-bottom: 10px;
   width: 100%;
   height: 20px;
   flex-wrap: nowrap;
-  pointer-events: none; /* ホバー検知を親要素に任せる */
+  border-radius: 5px;
+  transition: background-color 0.2s;
+  padding: 2px 4px;
+  box-sizing: border-box;
+}
+
+/* 03専用: ヘッダー単体がクリッカブルな場合 */
+.navItemHeaderClickable {
+  cursor: pointer;
+}
+
+.navItemHeaderClickable:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.navItemHeaderClickable:hover .navTitle {
+  color: #555;
 }
 
 /* ナビアイコン */
@@ -59,21 +87,15 @@
   transition: color 0.2s;
 }
 
-/* 親要素ホバー時にタイトルの色を変更 */
-.navItem:hover .navTitle {
-  color: #555;
-}
-
 /* サブアイテム容器 */
 .navSubItems {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0px 0px 0px 35px; /* 0px 15px 0px 38px → 0px 0px 0px 35px に変更 */
-  gap: 0px; /* 8px → 4px サブメニュー項目間の間隔を狭める */
+  padding: 0px 0px 0px 35px;
+  gap: 0px;
   width: 100%;
   box-sizing: border-box;
-  pointer-events: none; /* ホバー検知を親要素に任せる */
 }
 
 /* サブアイテム */
@@ -84,17 +106,24 @@
   font-size: 12px;
   line-height: 15px;
   color: var(--color-black);
-  margin-bottom: 0px; /* 8px → 0px に変更 */
+  margin-bottom: 0px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
-  transition: color 0.2s;
+  transition: color 0.2s, background-color 0.2s;
+  border-radius: 4px;
+  padding: 2px 4px;
 }
 
-/* 親要素ホバー時にサブアイテムの色を変更 */
-.navItem:hover .navSubItem {
+/* 03専用: サブアイテム単体がクリッカブルな場合 */
+.navSubItemClickable {
+  cursor: pointer;
+}
+
+.navSubItemClickable:hover {
   color: #555;
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 /* 探してみようセクション */
