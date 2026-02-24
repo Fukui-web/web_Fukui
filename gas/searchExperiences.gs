@@ -289,8 +289,48 @@ function getAllExperiences(limit = null) {
     const timestampIndex = 0; // A列: タイムスタンプ
     const authorNameIndex = 1; // B列: 1-2ペンネーム
     const gradeIndex = 2; // C列: 1-3初めて不登校になった学年
+    const familyIndex = 3; // D列: 1-4 家族構成
+    const triggerIndex = 4; // E列: 2-1 不登校になったきっかけ
     const detailIndex = 5; // F列: 2-2詳しい状況
     const approvalStatusIndex = 58; // BG列: 承認ステータス
+    
+    // 学校情報の列インデックス
+    const school1NameIndex = 19;      // T列: 4-1-1 学校名
+    const school1PeriodIndex = 20;    // U列: 4-1-2 通学期間
+    const school1ReasonIndex = 21;    // V列: 4-1-3 選んだ理由
+    const school1ReviewIndex = 22;    // W列: 4-1-4 感想
+    const school1CostIndex = 23;      // X列: 4-1-5 費用
+    
+    const school2NameIndex = 25;      // Z列: 4-2-1 学校名
+    const school2PeriodIndex = 26;    // AA列: 4-2-2 通学期間
+    const school2ReasonIndex = 27;    // AB列: 4-2-3 選んだ理由
+    const school2ReviewIndex = 28;    // AC列: 4-2-4 感想
+    const school2CostIndex = 29;      // AD列: 4-2-5 費用
+    
+    const school3NameIndex = 31;      // AF列: 4-3-1 学校名
+    const school3PeriodIndex = 32;    // AG列: 4-3-2 通学期間
+    const school3ReasonIndex = 33;    // AH列: 4-3-3 選んだ理由
+    const school3ReviewIndex = 34;    // AI列: 4-3-4 感想
+    const school3CostIndex = 35;      // AJ列: 4-3-5 費用
+    
+    // サポート情報の列インデックス
+    const support1TypeIndex = 37;      // AL列: 6-1-1 サポート1の種類
+    const support1DetailIndex = 38;    // AM列: 6-1-2 サポート1の名称
+    const support1FreqIndex = 39;      // AN列: 6-1-3 サポート1の利用期間・回数
+    const support1ReasonIndex = 40;    // AO列: 6-1-4 サポート1の利用きっかけ
+    const support1FeelingIndex = 41;   // AP列: 6-1-5 サポート1の感想
+    
+    const support2TypeIndex = 43;      // AR列: 6-2-1 サポート2の種類
+    const support2DetailIndex = 44;    // AS列: 6-2-2 サポート2の名称
+    const support2FreqIndex = 45;      // AT列: 6-2-3 サポート2の利用期間・回数
+    const support2ReasonIndex = 46;    // AU列: 6-2-4 サポート2の利用きっかけ
+    const support2FeelingIndex = 47;   // AV列: 6-2-5 サポート2の感想
+    
+    const support3TypeIndex = 49;      // AX列: 6-3-1 サポート3の種類
+    const support3DetailIndex = 50;    // AY列: 6-3-2 サポート3の名称
+    const support3FreqIndex = 51;      // AZ列: 6-3-3 サポート3の利用期間・回数
+    const support3ReasonIndex = 52;    // BA列: 6-3-4 サポート3の利用きっかけ
+    const support3FeelingIndex = 53;   // BB列: 6-3-5 サポート3の感想
     
     const results = [];
     
@@ -306,6 +346,56 @@ function getAllExperiences(limit = null) {
       // タイトルを生成（詳しい状況の最初の50文字）
       const title = String(row[detailIndex] || '').substring(0, 50) + '...';
       
+      // 学校情報を配列化
+      const schools = [
+        {
+          name: row[school1NameIndex] || '',
+          period: String(row[school1PeriodIndex] || ''),
+          reason: String(row[school1ReasonIndex] || ''),
+          review: String(row[school1ReviewIndex] || ''),
+          cost: String(row[school1CostIndex] || '')
+        },
+        {
+          name: row[school2NameIndex] || '',
+          period: String(row[school2PeriodIndex] || ''),
+          reason: String(row[school2ReasonIndex] || ''),
+          review: String(row[school2ReviewIndex] || ''),
+          cost: String(row[school2CostIndex] || '')
+        },
+        {
+          name: row[school3NameIndex] || '',
+          period: String(row[school3PeriodIndex] || ''),
+          reason: String(row[school3ReasonIndex] || ''),
+          review: String(row[school3ReviewIndex] || ''),
+          cost: String(row[school3CostIndex] || '')
+        }
+      ].filter(s => s.name); // 学校名が入力されているもののみ
+      
+      // サポート情報を配列化
+      const supports = [
+        {
+          type: row[support1TypeIndex] || '',
+          name: String(row[support1DetailIndex] || ''),
+          frequency: String(row[support1FreqIndex] || ''),
+          reason: String(row[support1ReasonIndex] || ''),
+          feeling: String(row[support1FeelingIndex] || '')
+        },
+        {
+          type: row[support2TypeIndex] || '',
+          name: String(row[support2DetailIndex] || ''),
+          frequency: String(row[support2FreqIndex] || ''),
+          reason: String(row[support2ReasonIndex] || ''),
+          feeling: String(row[support2FeelingIndex] || '')
+        },
+        {
+          type: row[support3TypeIndex] || '',
+          name: String(row[support3DetailIndex] || ''),
+          frequency: String(row[support3FreqIndex] || ''),
+          reason: String(row[support3ReasonIndex] || ''),
+          feeling: String(row[support3FeelingIndex] || '')
+        }
+      ].filter(s => s.type); // 種類が入力されているもののみ
+      
       results.push({
         id: i,  // 配列インデックス（data[1]から開始なのでid=1）
         title: title,
@@ -313,7 +403,11 @@ function getAllExperiences(limit = null) {
         authorName: row[authorNameIndex] || '匿名',
         authorInitial: getInitial(row[authorNameIndex]),
         date: formatDate(row[timestampIndex]),
-        grade: row[gradeIndex]
+        grade: row[gradeIndex],
+        family: row[familyIndex],
+        trigger: row[triggerIndex],
+        schools: schools,  // 学校情報を追加
+        supports: supports  // サポート情報を追加
       });
       
       if (limit && results.length >= limit) break;
