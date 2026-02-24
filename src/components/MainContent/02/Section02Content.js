@@ -1,16 +1,20 @@
 // src/components/MainContent/02/Section02Content.js
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import layoutStyles from '../commonPageLayout.module.css';
 import styles from './Section02Content.module.css';
 import Footer from '../../common/Footer';
 import Breadcrumbs from '../../common/Breadcrumbs';
 import FlexiCard from '../../common/FlexiCard/FlexiCard';
+import { getCardsByCategory } from '../../../data/flexiCardData';
 import road02Image from '../../../assets/icons/ROAD02.png';
 import dotlineImage from '../../../assets/images/dotline.png';
 import vectorRB from '../../../assets/images/vectorRB.png';
 
 const Section02Content = () => {
+  const navigate = useNavigate();
+
   return (
     <div className={`${layoutStyles.pageContainer} ${styles.section02Content}`}>
 
@@ -38,24 +42,14 @@ const Section02Content = () => {
       {/* 相談窓口カードセクション */}
       <div className={styles.consultationSection}>
         <div className={styles.flexiCardArea}>
-          <FlexiCard
-            title={`福井県教育総合研究所
-教育相談センター`}
-            description="0776-51-0511（メール不可）0120-96-8104（フリーダイヤル）"
-            buttonText="詳しく見る"
-          />
-          <FlexiCard
-            title={`福井県教育庁
-教育相談課`}
-            description="0776-56-1310"
-            buttonText="詳しく見る"
-          />
-          <FlexiCard
-            title={`スクールソーシャル
-ワーカー`}
-            description="家庭と学校現場の間の繋ぐスクールソーシャルワーカー不登校支援に関するのもお願いしま"
-            buttonText="詳しく見る"
-          />
+          {getCardsByCategory('prefecture').map((card) => (
+            <FlexiCard
+              key={card.id}
+              title={card.title}
+              description={card.description}
+              buttonText={card.buttonText}
+            />
+          ))}
         </div>
       </div>
 
@@ -69,29 +63,19 @@ const Section02Content = () => {
           各自治体の情報をまとめました。詳しくはお住まいの窓口まで問い合わせてください。
         </p>
         <div className={styles.flexiCardArea}>
-          <FlexiCard
-            title={`福井市
-チャレンジ教室`}
-            description="学校概要を再検討した。公費グラフ・スクール"
-            buttonText="詳しく見る"
-          />
-          <FlexiCard
-            title={`坂井市
-スタッフスクールきぼう`}
-            description="学校概要を再検討した。公費グラフ・スクール"
-            buttonText="詳しく見る"
-          />
-          <FlexiCard
-            title={`鮫江市
-嶺北エールド`}
-            description="学校概要を再検討した。公費グラフ・スクール"
-            buttonText="詳しが見る"
-          />
+          {getCardsByCategory('municipal').map((card) => (
+            <FlexiCard
+              key={card.id}
+              title={card.title}
+              description={card.description}
+              buttonText={card.buttonText}
+            />
+          ))}
         </div>
       </div>
 
       {/* 行政・医療機関一覧ボタン */}
-      <button className={styles.listButton}>
+      <button className={styles.listButton} onClick={() => { navigate('/school-info'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
         <img src={vectorRB} alt="アイコン" className={styles.playIcon} />
         <span>行政・医療機関一覧を見る</span>
       </button>

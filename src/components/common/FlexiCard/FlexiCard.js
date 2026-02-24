@@ -4,6 +4,7 @@
 
 import React from 'react';
 import styles from './FlexiCard.module.css';
+import newwindowIcon from '../../../assets/images/newwindow.png';
 
 const FlexiCard = ({ title, description, buttonText, onButtonClick }) => {
   // タイトル内の\nを改行に変換
@@ -23,6 +24,7 @@ const FlexiCard = ({ title, description, buttonText, onButtonClick }) => {
       <p className={styles.flexiCardDescription}>{description}</p>
       {buttonText && (
         <button className={styles.flexiCardButton} onClick={onButtonClick}>
+          <img src={newwindowIcon} alt="" className={styles.buttonIcon} />
           {buttonText}
         </button>
       )}

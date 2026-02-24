@@ -19,6 +19,7 @@ import PlaceReviewPage from './pages/PlaceReviewPage/PlaceReviewPage';
 import ReviewsPage from './pages/ReviewsPage/ReviewsPage';
 import ReviewDetailPage from './pages/ReviewDetailPage/ReviewDetailPage';
 import InterviewDetailPage from './pages/InterviewDetailPage/InterviewDetailPage';
+import FlexiCardListPage from './pages/FlexiCardListPage/FlexiCardListPage';
 
 function App() {
   return (
@@ -127,6 +128,13 @@ function App() {
             <Route path="/schools/:id" element={
               <Layout>
                 <SchoolDetailPage />
+              </Layout>
+            } />
+
+            {/* 学校・行政・医療情報の一覧ページ */}
+            <Route path="/school-info" element={
+              <Layout>
+                <FlexiCardListPage />
               </Layout>
             } />
 

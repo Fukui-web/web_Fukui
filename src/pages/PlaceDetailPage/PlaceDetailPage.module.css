@@ -171,6 +171,17 @@
   opacity: 0.7;
 }
 
+/* 連絡先リンク（電話・メール） */
+.contactLink {
+  color: #0066cc;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.contactLink:hover {
+  color: #004499;
+  text-decoration: underline;
+}
+
 /* 利用者の口コミ */
 .reviewSection {
   background: white;

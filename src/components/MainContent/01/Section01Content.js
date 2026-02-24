@@ -9,6 +9,7 @@ import Breadcrumbs from '../../common/Breadcrumbs';
 import InterviewCard from '../../common/InterviewCard/InterviewCard';
 import TweetCard from '../../common/TweetCard/TweetCard';
 import FlexiCard from '../../common/FlexiCard/FlexiCard';
+import { getCardsByCategory } from '../../../data/flexiCardData';
 import road01Image from '../../../assets/icons/ROAD01.png';
 import dotlineImage from '../../../assets/images/dotline.png';
 import vectorRB from '../../../assets/images/vectorRB.png';
@@ -147,21 +148,14 @@ const Section01Content = () => {
 
         {/* FlexiCardエリア - 柔軟に使える汎用カード */}
         <div className={styles.flexiCardArea}>
-          <FlexiCard
-            title="スクールカウンセラー"
-            description="ついつい頼りたくなりつらさを軽く理解できる話の専門家です。"
-            buttonText="詳しく見る"
-          />
-          <FlexiCard
-            title="校内サポートルーム"
-            description="県内の小学校、１時間がありません。校内の先生とは別の相談窓口です。"
-            buttonText="詳しく見る"
-          />
-          <FlexiCard
-            title="ライフパートナー制度"
-            description="専攻大学の学生さん。おしゃべりや遊び、自分との関わり、宿題など付き合ってくれます。"
-            buttonText="詳しく見る"
-          />
+          {getCardsByCategory('school').map((card) => (
+            <FlexiCard
+              key={card.id}
+              title={card.title}
+              description={card.description}
+              buttonText={card.buttonText}
+            />
+          ))}
         </div>
       </div>
 

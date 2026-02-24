@@ -44,10 +44,10 @@ const placeCards = [
     body: "福井市で不登校のお子さんを持つお母さん向けに座談会をしています。私自身中学校不登校だった息子の経験から同じような立場で気軽に話せる場が欲しかったことから始めました。少しでも心が軽くなってもらえたら嬉しいです",
     address: "福井市",
     hours: "主に第三か第四日曜日 場所はインスタグラムにて",
-    contact: "09097685530",
+    contact: "090-9768-5530",
     detailInfo: {
       location: "福井市",
-      phone: "09097685530",
+      phone: "090-9768-5530",
       email: "",
       website: {
         name: "Instagram（@tomarigi_fukui）",
@@ -79,10 +79,10 @@ const placeCards = [
     body: "ちいさな学校ヒトツナガリは、\n子どもたちが主体性を持って日々の暮らしの中で\n遊び、学ぶ、オルタナティブスクールです。\n\n自然や日々の暮らしの中には、\n生きていく上で大切な多くの学びがあります。\n子どもたちには、遊びの中からでも興味・関心を膨らませ、\n学びを見つける力があります。\n\nちいさな学校ヒトツナガリは、\n暮らしと遊びと学び、すべてがひとつながりとなり、\n子どもたちが伸びやかに自分を表現し\n育っていくことのできる学び場です。",
     address: "福井市",
     hours: "月火木金",
-    contact: "0776655623",
+    contact: "0776-65-5623",
     detailInfo: {
       location: "福井市",
-      phone: "0776655623",
+      phone: "0776-65-5623",
       email: "hitotsunagari.school@gmail.com",
       website: {
         name: "Instagram（@hitotsunagari_school）",
@@ -114,10 +114,10 @@ const placeCards = [
     body: "不登校でお困りの方　お話ししましょ",
     address: "大野市",
     hours: "毎月第一土曜日",
-    contact: "09028378050",
+    contact: "090-2837-8050",
     detailInfo: {
       location: "大野市",
-      phone: "09028378050",
+      phone: "090-2837-8050",
       email: "z27a227dc278c@i.softbank.jp",
       website: null,
       target: "不登校生の保護者",
@@ -146,10 +146,10 @@ const placeCards = [
     body: "P!CONT F は県外中学受験まで対応できる個別指導塾です。\n\n県内外の中学受験に向けた勉強はもちろん、普段の勉強のサポートや進路相談も承ります。\n\n不登校を経験していても、受け入れてくれる県外の中学校もあります。幅広い進路選択のサポートをさせていただきます。\n\n通塾以外にも不定期の学習スペース利用も行っております。個別ブースでご自身のペースで過ごすことができます。",
     address: "福井県福井市西方2-11-8",
     hours: "随時",
-    contact: "08015263984",
+    contact: "080-1526-3984",
     detailInfo: {
       location: "福井県福井市西方2-11-8",
-      phone: "08015263984",
+      phone: "080-1526-3984",
       email: "creperie.in.visby@gmail.com",
       website: {
         name: "P!CONT F 公式サイト",
@@ -181,10 +181,10 @@ const placeCards = [
     body: "現在、高校から20代前半のお子さんを持つお母さん達が年に何回か集まって色んな悩みや子供達の様子などを話したり情報交換しています。\n　少人数で、みんな困っているお母さん達と繋がりたいなぁと思っています。お気楽に連絡下さい\n　",
     address: "福井県　坂井市",
     hours: "不定期",
-    contact: "09017428891",
+    contact: "090-1742-8891",
     detailInfo: {
       location: "福井県　坂井市",
-      phone: "09017428891",
+      phone: "090-1742-8891",
       email: "orenji.panda.2015.9@gmail.com",
       website: null,
       target: "小学生, 中学生, 高校生, 不登校生の保護者",
@@ -248,10 +248,10 @@ const placeCards = [
     body: "自分にあった環境で勉強を続けたい方\n環境を代えて自分の能力を発揮したい方\n様々な選択肢があることをご存知ですか？\nこれまでも海外留学を経て進学し、活躍されているハローの先輩方が何人もおります",
     address: "",
     hours: "",
-    contact: "09034057249",
+    contact: "090-3405-7249",
     detailInfo: {
       location: "",
-      phone: "09034057249",
+      phone: "090-3405-7249",
       email: "rie@hello-fukui.jp",
       website: {
         name: "ハローインターナショナル公式サイト",
@@ -366,7 +366,7 @@ const placeCards = [
       recommended: "外部とコミュニケーションを取れる場所に行きたい, 不登校や子育てについて相談したい, 不登校や子育てについて共有したい, 不登校や子育てのイベントに参加したい, お友達を見つけたい, 同じ悩みを持つ人と話したい",
       suggestion: "大人も子どもも自分らしく在れる場所",
       schedule: "月2、3回",
-      fee: "600円＋イベントによって",
+      fee: "600円+イベントによって",
       other: ""
     },
     // 検索用タグ（フィルタリング用）

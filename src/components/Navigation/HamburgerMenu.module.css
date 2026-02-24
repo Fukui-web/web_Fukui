@@ -102,6 +102,7 @@
   width: 270px; /* 常に固定幅270px */
   min-width: 270px; /* 最小幅も270px */
   overflow-y: auto;
+  overflow-x: hidden; /* 横スクロールを防止 */
   scrollbar-width: none;
   -ms-overflow-style: none;
   padding-top: 68px; /* 84px → 60px Main.module 74px→50pxに合わせて24px下げる */

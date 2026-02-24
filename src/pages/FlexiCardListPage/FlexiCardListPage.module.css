@@ -1,0 +1,67 @@
+/* FlexiCardListPage.module.css */
+
+/* タイトルセクション */
+.titleSection {
+  padding: 40px 30px 20px 30px;
+  text-align: center;
+}
+
+.pageTitle {
+  font-size: 28px;
+  font-weight: bold;
+  line-height: 1.4;
+  margin: 0;
+  color: var(--color-black);
+}
+
+/* 点線コンテナ */
+.dotlineContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.dotline {
+  width: 90%;
+  max-width: 400px;
+  height: auto;
+}
+
+/* カードリストセクション */
+.cardListSection {
+  padding: 10px 30px 40px 30px;
+  min-height: 200px;
+}
+
+/* FlexiCardエリア */
+.flexiCardArea {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin: 16px 0 24px 0;
+}
+
+/* カード幅をグリッドに合わせる */
+.flexiCardArea > * {
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+/* セクション見出し */
+.sectionTitle {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--color-black);
+  margin: 24px 0 12px 0;
+  text-align: left;
+}
+
+/* 薄い灰色の区切り線 */
+.sectionDivider {
+  width: 100%;
+  height: 1px;
+  background-color: #cccccc;
+  margin-bottom: 8px;
+}

@@ -73,6 +73,26 @@ const HamburgerMenu = ({ isOpen: externalIsOpen, onToggle }) => {
     };
   }, [isOpen]);
 
+  // メニューが開いたときに背景のスクロールを防止
+  useEffect(() => {
+    if (isOpen) {
+      // 現在のスクロール位置を保存
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+    } else {
+      // メニューを閉じたときにスクロール位置を復元
+      const scrollY = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      window.scrollTo(0, parseInt(scrollY || '0') * -1);
+    }
+  }, [isOpen]);
+
   return (
     <>
       <div className={styles.hamburgerMenu} onClick={toggleMenu}>

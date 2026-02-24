@@ -49,6 +49,9 @@
 }
 
 .flexiCardButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   padding: 8px 16px;
   background: var(--color-black);
   color: var(--color-white);
@@ -64,4 +67,11 @@
 
 .flexiCardButton:hover {
   opacity: 0.8;
+}
+
+.buttonIcon {
+  width: 14px;
+  height: 14px;
+  filter: invert(1);
+  flex-shrink: 0;
 }

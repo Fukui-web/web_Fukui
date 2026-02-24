@@ -22,6 +22,10 @@ const NavigationBottom = ({ onActionCompleted }) => {
       navigate('/schools');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+    if (item === '◯学校・行政・医療情報の一覧') {
+      navigate('/school-info');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
     // メニューを閉じるなどの後処理
     if (onActionCompleted) {

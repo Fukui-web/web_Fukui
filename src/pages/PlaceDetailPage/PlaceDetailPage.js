@@ -52,14 +52,6 @@ const PlaceDetailPage = () => {
       <Breadcrumbs items={breadcrumbItems} />
       
       <div className={styles.contentArea}>
-        {/* タブナビゲーション */}
-        <div className={styles.tabNav}>
-          <div className={`${styles.tab} ${styles.tabActive}`}>
-            <img src={newwindowIcon} alt="" className={styles.tabIcon} />
-            居場所情報
-          </div>
-        </div>
-
         {/* タイトルとタグ */}
         <section className={styles.titleSection}>
           <h1 className={styles.pageTitle}>
@@ -106,11 +98,25 @@ const PlaceDetailPage = () => {
             </div>
             <div className={styles.detailRow}>
               <span className={styles.detailLabel}>電話番号</span>
-              <span className={styles.detailValue}>{card.detailInfo.phone}</span>
+              <span className={styles.detailValue}>
+                <a 
+                  href={`tel:${card.detailInfo.phone}`}
+                  className={styles.contactLink}
+                >
+                  {card.detailInfo.phone}
+                </a>
+              </span>
             </div>
             <div className={styles.detailRow}>
               <span className={styles.detailLabel}>メール</span>
-              <span className={styles.detailValue}>{card.detailInfo.email}</span>
+              <span className={styles.detailValue}>
+                <a 
+                  href={`mailto:${card.detailInfo.email}`}
+                  className={styles.contactLink}
+                >
+                  {card.detailInfo.email}
+                </a>
+              </span>
             </div>
             {card.detailInfo.website && (
               <div className={styles.detailRow}>
