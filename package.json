@@ -2,7 +2,7 @@
   "name": "3",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://yr04491.github.io/web_Fukui/",
+  "homepage": "https://bokuranomichi-fukui.com",
   "dependencies": {
     "@react-oauth/google": "^0.12.2",
     "@testing-library/dom": "^10.4.0",

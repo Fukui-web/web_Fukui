@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+// 変更点1: BrowserRouter を HashRouter に変更
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import AdminPage from './pages/AdminPage/AdminPage';
 import AdminExperienceDetail from './pages/AdminPage/AdminExperienceDetail';
@@ -23,7 +24,8 @@ import FlexiCardListPage from './pages/FlexiCardListPage/FlexiCardListPage';
 
 function App() {
   return (
-    <Router basename="/web_Fukui">
+    // 変更点2: basename="/web_Fukui" を削除
+    <Router>
       <ScrollToTop />
       <Routes>
         {/* ホーム画面用のルート */}
@@ -41,127 +43,127 @@ function App() {
           </AdminProtectedRoute>
         } />
 
-            {/* 管理者用体験談詳細ページ（認証保護） */}
-            <Route path="/admin/experience/:id" element={
-              <AdminProtectedRoute>
+        {/* 管理者用体験談詳細ページ（認証保護） */}
+        <Route path="/admin/experience/:id" element={
+          <AdminProtectedRoute>
+            <Layout>
+              <AdminExperienceDetail />
+            </Layout>
+          </AdminProtectedRoute>
+        } />
+
+        {/* 体験談を探すページ */}
+        <Route path="/experiences" element={
+          <Layout>
+            <ExperiencesContent />
+          </Layout>
+        } />
+
+        {/* 体験談検索結果ページ */}
+        <Route path="/experiences/search" element={
+          <Layout>
+            <ExperiencesSearchResultsContent />
+          </Layout>
+        } />
+
+        {/* 体験談を投稿するページ */}
+        <Route path="/experiences/post" element={
+          <Layout>
+            <PostExperienceContent />
+          </Layout>
+        } />
+
+        {/* 体験談詳細ページ */}
+        <Route path="/experiences/:id" element={
+          <Layout>
+            <TweetDetailPage />
+          </Layout>
+        } />
+
+        {/* 居場所を探すページ */}
+        <Route path="/places" element={
+          <Layout>
+            <PlacesContent />
+          </Layout>
+        } />
+        
+        <Route path="/places/:id" element={
+          <Layout>
+            <PlaceDetailPage />
+          </Layout>
+        } />
+        
+        <Route path="/places/:id/reviews" element={
+          <Layout>
+            <PlaceReviewPage />
+          </Layout>
+        } />
+
+        {/* 口コミ一覧ページと詳細ページ */}
+        <Route path="/reviews" element={
+          <Layout>
+            <ReviewsPage />
+          </Layout>
+        } />
+        
+        <Route path="/reviews/:id" element={
+          <Layout>
+            <ReviewDetailPage />
+          </Layout>
+        } />
+
+        {/* インタビュー詳細ページ */}
+        <Route path="/interviews/:id" element={
+          <Layout>
+            <InterviewDetailPage />
+          </Layout>
+        } />
+
+        {/* 卒業後の進路を探すページ */}
+        <Route path="/schools" element={
+          <Layout>
+            <PathsContent />
+          </Layout>
+        } />
+
+        {/* 学校詳細ページ */}
+        <Route path="/schools/:id" element={
+          <Layout>
+            <SchoolDetailPage />
+          </Layout>
+        } />
+
+        {/* 学校・行政・医療情報の一覧ページ */}
+        <Route path="/school-info" element={
+          <Layout>
+            <FlexiCardListPage />
+          </Layout>
+        } />
+
+        {/* ナビゲーション項目から動的にルートを生成 */}
+        {navigationItems.map((item, index) => {
+          // コンポーネントとパスが存在しない項目はスキップ
+          if (!item.component || !item.path) {
+            return null;
+          }
+          
+          const PageComponent = item.component;
+          
+          return (
+            <Route 
+              key={index}
+              path={item.path} 
+              element={
+                // 各ページを Layout でラップして表示
                 <Layout>
-                  <AdminExperienceDetail />
+                  <PageComponent />
                 </Layout>
-              </AdminProtectedRoute>
-            } />
-
-            {/* 体験談を探すページ */}
-            <Route path="/experiences" element={
-              <Layout>
-                <ExperiencesContent />
-              </Layout>
-            } />
-
-            {/* 体験談検索結果ページ */}
-            <Route path="/experiences/search" element={
-              <Layout>
-                <ExperiencesSearchResultsContent />
-              </Layout>
-            } />
-
-            {/* 体験談を投稿するページ */}
-            <Route path="/experiences/post" element={
-              <Layout>
-                <PostExperienceContent />
-              </Layout>
-            } />
-
-            {/* 体験談詳細ページ */}
-            <Route path="/experiences/:id" element={
-              <Layout>
-                <TweetDetailPage />
-              </Layout>
-            } />
-
-            {/* 居場所を探すページ */}
-            <Route path="/places" element={
-              <Layout>
-                <PlacesContent />
-              </Layout>
-            } />
-            
-            <Route path="/places/:id" element={
-              <Layout>
-                <PlaceDetailPage />
-              </Layout>
-            } />
-            
-            <Route path="/places/:id/reviews" element={
-              <Layout>
-                <PlaceReviewPage />
-              </Layout>
-            } />
-
-            {/* 口コミ一覧ページと詳細ページ */}
-            <Route path="/reviews" element={
-              <Layout>
-                <ReviewsPage />
-              </Layout>
-            } />
-            
-            <Route path="/reviews/:id" element={
-              <Layout>
-                <ReviewDetailPage />
-              </Layout>
-            } />
-
-            {/* インタビュー詳細ページ */}
-            <Route path="/interviews/:id" element={
-              <Layout>
-                <InterviewDetailPage />
-              </Layout>
-            } />
-
-            {/* 卒業後の進路を探すページ */}
-            <Route path="/schools" element={
-              <Layout>
-                <PathsContent />
-              </Layout>
-            } />
-
-            {/* 学校詳細ページ　*/}
-            <Route path="/schools/:id" element={
-              <Layout>
-                <SchoolDetailPage />
-              </Layout>
-            } />
-
-            {/* 学校・行政・医療情報の一覧ページ */}
-            <Route path="/school-info" element={
-              <Layout>
-                <FlexiCardListPage />
-              </Layout>
-            } />
-
-            {/* ナビゲーション項目から動的にルートを生成 */}
-            {navigationItems.map((item, index) => {
-              // コンポーネントとパスが存在しない項目はスキップ
-              if (!item.component || !item.path) {
-                return null;
-              }
-              
-              const PageComponent = item.component;
-              
-              return (
-                <Route 
-                  key={index}
-                  path={item.path} 
-                  element={
-                    // 各ページを Layout でラップして表示
-                    <Layout>
-                      <PageComponent />
-                    </Layout>
-                  } 
-                />
-              );
-            })}
-          </Routes>
-        </Router>
+              } 
+            />
+          );
+        })}
+      </Routes>
+    </Router>
   );
 }
 
