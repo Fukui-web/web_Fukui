@@ -2,6 +2,7 @@ import React from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import PropTypes from 'prop-types';
+import LoadingScreen from '../common/LoadingScreen';
 
 const AdminProtectedRoute = ({ children }) => {
   const { isAuthenticated, isAdmin, isLoading, isVerifying, logout, user } = useAuth();
@@ -17,24 +18,10 @@ const AdminProtectedRoute = ({ children }) => {
   // ロード中またはGAS検証中
   if (isLoading || isVerifying) {
     return (
-      <div style={{ 
-        display: 'flex', 
-        justifyContent: 'center', 
-        alignItems: 'center', 
-        minHeight: '100vh',
-        flexDirection: 'column',
-        gap: '1rem'
-      }}>
-        <p>認証を確認中...</p>
-        <div style={{
-          width: '40px',
-          height: '40px',
-          border: '4px solid #f3f3f3',
-          borderTop: '4px solid #3498db',
-          borderRadius: '50%',
-          animation: 'spin 1s linear infinite'
-        }}></div>
-      </div>
+      <LoadingScreen 
+        message="管理者認証を確認中..." 
+        subMessage="しばらくお待ちください"
+      />
     );
   }
 

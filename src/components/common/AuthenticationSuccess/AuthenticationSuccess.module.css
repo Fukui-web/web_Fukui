@@ -1,0 +1,274 @@
+/* 認証成功画面のコンテナ */
+.successContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* フェードインアニメーション */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 成功コンテンツ */
+.successContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: center;
+  padding: 2rem;
+  animation: slideUp 0.5s ease-out;
+}
+
+/* スライドアップアニメーション */
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* チェックマークのラッパー */
+.checkmarkWrapper {
+  margin-bottom: 1rem;
+}
+
+/* チェックマークの円 */
+.checkmarkCircle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #4caf50;
+  position: relative;
+  animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 8px 24px rgba(76, 175, 80, 0.3);
+}
+
+/* スケールインアニメーション */
+@keyframes scaleIn {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* チェックマーク */
+.checkmark {
+  position: absolute;
+  width: 40px;
+  height: 20px;
+  border-left: 5px solid white;
+  border-bottom: 5px solid white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%) rotate(-45deg);
+  animation: drawCheck 0.5s ease-out 0.3s forwards;
+  opacity: 0;
+}
+
+/* チェックマーク描画アニメーション */
+@keyframes drawCheck {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  50% {
+    width: 40px;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    width: 40px;
+    height: 20px;
+    opacity: 1;
+  }
+}
+
+/* メッセージテキスト */
+.message {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2e7d32;
+  margin: 0;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  animation: fadeIn 0.5s ease-out 0.3s both;
+}
+
+/* ユーザー名 */
+.userName {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #388e3c;
+  margin: -0.5rem 0 0 0;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  animation: fadeIn 0.5s ease-out 0.4s both;
+}
+
+/* サブメッセージ */
+.subMessage {
+  font-size: 1rem;
+  color: #558b2f;
+  margin: -0.5rem 0 0 0;
+  line-height: 1.6;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  animation: fadeIn 0.5s ease-out 0.5s both;
+}
+
+/* 管理者バッジ */
+.adminBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+  padding: 0.6rem 1.5rem;
+  border-radius: 24px;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+  animation: fadeIn 0.5s ease-out 0.6s both;
+}
+
+.badgeIcon {
+  font-size: 1.2rem;
+  animation: rotate 2s ease-in-out infinite;
+}
+
+@keyframes rotate {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+}
+
+.badgeText {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #f57c00;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+}
+
+/* プログレスバー */
+.progressBar {
+  width: 240px;
+  height: 4px;
+  background-color: rgba(46, 125, 50, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+  animation: fadeIn 0.5s ease-out 0.7s both;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #4caf50 0%, #66bb6a 100%);
+  border-radius: 2px;
+  animation: fillProgress 2s ease-out forwards;
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+}
+
+/* プログレスフィルアニメーション */
+@keyframes fillProgress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* リダイレクトメッセージ */
+.redirectMessage {
+  font-size: 0.9rem;
+  color: #66bb6a;
+  margin: 0;
+  font-family: 'Zen Kaku Gothic New', sans-serif;
+  animation: fadeIn 0.5s ease-out 0.8s both, pulse 1.5s ease-in-out 1s infinite;
+}
+
+/* パルスアニメーション */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .message {
+    font-size: 1.5rem;
+  }
+
+  .userName {
+    font-size: 1.1rem;
+  }
+
+  .subMessage {
+    font-size: 0.9rem;
+  }
+
+  .checkmarkCircle {
+    width: 80px;
+    height: 80px;
+  }
+
+  .checkmark {
+    width: 32px;
+    height: 16px;
+    border-left: 4px solid white;
+    border-bottom: 4px solid white;
+  }
+
+  @keyframes drawCheck {
+    0% {
+      width: 0;
+      height: 0;
+      opacity: 1;
+    }
+    50% {
+      width: 32px;
+      height: 0;
+      opacity: 1;
+    }
+    100% {
+      width: 32px;
+      height: 16px;
+      opacity: 1;
+    }
+  }
+
+  .progressBar {
+    width: 200px;
+  }
+}
