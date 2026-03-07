@@ -19,10 +19,10 @@ const Section05 = () => {
 
             {/* 説明テキスト */}
             <div className={styles.description}>
-                <p className={styles.descriptionTitle1}>ここにことばをいれる</p>
-                <p className={styles.descriptionTitle2}>ここにことばをいれるここにことば</p>
+                <p className={styles.descriptionTitle1}>全日制の高校に行けるのかしら？</p>
+                <p className={styles.descriptionTitle2}>大丈夫、様々な高校、通い方があるんです。</p>
                 <p className={styles.descriptionText}>
-                    ここに卒業後の内容をいれる。ここに卒業後の内容をいれる。ここに卒業後の内容をいれる。ここに卒業後の内容をいれる。ここに卒業後の内容をいれる。
+                    今の時代、通信制・定時制・サポート高校など、福井にいながら、様々な勉強方法で高校卒業資格を取得できるのです。
                 </p>
             </div>
 
@@ -33,8 +33,8 @@ const Section05 = () => {
                     <h3 className={styles.placeTitle}>学校・フリースクールの紹介</h3>
                 </div>
                 <div className={styles.placeCardArea}>
-                    <SchoolCard cardId={7} />
-                    <SchoolCard cardId={8} />
+                    <SchoolCard cardId={1} />
+                    <SchoolCard cardId={2} />
                     <SchoolCard cardId={3} />
                 </div>
 

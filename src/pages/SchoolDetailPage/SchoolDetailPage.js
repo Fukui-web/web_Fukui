@@ -6,7 +6,6 @@ import placeCards from '../../data/schoolCards';
 import TweetCard from '../../components/common/TweetCard/TweetCard';
 import Breadcrumbs from '../../components/common/Breadcrumbs';
 import Footer from '../../components/common/Footer';
-import newwindowIcon from '../../assets/images/newwindow.png';
 import vectorRB from '../../assets/images/vectorRB.png';
 import { getAllExperiences } from '../../utils/gasApi';
 
@@ -150,14 +149,6 @@ const SchoolDetailPage = () => {
       <Breadcrumbs items={breadcrumbItems} />
       
       <div className={styles.contentArea}>
-        {/* タブナビゲーション */}
-        <div className={styles.tabNav}>
-          <div className={`${styles.tab} ${styles.tabActive}`}>
-            <img src={newwindowIcon} alt="" className={styles.tabIcon} />
-            進学先情報
-          </div>
-        </div>
-
         {/* タイトルとタグ */}
         <section className={styles.titleSection}>
           <h1 className={styles.pageTitle}>

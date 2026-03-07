@@ -174,25 +174,56 @@
 }
 /* ▲ スタイル変更ここまで ▲ */
 
-/* 管理者画面リンク */
-.adminLink {
-  position: absolute;
-  bottom: 20px;
+/* フローティング「体験談を投稿する」ボタン */
+.floatingPostButton {
+  position: fixed;
+  bottom: 30px;
   right: 20px;
-  background: transparent;
+  background: #2A8A6E;
+  color: #ffffff;
   border: none;
+  border-radius: 28px;
+  padding: 14px 20px;
   font-family: 'Zen Kaku Gothic New', sans-serif;
-  font-size: 12px;
-  color: #555555;
+  font-weight: 700;
+  font-size: 14px;
   cursor: pointer;
-  padding: 4px 8px;
-  transition: color 0.2s, opacity 0.2s;
-  opacity: 0.7;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
 }
 
-.adminLink:hover {
-  color: #000000;
-  opacity: 1;
+.floatingPostButton:hover {
+  background: #1f7059;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.floatingPostButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* タブレット: コンテンツ 540px 中央寄せ */
+@media (min-width: 540px) and (max-width: 982px) {
+  .floatingPostButton {
+    right: calc((100vw - 540px) / 2 + 20px);
+  }
+}
+
+/* デスクトップ小: margin-left 392px + max-width 540px = 932px */
+@media (min-width: 983px) and (max-width: 1303px) {
+  .floatingPostButton {
+    right: calc(100vw - 912px);
+  }
+}
+
+/* デスクトップ大: コンテナ 1304px 中央寄せ */
+@media (min-width: 1304px) {
+  .floatingPostButton {
+    right: calc(50vw - 260px);
+  }
 }
 
 /* レスポンシブ対応 */

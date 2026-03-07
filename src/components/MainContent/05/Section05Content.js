@@ -30,11 +30,12 @@ const Section05Content = () => {
       {/* 説明セクション */}
       <div className={styles.descriptionSection}>
         <h2 className={styles.descriptionTitle}>
-          ここにこにはもはいれる。ここにこにはもはいれる。ここにこにはもはいれる。
+          全日制の高校に行けるのかしら？<br />
+          大丈夫、様々な高校、通い方があるんです。
         </h2>
         <div className={styles.dividerLine}></div>
         <p className={styles.descriptionText}>
-          ここに予定の文章が入ります。ここに予定の文章が入ります。ここに予定の文章が入ります。ここに予定の文章が入ります。ここに予定の文章が入ります。
+          今の時代、通信制・定時制・サポート高校など、福井にいながら、様々な勉強方法で高校卒業資格を取得できるのです。
         </p>
       </div>
 
@@ -46,8 +47,8 @@ const Section05Content = () => {
           <SchoolCard cardId={1} />
           <SchoolCard cardId={2} />
           <SchoolCard cardId={3} />
-          <SchoolCard cardId={1} />
-          <SchoolCard cardId={2} />
+          <SchoolCard cardId={4} />
+          <SchoolCard cardId={5} />
         </div>
       </div>
 
