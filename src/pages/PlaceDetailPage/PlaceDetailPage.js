@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import layoutStyles from '../../components/MainContent/commonPageLayout.module.css';
 import styles from './PlaceDetailPage.module.css';
 import placeCards from '../../data/placeCards';
@@ -148,6 +149,33 @@ const PlaceDetailPage = () => {
 
   return (
     <div className={layoutStyles.pageContainer}>
+      <Helmet>
+        <title>{card ? `${card.title.replace(/\n/g, '')} | ぼくらのみち` : '居場所詳細 | ぼくらのみち'}</title>
+        <meta name="description" content={card?.body?.slice(0, 120) || '福井県の居場所情報です。'} />
+        <link rel="canonical" href={`https://bokuranomichi-fukui.com/places/${id}`} />
+        {card && (
+          <script type="application/ld+json">{JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "LocalBusiness",
+                "name": card.title.replace(/\n/g, ''),
+                "description": card.body,
+                "address": card.address,
+                "url": `https://bokuranomichi-fukui.com/places/${id}`
+              },
+              {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  {"@type": "ListItem", "position": 1, "name": "TOP", "item": "https://bokuranomichi-fukui.com/"},
+                  {"@type": "ListItem", "position": 2, "name": "居場所をさがす", "item": "https://bokuranomichi-fukui.com/places"},
+                  {"@type": "ListItem", "position": 3, "name": card.title.replace(/\n/g, ''), "item": `https://bokuranomichi-fukui.com/places/${id}`}
+                ]
+              }
+            ]
+          })}</script>
+        )}
+      </Helmet>
       <Breadcrumbs items={breadcrumbItems} />
       
       <div className={styles.contentArea}>

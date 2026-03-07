@@ -2,6 +2,19 @@
 <html lang="ja">
   <head>
     <meta charset="utf-8" />
+    <script>
+      /* GitHub Pages SPA リダイレクト復元 */
+      (function(l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search.slice(1).split('&').map(function(s) {
+            return s.replace(/~and~/g, '&');
+          }).join('?');
+          window.history.replaceState(null, null,
+            l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location));
+    </script>
     <link rel="icon" href="%PUBLIC_URL%/title.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />

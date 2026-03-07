@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import layoutStyles from '../../components/MainContent/commonPageLayout.module.css';
 import styles from './FlexiCardListPage.module.css';
 import Breadcrumbs from '../../components/common/Breadcrumbs';
@@ -15,6 +16,11 @@ const FlexiCardListPage = () => {
 
   return (
     <div className={layoutStyles.pageContainer}>
+      <Helmet>
+        <title>学校・行政・医療情報の一覧｜ぼくらのみち</title>
+        <meta name="description" content="福井県内の学校・行政機関・医療機関の情報一覧です。不登校の相談先や支援相談窓口を掲載します。" />
+        <link rel="canonical" href="https://bokuranomichi-fukui.com/school-info" />
+      </Helmet>
       <Breadcrumbs items={breadcrumbItems} />
       
       <div className={layoutStyles.contentArea}>

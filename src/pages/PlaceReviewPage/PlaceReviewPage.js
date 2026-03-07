@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import layoutStyles from '../../components/MainContent/commonPageLayout.module.css';
 import styles from './PlaceReviewPage.module.css';
 import Breadcrumbs from '../../components/common/Breadcrumbs';
@@ -17,6 +18,11 @@ const PlaceReviewPage = () => {
 
   return (
     <div className={layoutStyles.pageContainer}>
+      <Helmet>
+        <title>口コミ | 居場所詳細 | ぼくらのみち</title>
+        <meta name="description" content="居場所に寍せられた口コミを確認できます。" />
+        <link rel="canonical" href={`https://bokuranomichi-fukui.com/places/${id}/reviews`} />
+      </Helmet>
       <Breadcrumbs items={breadcrumbItems} />
       
       <div className={styles.contentArea}>

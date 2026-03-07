@@ -1,6 +1,7 @@
 // src/components/MainContent/04/Section04Content.js
 
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import layoutStyles from '../commonPageLayout.module.css';
 import styles from './Section04Content.module.css';
 import Footer from '../../common/Footer';
@@ -13,6 +14,19 @@ import vectorRB from '../../../assets/images/vectorRB.png';
 const Section04Content = () => {
   return (
     <div className={`${layoutStyles.pageContainer} ${styles.section04Content}`}>
+      <Helmet>
+        <title>インタビュー 不登校とぼくら｜ぼくらのみち</title>
+        <meta name="description" content="不登校を経験した子どもたちや保護者のリアルな声をインタビュー形式でお届けします。" />
+        <link rel="canonical" href="https://bokuranomichi-fukui.com/section04" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "TOP", "item": "https://bokuranomichi-fukui.com/"},
+            {"@type": "ListItem", "position": 2, "name": "インタビュー 不登校とぼくら", "item": "https://bokuranomichi-fukui.com/section04"}
+          ]
+        })}</script>
+      </Helmet>
 
       {/* パンくずリスト */}
       <Breadcrumbs sectionNumber="04" sectionTitle="不登校とぼくら" />

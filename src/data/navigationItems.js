@@ -46,7 +46,7 @@ export const navigationItems = [
     component: Section04Content // 
   },
   {
-    title: '中学卒業のこと',
+    title: '中学卒業後のこと',
     subItems: ['義務教育後の選択肢'],
     path: '/section05', // 
     component: Section05Content // 

@@ -1,8 +1,7 @@
 // src/components/MainContent/01/Section01Content.js
 
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import layoutStyles from '../commonPageLayout.module.css'; // 共通CSS（外枠）
+import { useNavigate } from 'react-router-dom';import { Helmet } from 'react-helmet-async';import layoutStyles from '../commonPageLayout.module.css'; // 共通CSS（外枠）
 import styles from './Section01Content.module.css'; // 01ページ固有CSS
 import Footer from '../../common/Footer';
 import Breadcrumbs from '../../common/Breadcrumbs';
@@ -51,6 +50,19 @@ const Section01Content = () => {
 
   return (
     <div className={`${layoutStyles.pageContainer} ${styles.section01Content}`}>
+      <Helmet>
+        <title>学校に相談してみよう｜ぼくらのみち</title>
+        <meta name="description" content="学校にある支援の種類を軴に、不登校の子どもに学校ができるサポートを紹介します。" />
+        <link rel="canonical" href="https://bokuranomichi-fukui.com/section01" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "TOP", "item": "https://bokuranomichi-fukui.com/"},
+            {"@type": "ListItem", "position": 2, "name": "学校に相談してみよう", "item": "https://bokuranomichi-fukui.com/section01"}
+          ]
+        })}</script>
+      </Helmet>
 
       {/* パンくずリスト */}
       <Breadcrumbs sectionNumber="01" sectionTitle="学校に相談してみよう" />

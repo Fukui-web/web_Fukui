@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import layoutStyles from '../commonPageLayout.module.css'; // 共通CSS（外枠）
+import { useNavigate, useSearchParams } from 'react-router-dom';import { Helmet } from 'react-helmet-async';import layoutStyles from '../commonPageLayout.module.css'; // 共通CSS（外枠）
 import styles from './ExperiencesContent.module.css';
 import Breadcrumbs from '../../common/Breadcrumbs';
 import Footer from '../../common/Footer';
@@ -156,6 +155,19 @@ const ExperiencesContent = () => {
 
   return (
     <div className={layoutStyles.pageContainer}>
+      <Helmet>
+        <title>体験談をさがす｜ぼくらのみち</title>
+        <meta name="description" content="不登校を経験した当事者たちの体験談を検索できます。子どもや保護者のリアルな声や経験が満載。" />
+        <link rel="canonical" href="https://bokuranomichi-fukui.com/experiences" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "TOP", "item": "https://bokuranomichi-fukui.com/"},
+            {"@type": "ListItem", "position": 2, "name": "体験談をさがす", "item": "https://bokuranomichi-fukui.com/experiences"}
+          ]
+        })}</script>
+      </Helmet>
       <Breadcrumbs items={breadcrumbItems} />
       
       {/* 検索セクション */}

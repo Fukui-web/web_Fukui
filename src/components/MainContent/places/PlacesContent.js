@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import layoutStyles from '../commonPageLayout.module.css';
 import styles from './PlacesContent.module.css';
 import Breadcrumbs from '../../common/Breadcrumbs';
@@ -52,6 +53,19 @@ const PlacesContent = () => {
 
   return (
     <div className={layoutStyles.pageContainer}>
+      <Helmet>
+        <title>居場所をさがす｜ぼくらのみち</title>
+        <meta name="description" content="福井県内のフリースクール・居場所情報を掲載しています。地域から居場所を探すことができます。" />
+        <link rel="canonical" href="https://bokuranomichi-fukui.com/places" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "TOP", "item": "https://bokuranomichi-fukui.com/"},
+            {"@type": "ListItem", "position": 2, "name": "居場所をさがす", "item": "https://bokuranomichi-fukui.com/places"}
+          ]
+        })}</script>
+      </Helmet>
       <Breadcrumbs items={breadcrumbItems} />
       
       {/* タイトルセクション */}

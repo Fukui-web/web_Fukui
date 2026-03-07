@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import layoutStyles from '../../components/MainContent/commonPageLayout.module.css';
 import styles from './InterviewDetailPage.module.css';
 import interviewCards from '../../data/interviewCards';
@@ -45,6 +46,22 @@ const InterviewDetailPage = () => {
 
   return (
     <div className={`${layoutStyles.pageContainer} ${styles.pageWrapper}`}>
+      <Helmet>
+        <title>{card ? `${card.title} | ぼくらのみち` : 'インタビュー | ぼくらのみち'}</title>
+        <meta name="description" content={card?.description?.slice(0, 120) || '不登校を経験した当事者のインタビューです。'} />
+        <link rel="canonical" href={`https://bokuranomichi-fukui.com/interviews/${id}`} />
+        {card && (
+          <script type="application/ld+json">{JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": card.title,
+            "description": card.description?.slice(0, 120) || '',
+            "datePublished": card.date || '',
+            "url": `https://bokuranomichi-fukui.com/interviews/${id}`,
+            "publisher": {"@type": "Organization", "name": "ぼくらのみち"}
+          })}</script>
+        )}
+      </Helmet>
       <Breadcrumbs items={breadcrumbItems} />
       
       <div className={styles.contentArea}>

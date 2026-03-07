@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import layoutStyles from '../../components/MainContent/commonPageLayout.module.css';
 import styles from './TweetDetailPage.module.css';
 import tweetCards from '../../data/tweetCards';
@@ -195,6 +196,21 @@ const TweetDetailPage = () => {
 
   return (
     <div className={layoutStyles.pageContainer}>
+      <Helmet>
+        <title>{experienceData ? `${experienceData.title || '体験談'} | ぼくらのみち` : '体験談詳細 | ぼくらのみち'}</title>
+        <meta name="description" content={experienceData?.content?.slice(0, 120) || '不登校を経験した当事者の体験談です。'} />
+        <link rel="canonical" href={`https://bokuranomichi-fukui.com/experiences/${id}`} />
+        {experienceData && (
+          <script type="application/ld+json">{JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": experienceData.title || '体験談',
+            "description": experienceData.content?.slice(0, 120) || '',
+            "url": `https://bokuranomichi-fukui.com/experiences/${id}`,
+            "publisher": {"@type": "Organization", "name": "ぼくらのみち"}
+          })}</script>
+        )}
+      </Helmet>
       <Breadcrumbs items={breadcrumbItems} />
       
       <div className={styles.contentArea}>

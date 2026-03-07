@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import layoutStyles from '../commonPageLayout.module.css';
 import styles from './ExperiencesSearchResultsContent.module.css';
 import Breadcrumbs from '../../common/Breadcrumbs';
@@ -174,6 +175,11 @@ const ExperiencesSearchResultsContent = () => {
 
   return (
     <div className={layoutStyles.pageContainer}>
+      <Helmet>
+        <title>体験談検索結果｜ぼくらのみち</title>
+        <meta name="description" content="不登校に関する体験談の検索結果です。" />
+        <meta name="robots" content="noindex, follow" />
+      </Helmet>
       <Breadcrumbs items={breadcrumbItems} />
       
       {/* 検索セクション */}

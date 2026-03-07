@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import layoutStyles from '../../components/MainContent/commonPageLayout.module.css';
 import styles from './ReviewDetailPage.module.css';
 import reviewCards from '../../data/reviewCards';
@@ -36,6 +37,11 @@ const ReviewDetailPage = () => {
 
   return (
     <div className={layoutStyles.pageContainer}>
+      <Helmet>
+        <title>{card ? `${card.title || '口コミ'} | ぼくらのみち` : '口コミ詳細 | ぼくらのみち'}</title>
+        <meta name="description" content={card?.body?.slice(0, 120) || '不登校に関わる口コミです。'} />
+        <link rel="canonical" href={`https://bokuranomichi-fukui.com/reviews/${id}`} />
+      </Helmet>
       <Breadcrumbs items={breadcrumbItems} />
       
       <div className={styles.contentArea}>

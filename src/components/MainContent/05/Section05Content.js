@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import layoutStyles from '../commonPageLayout.module.css';
 import styles from './Section05Content.module.css';
 import Footer from '../../common/Footer';
@@ -16,6 +17,19 @@ const Section05Content = () => {
   const navigate = useNavigate();
   return (
     <div className={`${layoutStyles.pageContainer} ${styles.section05Content}`}>
+      <Helmet>
+        <title>中学卒業後のこと｜ぼくらのみち</title>
+        <meta name="description" content="中学卒業後の進路について、通信制高校・定時制高校・フリースクールなどの選択肢を紹介します。" />
+        <link rel="canonical" href="https://bokuranomichi-fukui.com/section05" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "TOP", "item": "https://bokuranomichi-fukui.com/"},
+            {"@type": "ListItem", "position": 2, "name": "中学卒業後のこと", "item": "https://bokuranomichi-fukui.com/section05"}
+          ]
+        })}</script>
+      </Helmet>
 
       {/* パンくずリスト */}
       <Breadcrumbs sectionNumber="05" sectionTitle="中学卒業後のこと" />

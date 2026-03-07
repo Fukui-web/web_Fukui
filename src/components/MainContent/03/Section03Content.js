@@ -2,6 +2,7 @@
 
 import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import layoutStyles from '../commonPageLayout.module.css';
 import styles from './Section03Content.module.css';
 import Footer from '../../common/Footer';
@@ -28,6 +29,19 @@ const Section03Content = () => {
 
   return (
     <div className={`${layoutStyles.pageContainer} ${styles.section03Content}`}>
+      <Helmet>
+        <title>みんなの居場所｜ぼくらのみち</title>
+        <meta name="description" content="不登校の子どもたちが通える居場所や、保護者同士が集まれる居場所を福井県内から探すことができます。" />
+        <link rel="canonical" href="https://bokuranomichi-fukui.com/section03" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "TOP", "item": "https://bokuranomichi-fukui.com/"},
+            {"@type": "ListItem", "position": 2, "name": "みんなの居場所", "item": "https://bokuranomichi-fukui.com/section03"}
+          ]
+        })}</script>
+      </Helmet>
 
       {/* パンくずリスト */}
       <Breadcrumbs sectionNumber="03" sectionTitle="まだまだある！みんなの居場所" />

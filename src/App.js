@@ -1,6 +1,6 @@
 import React from 'react';
 // 変更点1: BrowserRouter を HashRouter に変更
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import AdminPage from './pages/AdminPage/AdminPage';
 import AdminExperienceDetail from './pages/AdminPage/AdminExperienceDetail';

@@ -1,8 +1,7 @@
 // src/components/MainContent/00/Section00Content.js
 
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import layoutStyles from '../commonPageLayout.module.css'; // 共通CSS（外枠）
+import { useNavigate } from 'react-router-dom';import { Helmet } from 'react-helmet-async';import layoutStyles from '../commonPageLayout.module.css'; // 共通CSS（外枠）
 import styles from './Section00Content.module.css'; // 00ページ固有CSS
 import commonStyles from '../SectionCommon.module.css'; // 共通CSS（コンポーネント）
 import Footer from '../../common/Footer';
@@ -48,6 +47,19 @@ const Section00Content = () => {
   return (
     // ページレイアウト (styles)
     <div className={`${layoutStyles.pageContainer} ${styles.section00Content}`}>
+      <Helmet>
+        <title>まずは、どうする？｜ぼくらのみち</title>
+        <meta name="description" content="不登校になったとき、まず何をすればいい？慕てず情報兦集するためのヒントをまとめました。実際の当事者の体験談も紹介しています。" />
+        <link rel="canonical" href="https://bokuranomichi-fukui.com/section00" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "TOP", "item": "https://bokuranomichi-fukui.com/"},
+            {"@type": "ListItem", "position": 2, "name": "まずは、どうする？", "item": "https://bokuranomichi-fukui.com/section00"}
+          ]
+        })}</script>
+      </Helmet>
       
       {/* パンくずリスト */}
       <Breadcrumbs sectionNumber="00" sectionTitle="まずは、どうする？" />

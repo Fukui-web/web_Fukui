@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import layoutStyles from '../commonPageLayout.module.css';
 import styles from './PathsContent.module.css';
 import Breadcrumbs from '../../common/Breadcrumbs';
@@ -206,6 +207,19 @@ const PathsContent = () => {
 
   return (
     <div className={layoutStyles.pageContainer}>
+      <Helmet>
+        <title>卒業後の進路をさがす｜ぼくらのみち</title>
+        <meta name="description" content="中学卒業後の進路、通信制高校・定時制高校・フリースクールなど福井県内の選択肢を掲載しています。" />
+        <link rel="canonical" href="https://bokuranomichi-fukui.com/schools" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "TOP", "item": "https://bokuranomichi-fukui.com/"},
+            {"@type": "ListItem", "position": 2, "name": "卒業後の進路をさがす", "item": "https://bokuranomichi-fukui.com/schools"}
+          ]
+        })}</script>
+      </Helmet>
       <Breadcrumbs items={breadcrumbItems} />
       
       {/* 検索セクション */}

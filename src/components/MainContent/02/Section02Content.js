@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import layoutStyles from '../commonPageLayout.module.css';
 import styles from './Section02Content.module.css';
 import Footer from '../../common/Footer';
@@ -17,6 +18,19 @@ const Section02Content = () => {
 
   return (
     <div className={`${layoutStyles.pageContainer} ${styles.section02Content}`}>
+      <Helmet>
+        <title>公的支援や医療機関｜ぼくらのみち</title>
+        <meta name="description" content="不登校の子どもや保護者が利用できる公的機関の支援や医療機関を紹介します。福井県内の相談窓口、カウンセリング情報も掃羅。" />
+        <link rel="canonical" href="https://bokuranomichi-fukui.com/section02" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "TOP", "item": "https://bokuranomichi-fukui.com/"},
+            {"@type": "ListItem", "position": 2, "name": "公的支援や医療機関", "item": "https://bokuranomichi-fukui.com/section02"}
+          ]
+        })}</script>
+      </Helmet>
 
       {/* パンくずリスト */}
       <Breadcrumbs sectionNumber="02" sectionTitle="公的支援や医療機関" />
