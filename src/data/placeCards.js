@@ -6,24 +6,24 @@ const placeCards = [
     id: 1,
     title: "子どもデザインアカデミー\nふくい勝山教室",
     description: "",
-    body: "当教室では小中学生のお子様に向けてイラストや漫画の描き方をレッスンしています。マンガやアニメボーカロイド等描くことが好きなお子様のもっと上手くなりたい気持ちに寄り添い、お話を聞きながら楽しく絵を描いています。完全オンライン対応でご自宅からご受講いただけます。平日日中のレッスンも承ります。",
+    body: "当教室では小中学生のお子様に向けてイラストやマンガの描き方をレッスンしています。お子様のもっと上手くなりたい気持ちに寄り添い、お話を聞きながら楽しく絵を描いています。完全オンライン対応で全国どこに住んでいてもご自宅からご受講いただけます。1〜3人までの少人数制、ご希望に応じて平日日中のレッスンも承ります。無料で3回レッスンを体験いただけます。",
     address: "オンライン教室",
     hours: "月水金土開講",
-    contact: "08037406668",
+    contact: "メールフォームよりお問い合わせ下さい",
     detailInfo: {
       location: "オンライン教室",
-      phone: "080-3740-6668",
-      email: "office@305design.net",
+      phone: "",
+      email: "",
       website: {
-        name: "子どもデザインアカデミー公式サイト",
-        url: "https://kodomo-design.jp/school-list/fukui-katsuyama/"
+        name: "げこぽんwebサイト",
+        url: "https://www.gekopon.website/art-school/"
       },
       target: "小学生, 中学生, 高校生",
-      recommended: "専門的なことを学びたい, オンラインで授業を受けたい, 家以外の場所での居場所を見つけたい, お友達を見つけたい",
+      recommended: "専門的なことを学びたい, オンラインで授業を受けたい, お友達を見つけたい",
       suggestion: "習い事",
-      schedule: "月水金土開講",
-      fee: "月2回6,380円（税込）〜",
-      other: "我が家にも不登校気味の子がいます。お子様が好きなことで集中する時間がお母さんの救いになることもあるかと思い応募させていただきました。"
+      schedule: "水・金・土（それ以外は応相談）",
+      fee: "月2回6,000円（税込）〜",
+      other: "「マンガやイラストの絵を描くのが好き」というお子様に「人目を気にせず描いていてもいい」時間を提供しています。表現したいこと、やりたいことに合わせて技術や知識もレッスンしております。"
     },
     // 検索用タグ（フィルタリング用）
     searchTags: {
@@ -48,7 +48,7 @@ const placeCards = [
     detailInfo: {
       location: "福井市",
       phone: "090-9768-5530",
-      email: "",
+      email: "tomarigi1124@gmail.com",
       website: {
         name: "Instagram（@tomarigi_fukui）",
         url: "https://www.instagram.com/tomarigi_fukui/"
@@ -67,9 +67,9 @@ const placeCards = [
       facility: ["サークル"]
     },
     images: [
-      require('../assets/images/AdobeStock_Preview.png'),
+      require('../assets/images/Tomarigi.png'),
     ],
-    image: require('../assets/images/AdobeStock_Preview.png'),
+    image: require('../assets/images/Tomarigi.png'),
     tags: ["不登校生の保護者", "不登校児の親のおしゃべり会"]
   },
   {
@@ -85,8 +85,8 @@ const placeCards = [
       phone: "0776-65-5623",
       email: "hitotsunagari.school@gmail.com",
       website: {
-        name: "Instagram（@hitotsunagari_school）",
-        url: "https://www.instagram.com/hitotsunagari_school?igsh=d2E4eXF5NXo3YWdp&utm_source=qr"
+        name: "ちいさな学校ヒトツナガリ",
+        url: "https://www.notion.so/236912afa09a80e0a05dc972287eeac9?pvs=4"
       },
       target: "小学生",
       recommended: "専門的なことを学びたい, 家以外の場所での居場所を見つけたい, 外部とコミュニケーションを取れる場所に行きたい, 不登校や子育てについて相談したい, 不登校や子育てについて共有したい, 不登校や子育てのイベントに参加したい, お友達を見つけたい",
@@ -102,9 +102,9 @@ const placeCards = [
       facility: ["オルタナティブスクール"]
     },
     images: [
-      require('../assets/images/AdobeStock_Preview.png'),
+      require('../assets/images/Hitotunagari.png'),
     ],
-    image: require('../assets/images/AdobeStock_Preview.png'),
+    image: require('../assets/images/Hitotunagari.png'),
     tags: ["小学生", "オルタナティブスクール"]
   },
   {
