@@ -20,6 +20,12 @@ const FlexiCardListPage = () => {
         <title>学校・行政・医療情報の一覧｜ぼくらのみち</title>
         <meta name="description" content="福井県内の学校・行政機関・医療機関の情報一覧です。不登校の相談先や支援相談窓口を掲載します。" />
         <link rel="canonical" href="https://bokuranomichi-fukui.com/school-info" />
+        <meta property="og:title" content="学校・行政・医療情報の一覧｜ぼくらのみち" />
+        <meta property="og:description" content="福井県内の学校・行政機関・医療機関の情報一覧です。" />
+        <meta property="og:url" content="https://bokuranomichi-fukui.com/school-info" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://bokuranomichi-fukui.com/title.png" />
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       <Breadcrumbs items={breadcrumbItems} />
       

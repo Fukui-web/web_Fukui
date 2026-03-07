@@ -211,6 +211,12 @@ const PathsContent = () => {
         <title>卒業後の進路をさがす｜ぼくらのみち</title>
         <meta name="description" content="中学卒業後の進路、通信制高校・定時制高校・フリースクールなど福井県内の選択肢を掲載しています。" />
         <link rel="canonical" href="https://bokuranomichi-fukui.com/schools" />
+        <meta property="og:title" content="卒業後の進路をさがす｜ぼくらのみち" />
+        <meta property="og:description" content="中学卒業後の進路、通信制高校・定時制高校・フリースクールなど福井県内の選択肢を掲載しています。" />
+        <meta property="og:url" content="https://bokuranomichi-fukui.com/schools" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://bokuranomichi-fukui.com/title.png" />
+        <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",

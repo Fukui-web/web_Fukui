@@ -18,6 +18,12 @@ const Section04Content = () => {
         <title>インタビュー 不登校とぼくら｜ぼくらのみち</title>
         <meta name="description" content="不登校を経験した子どもたちや保護者のリアルな声をインタビュー形式でお届けします。" />
         <link rel="canonical" href="https://bokuranomichi-fukui.com/section04" />
+        <meta property="og:title" content="インタビュー 不登校とぼくら｜ぼくらのみち" />
+        <meta property="og:description" content="不登校を経験した子どもたちや保護者のリアルな声をインタビュー形式でお届けします。" />
+        <meta property="og:url" content="https://bokuranomichi-fukui.com/section04" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://bokuranomichi-fukui.com/title.png" />
+        <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",

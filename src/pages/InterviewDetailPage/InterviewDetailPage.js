@@ -50,6 +50,12 @@ const InterviewDetailPage = () => {
         <title>{card ? `${card.title} | ぼくらのみち` : 'インタビュー | ぼくらのみち'}</title>
         <meta name="description" content={card?.description?.slice(0, 120) || '不登校を経験した当事者のインタビューです。'} />
         <link rel="canonical" href={`https://bokuranomichi-fukui.com/interviews/${id}`} />
+        <meta property="og:title" content={card ? `${card.title} | ぼくらのみち` : 'インタビュー | ぼくらのみち'} />
+        <meta property="og:description" content={card?.description?.slice(0, 120) || '不登校を経験した当事者のインタビューです。'} />
+        <meta property="og:url" content={`https://bokuranomichi-fukui.com/interviews/${id}`} />
+        <meta property="og:type" content="article" />
+        <meta property="og:image" content="https://bokuranomichi-fukui.com/title.png" />
+        <meta name="twitter:card" content="summary_large_image" />
         {card && (
           <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",

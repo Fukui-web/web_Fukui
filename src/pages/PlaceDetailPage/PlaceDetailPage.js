@@ -153,6 +153,12 @@ const PlaceDetailPage = () => {
         <title>{card ? `${card.title.replace(/\n/g, '')} | ぼくらのみち` : '居場所詳細 | ぼくらのみち'}</title>
         <meta name="description" content={card?.body?.slice(0, 120) || '福井県の居場所情報です。'} />
         <link rel="canonical" href={`https://bokuranomichi-fukui.com/places/${id}`} />
+        <meta property="og:title" content={card ? `${card.title.replace(/\n/g, '')} | ぼくらのみち` : '居場所詳細 | ぼくらのみち'} />
+        <meta property="og:description" content={card?.body?.slice(0, 120) || '福井県の居場所情報です。'} />
+        <meta property="og:url" content={`https://bokuranomichi-fukui.com/places/${id}`} />
+        <meta property="og:type" content="article" />
+        <meta property="og:image" content="https://bokuranomichi-fukui.com/title.png" />
+        <meta name="twitter:card" content="summary_large_image" />
         {card && (
           <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",

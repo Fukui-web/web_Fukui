@@ -57,6 +57,12 @@ const PlacesContent = () => {
         <title>居場所をさがす｜ぼくらのみち</title>
         <meta name="description" content="福井県内のフリースクール・居場所情報を掲載しています。地域から居場所を探すことができます。" />
         <link rel="canonical" href="https://bokuranomichi-fukui.com/places" />
+        <meta property="og:title" content="居場所をさがす｜ぼくらのみち" />
+        <meta property="og:description" content="福井県内のフリースクール・居場所情報を掲載しています。地域から居場所を探すことができます。" />
+        <meta property="og:url" content="https://bokuranomichi-fukui.com/places" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://bokuranomichi-fukui.com/title.png" />
+        <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",

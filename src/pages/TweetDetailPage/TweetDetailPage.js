@@ -200,6 +200,12 @@ const TweetDetailPage = () => {
         <title>{experienceData ? `${experienceData.title || '体験談'} | ぼくらのみち` : '体験談詳細 | ぼくらのみち'}</title>
         <meta name="description" content={experienceData?.content?.slice(0, 120) || '不登校を経験した当事者の体験談です。'} />
         <link rel="canonical" href={`https://bokuranomichi-fukui.com/experiences/${id}`} />
+        <meta property="og:title" content={experienceData ? `${experienceData.title || '体験談'} | ぼくらのみち` : '体験談詳細 | ぼくらのみち'} />
+        <meta property="og:description" content={experienceData?.content?.slice(0, 120) || '不登校を経験した当事者の体験談です。'} />
+        <meta property="og:url" content={`https://bokuranomichi-fukui.com/experiences/${id}`} />
+        <meta property="og:type" content="article" />
+        <meta property="og:image" content="https://bokuranomichi-fukui.com/title.png" />
+        <meta name="twitter:card" content="summary_large_image" />
         {experienceData && (
           <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",

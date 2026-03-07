@@ -33,6 +33,12 @@ const Section03Content = () => {
         <title>みんなの居場所｜ぼくらのみち</title>
         <meta name="description" content="不登校の子どもたちが通える居場所や、保護者同士が集まれる居場所を福井県内から探すことができます。" />
         <link rel="canonical" href="https://bokuranomichi-fukui.com/section03" />
+        <meta property="og:title" content="みんなの居場所｜ぼくらのみち" />
+        <meta property="og:description" content="不登校の子どもたちが通える居場所や、保護者同士が集まれる居場所を福井県内から探すことができます。" />
+        <meta property="og:url" content="https://bokuranomichi-fukui.com/section03" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://bokuranomichi-fukui.com/title.png" />
+        <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",

@@ -22,6 +22,12 @@ const Section02Content = () => {
         <title>公的支援や医療機関｜ぼくらのみち</title>
         <meta name="description" content="不登校の子どもや保護者が利用できる公的機関の支援や医療機関を紹介します。福井県内の相談窓口、カウンセリング情報も掃羅。" />
         <link rel="canonical" href="https://bokuranomichi-fukui.com/section02" />
+        <meta property="og:title" content="公的支援や医療機関｜ぼくらのみち" />
+        <meta property="og:description" content="不登校の子どもや保護者が利用できる公的機関の支援や医療機関を紹介します。" />
+        <meta property="og:url" content="https://bokuranomichi-fukui.com/section02" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://bokuranomichi-fukui.com/title.png" />
+        <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",

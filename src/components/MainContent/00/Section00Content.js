@@ -51,6 +51,12 @@ const Section00Content = () => {
         <title>まずは、どうする？｜ぼくらのみち</title>
         <meta name="description" content="不登校になったとき、まず何をすればいい？慕てず情報兦集するためのヒントをまとめました。実際の当事者の体験談も紹介しています。" />
         <link rel="canonical" href="https://bokuranomichi-fukui.com/section00" />
+        <meta property="og:title" content="まずは、どうする？｜ぼくらのみち" />
+        <meta property="og:description" content="不登校になったとき、まず何をすればいい？慕てず情兦集するためのヒントをまとめました。" />
+        <meta property="og:url" content="https://bokuranomichi-fukui.com/section00" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://bokuranomichi-fukui.com/title.png" />
+        <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",

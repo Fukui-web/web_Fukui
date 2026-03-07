@@ -54,6 +54,12 @@ const Section01Content = () => {
         <title>学校に相談してみよう｜ぼくらのみち</title>
         <meta name="description" content="学校にある支援の種類を軴に、不登校の子どもに学校ができるサポートを紹介します。" />
         <link rel="canonical" href="https://bokuranomichi-fukui.com/section01" />
+        <meta property="og:title" content="学校に相談してみよう｜ぼくらのみち" />
+        <meta property="og:description" content="学校にある支援の種類を軸に、不登校の子どもに学校ができるサポートを紹介します。" />
+        <meta property="og:url" content="https://bokuranomichi-fukui.com/section01" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://bokuranomichi-fukui.com/title.png" />
+        <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",

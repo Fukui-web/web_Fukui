@@ -21,6 +21,12 @@ const Section05Content = () => {
         <title>中学卒業後のこと｜ぼくらのみち</title>
         <meta name="description" content="中学卒業後の進路について、通信制高校・定時制高校・フリースクールなどの選択肢を紹介します。" />
         <link rel="canonical" href="https://bokuranomichi-fukui.com/section05" />
+        <meta property="og:title" content="中学卒業後のこと｜ぼくらのみち" />
+        <meta property="og:description" content="中学卒業後の進路、通信制高校・定時制高校・フリースクールなどの選択肢を紹介します。" />
+        <meta property="og:url" content="https://bokuranomichi-fukui.com/section05" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://bokuranomichi-fukui.com/title.png" />
+        <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",

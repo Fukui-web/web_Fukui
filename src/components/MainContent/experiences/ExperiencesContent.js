@@ -159,6 +159,12 @@ const ExperiencesContent = () => {
         <title>体験談をさがす｜ぼくらのみち</title>
         <meta name="description" content="不登校を経験した当事者たちの体験談を検索できます。子どもや保護者のリアルな声や経験が満載。" />
         <link rel="canonical" href="https://bokuranomichi-fukui.com/experiences" />
+        <meta property="og:title" content="体験談をさがす｜ぼくらのみち" />
+        <meta property="og:description" content="不登校を経験した当事者たちの体験談を検索できます。子どもや保護者のリアルな声や経験が満載。" />
+        <meta property="og:url" content="https://bokuranomichi-fukui.com/experiences" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://bokuranomichi-fukui.com/title.png" />
+        <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",

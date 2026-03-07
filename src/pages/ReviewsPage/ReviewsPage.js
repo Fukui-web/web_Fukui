@@ -16,6 +16,12 @@ const ReviewsPage = () => {
         <title>口コミ一覧｜ぼくらのみち</title>
         <meta name="description" content="不登校に関わる施設や支援についての口コミ一覧です。" />
         <link rel="canonical" href="https://bokuranomichi-fukui.com/reviews" />
+        <meta property="og:title" content="口コミ一覧｜ぼくらのみち" />
+        <meta property="og:description" content="不登校に関わる施設や支援についての口コミ一覧です。" />
+        <meta property="og:url" content="https://bokuranomichi-fukui.com/reviews" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://bokuranomichi-fukui.com/title.png" />
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       <Breadcrumbs items={breadcrumbItems} />
       
