@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://bokuranomichi-fukui.com/</loc>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://bokuranomichi-fukui.com/section00</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bokuranomichi-fukui.com/section01</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bokuranomichi-fukui.com/section02</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bokuranomichi-fukui.com/section03</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bokuranomichi-fukui.com/section04</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bokuranomichi-fukui.com/section05</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://bokuranomichi-fukui.com/experiences</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bokuranomichi-fukui.com/experiences/search</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://bokuranomichi-fukui.com/experiences/post</loc>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://bokuranomichi-fukui.com/places</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bokuranomichi-fukui.com/reviews</loc>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://bokuranomichi-fukui.com/schools</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bokuranomichi-fukui.com/school-info</loc>
+    <priority>0.8</priority>
+  </url>
+</urlset>
