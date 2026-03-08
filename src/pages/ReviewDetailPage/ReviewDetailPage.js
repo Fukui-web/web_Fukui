@@ -16,7 +16,7 @@ const ReviewDetailPage = () => {
   const breadcrumbItems = [
     { label: 'TOP', path: '/' },
     { label: '口コミ一覧', path: '/reviews' },
-    { label: `口コミ${id}`, path: `/reviews/${id}` }
+    { label: card ? (card.title || '口コミ').replace(/\n/g, '') : `口コミ${id}`, path: `/reviews/${id}` }
   ];
 
   if (!card) {
@@ -34,19 +34,39 @@ const ReviewDetailPage = () => {
 
   // Related: show other review cards (exclude current)
   const related = reviewCards.filter(c => c.id !== card.id).slice(0, 4);
+  const reviewContent = card.body || card.text || '';
 
   return (
     <div className={layoutStyles.pageContainer}>
       <Helmet>
-        <title>{card ? `${card.title || '口コミ'} | ぼくらのみち` : '口コミ詳細 | ぼくらのみち'}</title>
-        <meta name="description" content={card?.body?.slice(0, 120) || '不登校に関わる口コミです。'} />
+        <title>{`【口コミ】${card.title ? card.title.replace(/\n/g, '') : '不登校支援について'}｜ぼくらのみち`}</title>
+        <meta name="description" content={`当事者による口コミ・評判です。「${reviewContent.slice(0, 80)}...」`} />
         <link rel="canonical" href={`https://bokuranomichi-fukui.com/reviews/${id}`} />
-        <meta property="og:title" content={card ? `${card.title || '口コミ'} | ぼくらのみち` : '口コミ詳細 | ぼくらのみち'} />
-        <meta property="og:description" content={card?.body?.slice(0, 120) || '不登校に関わる口コミです。'} />
+        <meta property="og:title" content={`【口コミ】${card.title ? card.title.replace(/\n/g, '') : '不登校支援について'}｜ぼくらのみち`} />
+        <meta property="og:description" content={`当事者による口コミ・評判です。「${reviewContent.slice(0, 80)}...」`} />
         <meta property="og:url" content={`https://bokuranomichi-fukui.com/reviews/${id}`} />
         <meta property="og:type" content="article" />
         <meta property="og:image" content="https://bokuranomichi-fukui.com/title.png" />
         <meta name="twitter:card" content="summary_large_image" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Review",
+          "headline": card.title || '口コミ',
+          "reviewBody": reviewContent,
+          "author": {
+            "@type": "Person",
+            "name": card.authorName || '匿名'
+          },
+          "reviewRating": card.rating ? {
+            "@type": "Rating",
+            "ratingValue": card.rating,
+            "bestRating": "5"
+          } : undefined,
+          "itemReviewed": {
+            "@type": "Organization",
+            "name": "ぼくらのみち 掲載施設・支援"
+          }
+        })}</script>
       </Helmet>
       <Breadcrumbs items={breadcrumbItems} />
       
@@ -74,7 +94,7 @@ const ReviewDetailPage = () => {
           )}
 
           <section className={styles.bodySection}>
-            <p className={styles.bodyText}>{card.body || card.text}</p>
+            <p className={styles.bodyText}>{reviewContent}</p>
           </section>
 
           {card.rating && (

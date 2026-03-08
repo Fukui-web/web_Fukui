@@ -21,7 +21,6 @@ const TweetDetailPage = () => {
   const [relatedError, setRelatedError] = useState(null);
   const [noRelatedData, setNoRelatedData] = useState(false);
 
-  // locationのstateから渡されたデータとコンテキストを取得
   const passedData = location.state?.experienceData;
   const relatedContext = location.state?.relatedContext;
 
@@ -29,14 +28,12 @@ const TweetDetailPage = () => {
     const loadExperienceData = async () => {
       setIsLoading(true);
       setError(false);
-      // 常にGASから完全なデータを取得
       try {
         const data = await getExperienceById(id);
         setExperienceData(data);
         loadRelatedExperiences(data);
       } catch (error) {
         console.error('体験談の取得エラー:', error);
-        // エラー時は渡されたデータまたはtweetCardsから取得（フォールバック）
         if (passedData) {
           setExperienceData(passedData);
         } else {
@@ -55,16 +52,13 @@ const TweetDetailPage = () => {
     loadExperienceData();
   }, [id, passedData]);
 
-  // 関連する体験談を取得
   const loadRelatedExperiences = async (currentData) => {
     setIsLoadingRelated(true);
     setRelatedError(null);
     setNoRelatedData(false);
     
     try {
-      // relatedContextがあればそれを使用（遷移元から渡された関連記事）
       if (relatedContext && relatedContext.relatedExperiences) {
-        // 現在の体験談を除外して最大4件取得
         const related = relatedContext.relatedExperiences
           .filter(item => String(item.id) !== String(id))
           .slice(0, 4);
@@ -78,14 +72,12 @@ const TweetDetailPage = () => {
         return;
       }
       
-      // relatedContextがない場合は従来通り学年やきっかけで検索
       const filters = {};
       if (currentData.grade) {
         filters.grade = [currentData.grade];
       }
       
       const results = await searchExperiences('*', filters);
-      // 現在の体験談を除外して最大4件取得
       const related = results.filter(item => String(item.id) !== String(id)).slice(0, 4);
       
       if (related.length === 0) {
@@ -101,11 +93,10 @@ const TweetDetailPage = () => {
     }
   };
 
-  // 目次のスクロール処理
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const yOffset = -80; // ヘッダーの高さ分オフセット
+      const yOffset = -80;
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
@@ -114,10 +105,9 @@ const TweetDetailPage = () => {
   const breadcrumbItems = [
     { label: 'TOP', path: '/' },
     { label: '体験談をさがす', path: '/experiences' },
-    { label: `体験談${id}`, path: `/experiences/${id}` }
+    { label: experienceData ? (experienceData.title || '体験談').replace(/\n/g, '') : `体験談${id}`, path: `/experiences/${id}` }
   ];
 
-  // 読み込み中の表示
   if (isLoading) {
     return (
       <div className={layoutStyles.pageContainer}>
@@ -133,7 +123,6 @@ const TweetDetailPage = () => {
     );
   }
 
-  // データが読み込まれていない場合（エラー時）
   if (error || !experienceData) {
     return (
       <div className={layoutStyles.pageContainer}>
@@ -147,21 +136,15 @@ const TweetDetailPage = () => {
     );
   }
 
-  // データの整形（検索結果とtweetCardsの両方に対応）
   const displayData = {
-    // 基本情報
     title: experienceData.title || experienceData.text || 'タイトルなし',
     authorName: experienceData.authorName || 'ひろまま',
     authorInitial: experienceData.authorInitial || 'H',
     date: experienceData.date || '2025.07.03',
     grade: experienceData.grade || '',
     family: experienceData.family || '',
-    
-    // セクション2: 不登校のきっかけ
     trigger: experienceData.trigger || '',
     detail: experienceData.detail || experienceData.description || experienceData.text || '',
-    
-    // セクション2の続き: 初動と経過
     parentInitialAction: experienceData.parentInitialAction || '',
     childReaction: experienceData.childReaction || '',
     schoolResponse: experienceData.schoolResponse || '',
@@ -171,24 +154,14 @@ const TweetDetailPage = () => {
     dailyLifeOverMonth: experienceData.dailyLifeOverMonth || '',
     improvementTrigger: experienceData.improvementTrigger || '',
     schoolConnection: experienceData.schoolConnection || '',
-    
-    // セクション3: 子どもの成長過程
     elementarySchool: experienceData.elementarySchool || '',
     juniorHighSchool: experienceData.juniorHighSchool || '',
     highSchool: experienceData.highSchool || '',
     alternativeSchool: experienceData.alternativeSchool || '',
-    
-    // セクション4: 通信制・定時制の学校情報
     schools: experienceData.schools || [],
-    
-    // セクション5: 行政・民間サポートの有無
     supportUsed: experienceData.supportUsed || '',
-    
-    // セクション6: 利用したサポート
     supports: experienceData.supports || [],
     support: experienceData.support || '',
-    
-    // セクション7: その他のサポートと今の想い
     otherSupport: experienceData.otherSupport || '',
     currentThoughts: experienceData.currentThoughts || '',
     message: experienceData.message || ''
@@ -197,25 +170,34 @@ const TweetDetailPage = () => {
   return (
     <div className={layoutStyles.pageContainer}>
       <Helmet>
-        <title>{experienceData ? `${experienceData.title || '体験談'} | ぼくらのみち` : '体験談詳細 | ぼくらのみち'}</title>
-        <meta name="description" content={experienceData?.content?.slice(0, 120) || '不登校を経験した当事者の体験談です。'} />
+        <title>{`【体験談】${displayData.title.replace(/\n/g, '')}｜ぼくらのみち（不登校の記録）`}</title>
+        <meta name="description" content={`不登校を経験した方の体験談です。「${displayData.detail.slice(0, 80)}...」`} />
         <link rel="canonical" href={`https://bokuranomichi-fukui.com/experiences/${id}`} />
-        <meta property="og:title" content={experienceData ? `${experienceData.title || '体験談'} | ぼくらのみち` : '体験談詳細 | ぼくらのみち'} />
-        <meta property="og:description" content={experienceData?.content?.slice(0, 120) || '不登校を経験した当事者の体験談です。'} />
+        <meta property="og:title" content={`【体験談】${displayData.title.replace(/\n/g, '')}｜ぼくらのみち`} />
+        <meta property="og:description" content={`不登校を経験した方の体験談です。「${displayData.detail.slice(0, 80)}...」`} />
         <meta property="og:url" content={`https://bokuranomichi-fukui.com/experiences/${id}`} />
         <meta property="og:type" content="article" />
         <meta property="og:image" content="https://bokuranomichi-fukui.com/title.png" />
         <meta name="twitter:card" content="summary_large_image" />
-        {experienceData && (
-          <script type="application/ld+json">{JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Article",
-            "headline": experienceData.title || '体験談',
-            "description": experienceData.content?.slice(0, 120) || '',
-            "url": `https://bokuranomichi-fukui.com/experiences/${id}`,
-            "publisher": {"@type": "Organization", "name": "ぼくらのみち"}
-          })}</script>
-        )}
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": displayData.title.replace(/\n/g, ''),
+          "description": displayData.detail,
+          "author": {
+            "@type": "Person",
+            "name": displayData.authorName
+          },
+          "url": `https://bokuranomichi-fukui.com/experiences/${id}`,
+          "publisher": {
+            "@type": "Organization", 
+            "name": "ぼくらのみち",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://bokuranomichi-fukui.com/title.png"
+            }
+          }
+        })}</script>
       </Helmet>
       <Breadcrumbs items={breadcrumbItems} />
       

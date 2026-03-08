@@ -23,7 +23,7 @@ const SchoolDetailPage = () => {
   const breadcrumbItems = [
     { label: 'TOP', path: '/' },
     { label: '卒業後の進路をさがす', path: '/schools' },
-    { label: `詳細${id}`, path: `/schools/${id}` }
+    { label: card ? card.title.replace(/\n/g, '') : `詳細${id}`, path: `/schools/${id}` }
   ];
 
   // 体験談から進路の口コミを抽出するヘルパー関数
@@ -148,11 +148,11 @@ const SchoolDetailPage = () => {
   return (
     <div className={layoutStyles.pageContainer}>
       <Helmet>
-        <title>{card ? `${card.title.replace(/\n/g, '')} | ぼくらのみち` : '進路詳細 | ぼくらのみち'}</title>
-        <meta name="description" content={card?.body?.slice(0, 120) || '福井県の進路情報です。'} />
+        <title>{card ? `${card.title.replace(/\n/g, '')}の詳細情報｜ぼくらのみち（福井の進路情報）` : '進路詳細 | ぼくらのみち'}</title>
+        <meta name="description" content={card ? `${card.title.replace(/\n/g, '')}の詳細ページです。${card.body.slice(0, 100)}` : '福井県の進路情報です。'} />
         <link rel="canonical" href={`https://bokuranomichi-fukui.com/schools/${id}`} />
-        <meta property="og:title" content={card ? `${card.title.replace(/\n/g, '')} | ぼくらのみち` : '進路詳細 | ぼくらのみち'} />
-        <meta property="og:description" content={card?.body?.slice(0, 120) || '福井県の進路情報です。'} />
+        <meta property="og:title" content={card ? `${card.title.replace(/\n/g, '')}の詳細情報｜ぼくらのみち` : '進路詳細 | ぼくらのみち'} />
+        <meta property="og:description" content={card ? card.body.slice(0, 100) : '福井県の進路情報です。'} />
         <meta property="og:url" content={`https://bokuranomichi-fukui.com/schools/${id}`} />
         <meta property="og:type" content="article" />
         <meta property="og:image" content="https://bokuranomichi-fukui.com/title.png" />
@@ -160,23 +160,11 @@ const SchoolDetailPage = () => {
         {card && (
           <script type="application/ld+json">{JSON.stringify({
             "@context": "https://schema.org",
-            "@graph": [
-              {
-                "@type": "EducationalOrganization",
-                "name": card.title.replace(/\n/g, ''),
-                "description": card.body,
-                "address": card.address,
-                "url": `https://bokuranomichi-fukui.com/schools/${id}`
-              },
-              {
-                "@type": "BreadcrumbList",
-                "itemListElement": [
-                  {"@type": "ListItem", "position": 1, "name": "TOP", "item": "https://bokuranomichi-fukui.com/"},
-                  {"@type": "ListItem", "position": 2, "name": "卒業後の進路をさがす", "item": "https://bokuranomichi-fukui.com/schools"},
-                  {"@type": "ListItem", "position": 3, "name": card.title.replace(/\n/g, ''), "item": `https://bokuranomichi-fukui.com/schools/${id}`}
-                ]
-              }
-            ]
+            "@type": "EducationalOrganization",
+            "name": card.title.replace(/\n/g, ''),
+            "description": card.body,
+            "address": card.address,
+            "url": `https://bokuranomichi-fukui.com/schools/${id}`
           })}</script>
         )}
       </Helmet>
@@ -279,15 +267,13 @@ const SchoolDetailPage = () => {
               </div>
             </div>
 
-            {/* 本校所在地 (既存) */}
+            {/* 本校所在地 */}
             <div className={styles.detailRow}>
               <div className={styles.detailLabel}>本校所在地</div>
               <div className={styles.detailValue}>
                 {card.detailInfo.location || 'ー'}
               </div>
             </div>
-
-            {/* ▼▼▼ ここから追加 ▼▼▼ */}
 
             {/* 福井キャンパス */}
             <div className={styles.detailRow}>

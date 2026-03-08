@@ -28,7 +28,7 @@ const InterviewDetailPage = () => {
   const breadcrumbItems = [
     { label: 'TOP', path: '/' },
     { label: '不登校とぼくら', path: '/04' },
-    { label: `インタビュー${id}`, path: `/interviews/${id}` }
+    { label: card ? card.title : `インタビュー${id}`, path: `/interviews/${id}` }
   ];
 
   if (!card) {
@@ -47,10 +47,10 @@ const InterviewDetailPage = () => {
   return (
     <div className={`${layoutStyles.pageContainer} ${styles.pageWrapper}`}>
       <Helmet>
-        <title>{card ? `${card.title} | ぼくらのみち` : 'インタビュー | ぼくらのみち'}</title>
+        <title>{card ? `【インタビュー】${card.title}｜ぼくらのみち` : 'インタビュー | ぼくらのみち'}</title>
         <meta name="description" content={card?.description?.slice(0, 120) || '不登校を経験した当事者のインタビューです。'} />
         <link rel="canonical" href={`https://bokuranomichi-fukui.com/interviews/${id}`} />
-        <meta property="og:title" content={card ? `${card.title} | ぼくらのみち` : 'インタビュー | ぼくらのみち'} />
+        <meta property="og:title" content={card ? `【インタビュー】${card.title}｜ぼくらのみち` : 'インタビュー | ぼくらのみち'} />
         <meta property="og:description" content={card?.description?.slice(0, 120) || '不登校を経験した当事者のインタビューです。'} />
         <meta property="og:url" content={`https://bokuranomichi-fukui.com/interviews/${id}`} />
         <meta property="og:type" content="article" />
@@ -64,7 +64,14 @@ const InterviewDetailPage = () => {
             "description": card.description?.slice(0, 120) || '',
             "datePublished": card.date || '',
             "url": `https://bokuranomichi-fukui.com/interviews/${id}`,
-            "publisher": {"@type": "Organization", "name": "ぼくらのみち"}
+            "publisher": {
+              "@type": "Organization", 
+              "name": "ぼくらのみち",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://bokuranomichi-fukui.com/title.png"
+              }
+            }
           })}</script>
         )}
       </Helmet>
