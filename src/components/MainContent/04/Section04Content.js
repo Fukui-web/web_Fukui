@@ -62,11 +62,13 @@ const Section04Content = () => {
         <div className={styles.sectionHeader}>
           <h3 className={styles.sectionTitle}>
             <span className={styles.titleLine1}>自分と同じ気持ちの人はいるかな。</span>
-            <span className={styles.titleLine2}>みんなのインタビューを見てみよう！</span>
+            <span className={styles.titleLine2}>不登校を体験したみんなのインタビューを見てみよう！</span>
           </h3>
         </div>
         <div className={styles.interviewCardArea}>
           <InterviewCard cardId={1} />
+          <div className={styles.dividerLine}></div>
+          <span className={styles.titleLine2}>支援者のみなさんからのメッセージ</span>
           <InterviewCard cardId={2} />
         </div>
       </div>

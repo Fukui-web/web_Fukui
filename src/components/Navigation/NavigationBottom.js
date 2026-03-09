@@ -43,15 +43,14 @@ const NavigationBottom = ({ onActionCompleted }) => {
     }
   };
 
-  // 寄付ボタンクリックハンドラ
-  const handleDonationClick = () => {
-    console.log("寄付ボタンがクリックされました");
-    // window.location.href = 'https://...'; // 寄付ページのURL
-
-    if (onActionCompleted) {
-      onActionCompleted();
-    }
-  };
+  // // 寄付ボタンクリックハンドラ
+  // const handleDonationClick = () => {
+  //   console.log("寄付ボタンがクリックされました");
+  //   // window.location.href = 'https://...'; // 寄付ページのURL
+  //   if (onActionCompleted) {
+  //     onActionCompleted();
+  //   }
+  // };
 
   return (
     <>
@@ -80,21 +79,20 @@ const NavigationBottom = ({ onActionCompleted }) => {
       >
         プロジェクトと私たちについて
       </div>
-
-      {/* 寄付のお願いセクション */}
+      {/* // 寄付のお願いセクション
       <div className={commonStyles.donationSection}>
         <h3 className={commonStyles.donationTitle}>寄付のお願い</h3>
         <div className={commonStyles.dottedDivider}></div>
         <p className={commonStyles.donationText}>
           たくさんの新しい情報をお届けするためにみなさんのご支援をお願いします。
         </p>
-        <button 
+        <button
           className={commonStyles.donationButton}
           onClick={handleDonationClick}
         >
           月500円から寄付をする
         </button>
-      </div>
+      </div> */}
     </>
   );
 };

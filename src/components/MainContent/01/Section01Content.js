@@ -104,7 +104,7 @@ const Section01Content = () => {
             <span className={styles.titleLine2}>不登校の原因って</span>
           </h3>
         </div>
-        <InterviewCard cardId={1} />
+        <InterviewCard cardId={2} />
         <div className={styles.dottedBorder}></div>
       </div>
 
@@ -172,6 +172,8 @@ const Section01Content = () => {
               title={card.title}
               description={card.description}
               buttonText={card.buttonText}
+              phone={card.phone}
+              url={card.url}
             />
           ))}
         </div>

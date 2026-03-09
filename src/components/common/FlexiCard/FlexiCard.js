@@ -6,7 +6,7 @@ import React from 'react';
 import styles from './FlexiCard.module.css';
 import newwindowIcon from '../../../assets/images/newwindow.png';
 
-const FlexiCard = ({ title, description, buttonText, onButtonClick }) => {
+const FlexiCard = ({ title, description, buttonText, onButtonClick, phone, url }) => {
   // タイトル内の\nを改行に変換
   const renderTitle = () => {
     return title.split('\n').map((line, index, array) => (
@@ -17,16 +17,31 @@ const FlexiCard = ({ title, description, buttonText, onButtonClick }) => {
     ));
   };
 
+  const handleButtonClick = () => {
+    if (url) {
+      window.open(url, '_blank', 'noopener noreferrer');
+    } else if (onButtonClick) {
+      onButtonClick();
+    }
+  };
+
   return (
     <div className={styles.flexiCard}>
       <h4 className={styles.flexiCardTitle}>{renderTitle()}</h4>
       <div className={styles.flexiCardDivider}></div>
       <p className={styles.flexiCardDescription}>{description}</p>
-      {buttonText && (
-        <button className={styles.flexiCardButton} onClick={onButtonClick}>
+      {phone ? (
+        <a className={styles.flexiCardButton} href={`tel:${phone}`}>
           <img src={newwindowIcon} alt="" className={styles.buttonIcon} />
-          {buttonText}
-        </button>
+          {phone}
+        </a>
+      ) : (
+        buttonText && (
+          <button className={styles.flexiCardButton} onClick={handleButtonClick}>
+            <img src={newwindowIcon} alt="" className={styles.buttonIcon} />
+            {buttonText}
+          </button>
+        )
       )}
     </div>
   );

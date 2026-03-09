@@ -23,21 +23,31 @@ const Section04 = () => {
                 </div>
             </ContentFrame>
 
-            {/* インタビューセクション */}
+            {/* インタビューセクション - 体験者 */}
             <div className={styles.interviewSection}>
                 <div className={styles.interviewHeader}>
                     <span className={styles.interviewTag}>自分と同じ気持ちの人はいるのかな。</span>
-                    <h3 className={styles.interviewTitle}>みんなのインタビューを見てみよう！</h3>
+                    <h3 className={styles.interviewTitle}>不登校を体験したみんなのインタビューを見てみよう！</h3>
                 </div>
                 <div className={styles.interviewCardArea}>
                     <InterviewCard cardId={1} />
+                </div>
+            </div>
+
+            {/* 区切り */}
+            <div className={styles.dividerLine}></div>
+
+            {/* インタビューセクション - 支援者 */}
+            <div className={styles.interviewSection}>
+                <div className={styles.interviewHeader}>
+                    <h3 className={styles.interviewTitle}>支援者のみなさんからのメッセージ</h3>
+                </div>
+                <div className={styles.interviewCardArea}>
                     <InterviewCard cardId={2} />
                 </div>
 
                 <button className={styles.moreButton}>
-                    <div className={styles.buttonIconContainer}>
-                        <div className={styles.playIcon}></div>
-                    </div>
+                    <div className={styles.playIcon}></div>
                     <span>インタビューをもっと見る</span>
                 </button>
             </div>

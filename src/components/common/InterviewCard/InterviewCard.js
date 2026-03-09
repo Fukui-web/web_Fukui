@@ -27,15 +27,10 @@ const InterviewCard = ({ cardId }) => {
       <div className={styles.contentContainer}>
         <div className={styles.mainContent}>
           <h4 className={styles.cardTitle}>{card.title}</h4>
+          <div className={styles.divider}></div>
           <p className={styles.cardDescription}>{card.description}</p>
         </div>
-        <div className={styles.divider}></div>
-        <div className={styles.cardFooter}>
-          <div className={styles.authorIcon}>{card.authorInitial}</div>
-          <span className={styles.authorName}>{card.authorName}</span>
-          <span className={styles.cardDate}>{card.date}</span>
         </div>
-      </div>
     </div>
   );
 };

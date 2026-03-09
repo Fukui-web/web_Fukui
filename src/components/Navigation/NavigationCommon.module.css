@@ -8,7 +8,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0px 0px 0px 30px;
+  padding: 0px 0px 0px 8px;
   gap: 5px; /* 10px → 5px に変更 タイトルとサブメニューの間隔を狭める */
   border-radius: 5px;
   overflow: visible;
@@ -80,10 +80,9 @@
   line-height: 20px; /* 28px → 20px Figmaの2行タイトルに合わせる */
   letter-spacing: 0.05em; /* 追加 */
   color: var(--color-black);
-  white-space: pre-wrap; /* nowrap → pre-wrap 改行を許可し、\nも反映 */
+  white-space: pre-wrap; /* 改行を許可し、\nも反映 */
   overflow: visible; /* hidden → visible はみ出しを許可 */
   max-width: 100%;
-  word-break: keep-all; /* 日本語の単語途中で改行しない */
   transition: color 0.2s;
 }
 

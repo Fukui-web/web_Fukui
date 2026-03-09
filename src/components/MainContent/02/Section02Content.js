@@ -68,6 +68,8 @@ const Section02Content = () => {
               title={card.title}
               description={card.description}
               buttonText={card.buttonText}
+              phone={card.phone}
+              url={card.url}
             />
           ))}
         </div>
@@ -89,6 +91,8 @@ const Section02Content = () => {
               title={card.title}
               description={card.description}
               buttonText={card.buttonText}
+              phone={card.phone}
+              url={card.url}
             />
           ))}
         </div>

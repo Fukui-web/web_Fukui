@@ -27,8 +27,8 @@ const InterviewDetailPage = () => {
 
   const breadcrumbItems = [
     { label: 'TOP', path: '/' },
-    { label: '不登校とぼくら', path: '/04' },
-    { label: card ? card.title : `インタビュー${id}`, path: `/interviews/${id}` }
+    { label: '不登校とぼくら', path: '/section04' },
+    { label: card ? (card.breadcrumbLabel || card.title) : `インタビュー${id}`, path: `/interviews/${id}` }
   ];
 
   if (!card) {
@@ -80,28 +80,52 @@ const InterviewDetailPage = () => {
       <div className={styles.contentArea}>
         {/* タイトル部分 */}
         <div className={styles.titleSection}>
-          <p className={styles.subTitle}>インタビュー</p>
-          <h1 className={styles.mainTitle}>不登校とぼくら</h1>
+          {card.type === 'supporter' ? (
+            <>
+              <p className={styles.subTitle}>メッセージ</p>
+              <h1 className={styles.mainTitle}>支援者のみなさんからの<br />メッセージ</h1>
+            </>
+          ) : (
+            <>
+              <p className={styles.subTitle}>インタビュー</p>
+              <h1 className={styles.mainTitle}>不登校とぼくら</h1>
+            </>
+          )}
           <img src={dotlineImage} alt="点線" className={styles.dotline} />
         </div>
 
         {/* プロフィール部分 */}
         <div className={styles.profileSection}>
           <div className={styles.profileIcon}>
-            <img src={ellipseImage} alt="プロフィール" className={styles.iconImage} />
+            <img src={card.iconImage || ellipseImage} alt="プロフィール" className={styles.iconImage} />
           </div>
           <div className={styles.profileInfo}>
-            <p className={styles.profileName}>
-              {card.fullName}さん（{card.profile}）
-            </p>
-            <p className={styles.profileDate}>
-              インタビュー時期：{card.interviewDate}
-            </p>
+            {card.type === 'supporter' ? (
+              <>
+                <p className={styles.profileName}>{card.profile}</p>
+                <p className={styles.profileName}>{card.fullName}さん</p>
+              </>
+            ) : (
+              <>
+                <p className={styles.profileName}>
+                  {card.fullName}さん（{card.profile}）
+                </p>
+                <p className={styles.profileDate}>
+                  インタビュー時期：{card.interviewDate}
+                </p>
+              </>
+            )}
           </div>
         </div>
 
         {/* 本文 */}
         <div className={styles.contentText}>
+          {card.type === 'supporter' && card.description && (
+            <>
+              <h2 className={styles.sectionHeading}>{card.description}</h2>
+              <div className={styles.sectionDivider}></div>
+            </>
+          )}
           {card.introduction && card.introduction.map((paragraph, index) => (
             <p key={index} className={styles.paragraph}>{paragraph}</p>
           ))}
@@ -109,7 +133,7 @@ const InterviewDetailPage = () => {
 
         {/* インタビュー画像 */}
         <div className={styles.interviewImageContainer}>
-          <img src={nakataniImage} alt="インタビュー" className={styles.interviewImage} />
+          <img src={card.image} alt="インタビュー" className={styles.interviewImage} />
         </div>
 
         {/* 目次セクション */}
