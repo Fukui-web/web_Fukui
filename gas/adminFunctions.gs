@@ -33,6 +33,7 @@ const ADMIN_EMAILS = [
   'admin@example.com',
   'manager@example.com'
   // 必要に応じて追加
+  // 追加(2026/04/12)
 ];
 
 /**
