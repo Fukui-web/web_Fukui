@@ -16,6 +16,8 @@ import { getExperiencesByQuestion } from '../../../utils/gasApi';
 
 const Section01Content = () => {
   const navigate = useNavigate();
+  const showSupportExperienceSection2 =
+    process.env.REACT_APP_SHOW_SECTION01_SUPPORT_EXPERIENCES === 'true';
   
   // 不登校初期の体験談
   const [earlyExperiences, setEarlyExperiences] = useState([]);
@@ -179,26 +181,28 @@ const Section01Content = () => {
         </div>
       </div>
 
-      {/* 体験談セクション2 */}
-      <div className={styles.supportSection2}>
-        <div className={styles.sectionHeader}>
-          <h3 className={styles.sectionTitle}>
-            <span className={styles.titleLine2Support}>みんなの体験談を見てみよう</span>
-            <span className={styles.titleLine1Support}>学校の支援制度はどうだった？</span>
-          </h3>
+      {/* 体験談セクション2（将来利用予定のためフラグで表示制御） */}
+      {showSupportExperienceSection2 && (
+        <div className={styles.supportSection2}>
+          <div className={styles.sectionHeader}>
+            <h3 className={styles.sectionTitle}>
+              <span className={styles.titleLine2Support}>みんなの体験談を見てみよう</span>
+              <span className={styles.titleLine1Support}>学校の支援制度はどうだった？</span>
+            </h3>
+          </div>
+          <div className={styles.tweetCardArea}>
+            <TweetCard cardId={3} />
+            <TweetCard cardId={4} />
+          </div>
+          <button
+            className={styles.moreButton2}
+            onClick={() => navigate('/experiences')}
+          >
+            <img src={vectorRB} alt="アイコン" className={styles.playIcon} />
+            <span>体験談をさがす</span>
+          </button>
         </div>
-        <div className={styles.tweetCardArea}>
-          <TweetCard cardId={3} />
-          <TweetCard cardId={4} />
-        </div>
-        <button 
-          className={styles.moreButton2}
-          onClick={() => navigate('/experiences')}
-        >
-          <img src={vectorRB} alt="アイコン" className={styles.playIcon} />
-          <span>体験談をさがす</span>
-        </button>
-      </div>
+      )}
 
       {/* 行政・医療機関一覧ボタン */}
       <button className={styles.listButton}>

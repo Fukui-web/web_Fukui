@@ -60,6 +60,24 @@ REACT_APP_ADMIN_EMAILS=admin1@example.com,admin2@example.com
 1. Secrets を更新しただけでは反映されません
 2. `master` に新しい commit を push して再ビルドが必要です
 
+### 4-1. CI/CD での環境変数運用ルール（記録）
+
+GitHub Actions などの CI/CD でビルドする場合、フロントエンドが参照する `REACT_APP_` 系の値は、次のいずれかで必ずビルド時に渡します。
+
+1. Actions の Variables / Secrets に同名キーを登録する
+2. Workflow の `build` ステップで `env` として直接渡す
+
+使い分けの目安:
+
+1. 秘密情報（例: API の認証情報）は `Secrets`
+2. 表示フラグなど秘密でない値は `Variables` でも可
+
+このリポジトリの現行設定:
+
+1. [.github/workflows/deploy.yml](.github/workflows/deploy.yml) は `secrets.REACT_APP_*` を参照
+2. そのため、値を `Variables` に置く場合は workflow 側を `vars.*` 参照に変更するか、`env` に直接渡す必要があります
+3. 例: `REACT_APP_SHOW_SECTION01_SUPPORT_EXPERIENCES` を CI/CD で固定したい場合も同様です
+
 ## 5. 動作確認
 
 1. 管理者アカウントでログイン
@@ -87,3 +105,7 @@ REACT_APP_ADMIN_EMAILS=admin1@example.com,admin2@example.com
 3. GAS を再デプロイ
 4. GitHub Repository secrets に3項目を設定
 5. `master` に push して Actions 成功を確認
+
+必要に応じて追加:
+
+1. UI 表示フラグ（例: `REACT_APP_SHOW_SECTION01_SUPPORT_EXPERIENCES`）を CI/CD 側にも設定
