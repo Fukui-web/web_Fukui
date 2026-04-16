@@ -290,6 +290,7 @@ const PathsContent = () => {
         onClose={() => setIsModalOpen(false)}
         filterConfig={filterConfig}
         onApply={handleFilterApply}
+        showPeriodTab={false}
       />
       <Footer />
     </div>
