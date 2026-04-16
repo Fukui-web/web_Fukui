@@ -205,7 +205,10 @@ const Section01Content = () => {
       )}
 
       {/* 行政・医療機関一覧ボタン */}
-      <button className={styles.listButton}>
+      <button 
+        className={styles.listButton}
+        onClick={() => navigate('/school-info')}
+      >
         <img src={vectorRB} alt="アイコン" className={styles.playIcon} />
         <span>行政・医療機関一覧を見る</span>
       </button>
