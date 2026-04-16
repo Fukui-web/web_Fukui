@@ -88,18 +88,7 @@ const FlexiCardListPage = () => {
 
           <h2 className={styles.sectionTitle}>医療機関／子どもの発達障害・心療内科</h2>
           <div className={styles.sectionDivider}></div>
-          <div className={styles.flexiCardArea}>
-            {getCardsByCategory('medical').map((card) => (
-              <FlexiCard
-                key={card.id}
-                title={card.title}
-                description={card.description}
-                buttonText={card.buttonText}
-                phone={card.phone}
-                url={card.url}
-              />
-            ))}
-          </div>
+          <p className={styles.comingSoon}>Coming Soon</p>
 
         </section>
       </div>
