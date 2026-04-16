@@ -65,3 +65,11 @@
   background-color: #cccccc;
   margin-bottom: 8px;
 }
+
+.comingSoon {
+  margin: 16px 0 24px 0;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  color: #666666;
+}
