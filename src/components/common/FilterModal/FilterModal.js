@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom'; // 1. ReactDOMをインポート
 import styles from './FilterModal.module.css';
 
-const FilterModal = ({ isOpen, onClose, filterConfig, onApply }) => {
+const FilterModal = ({ isOpen, onClose, filterConfig, onApply, showPeriodTab = true }) => {
   const [activeTab, setActiveTab] = useState('condition'); // 'condition' or 'period'
   const [selectedTags, setSelectedTags] = useState([]);
 
@@ -138,12 +138,14 @@ const FilterModal = ({ isOpen, onClose, filterConfig, onApply }) => {
           >
             条件で絞りこむ
           </button>
-          <button
-            className={`${styles.tab} ${activeTab === 'period' ? styles.activeTab : ''}`}
-            onClick={() => handleTabChange('period')}
-          >
-            時期で絞りこむ
-          </button>
+          {showPeriodTab && (
+            <button
+              className={`${styles.tab} ${activeTab === 'period' ? styles.activeTab : ''}`}
+              onClick={() => handleTabChange('period')}
+            >
+              時期で絞りこむ
+            </button>
+          )}
         </div>
 
         <div className={styles.filterContent}>
