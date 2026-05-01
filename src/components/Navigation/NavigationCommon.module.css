@@ -1,5 +1,49 @@
 /* ナビゲーション共通スタイル - デスクトップとモバイルで共通 */
 
+/* ナビパネル共通（見た目のみ・位置は各CSSで定義） */
+.navPanel {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  isolation: isolate;
+  width: 270px;
+  background: var(--color-white);
+  border: 2px solid var(--color-black);
+  border-radius: var(--radius-l);
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.navPanel::-webkit-scrollbar {
+  display: none;
+}
+
+/* ナビアイテムコンテナ（共通・PC・スマホ同一） */
+.navItemsContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-top: 80px;
+}
+
+/* 縦線（共通） */
+.verticalLine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 17px;
+  background-image: url('../../assets/images/vector.png');
+  background-size: 17px 100%;
+  background-repeat: repeat-y;
+  background-position: top;
+  z-index: 8;
+}
+
 /* ナビアイテム */
 .navItem {
   width: fit-content; /* 100% → fit-content テキスト幅に合わせる */

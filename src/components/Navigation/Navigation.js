@@ -1,22 +1,18 @@
 import React from 'react';
-// useNavigate は不要になったため削除
 import styles from '../../styles/Main.module.css';
+import commonStyles from './NavigationCommon.module.css';
 import NavigationHeader from './NavigationHeader';
 import NavigationItem from './NavigationItem';
-import NavigationBottom from './NavigationBottom'; // ★追加
+import NavigationBottom from './NavigationBottom';
 import { navigationItems } from '../../data/navigationItems';
-// searchItems, commonStyles は NavigationBottom 内で使うのでここでは不要
 
 const Navigation = () => {
-  // ナビゲーション項目以外のロジックは NavigationBottom に移動しました
-
   return (
-    <div className={styles.navigation}>
-      {/* ナビゲーションヘッダー */}
+    <div className={`${styles.navigation} ${commonStyles.navPanel}`}>
       <NavigationHeader isHamburger={false} />
-      
-      {/* ナビゲーション項目 */}
-      <div className={styles.navItemsContainer}>
+
+      <div className={commonStyles.navItemsContainer}>
+        <div className={commonStyles.verticalLine} />
         {navigationItems.map((item, index) => (
           <NavigationItem 
             key={index} 
@@ -28,7 +24,6 @@ const Navigation = () => {
         ))}
       </div>
 
-      {/* ★共通コンポーネント: 探してみよう / プロジェクト / 寄付 */}
       <NavigationBottom />
     </div>
   );

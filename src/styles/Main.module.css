@@ -73,31 +73,16 @@
   }
 }
 
-/* ナビゲーション */
+/* ナビゲーション（位置・サイズ固有のみ・見た目はnavPanelクラスで管理） */
 .navigation {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 32px 23px; /* 32px 30px → 32px 23px に変更 */
-  isolation: isolate;
-  width: 270px; /* 固定幅 */
-  height: auto; /* calc(100vh - 102px) → auto 画面サイズに適応 */
-  max-height: calc(100vh - 51px - 20px); /* top(51px) + 下部余白(20px)を引く */
-  min-height: auto; /* 670px → auto 画面サイズに応じて調整 */
-  background: var(--color-white);
-  border: 2px solid var(--color-black);
-  border-radius: var(--radius-l);
+  padding: 32px 23px;
+  max-height: calc(100vh - 51px - 20px);
   flex: none;
   order: 0;
   flex-shrink: 0;
   z-index: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
-  scrollbar-width: none; /* Firefox用 */
-  -ms-overflow-style: none; /* IE/Edge用 */
   position: fixed;
-  left: 50px; /* 固定値 */
+  left: 50px;
   top: 51px;
 }
 
@@ -108,34 +93,7 @@
   }
 }
 
-/* Chrome, Safari, Operaでスクロールバーを非表示 */
-.navigation::-webkit-scrollbar {
-  display: none;
-}
-
-/* ナビアイテムコンテナ - ハンバーガーメニューと同じ構造 */
-.navItemsContainer {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  margin-top: 80px; /* 90px → 74px: ヘッダー(44px) + gap(30px) = Figma準拠 */
-}
-
-/* ナビゲーション左側の黒い縦線 - Vector画像を配置 */
-.navigation::before {
-  content: '';
-  position: absolute;
-  width: 17px;
-  height: calc(100% - 210px); /* 「みんなで知恵を出し合おう」までの高さに調整 */
-  left: 23px; /* ハンバーガーメニューの-7pxとパディング30pxを考慮して23px */
-  top: 114px; /* 149px → 125px margin-top 74px→50pxに合わせて24px上げる */
-  background-image: url('../assets/images/vector.png');
-  background-size: 17px 100%; /* 幅を固定し、高さを94%に調整 */
-  background-repeat: repeat-y; /* 繰り返しなし */
-  background-position: top;
-  z-index: 8;
-}
+/* 縦線は NavigationCommon.module.css の .verticalLine で管理 */
 
 /* ハンバーガーメニュー用 */
 .hamburgerMenu {

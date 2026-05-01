@@ -85,32 +85,18 @@
   line-height: 1;
 }
 
-/* モバイル版ナビゲーション */
+/* モバイル版ナビゲーション（位置・サイズ固有のみ・見た目はnavPanelクラスで管理） */
 .navigation {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 32px 23px; /* 32px 30px → 32px 23px に変更 */
-  isolation: isolate;
+  padding: 32px 23px;
+  padding-top: 68px;
   position: fixed;
   top: 0;
-  right: -270px; /* 初期状態では画面外に */
+  right: -270px;
   height: 100vh;
+  min-width: 270px;
+  min-height: 670px;
   transition: right 0.3s ease;
   z-index: 103;
-  width: 270px; /* 常に固定幅270px */
-  min-width: 270px; /* 最小幅も270px */
-  overflow-y: auto;
-  overflow-x: hidden; /* 横スクロールを防止 */
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  padding-top: 68px; /* 84px → 60px Main.module 74px→50pxに合わせて24px下げる */
-  background-color: #FFFFFF;
-  background: var(--color-white);
-  border: 2px solid var(--color-black);
-  border-radius: var(--radius-l);
-  min-height: 670px;
 }
 
 /* Chrome, Safari, Operaでスクロールバーを非表示 */
@@ -123,32 +109,7 @@
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2); /* 右側メニューに合わせて影の方向も変更 */
 }
 
-/* ナビアイテムコンテナ - 縦線の高さ計算のためのコンテナ */
-.navItemsContainer {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  margin-top: 80px;
-}
+/* navItemsContainer は NavigationCommon.module.css で管理 */
 
-/* ナビゲーション左側の黒い縦線 - 実際のDOMノードとして追加 */
-.verticalLine {
-  position: absolute;
-  width: 17px;
-  left: -7px; /* ナビアイテムのpadding-left: 30pxを考慮して調整 */
-  top: 0px; /* 0 → 24px Main.module 74px→50pxに合わせて24px下げる */
-  background-image: url('../../assets/images/vector.png');
-  background-size: 17px 100%;
-  background-repeat: repeat-y;
-  background-position: top;
-  z-index: 8;
-}
-
-/* ::before擬似要素は無効化 */
-.navigation::before {
-  content: none;
-}
-
-/* ナビゲーションアイテム間のスペースはgapプロパティで管理 */
+/* 縦線は NavigationCommon.module.css の .verticalLine で管理 */
 
