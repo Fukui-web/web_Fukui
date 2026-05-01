@@ -1,5 +1,6 @@
 // src/data/interviewCards.js
 import nakataniImage from '../assets/images/nakatani.png';
+import nakataniIconImage from '../assets/images/nakatani_icon.png';
 import nagataImage from '../assets/images/nagata.png';
 import nagataIconImage from '../assets/images/nagata_icon.png';
 
@@ -14,6 +15,7 @@ const interviewCards = [
     authorInitial: "R",
     date: "2025.07.01",
     image: nakataniImage,
+    iconImage: nakataniIconImage,
 
     // ▼ 詳細ページ用 ▼
     fullName: "中谷 悠人",

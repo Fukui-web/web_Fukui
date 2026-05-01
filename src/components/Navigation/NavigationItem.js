@@ -18,17 +18,15 @@ const NavigationItem = ({ title, subItems = [], index, isHamburger = false, path
   const hasSubPaths = subItems.length > 0 && typeof subItems[0] === 'object';
 
   // タイトルの処理（ハンバーガーメニューでは改行なし、通常ナビでは改行あり）
-  const formattedTitle = isHamburger
-    ? title.replace(/\\n/g, ' ').replace(/\n/g, ' ')
-    : title
-        .replace(/\\n/g, '\n')
-        .split('\n')
-        .map((line, i, arr) => (
-          <React.Fragment key={i}>
-            {line}
-            {i < arr.length - 1 && <br />}
-          </React.Fragment>
-        ));
+  const formattedTitle = title
+    .replace(/\\n/g, '\n')
+    .split('\n')
+    .map((line, i, arr) => (
+      <React.Fragment key={i}>
+        {line}
+        {i < arr.length - 1 && <br />}
+      </React.Fragment>
+    ));
 
   // 全体クリック（文字列subItems / 03以外）
   const handleItemClick = () => {

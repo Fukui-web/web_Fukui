@@ -129,7 +129,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  margin-top: 84px; /* 90px → 66px Main.module 74px→50pxに合わせて24px下げる */
+  margin-top: 80px;
 }
 
 /* ナビゲーション左側の黒い縦線 - 実際のDOMノードとして追加 */
