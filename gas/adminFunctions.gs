@@ -28,6 +28,17 @@ const STATUS = {
 // メール送信設定
 const FORM_URL = 'https://docs.google.com/forms/d/YOUR_FORM_ID/edit'; // フォームの編集URLに置き換えてください
 
+/**
+ * メール送信が有効かどうかをスクリプトプロパティから判定する
+ * GASエディタの「プロジェクトの設定」→「スクリプトプロパティ」で
+ * キー: EMAIL_ENABLED, 値: false を設定すると無効になる
+ * プロパティ未設定またはそれ以外の値の場合は有効（デフォルト）
+ */
+function isEmailEnabled() {
+  const value = PropertiesService.getScriptProperties().getProperty('EMAIL_ENABLED');
+  return value !== 'false';
+}
+
 // 管理者メールアドレスのリスト（実際のメールアドレスに変更してください）
 const ADMIN_EMAILS = [
   'admin@example.com',
@@ -385,7 +396,7 @@ function approveExperience(id) {
       const detail = sheet.getRange(sheetRow, detailIndex + 1).getValue();
       const title = String(detail || '').substring(0, 50) + '...';
       
-      if (email) {
+      if (email && isEmailEnabled()) {
         sendApprovalEmail(email, authorName, title);
       }
     } catch (emailError) {
@@ -511,7 +522,7 @@ function rejectExperience(id, reason) {
       const detail = sheet.getRange(sheetRow, detailIndex + 1).getValue();
       const title = String(detail || '').substring(0, 50) + '...';
       
-      if (email) {
+      if (email && isEmailEnabled()) {
         sendRejectionEmail(email, authorName, title, reason);
       }
     } catch (emailError) {
