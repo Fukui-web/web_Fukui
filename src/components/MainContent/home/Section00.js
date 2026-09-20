@@ -53,7 +53,9 @@ const Section00 = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            福井県教育総合研究所教育相談センター
+            福井県教育総合研究所
+            <br className={styles.mobileBreak} />
+            教育相談センター
           </a><br />
           <a href="tel:0120968104" className={styles.phoneLink}>0120-96-8104</a><br />
           <span className={styles.consultationNote}>(フリーダイヤル)24時間対応</span>

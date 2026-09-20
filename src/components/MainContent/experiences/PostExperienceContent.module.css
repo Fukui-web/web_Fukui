@@ -112,6 +112,27 @@
   font-weight: bold;
 }
 
+.numberedList {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.numberedList li {
+  margin-bottom: 25px;
+}
+
+.numberedList li:last-child {
+  margin-bottom: 0;
+}
+
+.closingMessage {
+  text-align: center;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin: 25px 0 0 0;
+}
+
 /* Googleフォームリンクコンテナ */
 .formContainer {
   width: 100%;

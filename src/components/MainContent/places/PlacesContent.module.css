@@ -281,4 +281,17 @@
   }
   .cardsGrid::-webkit-scrollbar { display: none; }
   .cardsGrid > * { flex: 0 0 auto; scroll-snap-align: start; }
+
+  .cityCardsGrid {
+    display: flex;
+    overflow-x: auto;
+    gap: var(--space-m);
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 10px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .cityCardsGrid::-webkit-scrollbar { display: none; }
+  .cityCardsGrid > * { flex: 0 0 auto; scroll-snap-align: start; }
 }

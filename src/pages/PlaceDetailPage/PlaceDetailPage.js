@@ -276,7 +276,21 @@ const PlaceDetailPage = () => {
             </div>
             <div className={styles.detailRow}>
               <span className={styles.detailLabel}>料金</span>
-              <span className={styles.detailValue}>{card.detailInfo.fee}</span>
+              <span className={styles.detailValue}>
+                {card.detailInfo.feeUrl ? (
+                  <a
+                    href={card.detailInfo.feeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.websiteLink}
+                  >
+                    {card.detailInfo.fee}
+                    <img src={newwindowIcon} alt="新しいウィンドウで開く" className={styles.linkIcon} />
+                  </a>
+                ) : (
+                  card.detailInfo.fee
+                )}
+              </span>
             </div>
             <div className={styles.detailRow}>
               <span className={styles.detailLabel}>その他</span>

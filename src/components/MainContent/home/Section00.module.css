@@ -191,6 +191,16 @@
   color: #007BFF;
 }
 
+.mobileBreak {
+  display: none;
+}
+
+@media (max-width: 560px) {
+  .mobileBreak {
+    display: block;
+  }
+}
+
 /* 体験談セクション */
 .experienceSection {
   width: 100%;
