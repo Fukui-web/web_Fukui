@@ -27,7 +27,7 @@ const NavigationHeader = ({ isHamburger = false, onNavigate }) => {
         onClick={handleTitleClick}
         style={{ cursor: 'pointer' }}
       >
-        当事者たちでつくる、不登校情報サイト
+        経験者の声から生まれた不登校情報サイト
       </p>
       
       <div 

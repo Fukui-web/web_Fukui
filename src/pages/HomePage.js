@@ -25,10 +25,10 @@ const HomePage = () => {
   return (
     <Layout>
       <Helmet>
-        <title>ぼくらのみち｜当事者たちでつくる、不登校情報サイト</title>
+        <title>ぼくらのみち｜経験者の声から生まれた不登校情報サイト</title>
         <meta name="description" content="このサイトは当事者たちによる当事者たちのための本当に欲しい情報を集めたウェブサイトです。それぞれのご家庭に合った解決法を見つけるヒントとなるように、専門家のご意見と共に発信しています。" />
         <link rel="canonical" href="https://bokuranomichi-fukui.com/" />
-        <meta property="og:title" content="ぼくらのみち｜当事者たちでつくる、不登校情報サイト" />
+        <meta property="og:title" content="ぼくらのみち｜経験者の声から生まれた不登校情報サイト" />
         <meta property="og:description" content="このサイトは当事者たちによる当事者たちのための本当に欲しい情報を集めたウェブサイトです。" />
         <meta property="og:url" content="https://bokuranomichi-fukui.com/" />
         <meta property="og:type" content="website" />

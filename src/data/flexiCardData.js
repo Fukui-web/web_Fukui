@@ -35,6 +35,14 @@ const flexiCardData = [
     buttonText: '公式サイトをみる',
     url: 'https://www.f-edu.u-fukui.ac.jp/~life2020/',
   },
+  {
+    id: 12,
+    category: 'school',
+    title: '高校内居場所カフェ',
+    description: '学校内にある、家庭や学校関係者以外の、信頼できる大人や友達と安心して過ごすことができる第三の居場所。',
+    buttonText: '公式サイトをみる',
+    url: 'https://www.pref.fukui.lg.jp/doc/016407/kateifukusi/kounaikafe.html',
+  },
 
   // ── 行政の支援／福井県 ────────────────────────
   {
