@@ -6,7 +6,6 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    margin-right: 8px;
 }
 /* Section05 スタイル - 改善されたレイアウト */
 .section05 {
@@ -189,7 +188,7 @@
     gap: var(--space-m);
     width: 100%;
     overflow-x: auto;
-    overflow-y: hidden;
+    overflow-y: visible;
     scrollbar-width: none;
     -ms-overflow-style: none;
 }
@@ -233,6 +232,9 @@
     width: 24px;
     height: 24px;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .playArrowIcon {
@@ -513,7 +515,7 @@
         max-width: 100%;
     }
 
-    .mainTitle {
+    .mainTitle {
         line-height: var(--line-height-tight);
         width: 100%;
         max-width: 300px; /* タイトルの最大幅を制限 */
@@ -561,7 +563,7 @@
 }
 
 @media (max-width: 560px) {
-    .mainTitle {
+    .mainTitle {
         line-height: var(--line-height-tight);
         max-width: 250px; /* さらに小さい画面での最大幅 */
     }

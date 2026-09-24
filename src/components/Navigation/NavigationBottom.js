@@ -91,7 +91,7 @@ const NavigationBottom = ({ onActionCompleted }) => {
       </div>
 
       <button className={commonStyles.emailButton} onClick={handleContactClick}>
-        お問い合わせはこちら
+        メールでお問い合わせ
       </button>
       {/* // 寄付のお願いセクション
       <div className={commonStyles.donationSection}>

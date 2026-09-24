@@ -51,7 +51,7 @@ const Section05 = () => {
 
             {/* 体験談セクション追加 */}
             <ExperienceSection 
-                title={"みんなの体験談を見てみよう！\n中学卒業後の進路をどう選んだ？"}
+                title={"みんなの体験談をみてみよう！\n中学卒業後の進路をどう選んだ？"}
                 questionId="4-1-2"
                 limit={6}
                 moreButtonText="卒業後の進路の体験談を見る"
