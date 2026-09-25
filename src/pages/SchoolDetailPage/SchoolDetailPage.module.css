@@ -168,16 +168,36 @@
 
 /* 小タイトル (公式サイトと同じ雰囲気で) */
 .detailLabel {
+  position: relative;
   font-size: var(--font-s);
   font-weight: bold;
   color: var(--color-black);
   width: 100%;
-  
-  /* ▼ 黒い点線 ▼ */
-  border-bottom: 2px dotted var(--color-black);
-  
+
+  /* ▼ 両端に丸ポイントのある実線 ▼ */
+  border-bottom: 2px solid var(--color-accent-school);
+
   padding-bottom: 5px;
   margin-bottom: 10px; /* 内容との間隔 */
+}
+
+.detailLabel::before,
+.detailLabel::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-accent-school);
+}
+
+.detailLabel::before {
+  left: 0;
+}
+
+.detailLabel::after {
+  right: 0;
 }
 
 /* 内容 */

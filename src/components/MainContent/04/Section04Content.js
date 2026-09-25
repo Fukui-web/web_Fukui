@@ -4,6 +4,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import layoutStyles from '../commonPageLayout.module.css';
 import styles from './Section04Content.module.css';
+import commonStyles from '../SectionCommon.module.css';
 import Footer from '../../common/Footer';
 import Breadcrumbs from '../../common/Breadcrumbs';
 import InterviewCard from '../../common/InterviewCard/InterviewCard';
@@ -38,20 +39,20 @@ const Section04Content = () => {
       <Breadcrumbs sectionNumber="04" sectionTitle="不登校とぼくら" />
 
       {/* タイトル部分 */}
-      <div className={styles.titleSection}>
-        <img src={road04Image} alt="ROAD 04" className={styles.roadImage} />
+      <div className={commonStyles.pageTitleSection}>
+        <img src={road04Image} alt="ROAD 04" className={commonStyles.pageRoadImage} />
         <p className={styles.subTitle}>インタビュー</p>
-        <h1 className={styles.mainTitle}>不登校とぼくら</h1>
-        <img src={dotlineImage} alt="点線" className={styles.dotline} />
+        <h1 className={commonStyles.pageMainTitle}>不登校とぼくら</h1>
+        <img src={dotlineImage} alt="点線" className={commonStyles.pageDotline} />
       </div>
 
       {/* 説明セクション */}
-      <div className={styles.descriptionSection}>
-        <h2 className={styles.descriptionTitle}>
+      <div className={commonStyles.pageDescriptionSection}>
+        <h2 className={commonStyles.pageDescriptionTitle}>
           大丈夫。あなただけじゃない。
         </h2>
-        <div className={styles.dividerLine}></div>
-        <p className={styles.descriptionText}>
+        <div className={commonStyles.pageDividerLine}></div>
+        <p className={commonStyles.pageDescriptionText}>
           福井県内で不登校を身近に経験した方々にインタビューをしました。当時のこと、今のこと、今から考えること・・・<br />
           なにかヒントが見つかるかもしれません。
         </p>
@@ -69,7 +70,7 @@ const Section04Content = () => {
           <InterviewCard cardId={1} />
           <InterviewCard cardId={3} />
           <InterviewCard cardId={4} />
-          <div className={styles.dividerLine}></div>
+          <div className={commonStyles.pageDividerLine}></div>
           <span className={styles.titleLine2}>支援者のみなさんからのメッセージ</span>
           <InterviewCard cardId={2} />
         </div>

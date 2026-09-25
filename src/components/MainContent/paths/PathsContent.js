@@ -206,7 +206,7 @@ const PathsContent = () => {
   };
 
   return (
-    <div className={layoutStyles.pageContainer}>
+    <div className={`${layoutStyles.pageContainer} ${styles.pageRoot}`}>
       <Helmet>
         <title>卒業後の進路をさがす｜ぼくらのみち</title>
         <meta name="description" content="中学卒業後の進路、通信制高校・定時制高校・フリースクールなど福井県内の選択肢を掲載しています。" />

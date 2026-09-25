@@ -7,84 +7,16 @@
   align-items: center;
 }
 
-.titleSection {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* 修正: 余白統一 */
-  padding: 0 30px 20px;
-  gap: var(--space-xs);
-  width: 100%;
-  max-width: 540px;
-  box-sizing: border-box; /* 追加 */
-}
-
-.roadImage {
-  height: auto;
-  max-width: 200px;
-  margin-bottom: -10px;
-}
-
-.mainTitle {
-  font-family: var(--font-primary);
-  font-size: var(--font-title-story);
-  font-weight: 600;
-  color: var(--color-black);
-  text-align: center;
-  margin: 0;
-  line-height: var(--line-height-tight);
-}
-
-.dotline {
-  width: 100%;
-  max-width: 480px;
-  height: auto;
-  margin: 5px 0;
-}
-
-.descriptionSection {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  /* 修正: 20px -> 30px に統一 */
-  padding: 30px 30px; 
-  gap: var(--space-m);
-  width: 100%;
-  max-width: 540px;
-  box-sizing: border-box; /* 追加 */
-}
-
-.descriptionTitle {
-  font-family: var(--font-primary);
-  font-style: normal;
-  font-weight: 600;
-  font-size: var(--font-heading);
-  line-height: var(--line-height-normal);
-  color: var(--color-black);
-  margin: 0;
-}
-
-.dividerLine {
-  width: 100%;
-  border-bottom: 1px solid #CCCCCC;
-}
-
-.descriptionText {
-  font-family: var(--font-primary);
-  font-style: normal;
-  font-weight: 400;
-  font-size: var(--font-s);
-  line-height: var(--line-height-loose);
-  color: var(--color-black);
-  margin: 0;
-}
+/* titleSection, roadImage, mainTitle, dotline, descriptionSection,
+   descriptionTitle, dividerLine, descriptionText は
+   ../SectionCommon.module.css の pageXxx クラスに統一しました */
 
 .consultationSection {
   display: flex;
   flex-direction: column;
   align-items: center;
   /* 修正: 20px -> 30px に統一 */
-  padding: 30px 30px; 
+  padding: 20px 20px; 
   gap: var(--space-l);
   width: 100%;
   max-width: 540px;
@@ -96,7 +28,7 @@
   flex-direction: column;
   align-items: flex-start;
   /* 修正: 20px -> 30px に統一 */
-  padding: 30px 30px; 
+  padding: 20px 20px; 
   gap: var(--space-m);
   width: 100%;
   max-width: 540px;
@@ -163,7 +95,3 @@
 .listButton:active { transform: scale(0.98); }
 
 .playIcon { width: 14px; height: 14px; }
-
-@media (max-width: 560px) {
-  .roadImage { max-width: 120px; }
-}

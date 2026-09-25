@@ -146,7 +146,7 @@ const ExperiencesContent = () => {
   };
 
   return (
-    <div className={layoutStyles.pageContainer}>
+    <div className={`${layoutStyles.pageContainer} ${styles.pageRoot}`}>
       <Helmet>
         <title>体験談をさがす｜ぼくらのみち</title>
         <meta name="description" content="不登校を経験した当事者たちの体験談を検索できます。子どもや保護者のリアルな声や経験が満載。" />

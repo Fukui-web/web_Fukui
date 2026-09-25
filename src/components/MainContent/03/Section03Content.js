@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import layoutStyles from '../commonPageLayout.module.css';
 import styles from './Section03Content.module.css';
+import commonStyles from '../SectionCommon.module.css';
 import Footer from '../../common/Footer';
 import Breadcrumbs from '../../common/Breadcrumbs';
 import PlaceCard from '../../common/PlaceCard/PlaceCard';
@@ -53,20 +54,20 @@ const Section03Content = () => {
       <Breadcrumbs sectionNumber="03" sectionTitle="まだまだある！みんなの居場所" />
 
       {/* タイトル部分 */}
-      <div className={styles.titleSection}>
-        <img src={road03Image} alt="ROAD 03" className={styles.roadImage} />
-        <h1 className={styles.mainTitle}>まだまだある！<br />みんなの居場所</h1>
-        <img src={dotlineImage} alt="点線" className={styles.dotline} />
+      <div className={commonStyles.pageTitleSection}>
+        <img src={road03Image} alt="ROAD 03" className={commonStyles.pageRoadImage} />
+        <h1 className={commonStyles.pageMainTitle}>まだまだある！<br />みんなの居場所</h1>
+        <img src={dotlineImage} alt="点線" className={commonStyles.pageDotline} />
       </div>
 
       {/* 説明セクション */}
-      <div className={styles.descriptionSection}>
-        <h2 className={styles.descriptionTitle}>
+      <div className={commonStyles.pageDescriptionSection}>
+        <h2 className={commonStyles.pageDescriptionTitle}>
           子どもだけじゃない。<br />
           保護者のみなさんの居場所もあります。
         </h2>
-        <div className={styles.dividerLine}></div>
-        <p className={styles.descriptionText}>
+        <div className={commonStyles.pageDividerLine}></div>
+        <p className={commonStyles.pageDescriptionText}>
           多くの民間団体やサークルが、不登校の子どもたちや保護者の居場所を作ってくれています。保護者のみなさんが、子どもたちにと思う場所をまず見つけてください。
         </p>
       </div>
@@ -74,7 +75,7 @@ const Section03Content = () => {
       {/* みんなの居場所一覧セクション */}
       <div className={styles.placeListSection}>
         <h3 id="kids-place" className={styles.placeListTitle}>こどもの居場所一覧</h3>
-        <div className={styles.dividerLine}></div>
+        <div className={commonStyles.pageDividerLine}></div>
         <div className={styles.placeCardArea}>
           <PlaceCard cardId={1} />
           <PlaceCard cardId={3} />
@@ -86,7 +87,7 @@ const Section03Content = () => {
         </div>
 
         <h3 id="parents-place" className={styles.placeListTitle}>保護者の居場所一覧</h3>
-        <div className={styles.dividerLine}></div>
+        <div className={commonStyles.pageDividerLine}></div>
         <div className={styles.placeCardArea}>
           <PlaceCard cardId={2} />
           <PlaceCard cardId={4} />

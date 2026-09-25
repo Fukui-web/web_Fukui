@@ -1,10 +1,14 @@
 /* src/components/MainContent/places/PlacesContent.module.css */
 /* 統一版 */
 
+.pageRoot {
+  font-family: var(--font-primary);
+}
+
 .searchSection {
   background-color: rgba(136, 211, 188, 0.25);
-  /* 修正: 上下の余白を調整 */
-  padding: 30px 30px 20px 30px; /* 下のpaddingを減らす */
+  /* 修正: サイト全体の20pxに統一 */
+  padding: 20px;
   margin: 20px 0 5px 0; /* 下の余白を狭める */
   border-radius: 0;
   text-align: center;

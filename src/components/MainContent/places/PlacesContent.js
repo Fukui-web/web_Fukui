@@ -52,7 +52,7 @@ const PlacesContent = () => {
   };
 
   return (
-    <div className={layoutStyles.pageContainer}>
+    <div className={`${layoutStyles.pageContainer} ${styles.pageRoot}`}>
       <Helmet>
         <title>居場所をさがす｜ぼくらのみち</title>
         <meta name="description" content="福井県内のフリースクール・居場所情報を掲載しています。地域から居場所を探すことができます。" />

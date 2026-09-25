@@ -40,7 +40,7 @@
 
 .mainTitle {
   font-family: var(--font-primary);
-  font-size: var(--font-title-interview);
+  font-size: var(--font-title-story);
   font-weight: 600;
   color: var(--color-black);
   margin: 0;
@@ -70,12 +70,13 @@
 .profileInfo { flex: 1; }
 /* 長い肩書き（例: 特定非営利活動法人 BRICOLAB代表理事）がスマホで
    はみ出すため、改行禁止をやめて折り返せるようにする */
-.profileName { font-size: var(--font-m); font-weight: 400; color: var(--color-text-secondary); margin: 0 0 4px 0; line-height: var(--line-height-tight); overflow-wrap: anywhere; }
-.profileDate { font-size: var(--font-m); font-weight: 400; color: var(--color-text-secondary); margin: 0; line-height: var(--line-height-tight); }
+.profileName { font-family: var(--font-primary); font-size: var(--font-m); font-weight: 400; color: var(--color-text-secondary); margin: 0 0 4px 0; line-height: var(--line-height-tight); overflow-wrap: anywhere; }
+.profileDate { font-family: var(--font-primary); font-size: var(--font-m); font-weight: 400; color: var(--color-text-secondary); margin: 0; line-height: var(--line-height-tight); }
 
 /* 本文 */
 .contentText { padding: 0 10px; }
 .paragraph {
+  font-family: var(--font-primary);
   font-size: 15px;
   font-weight: 400;
   line-height: var(--line-height-loose);
@@ -131,8 +132,8 @@
 
 /* Q&Aブロック */
 .qaBlock { margin-bottom: 30px; }
-.question { font-size: 15px; font-weight: 400; color: #4F9781; margin: 0 0 15px 0; line-height: var(--line-height-loose); }
-.answer { font-size: 15px; font-weight: 400; color: var(--color-text-secondary); margin: 0; line-height: var(--line-height-loose); text-align: justify; white-space: pre-wrap;}
+.question { font-family: var(--font-primary); font-size: 15px; font-weight: 400; color: #4F9781; margin: 0 0 15px 0; line-height: var(--line-height-loose); }
+.answer { font-family: var(--font-primary); font-size: 15px; font-weight: 400; color: var(--color-text-secondary); margin: 0; line-height: var(--line-height-loose); text-align: justify; white-space: pre-wrap;}
 
 /* ライター紹介 */
 .writerSection {

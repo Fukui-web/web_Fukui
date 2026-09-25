@@ -1,11 +1,15 @@
 /* src/components/MainContent/experiences/ExperiencesContent.module.css */
 /* 統一版 */
 
+.pageRoot {
+  font-family: var(--font-primary);
+}
+
 /* 検索セクション */
 .searchSection {
   background-color: var(--color-accent-experience-bg);
-  /* 修正: 余白を30pxに統一 */
-  padding: 30px 30px;
+  /* 修正: サイト全体の20pxに統一 */
+  padding: 20px;
   margin: 20px 0 0 0;
   border-radius: 0;
   text-align: center;
@@ -143,8 +147,8 @@
 
 /* 体験談ピックアップセクション */
 .pickupSection {
-  /* 修正: 余白統一 */
-  padding: 30px 30px 80px 30px;
+  /* 修正: サイト全体の20pxに統一 */
+  padding: 20px 20px 80px 20px;
   
   /* 修正: 幅制限 */
   width: 100%;

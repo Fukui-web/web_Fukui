@@ -5,7 +5,7 @@
   width: 100%;
   max-width: 540px; /* 統一: 540pxに変更 */
   margin: 0 auto;
-  padding: 30px 30px; /* 統一: 30pxに変更 */
+  padding: 20px; /* 修正: サイト全体の20pxに統一 */
   box-sizing: border-box; /* 追加: レイアウト崩れ防止 */
 }
 

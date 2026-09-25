@@ -346,6 +346,79 @@
   flex-grow: 1;
 }
 
+/* ===== 02〜05ページ共通: タイトルセクション ===== */
+/* (02, 03, 04, 05 で完全に重複していたスタイルを集約) */
+
+.pageTitleSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px 20px;
+  gap: var(--space-xs);
+  width: 100%;
+  max-width: 540px;
+  box-sizing: border-box;
+}
+
+.pageRoadImage {
+  height: auto;
+  max-width: 200px;
+  margin-bottom: -10px;
+}
+
+.pageMainTitle {
+  font-family: var(--font-primary);
+  font-size: var(--font-title-story);
+  font-weight: 600;
+  color: var(--color-black);
+  text-align: center;
+  margin: 0;
+  line-height: var(--line-height-tight);
+}
+
+.pageDotline {
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  margin: 5px 0;
+}
+
+.pageDescriptionSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px 20px;
+  gap: var(--space-m);
+  width: 100%;
+  max-width: 540px;
+  box-sizing: border-box;
+}
+
+.pageDescriptionTitle {
+  font-family: var(--font-primary);
+  font-style: normal;
+  font-weight: 600;
+  font-size: var(--font-heading);
+  line-height: var(--line-height-normal);
+  color: var(--color-black);
+  margin: 0;
+}
+
+.pageDividerLine {
+  width: 100%;
+  border-bottom: 1px solid #CCCCCC;
+}
+
+.pageDescriptionText {
+  font-family: var(--font-primary);
+  font-style: normal;
+  font-weight: 400;
+  font-size: var(--font-s);
+  line-height: var(--line-height-loose);
+  color: var(--color-black);
+  margin: 0;
+}
+
 /* 励ましのテキスト */
 .encouragementText {
   width: 480px;
@@ -387,8 +460,12 @@
   .sectionTitle,
   .sectionDescription,
   .supportBox,
-  .longDescription { 
+  .longDescription {
     width: 100%;
     max-width: 480px;
+  }
+
+  .pageRoadImage {
+    max-width: 120px;
   }
 }

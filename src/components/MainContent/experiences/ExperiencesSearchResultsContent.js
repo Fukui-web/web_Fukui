@@ -169,7 +169,7 @@ const ExperiencesSearchResultsContent = () => {
   };
 
   return (
-    <div className={layoutStyles.pageContainer}>
+    <div className={`${layoutStyles.pageContainer} ${styles.pageRoot}`}>
       <Helmet>
         <title>体験談検索結果｜ぼくらのみち</title>
         <meta name="description" content="不登校に関する体験談の検索結果です。" />

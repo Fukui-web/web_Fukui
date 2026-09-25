@@ -13,7 +13,7 @@
   flex-direction: column;
   align-items: center;
   /* 修正: 余白統一 (他ページのtitleSectionに合わせる) */
-  padding: 0 30px 20px;
+  padding: 0 20px 20px;
   gap: var(--space-xs);
   width: 100%;
   max-width: 540px;
@@ -85,8 +85,8 @@
   flex-direction: column;
   align-items: center;
   
-  /* 修正: 余白を他ページと統一 (30px) */
-  padding: 30px 30px; 
+  /* 修正: サイト全体の20pxに統一 */
+  padding: 20px 20px;
   
   gap: var(--space-xl);
   position: relative;

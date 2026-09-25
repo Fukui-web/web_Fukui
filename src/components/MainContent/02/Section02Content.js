@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import layoutStyles from '../commonPageLayout.module.css';
 import styles from './Section02Content.module.css';
+import commonStyles from '../SectionCommon.module.css';
 import Footer from '../../common/Footer';
 import Breadcrumbs from '../../common/Breadcrumbs';
 import FlexiCard from '../../common/FlexiCard/FlexiCard';
@@ -35,19 +36,19 @@ const Section02Content = () => {
       <Breadcrumbs sectionNumber="02" sectionTitle="行政が行う公的支援" />
 
       {/* タイトル部分 */}
-      <div className={styles.titleSection}>
-        <img src={road02Image} alt="ROAD 02" className={styles.roadImage} />
-        <h1 className={styles.mainTitle}>公的支援や医療機関</h1>
-        <img src={dotlineImage} alt="点線" className={styles.dotline} />
+      <div className={commonStyles.pageTitleSection}>
+        <img src={road02Image} alt="ROAD 02" className={commonStyles.pageRoadImage} />
+        <h1 className={commonStyles.pageMainTitle}>公的支援や医療機関</h1>
+        <img src={dotlineImage} alt="点線" className={commonStyles.pageDotline} />
       </div>
 
       {/* 説明セクション */}
-      <div className={styles.descriptionSection}>
-        <h2 className={styles.descriptionTitle}>
+      <div className={commonStyles.pageDescriptionSection}>
+        <h2 className={commonStyles.pageDescriptionTitle}>
           学校以外で支援や相談に乗ってくれるところです。
         </h2>
-        <div className={styles.dividerLine}></div>
-        <p className={styles.descriptionText}>
+        <div className={commonStyles.pageDividerLine}></div>
+        <p className={commonStyles.pageDescriptionText}>
           学校での相談が思うように進まなかったり、欲しい情報が得られなかったりすることもあります。まずはお近くの窓口で相談してみてください。
         </p>
       </div>
@@ -74,7 +75,7 @@ const Section02Content = () => {
         <p className={styles.municipalIntro}>
           各市町で独自に行なっている支援もあります。
         </p>
-        <div className={styles.dividerLine}></div>
+        <div className={commonStyles.pageDividerLine}></div>
         <p className={styles.municipalDescription}>
           各自治体の情報をまとめました。お住まいの地域を探してみてください。
         </p>

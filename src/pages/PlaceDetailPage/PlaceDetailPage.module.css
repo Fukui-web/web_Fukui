@@ -2,6 +2,7 @@
 /* 統一版 */
 
 .contentArea {
+  font-family: var(--font-primary);
   background: white;
   min-height: 100vh;
   /* 修正: 幅制限とセンタリング */
@@ -149,9 +150,53 @@
   padding: 10px 30px 30px 30px;
   margin-bottom: 40px;
 }
-.detailRow { display: flex; padding: 8px 0; border-bottom: 3px dotted var(--color-black); }
-.detailLabel { font-weight: normal; min-width: 120px; color: var(--color-black); flex-shrink: 0; }
-.detailValue { color: var(--color-black); flex: 1; }
+.detailRow {
+  display: flex;
+  flex-direction: column; /* 縦並びにする（学校紹介ページと統一） */
+  padding: 0;
+  border-bottom: none;
+  margin-bottom: 25px;
+}
+
+.detailLabel {
+  position: relative;
+  font-size: var(--font-s);
+  font-weight: bold;
+  color: var(--color-black);
+  width: 100%;
+
+  /* ▼ 両端に丸ポイントのある実線 ▼ */
+  border-bottom: 2px solid var(--color-accent-place);
+
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.detailLabel::before,
+.detailLabel::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-accent-place);
+}
+
+.detailLabel::before {
+  left: 0;
+}
+
+.detailLabel::after {
+  right: 0;
+}
+
+.detailValue {
+  font-size: var(--font-s);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-black);
+  padding-left: 0;
+}
 
 /* 公式サイトリンク */
 .websiteLink {
