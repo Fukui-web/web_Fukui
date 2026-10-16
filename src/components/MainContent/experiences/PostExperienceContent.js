@@ -32,10 +32,11 @@ const PostExperienceContent = () => {
           <div className={styles.sectionContent}>
             <ul className={styles.numberedList}>
               <li>①　Googleアカウントを取得の上でご記入ください。</li>
-              <li>②　途中でフォームを閉じた場合でも回答内容を保存できます。、ゆっくりご記入ください。</li>
+              <li>②　途中でフォームを閉じた場合でも回答内容を保存できます。ゆっくりご記入ください。</li>
               <li>③　長いアンケートになります。記入したいところだけご記入いただければ大丈夫です。</li>
               <li>④　投稿後も修正が可能です。</li>
               <li>⑤　投稿を削除したい場合はお問い合わせフォームからご依頼ください。</li>
+              <li></li>
             </ul>
             <p className={styles.closingMessage}>～皆さんの言葉が、同じように悩む方々の力になります～</p>
           </div>
