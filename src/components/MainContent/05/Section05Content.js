@@ -60,9 +60,9 @@ const Section05Content = () => {
         </p>
       </div>
 
-      {/* 検索機能セクション */}
+      {/* 全日制以外の学校・フリースクールの紹介セクション */}
       <div className={styles.searchSection}>
-        <h3 className={styles.searchTitle}>検索機能</h3>
+        <h3 className={styles.searchTitle}>全日制以外の学校・フリースクールの紹介</h3>
         <div className={commonStyles.pageDividerLine}></div>
         <div className={styles.placeCardArea}>
           <SchoolCard cardId={2} />
