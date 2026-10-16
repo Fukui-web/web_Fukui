@@ -533,6 +533,42 @@ function sendMail_(options) {
 }
 
 /**
+ * HTML 用にエスケープ
+ * @param {string} text
+ * @return {string}
+ */
+function escapeHtml_(text) {
+  return String(text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+/**
+ * 段落の配列からメール本文（プレーンテキスト / HTML）を組み立てる
+ *
+ * 段落内の文は改行せずに書くこと。HTML 版では画面幅に合わせて自然に折り返されるため、
+ * スマートフォンでも不自然な位置で改行されません。
+ * 段落内の "\n" は意図的な改行として扱います（タイトル・日時の列挙など）。
+ *
+ * @param {string[]} paragraphs - 段落ごとの文字列
+ * @return {{body: string, htmlBody: string}}
+ */
+function buildMailBodies_(paragraphs) {
+  const body = paragraphs.join('\n\n');
+  const html = paragraphs.map(function(p) {
+    const inner = escapeHtml_(p)
+      .replace(/https?:\/\/[^\s<]+/g, function(url) { return '<a href="' + url + '">' + url + '</a>'; })
+      .replace(/\n/g, '<br>');
+    return '<p style="margin:0 0 1em;">' + inner + '</p>';
+  }).join('');
+  const htmlBody = '<div style="font-size:14px;line-height:1.7;">' + html + '</div>';
+  return { body: body, htmlBody: htmlBody };
+}
+
+/**
  * 承認メール送信
  * @param {string} email - 送信先メールアドレス
  * @param {string} authorName - 投稿者名
@@ -541,28 +577,25 @@ function sendMail_(options) {
 function sendApprovalEmail(email, authorName, title) {
   try {
     const subject = '【掲載通知】あなたの体験談が掲載されました';
-    const body = `${authorName}様
+    const mail = buildMailBodies_([
+      `${authorName}様`,
+      'この度は体験談をご投稿いただき、ありがとうございました。' +
+        '管理者による確認の結果、あなたの体験談が掲載されました。',
+      `タイトル: ${title}\n` +
+        `承認日時: ${Utilities.formatDate(new Date(), 'Asia/Tokyo', 'yyyy年MM月dd日 HH:mm')}`,
+      '体験談はウェブサイトに公開されます。' +
+        'あなたの経験が、同じような状況にある方々の助けになることを願っています。',
+      '今後とも当サイトをよろしくお願いいたします。',
+      '------\n' +
+        'このメールは自動送信されています。' +
+        'ご不明な点がございましたら、お気軽にお問い合わせください。'
+    ]);
 
-この度は体験談をご投稿いただき、ありがとうございました。
-管理者による確認の結果、あなたの体験談が掲載されました。
-
-タイトル: ${title}
-承認日時: ${Utilities.formatDate(new Date(), 'Asia/Tokyo', 'yyyy年MM月dd日 HH:mm')}
-
-体験談はウェブサイトに公開されます。
-あなたの経験が、同じような状況にある方々の助けになることを願っています。
-
-今後とも当サイトをよろしくお願いいたします。
-
-------
-このメールは自動送信されています。
-ご不明な点がございましたら、お気軽にお問い合わせください。
-`;
-    
     sendMail_({
       to: email,
       subject: subject,
-      body: body
+      body: mail.body,
+      htmlBody: mail.htmlBody
     });
     
     Logger.log('承認メール送信成功: ' + email);
@@ -582,36 +615,27 @@ function sendApprovalEmail(email, authorName, title) {
 function sendRejectionEmail(email, authorName, title, reason) {
   try {
     const subject = '【再投稿のお願い】体験談について';
-    const body = `${authorName}様
+    const mail = buildMailBodies_([
+      `${authorName}様`,
+      'この度は体験談をご投稿いただき、ありがとうございました。' +
+        'お送りいただいたお話は、今悩んでいる多くの方の力になる貴重な内容だと感じております。' +
+        '管理者による確認の結果、以下の理由により一部修正をお願いしたく、ご連絡いたしました。' +
+        '管理者一同、投稿を楽しみにしております。',
+      `タイトル: ${title}`,
+      `【修正依頼】\n${reason}`,
+      'お手数ですが、上記の点を修正の上、再度ご投稿いただけますと幸いです。\n' +
+        '※再投稿の際は、ご自身が登録されたGoogleフォームの編集から記入・送信してください。',
+      `【再投稿用フォーム】\n${FORM_URL}`,
+      '皆様の貴重な体験談をお待ちしております。' +
+        'ご不明な点がございましたら、お気軽にお問い合わせください。',
+      '------\nこのメールは自動送信されています。'
+    ]);
 
-この度は体験談をご投稿いただき、ありがとうございました。
-お送りいただいたお話は、今悩んでいる多くの方の力になる貴重な内容だと感じております。
-管理者による確認の結果、以下の理由により一部修正をお願いしたく、ご連絡いたしました。
-管理者一同、投稿を楽しみにしております
-
-
-タイトル: ${title}
-
-【修正依頼】
-${reason}
-
-お手数ですが、上記の点を修正の上、再度ご投稿いただけますと幸いです。
-※再投稿の際は、ご自身が登録されたGoogleフォームの編集から記入・送信してください。
-
-【再投稿用フォーム】
-${FORM_URL}
-
-皆様の貴重な体験談をお待ちしております。
-ご不明な点がございましたら、お気軽にお問い合わせください。
-
-------
-このメールは自動送信されています。
-`;
-    
     sendMail_({
       to: email,
       subject: subject,
-      body: body
+      body: mail.body,
+      htmlBody: mail.htmlBody
     });
     
     Logger.log('却下メール送信成功: ' + email);
