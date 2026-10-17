@@ -276,17 +276,31 @@ function getAllExperiences(limit = null) {
     // ヘッダー行（1行目）から列位置を解決する（定義は columns.gs）
     const col = getColumnMap(data[0]);
 
-    const results = [];
-    
+    const dataRows = [];
+
     for (let i = 1; i < data.length; i++) {
       const row = data[i];
-      
+
       if (!row[col.authorName] && !row[col.detail]) continue;
 
       // 承認済みの体験談のみを取得
       const status = row[col.approvalStatus] || '';
       if (status !== '承認済み') continue;
 
+      dataRows.push({
+        row: row,
+        timestamp: row[col.timestamp] ? new Date(row[col.timestamp]) : new Date(0),
+        dataIndex: i  // data配列のインデックス（data[1]から開始なのでid=1）
+      });
+    }
+
+    // タイムスタンプで降順ソート（最新が先頭）
+    dataRows.sort((a, b) => b.timestamp - a.timestamp);
+
+    // limit件数まで取得
+    const limitedRows = limit ? dataRows.slice(0, limit) : dataRows;
+
+    const results = limitedRows.map(({ row, dataIndex }) => {
       // タイトルを生成（なりはじめの頃の状態の最初の50文字）
       const title = String(row[col.detail] || '').substring(0, 50) + '...';
 
@@ -296,8 +310,8 @@ function getAllExperiences(limit = null) {
       // サポート情報を配列化
       const supports = buildSupports_(row, col);
 
-      results.push({
-        id: i,  // 配列インデックス（data[1]から開始なのでid=1）
+      return {
+        id: dataIndex,  // 配列インデックス（data[1]から開始なのでid=1）
         title: title,
         description: String(row[col.detail] || ''),
         authorName: row[col.authorName] || '匿名',
@@ -309,11 +323,9 @@ function getAllExperiences(limit = null) {
         trigger: normalizeMultiSelect_(row[col.trigger]),
         schools: schools,  // 学校情報を追加
         supports: supports  // サポート情報を追加
-      });
-      
-      if (limit && results.length >= limit) break;
-    }
-    
+      };
+    });
+
     return {
       success: true,
       data: results,
