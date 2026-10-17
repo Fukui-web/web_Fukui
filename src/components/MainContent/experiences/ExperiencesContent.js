@@ -69,9 +69,8 @@ const ExperiencesContent = () => {
             setPickupExperiences(result.data);
           }
         } else {
-          // questionIdがない場合は、全体験談から上位6件を取得
-          const allExperiences = await getAllExperiences();
-          const pickup = allExperiences.slice(0, 6);
+          // questionIdがない場合は、最新の体験談を6件取得
+          const pickup = await getAllExperiences(6);
           
           if (pickup.length === 0) {
             setNoPickupData(true);
